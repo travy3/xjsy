@@ -16,4 +16,10 @@ public class LoginController extends BaseController {
         System.out.println("123");
         return "/modules/sys/sysIndex";
     }
+
+    @RequestMapping(value = "/login")
+    public String login(){
+
+        return "/modules/sys/sysLogin";
+    }
 }
