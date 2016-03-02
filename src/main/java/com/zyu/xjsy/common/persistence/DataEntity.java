@@ -1,4 +1,4 @@
-package com.zyu.xjsy.common.persistence.annotation;
+package com.zyu.xjsy.common.persistence;
 
 import com.zyu.xjsy.modules.sys.entity.User;
 

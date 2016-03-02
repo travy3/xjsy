@@ -1,4 +1,4 @@
-package com.zyu.xjsy.common.persistence.annotation;
+package com.zyu.xjsy.common.persistence;
 
 /**
  * Created by chenjie on 2016/2/18.
