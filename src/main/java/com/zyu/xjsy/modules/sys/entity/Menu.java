@@ -1,17 +1,16 @@
 package com.zyu.xjsy.modules.sys.entity;
 
+import com.zyu.xjsy.common.persistence.DataEntity;
+
 /**
  * Created by chenjie on 2016/2/18.
  */
-public class Menu {
+public class Menu extends DataEntity<Menu>{
 
-    private String id;
     private String name;
     private String pid;
     private String href;
     private String isShow;
-    private String delFlag;
-    private String remark;
     private String type;
 
     public Menu(String id) {
@@ -25,6 +24,7 @@ public class Menu {
     public void setId(String id) {
         this.id = id;
     }
+
 
     public String getName() {
         return name;
@@ -66,13 +66,6 @@ public class Menu {
         this.delFlag = delFlag;
     }
 
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
 
     public String getType() {
         return type;

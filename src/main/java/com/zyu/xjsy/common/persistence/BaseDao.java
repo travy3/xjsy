@@ -5,4 +5,5 @@ package com.zyu.xjsy.common.persistence;
  */
 public interface BaseDao {
 
+
 }
