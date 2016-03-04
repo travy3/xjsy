@@ -11,7 +11,7 @@ public class Menu extends DataEntity<Menu>{
     private String pid;
     private String href;
     private String isShow;
-    private String type;
+    private String permission;
 
     public Menu(String id) {
         this.id = id;
@@ -67,12 +67,11 @@ public class Menu extends DataEntity<Menu>{
     }
 
 
-    public String getType() {
-        return type;
+    public String getPermission() {
+        return permission;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setPermission(String permission) {
+        this.permission = permission;
     }
-
 }
