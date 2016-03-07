@@ -55,15 +55,15 @@
 <!-- dragsort -->
 <script src="${bjui}/plugins/dragsort/jquery.dragsort-0.5.1.min.js"></script>
 <!-- highcharts -->
-<script src="${bjui}/plugins/highcharts/highcharts.js"></script>
-<script src="${bjui}/plugins/highcharts/highcharts-3d.js"></script>
+<%--<script src="${bjui}/plugins/highcharts/highcharts.js"></script>--%>
+<%--<script src="${bjui}/plugins/highcharts/highcharts-3d.js"></script>--%>
 <!-- ECharts -->
-<script src="${bjui}/plugins/echarts/echarts.js"></script>
+<%--<script src="${bjui}/plugins/echarts/echarts.js"></script>--%>
 <!-- other plugins -->
 <script src="${bjui}/plugins/other/jquery.autosize.js"></script>
 <link href="${bjui}/plugins/uploadify/css/uploadify.css" rel="stylesheet">
 <script src="${bjui}/plugins/uploadify/scripts/jquery.uploadify.min.js"></script>
-<script src="${bjui}/plugins/download/jquery.fileDownload.js"></script>
+<%--<script src="${bjui}/plugins/download/jquery.fileDownload.js"></script>--%>
 <!-- init -->
 <script type="text/javascript">
     $(function() {

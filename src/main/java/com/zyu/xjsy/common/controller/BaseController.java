@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by travy on 2016/2/17.
  */
-public class BaseController {
+public abstract class BaseController {
 
     protected Logger logger = LoggerFactory.getLogger(getClass());
 

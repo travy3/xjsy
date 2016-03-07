@@ -12,5 +12,13 @@
         a.permission
     </sql>
 
+    <select id="findAllList">
+        SELECT
+        <include refid="menuColumns"></include>
+        FROM sys_menu a
+        WHERE a.delFlag =#{DEL_FLAG_NORMAL}
+    </select>
+
+
 
 </mapper>

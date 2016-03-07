@@ -2,16 +2,27 @@ package com.zyu.xjsy.common.persistence;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.Serializable;
+
 /**
  * Created by chenjie on 2016/2/18.
  */
-public abstract class BaseEntity<T> {
+public abstract class BaseEntity<T> implements Serializable{
+
+    private static final long serialVersionUID = 1L;
 
     protected String id;
 
     protected boolean isNewRecord = false;
 
-    protected String delFlag; 	// 删除标记（0：正常；1：删除；2：审核）
+    public BaseEntity() {
+
+    }
+
+    public BaseEntity(String id) {
+        this();
+        this.id = id;
+    }
 
     public String getId() {
         return id;
@@ -57,18 +68,6 @@ public abstract class BaseEntity<T> {
         isNewRecord = newRecord;
     }
 
-    public String getDelFlag() {
-        return delFlag;
-    }
 
-    public void setDelFlag(String delFlag) {
-        this.delFlag = delFlag;
-    }
 
-    /**
-     * 删除标记（0：正常；1：删除；2：审核；）
-     */
-    public static final String DEL_FLAG_NORMAL = "0";
-    public static final String DEL_FLAG_DELETE = "1";
-    public static final String DEL_FLAG_AUDIT = "2";
 }

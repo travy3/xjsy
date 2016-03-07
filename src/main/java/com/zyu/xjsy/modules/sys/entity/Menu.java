@@ -10,8 +10,13 @@ public class Menu extends DataEntity<Menu>{
     private String name;
     private String pid;
     private String href;
-    private String isShow;
+    private String isShow;// 是否在菜单中显示（1：显示；0：不显示）显示是菜单，不显示是权限
     private String permission;
+
+    public Menu(){
+        super();
+        this.isShow="1";
+    }
 
     public Menu(String id) {
         this.id = id;
