@@ -24,7 +24,7 @@ public class User extends DataEntity<User> {
 
     private Business business; // 归属加盟商
 
-    private List<Role> roleList;
+    private List<Role> roleList ;
 
 
     public User(String id){
