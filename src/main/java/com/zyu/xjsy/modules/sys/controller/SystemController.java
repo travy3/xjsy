@@ -22,12 +22,13 @@ public class SystemController extends BaseController {
     private SystemService systemService;
 
 
+    @RequestMapping(value = "/menu/list")
     public String getMenuList(Model model){
 
         List<Menu> menuList = new ArrayList<Menu>();
         menuList = systemService.findAllMenu();
 
         model.addAttribute("menuList",menuList);
-        return "";
+        return "/modules/sys/sysMenu";
     }
 }

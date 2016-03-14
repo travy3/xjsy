@@ -12,7 +12,7 @@
         a.permission
     </sql>
 
-    <select id="findAllList">
+    <select id="findAllList" resultType="Menu">
         SELECT
         <include refid="menuColumns"></include>
         FROM sys_menu a

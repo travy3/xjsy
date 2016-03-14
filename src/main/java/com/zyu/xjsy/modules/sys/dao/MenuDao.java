@@ -10,5 +10,6 @@ import com.zyu.xjsy.modules.sys.entity.Menu;
 @MyBatisDao
 public interface MenuDao extends CrudDao<Menu> {
 
+    
 
 }

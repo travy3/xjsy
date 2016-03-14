@@ -12,10 +12,7 @@ public class Role extends DataEntity<Role> {
 
     private static final long serialVersionUID = 1L;
 
-    private User user;		// 根据用户ID查询角色列表
-
     private String name;
-
 
     private List<Menu> menuList = Lists.newArrayList(); // 拥有菜单列表
 

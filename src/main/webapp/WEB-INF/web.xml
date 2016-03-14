@@ -3,12 +3,6 @@
         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
         version="2.5">
   <display-name>xjsy</display-name>
-
-
-  <context-param>
-    <param-name>contextConfigLocation</param-name>
-    <param-value>classpath*:/spring-context.xml</param-value>
-  </context-param>
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
@@ -16,6 +10,11 @@
   <listener>
     <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
   </listener>
+
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath*:/spring-context.xml</param-value>
+  </context-param>
 
   <filter>
     <filter-name>encodingFilter</filter-name>

@@ -12,8 +12,6 @@ public class LoginController extends BaseController {
 
     @RequestMapping(value = "/a")
     public String index(){
-
-        System.out.println("123");
         return "/modules/sys/sysIndex";
     }
 
