@@ -197,16 +197,26 @@
                         onClick: 'ZtreeClick'
                     }"
                 >
-                    <li data-id="1" data-pid="0" data-faicon="rss" data-faicon-close="cab">表单元素</li>
-                    <li data-id="10" data-pid="1" data-url="form-button.html" data-tabid="form-button" data-faicon="bell">按钮</li>
-                    <li data-id="11" data-pid="1" data-url="form-input.html" data-tabid="form-input" data-faicon="info-circle">文本框</li>
-                    <li data-id="12" data-pid="1" data-url="form-select.html" data-tabid="form-select" data-faicon="ellipsis-v">下拉选择框</li>
-                    <li data-id="13" data-pid="1" data-url="form-checkbox.html" data-tabid="table" data-faicon="soccer-ball-o">复选、单选框</li>
-                    <li data-id="14" data-pid="1" data-url="form.html" data-tabid="form" data-faicon="comments">表单综合演示</li>
-                    <li data-id="2" data-pid="0">表格</li>
-                    <li data-id="20" data-pid="2" data-url="table.html" data-tabid="table" data-faicon="signal">普通表格</li>
-                    <li data-id="21" data-pid="2" data-url="table-fixed.html" data-tabid="table-fixed" data-faicon="rss-square">固定表头表格</li>
-                    <li data-id="22" data-pid="2" data-url="table-edit.html" data-tabid="table-edit" data-faicon="bookmark-o">可编辑表格</li>
+                    <c:forEach items="${menuList}" var="menu">
+                        <c:if test="${menu.pid eq 1}">
+                            <li data-id="${menu.id}" data-pid="${menu.pid}" data-faicon="rss" data-faicon-close="cab">${menu.name}</li>
+                            <c:forEach items="${menuList}" var="menuChild">
+                                <c:if test="${menuChild.pid eq menu.id}">
+                                    <li data-id="${menuChild.id}" data-pid="${menuChild.pid}" data-url="" data-tabid="form-button" data-faicon="bell">${menuChild.name}</li>
+                                </c:if>
+                            </c:forEach>
+                        </c:if>
+                    </c:forEach>
+                    <%--<li data-id="1" data-pid="0" data-faicon="rss" data-faicon-close="cab">表单元素</li>--%>
+                    <%--<li data-id="10" data-pid="1" data-url="form-button.html" data-tabid="form-button" data-faicon="bell">按钮</li>--%>
+                    <%--<li data-id="11" data-pid="1" data-url="form-input.html" data-tabid="form-input" data-faicon="info-circle">文本框</li>--%>
+                    <%--<li data-id="12" data-pid="1" data-url="form-select.html" data-tabid="form-select" data-faicon="ellipsis-v">下拉选择框</li>--%>
+                    <%--<li data-id="13" data-pid="1" data-url="form-checkbox.html" data-tabid="table" data-faicon="soccer-ball-o">复选、单选框</li>--%>
+                    <%--<li data-id="14" data-pid="1" data-url="form.html" data-tabid="form" data-faicon="comments">表单综合演示</li>--%>
+                    <%--<li data-id="2" data-pid="0">表格</li>--%>
+                    <%--<li data-id="20" data-pid="2" data-url="table.html" data-tabid="table" data-faicon="signal">普通表格</li>--%>
+                    <%--<li data-id="21" data-pid="2" data-url="table-fixed.html" data-tabid="table-fixed" data-faicon="rss-square">固定表头表格</li>--%>
+                    <%--<li data-id="22" data-pid="2" data-url="table-edit.html" data-tabid="table-edit" data-faicon="bookmark-o">可编辑表格</li>--%>
                 </ul>
             </div>
             <div id="ztree-detail" style="display:none; margin-left:230px; width:300px; height:240px;">
