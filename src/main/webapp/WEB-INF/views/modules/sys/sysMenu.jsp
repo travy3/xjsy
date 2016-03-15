@@ -1,4 +1,5 @@
 <%@page language="java" contentType="text/html; utf-8" pageEncoding="utf-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
     function changeZtree(t) {
         var $panel = $.CurrentNavtab
@@ -194,7 +195,11 @@
                 <ul id="ztree1" class="ztree" data-toggle="ztree"
                     data-options="{
                         expandAll: true,
-                        onClick: 'ZtreeClick'
+                        onClick: 'ZtreeClick',
+                        addHoverDom:'edit',
+                        removeHoverDom:'edit',
+                        showRenameBtn:false,
+                        showRemoveBtn:false
                     }"
                 >
                     <c:forEach items="${menuList}" var="menu">
@@ -207,16 +212,6 @@
                             </c:forEach>
                         </c:if>
                     </c:forEach>
-                    <%--<li data-id="1" data-pid="0" data-faicon="rss" data-faicon-close="cab">表单元素</li>--%>
-                    <%--<li data-id="10" data-pid="1" data-url="form-button.html" data-tabid="form-button" data-faicon="bell">按钮</li>--%>
-                    <%--<li data-id="11" data-pid="1" data-url="form-input.html" data-tabid="form-input" data-faicon="info-circle">文本框</li>--%>
-                    <%--<li data-id="12" data-pid="1" data-url="form-select.html" data-tabid="form-select" data-faicon="ellipsis-v">下拉选择框</li>--%>
-                    <%--<li data-id="13" data-pid="1" data-url="form-checkbox.html" data-tabid="table" data-faicon="soccer-ball-o">复选、单选框</li>--%>
-                    <%--<li data-id="14" data-pid="1" data-url="form.html" data-tabid="form" data-faicon="comments">表单综合演示</li>--%>
-                    <%--<li data-id="2" data-pid="0">表格</li>--%>
-                    <%--<li data-id="20" data-pid="2" data-url="table.html" data-tabid="table" data-faicon="signal">普通表格</li>--%>
-                    <%--<li data-id="21" data-pid="2" data-url="table-fixed.html" data-tabid="table-fixed" data-faicon="rss-square">固定表头表格</li>--%>
-                    <%--<li data-id="22" data-pid="2" data-url="table-edit.html" data-tabid="table-edit" data-faicon="bookmark-o">可编辑表格</li>--%>
                 </ul>
             </div>
             <div id="ztree-detail" style="display:none; margin-left:230px; width:300px; height:240px;">

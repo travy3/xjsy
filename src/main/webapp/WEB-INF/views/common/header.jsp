@@ -1,4 +1,3 @@
-<%@page language="java" contentType="text/html; utf-8" pageEncoding="utf-8" %>
 <header id="bjui-header">
     <!-- logo --><!-- 快捷菜单(消息、用户信息、切换皮肤) -->
     <div class="bjui-navbar-header">
@@ -35,18 +34,21 @@
     <div id="bjui-hnav">
         <div id="bjui-hnav-navbar-box">
             <ul id="bjui-hnav-navbar">
-                <li class="active"><a href="javascript:;" data-toggle="slidebar"><i class="fa fa-check-square-o"></i> 表单元素</a>
-                    <div class="items hide" data-noinit="true">
-                        <ul id="bjui-hnav-tree1" class="ztree ztree_main" data-toggle="ztree" data-on-click="MainMenuClick()" data-expand-all="true" data-faicon="check-square-o">
-                            <li data-id="1" data-pid="0" data-faicon="folder-open-o" data-faicon-close="folder-o">表单元素</li>
-                            <li data-id="10" data-pid="1" data-url="form-button.html" data-tabid="form-button" data-faicon="hand-o-up">按钮</li>
-                            <li data-id="11" data-pid="1" data-url="form-input.html" data-tabid="form-input" data-faicon="terminal">文本框</li>
-                            <li data-id="12" data-pid="1" data-url="form-select.html" data-tabid="form-select" data-faicon="caret-square-o-down">下拉选择框</li>
-                            <li data-id="13" data-pid="1" data-url="form-checkbox.html" data-tabid="table" data-faicon="check-square-o">复选、单选框</li>
-                            <li data-id="14" data-pid="1" data-url="form.html" data-tabid="form" data-faicon="list">表单综合演示</li>
-                        </ul>
-                    </div>
-                </li>
+                <c:forEach items="menuList" var="menu">
+                    <c:if test="${menu.pid eq 1}">
+                    <li class="active"><a href="javascript:;" data-toggle="slidebar"><i class="fa fa-check-square-o"></i> 表单元素</a>
+                        <div class="items hide" data-noinit="true">
+                            <ul id="bjui-hnav-tree1" class="ztree ztree_main" data-toggle="ztree" data-on-click="MainMenuClick()" data-expand-all="true" data-faicon="check-square-o">
+                                <c:forEach items="${menuList}" var="menuChild">
+                                    <c:if test="${menuChild.pid eq menu.id}">
+                                        <li data-id="${menuChild.id}" data-pid="${menuChild.pid}" data-url="" data-tabid="form-button" data-faicon="bell">${menuChild.name}</li>
+                                    </c:if>
+                                </c:forEach>
+                            </ul>
+                        </div>
+                    </li>
+                    </c:if>
+                </c:forEach>
                 <li><a href="javascript:;" data-toggle="slidebar"><i class="fa fa-table"></i> 表格</a>
                     <div class="items hide" data-noinit="true">
                         <ul id="bjui-hnav-tree2" class="ztree ztree_main" data-toggle="ztree" data-on-click="MainMenuClick" data-expand-all="true" data-faicon="table">

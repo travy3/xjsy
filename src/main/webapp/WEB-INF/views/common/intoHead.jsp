@@ -1,4 +1,4 @@
-
+<%@page language="java" contentType="text/html; utf-8" pageEncoding="utf-8" %>
 <!-- bootstrap - css -->
 <link href="${bjui}/themes/css/bootstrap.min.css" rel="stylesheet">
 <!-- core - css -->
@@ -145,7 +145,6 @@
     //菜单-事件
     function MainMenuClick(event, treeId, treeNode) {
         event.preventDefault()
-
         if (treeNode.isParent) {
             var zTree = $.fn.zTree.getZTreeObj(treeId)
 
@@ -158,5 +157,4 @@
         else
             $(event.target).navtab({id:treeNode.tabid, url:treeNode.url, title:treeNode.name, fresh:treeNode.fresh, external:treeNode.external})
     }
-
 </script>
