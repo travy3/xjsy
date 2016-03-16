@@ -104,6 +104,7 @@ public class User extends DataEntity<User> {
     }
 
     public void setRoleList(List<Role> roleList) {
+
         this.roleList = roleList;
     }
 

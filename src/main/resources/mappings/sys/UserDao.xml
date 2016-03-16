@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper>
+<mapper namespace="com.zyu.xjsy.modules.sys.dao.UserDao">
+    <resultMap id="userList" type="com.zyu.xjsy.modules.sys.entity.User">
+        <id column="id" property="id" jdbcType="VARCHAR" />
+
+    </resultMap>
     <sql id="userColumns">
         a.id,
         a.name,
@@ -13,6 +17,8 @@
     </sql>
 
     <sql id="userjoin">
+        JOIN sys_user_role ur WHERE a.id = ur.user_id
+        JOIN sys_role r WHERE r.id = ur.role_id
 
 
     </sql>
