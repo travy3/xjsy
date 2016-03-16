@@ -2,6 +2,7 @@ package com.zyu.xjsy.modules.sys.controller;
 
 import com.zyu.xjsy.common.controller.BaseController;
 import com.zyu.xjsy.modules.sys.entity.Menu;
+import com.zyu.xjsy.modules.sys.entity.User;
 import com.zyu.xjsy.modules.sys.service.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,5 +31,17 @@ public class SystemController extends BaseController {
 
         model.addAttribute("menuList",menuList);
         return "/modules/sys/sysMenu";
+    }
+
+    @RequestMapping(value = "/user/list")
+    public String getUserList(Model model){
+
+        List<User> userList  = new ArrayList<User>();
+
+        userList = systemService.findAllUser();
+
+        model.addAttribute("userList",userList);
+
+        return "/modules/sys/sysUser";
     }
 }

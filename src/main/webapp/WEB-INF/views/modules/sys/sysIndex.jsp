@@ -49,7 +49,7 @@
                                 <ul id="bjui-hnav-tree${menu.id}" class="ztree ztree_main" data-toggle="ztree" data-on-click="MainMenuClick" data-expand-all="true" data-faicon="check-square-o">
                                     <c:forEach items="${menuList}" var="menuChild">
                                         <c:if test="${menuChild.pid eq menu.id}">
-                                            <li data-id="${menuChild.id}"  data-pid="${menuChild.pid}" data-url="${ctx}/sys/menu/list" data-tabid="form-button"
+                                            <li data-id="${menuChild.id}"  data-pid="${menuChild.pid}" data-url="${ctx}${menuChild.href}" data-tabid="form-button"
                                                 data-faicon="bell">${menuChild.name}</li>
                                             <%--<a href="${ctx}/sys/menu/list" data-toggle="navtab" data-id="${menuChild.id}" data-pid="${menuChild.pid}"  data-faicon="bell" data-title="我的业务页面">${menuChild.name}</a>--%>
 

@@ -39,3 +39,49 @@ INSERT INTO `sys_menu` VALUES ('2', '系统管理', '1', '#', 'Y', '0', null, nu
 INSERT INTO `sys_menu` VALUES ('3', '用户管理', '2', '#', 'Y', '0', null, null);
 INSERT INTO `sys_menu` VALUES ('4', '角色管理', '2', '#', 'Y', '0', null, null);
 INSERT INTO `sys_menu` VALUES ('5', '菜单管理', '2', '#', 'Y', '0', null, null);
+
+
+
+CREATE TABLE sys_menu_role
+(
+    menu_id VARCHAR(64) NOT NULL,
+    role_id VARCHAR(64) PRIMARY KEY NOT NULL
+);
+CREATE TABLE sys_role
+(
+    id VARCHAR(64) PRIMARY KEY NOT NULL,
+    name VARCHAR(200),
+    remarks VARCHAR(255),
+    delflag CHAR(1),
+    create_by VARCHAR(64),
+    create_date DATETIME,
+    update_by VARCHAR(64),
+    update_date DATETIME
+);
+CREATE TABLE sys_user
+(
+    id VARCHAR(64) PRIMARY KEY NOT NULL,
+    login_name VARCHAR(200),
+    password VARCHAR(100),
+    real_name VARCHAR(100),
+    mobile VARCHAR(200),
+    email VARCHAR(200),
+    remarks VARCHAR(255),
+    delflag CHAR(1),
+    business VARCHAR(64),
+    create_by VARCHAR(64),
+    create_date DATETIME,
+    update_by VARCHAR(64),
+    update_date DATETIME
+);
+CREATE TABLE sys_user_role
+(
+    user_id VARCHAR(64) NOT NULL,
+    role_id VARCHAR(64) PRIMARY KEY NOT NULL
+);
+ALTER TABLE sys_menu_role ADD FOREIGN KEY (menu_id) REFERENCES sys_menu (id);
+ALTER TABLE sys_menu_role ADD FOREIGN KEY (role_id) REFERENCES sys_role (id);
+CREATE INDEX sys_menu_role_sys_menu_id_fk ON sys_menu_role (menu_id);
+ALTER TABLE sys_user_role ADD FOREIGN KEY (role_id) REFERENCES sys_role (id);
+ALTER TABLE sys_user_role ADD FOREIGN KEY (user_id) REFERENCES sys_user (id);
+CREATE INDEX sys_user_role_sys_user_id_fk ON sys_user_role (user_id);
