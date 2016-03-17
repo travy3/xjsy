@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2016-03-17 17:12:31
+Date: 2016-03-17 20:51:00
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -54,6 +54,7 @@ CREATE TABLE `sys_business` (
 -- ----------------------------
 -- Records of sys_business
 -- ----------------------------
+INSERT INTO `sys_business` VALUES ('1', '石家庄总店', '2', '青园街220', '1', '15032831553', '11@qqc.com');
 
 -- ----------------------------
 -- Table structure for sys_dictionary
@@ -160,6 +161,7 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
+INSERT INTO `sys_user` VALUES ('1', 'admin', '123123', '管理员', '15032831553', '11@qq.com', null, '0', '1', '1', '2016-03-17 20:15:26', '1', '2016-03-17 20:15:35');
 
 -- ----------------------------
 -- Table structure for sys_user_role

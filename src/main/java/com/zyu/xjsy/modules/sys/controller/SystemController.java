@@ -38,7 +38,7 @@ public class SystemController extends BaseController {
 
         List<User> userList  = new ArrayList<User>();
 
-        userList = systemService.findAllUser();
+        userList = systemService.findAllUser(new User());
 
         model.addAttribute("userList",userList);
 

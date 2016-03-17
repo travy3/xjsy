@@ -28,6 +28,9 @@ public class User extends DataEntity<User> {
 
     private List<Role> roleList = Lists.newArrayList();
 
+    public User(){
+        super();
+    }
 
     public User(String id){
         super(id);

@@ -3,7 +3,7 @@
 <mapper namespace="com.zyu.xjsy.modules.sys.dao.UserDao">
     <sql id="userColumns">
         u.id,
-        u.name,
+        u.real_name AS 'name',
         u.login_name AS 'loginName',
         u.email,
         u.mobile,
@@ -14,8 +14,7 @@
         u.update_by AS 'updateBy.id',
         u.update_date AS 'updateDate',
         u.business AS 'business.id',
-        b.name AS 'business.name',
-
+        b.name AS 'business.name'
     </sql>
 
     <sql id="userJoin">
@@ -23,12 +22,11 @@
     </sql>
 
     <select id="findList" resultType="User">
-
         SELECT
         <include refid="userColumns"/>
         FROM sys_user u
         <include refid="userJoin" />
-
+        WHERE u.delflag = #{DEL_FLAG_NORMAL}
     </select>
 
 
