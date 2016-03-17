@@ -1,20 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper>
+<mapper namespace="com.zyu.xjsy.modules.sys.dao.UserDao">
     <sql id="userColumns">
-        a.id,
-        a.name,
-        a.remarks,
-        a.relflag,
-        a.create_by,
-        a.create_date,
-        a.update_by,
-        a.update_date
+        u.id,
+        u.name,
+        u.login_name AS 'loginName',
+        u.email,
+        u.mobile,
+        u.remarks,
+        u.delflag,
+        u.create_by AS 'createBy.id',
+        u.create_date AS 'createDate',
+        u.update_by AS 'updateBy.id',
+        u.update_date AS 'updateDate',
+        u.business AS 'business.id',
+        b.name AS 'business.name',
+
     </sql>
 
-    <sql id="userjoin">
-
-
+    <sql id="userJoin">
+        JOIN sys_business b on u.business = b.id
     </sql>
+
+    <select id="findList" resultType="User">
+
+        SELECT
+        <include refid="userColumns"/>
+        FROM sys_user u
+        <include refid="userJoin" />
+
+    </select>
+
 
 </mapper>
