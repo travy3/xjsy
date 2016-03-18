@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2016-03-17 20:51:00
+Date: 2016-03-18 18:50:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -96,8 +96,8 @@ CREATE TABLE `sys_menu` (
 -- ----------------------------
 INSERT INTO `sys_menu` VALUES ('1', '根目录', '0', '#', 'N', '0', null, null);
 INSERT INTO `sys_menu` VALUES ('2', '系统管理', '1', '#', 'Y', '0', null, null);
-INSERT INTO `sys_menu` VALUES ('3', '用户管理', '2', '#', 'Y', '0', null, null);
-INSERT INTO `sys_menu` VALUES ('4', '角色管理', '2', '#', 'Y', '0', null, null);
+INSERT INTO `sys_menu` VALUES ('3', '用户管理', '2', '/sys/user', 'Y', '0', null, null);
+INSERT INTO `sys_menu` VALUES ('4', '角色管理', '2', '', 'Y', '0', null, null);
 INSERT INTO `sys_menu` VALUES ('5', '菜单管理', '2', '/sys/menu/list', 'Y', '0', null, 'sys:menu:list');
 
 -- ----------------------------
@@ -155,13 +155,14 @@ CREATE TABLE `sys_user` (
   `create_date` datetime DEFAULT NULL,
   `update_by` varchar(64) DEFAULT NULL,
   `update_date` datetime DEFAULT NULL,
+  `loginflag` char(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'admin', '123123', '管理员', '15032831553', '11@qq.com', null, '0', '1', '1', '2016-03-17 20:15:26', '1', '2016-03-17 20:15:35');
+INSERT INTO `sys_user` VALUES ('1', 'admin', '123123', '管理员', '15032831553', '11@qq.com', null, '0', '1', '1', '2016-03-17 20:15:26', '1', '2016-03-17 20:15:35', '1');
 
 -- ----------------------------
 -- Table structure for sys_user_role
