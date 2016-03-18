@@ -1,6 +1,7 @@
 package com.zyu.xjsy.modules.sys.entity;
 
 import com.google.common.collect.Lists;
+import com.zyu.xjsy.common.config.Global;
 import com.zyu.xjsy.common.persistence.DataEntity;
 
 import java.util.List;
@@ -26,10 +27,13 @@ public class User extends DataEntity<User> {
 
     private Business business; // 归属加盟商
 
+    private String loginFlag;
+
     private List<Role> roleList = Lists.newArrayList();
 
     public User(){
         super();
+        this.loginFlag = Global.YES;
     }
 
     public User(String id){
@@ -110,4 +114,15 @@ public class User extends DataEntity<User> {
         this.roleList = roleList;
     }
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public String getLoginFlag() {
+        return loginFlag;
+    }
+
+    public void setLoginFlag(String loginFlag) {
+        this.loginFlag = loginFlag;
+    }
 }

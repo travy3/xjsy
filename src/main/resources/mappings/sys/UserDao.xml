@@ -9,6 +9,7 @@
         u.mobile,
         u.remarks,
         u.delflag,
+        u.loginflag,
         u.create_by AS 'createBy.id',
         u.create_date AS 'createDate',
         u.update_by AS 'updateBy.id',
