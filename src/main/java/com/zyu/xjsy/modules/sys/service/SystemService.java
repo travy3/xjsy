@@ -30,9 +30,9 @@ public class SystemService extends BaseService {
     }
 
 
-    public List<User> findAllUser() {
+    public List<User> findAllUser(User user) {
 
-        return userDao.findAllList();
+        return userDao.findList(user);
 
     }
 }

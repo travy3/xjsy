@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zyu.xjsy.modules.sys.dao.MenuDao">
+    <!--<resultMap id="userList" type="com.zyu.xjsy.modules.sys.entity.User">-->
+        <!--<id property="id" column="id"></id>-->
+        <!--<collection property="roleList" ofType="com.zyu.xjsy.modules.sys.entity.Role">-->
+            <!--<id property="id" column="role_id"></id>-->
+            <!---->
+        <!--</collection>-->
+    <!--</resultMap>-->
     <sql id="menuColumns">
         a.id,
         a.name,

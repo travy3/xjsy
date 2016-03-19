@@ -9,9 +9,7 @@ public class Business extends DataEntity<Business> {
 
     private String name;
 
-    private String area;
-
-    private String code;
+    private Area area;
 
     private String address;
 
@@ -39,20 +37,12 @@ public class Business extends DataEntity<Business> {
         this.name = name;
     }
 
-    public String getArea() {
+    public Area getArea() {
         return area;
     }
 
-    public void setArea(String area) {
+    public void setArea(Area area) {
         this.area = area;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 
     public String getAddress() {

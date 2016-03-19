@@ -26,7 +26,9 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
     }
 
     public DataEntity(String id){
+
         super(id);
+        this.delFlag = DEL_FLAG_NORMAL;
     }
 
     @Override
