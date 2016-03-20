@@ -2,6 +2,7 @@ package com.zyu.xjsy.modules.sys.controller;
 
 import com.google.gson.Gson;
 import com.zyu.xjsy.common.controller.BaseController;
+import com.zyu.xjsy.common.util.PageInfo;
 import com.zyu.xjsy.modules.sys.entity.Menu;
 import com.zyu.xjsy.modules.sys.entity.User;
 import com.zyu.xjsy.modules.sys.service.SystemService;
@@ -46,7 +47,9 @@ public class SystemController extends BaseController {
 
     @RequestMapping(value = "/user/list")
     @ResponseBody
-    public String getUserList(Model model){
+    public String getUserList(Model model, PageInfo pageInfo){
+
+
 
         List<User> userList  = new ArrayList<User>();
 

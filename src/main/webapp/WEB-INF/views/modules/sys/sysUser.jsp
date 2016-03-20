@@ -4,7 +4,7 @@
     $('#user-datagrid-json').datagrid({
         gridTitle : '用户列表',
         showToolbar: true,
-        toolbarItem: 'add,edit,save,del',
+        toolbarItem: 'add,edit,del',
         addLocation:'first',
         local: 'local',
         dataUrl: '${ctx}/sys/user/list',
@@ -59,7 +59,7 @@
         delUrl : 'ajaxDone1.html',
         contextMenuB: true,
         paging: {total:30, pageSize:5},
-        editMode: 'inline',
+        editMode: 'dialog',
         fullGrid: true,
         showLinenumber: false
     })
@@ -105,5 +105,5 @@
     </div>
 </div>
 <div class="bjui-pageFooter ">
-    <div class="pagination-box" data-toggle="pagination" data-total="10" data-page-size="5" data-page-current="1"></div>
+    <div class="pagination-box" data-toggle="pagination" data-total="10" data-page-size="10" data-page-current="1"></div>
 </div>
