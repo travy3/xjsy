@@ -1,5 +1,6 @@
 package com.zyu.xjsy.common.persistence;
 
+import com.zyu.xjsy.common.util.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
@@ -14,6 +15,8 @@ public abstract class BaseEntity<T> implements Serializable{
     protected String id;
 
     protected boolean isNewRecord = false;
+
+    protected PageInfo pageInfo;
 
     public BaseEntity() {
 
@@ -69,5 +72,11 @@ public abstract class BaseEntity<T> implements Serializable{
     }
 
 
+    public PageInfo getPageInfo() {
+        return pageInfo;
+    }
 
+    public void setPageInfo(PageInfo pageInfo) {
+        this.pageInfo = pageInfo;
+    }
 }

@@ -79,4 +79,12 @@ public class PageInfo {
     public void setOrderDirection(String orderDirection) {
         this.orderDirection = orderDirection;
     }
+
+    public int getFirstResult(){
+        int firstResult = (getPageCurrent() - 1) * getPageSize();
+        if (firstResult >= getTotal()) {
+            firstResult = 0;
+        }
+        return firstResult;
+    }
 }
