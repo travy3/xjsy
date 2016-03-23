@@ -20,7 +20,7 @@ public class PropertiesLoader {
 
     private static ResourceLoader resourceLoader = new DefaultResourceLoader();
 
-    private Properties properties;
+    private Properties properties = new Properties();
 
     public PropertiesLoader(String... resourcePaths){
 

@@ -53,6 +53,11 @@ public class PageInterceptor extends BaseInterceptor{
         return null;
     }
 
+    @Override
+    protected void initProperties(Properties p) {
+        super.initProperties(p);
+    }
+
     public Object plugin(Object target) {
         return null;
     }

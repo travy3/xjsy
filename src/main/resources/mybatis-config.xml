@@ -39,4 +39,8 @@
 
     </settings>
 
+    <plugins>
+        <plugin interceptor="com.zyu.xjsy.common.persistence.interceptor.PaginationInterceptor"></plugin>
+    </plugins>
+
 </configuration>

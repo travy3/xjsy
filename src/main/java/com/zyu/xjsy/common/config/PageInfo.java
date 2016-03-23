@@ -1,12 +1,15 @@
-package com.zyu.xjsy.common.util;
+package com.zyu.xjsy.common.config;
+
+import com.google.common.collect.Lists;
+
+import java.util.List;
 
 /**
  * Created by travy on 2016/3/20.
  */
-public class PageInfo {
+public class PageInfo<T> {
 
     private int total;
-
 
     private int pageSize;
 
@@ -18,18 +21,24 @@ public class PageInfo {
 
     private String orderDirection;
 
+    private List<T> list  = Lists.newArrayList();
+
+    public PageInfo() {
+    }
+
     public PageInfo(int total, String orderField) {
         this.total = total;
         this.orderField = orderField;
     }
 
-    public PageInfo(int total, int pageSize, int pageCurrent, int pageNum, String orderField, String orderDirection) {
+    public PageInfo(int total, int pageSize, int pageCurrent, int pageNum, String orderField, String orderDirection, List<T> list) {
         this.total = total;
         this.pageSize = pageSize;
         this.pageCurrent = pageCurrent;
         this.pageNum = pageNum;
         this.orderField = orderField;
         this.orderDirection = orderDirection;
+        this.list = list;
     }
 
     public int getTotal() {
@@ -80,6 +89,14 @@ public class PageInfo {
         this.orderDirection = orderDirection;
     }
 
+    public List<T> getList() {
+        return list;
+    }
+
+    public void setList(List<T> list) {
+        this.list = list;
+    }
+
     public int getFirstResult(){
         int firstResult = (getPageCurrent() - 1) * getPageSize();
         if (firstResult >= getTotal()) {
@@ -87,4 +104,5 @@ public class PageInfo {
         }
         return firstResult;
     }
+
 }

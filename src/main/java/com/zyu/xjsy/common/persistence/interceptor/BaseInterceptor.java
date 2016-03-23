@@ -1,14 +1,13 @@
 package com.zyu.xjsy.common.persistence.interceptor;
 
 import com.zyu.xjsy.common.config.Global;
+import com.zyu.xjsy.common.config.PageInfo;
 import com.zyu.xjsy.common.persistence.dialect.Dialect;
 import com.zyu.xjsy.common.persistence.dialect.MySQLDialect;
-import com.zyu.xjsy.common.util.PageInfo;
 import com.zyu.xjsy.common.util.Reflections;
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.plugin.Interceptor;
-import org.apache.ibatis.plugin.Invocation;
 
 import java.io.Serializable;
 import java.util.Properties;
@@ -35,23 +34,18 @@ public abstract class BaseInterceptor implements Interceptor , Serializable {
     protected static final String MAPPED_STATEMENT = "mappedStatement";
 
 
-    public Object intercept(Invocation invocation) throws Throwable {
-        return null;
-    }
-
-    public Object plugin(Object target) {
-        return null;
-    }
-
-    public void setProperties(Properties properties) {
-
-    }
-
+    /**
+     * 设置属性，支持自定义方言类和制定数据库的方式
+     * <code>dialectClass</code>,自定义方言类。可以不配置这项
+     * <ode>dbms</ode> 数据库类型，插件支持的数据库
+     * <code>sqlPattern</code> 需要拦截的SQL ID
+     * @param p 属性
+     */
     protected void initProperties(Properties p){
 
         Dialect dialect = null;
 
-        String dbType = Global.getConfig("jdbc.type");
+        String dbType = Global.getInstance().getConfig("jdbc.type");
 
         if("mysql".equals(dbType)){
             dialect = new MySQLDialect();

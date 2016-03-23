@@ -1,14 +1,18 @@
 package com.zyu.xjsy.common.persistence.interceptor;
 
+import com.zyu.xjsy.common.config.PageInfo;
 import com.zyu.xjsy.common.persistence.dialect.Dialect;
-import com.zyu.xjsy.common.util.PageInfo;
+import org.apache.commons.jxpath.JXPathContext;
+import org.apache.commons.jxpath.JXPathException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
+import org.apache.ibatis.mapping.SqlSource;
 import org.apache.ibatis.plugin.Intercepts;
 import org.apache.ibatis.plugin.Invocation;
+import org.apache.ibatis.plugin.Plugin;
 import org.apache.ibatis.plugin.Signature;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
@@ -17,6 +21,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 
 /**
  * 数据库分页插件，只拦截查询语句.
@@ -39,8 +44,8 @@ public class PaginationInterceptor extends BaseInterceptor {
 
         //获取分页参数对象
 
-        PageInfo pageInfo = null;
-        if(parameterObject != null){
+        PageInfo pageInfo = searchPageWithXpath(boundSql.getParameterObject(),".","pageInfo","*/pageInfo");
+        if(parameterObject != null && pageInfo != null){
             pageInfo = convertParameter(parameterObject,pageInfo);
         }
         //如果设置了分页对象，则进行分页
@@ -58,9 +63,44 @@ public class PaginationInterceptor extends BaseInterceptor {
 
             //分页查询 本地化对象 修改数据库注意修改实现
             //todo
-//            String pageSql = SQLHelper.generatePageSql(originalSql, page, DIALECT);
+            String pageSql = generatePageSql(originalSql, pageInfo, DIALECT);
+
+            invocation.getArgs()[2] = new RowBounds(RowBounds.NO_ROW_OFFSET, RowBounds.NO_ROW_LIMIT);
+            BoundSql newBoundSql = new BoundSql(mappedStatement.getConfiguration(), pageSql, boundSql.getParameterMappings(), boundSql.getParameterObject());
+
+            MappedStatement newMs = copyFromMappedStatement(mappedStatement, new BoundSqlSqlSource(newBoundSql));
+
+            invocation.getArgs()[0] = newMs;
         }
-        return super.intercept(invocation);
+//        return intercept(invocation);
+        return invocation.proceed();
+    }
+
+    private PageInfo searchPageWithXpath(Object parameterObject, String... xPaths ) {
+
+        JXPathContext jxPathContext =JXPathContext.newContext(parameterObject);
+
+        Object result;
+
+        for (String xPath : xPaths){
+            try {
+                result  = jxPathContext.selectSingleNode(xPath);
+            }catch (JXPathException e){
+                continue;
+            }
+            if (result instanceof PageInfo){
+                return (PageInfo) result;
+            }
+        }
+        return null;
+    }
+
+    public Object plugin(Object target) {
+        return Plugin.wrap(target,this);
+    }
+
+    public void setProperties(Properties properties) {
+        super.initProperties(properties);
     }
 
     /**
@@ -77,7 +117,6 @@ public class PaginationInterceptor extends BaseInterceptor {
                                final MappedStatement mappedStatement, final Object parameterObject,
                                final BoundSql boundSql, Log log) throws SQLException {
         final String countSql = "select count(1) from (" + sql + ") tmp_count";
-//        final String countSql = "select count(1) " + removeSelect(removeOrders(sql));
         Connection conn = connection;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -120,10 +159,47 @@ public class PaginationInterceptor extends BaseInterceptor {
      */
     public static String generatePageSql(String sql, PageInfo page, Dialect dialect) {
         if (dialect.supportsLimit()) {
-            //todo
             return dialect.getLimitString(sql, page.getFirstResult(), page.getPageSize());
         } else {
             return sql;
         }
     }
+
+
+    private MappedStatement copyFromMappedStatement(MappedStatement ms,
+                                                    SqlSource newSqlSource) {
+        MappedStatement.Builder builder = new MappedStatement.Builder(ms.getConfiguration(),
+                ms.getId(), newSqlSource, ms.getSqlCommandType());
+        builder.resource(ms.getResource());
+        builder.fetchSize(ms.getFetchSize());
+        builder.statementType(ms.getStatementType());
+        builder.keyGenerator(ms.getKeyGenerator());
+        if (ms.getKeyProperties() != null) {
+            for (String keyProperty : ms.getKeyProperties()) {
+                builder.keyProperty(keyProperty);
+            }
+        }
+        builder.timeout(ms.getTimeout());
+        builder.parameterMap(ms.getParameterMap());
+        builder.resultMaps(ms.getResultMaps());
+        builder.cache(ms.getCache());
+        return builder.build();
+    }
+
+
+    public static class BoundSqlSqlSource implements SqlSource{
+
+        BoundSql boundSql;
+
+
+        public BoundSql getBoundSql(Object parameterObject) {
+            return boundSql;
+        }
+
+        public BoundSqlSqlSource(BoundSql boundSql) {
+            this.boundSql = boundSql;
+        }
+    }
+
+
 }

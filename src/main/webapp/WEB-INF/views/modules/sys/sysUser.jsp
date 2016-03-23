@@ -6,8 +6,8 @@
         showToolbar: true,
         toolbarItem: 'add,edit,del',
         addLocation:'first',
-        local: 'local',
-        dataUrl: '${ctx}/sys/user/list',
+        local: 'remote',
+        dataUrl: '${ctx}/sys/user/list/',
         dataType: 'json',
         filterThead: false,
         columns: [
