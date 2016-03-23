@@ -24,6 +24,8 @@ public class PageInfo<T> {
     private List<T> list  = Lists.newArrayList();
 
     public PageInfo() {
+        this.pageCurrent = 1;
+        this.pageSize = 10;
     }
 
     public PageInfo(int total, String orderField) {

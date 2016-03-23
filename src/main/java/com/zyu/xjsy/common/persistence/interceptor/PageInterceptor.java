@@ -50,6 +50,7 @@ public class PageInterceptor extends BaseInterceptor{
         Configuration configuration = (Configuration) metaObject.getValue("delegate.configuration");
 
 
+
         return null;
     }
 

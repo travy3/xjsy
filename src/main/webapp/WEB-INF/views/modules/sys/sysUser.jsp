@@ -58,7 +58,7 @@
         editUrl: 'ajaxDone1.html',
         delUrl : 'ajaxDone1.html',
         contextMenuB: true,
-        paging: {total:30, pageSize:5},
+        paging: {pageSize:5,pageCurrent:1},
         editMode: 'dialog',
         fullGrid: true,
         showLinenumber: false
