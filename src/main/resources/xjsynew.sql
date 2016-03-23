@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2016-03-18 18:50:46
+Date: 2016-03-23 19:23:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -136,6 +136,8 @@ CREATE TABLE `sys_role` (
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
+INSERT INTO `sys_role` VALUES ('1', '管理员', '系统', '0', '1', '2016-03-23 15:13:58', '1', '2016-03-23 15:14:01');
+INSERT INTO `sys_role` VALUES ('2', '加盟商', '加盟商', '0', '1', '2016-03-23 15:14:24', '1', '2016-03-23 15:14:26');
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -171,12 +173,11 @@ DROP TABLE IF EXISTS `sys_user_role`;
 CREATE TABLE `sys_user_role` (
   `user_id` varchar(64) NOT NULL,
   `role_id` varchar(64) NOT NULL,
-  PRIMARY KEY (`role_id`),
-  KEY `sys_user_role_sys_user_id_fk` (`user_id`),
-  CONSTRAINT `sys_user_role_sys_role_id_fk` FOREIGN KEY (`role_id`) REFERENCES `jeesitenew`.`sys_role` (`id`),
-  CONSTRAINT `sys_user_role_sys_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `jeesitenew`.`sys_user` (`id`)
+  KEY `sys_user_role_sys_user_id_fk` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_user_role
 -- ----------------------------
+INSERT INTO `sys_user_role` VALUES ('1', '1');
+INSERT INTO `sys_user_role` VALUES ('1', '2');
