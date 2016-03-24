@@ -7,7 +7,7 @@
         toolbarItem: 'add,edit,del',
         addLocation:'first',
         local: 'remote',
-        dataUrl: '${ctx}/sys/user/list/',
+        dataUrl: '${ctx}/sys/user/list',
         dataType: 'json',
         filterThead: false,
         columns: [
@@ -58,18 +58,18 @@
         editUrl: 'ajaxDone1.html',
         delUrl : 'ajaxDone1.html',
         contextMenuB: true,
-        paging: {pageSize:5,pageCurrent:1},
+        paging: {pageSize:1, pageCurrent:1},
         editMode: 'dialog',
         fullGrid: true,
-        showLinenumber: false
+        showLinenumber: true
     })
 </script>
 <div class="bjui-pageHeader">
-    <form id="pagerForm" data-toggle="ajaxsearch" action="table.html" method="post">
-        <input type="hidden" name="pageSize" value="${model.pageSize}">
-        <input type="hidden" name="pageCurrent" value="${model.pageCurrent}">
-        <input type="hidden" name="orderField" value="${param.orderField}">
-        <input type="hidden" name="orderDirection" value="${param.orderDirection}">
+    <form id="pagerForm" data-toggle="ajaxsearch" action="${ctx}/sys/user/list" method="post">
+        <input type="hidden" name="pageSize" value="${user.pageInfo.pageSize}">
+        <input type="hidden" name="pageCurrent" value="${user.pageInfo.pageCurrent}">
+        <input type="hidden" name="orderField" value="${user.pageInfo.orderField}">
+        <input type="hidden" name="orderDirection" value="${user.pageInfo.orderDirection}">
         <div class="bjui-searchBar">
             <label>加盟商:</label>
             <select name="business" data-toggle="selectpicker">
@@ -105,5 +105,5 @@
     </div>
 </div>
 <div class="bjui-pageFooter ">
-    <div class="pagination-box" data-toggle="pagination" data-total="10" data-page-size="10" data-page-current="1"></div>
+    <%--<div class="pagination-box" data-toggle="pagination" data-total="" data-page-size="" data-page-current=""></div>--%>
 </div>

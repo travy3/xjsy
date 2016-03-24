@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,28 +39,32 @@ public class SystemController extends BaseController {
 
     @RequestMapping(value = "/user")
     public String userIndex(){
-        List<User> userList  = new ArrayList<User>();
+//        List<User> userList  = new ArrayList<User>();
 
-        userList = systemService.findAllUser(new User());
+//        userList = systemService.findAllUser(new User());
 
         return "/modules/sys/sysUser";
     }
 
     @RequestMapping(value = "/user/list")
     @ResponseBody
-    public String getUserList(Model model, PageInfo pageInfo,String pageCurrent){
+    public String getUserList(Model model, User user, PageInfo pageInfo, HttpServletRequest request){
+
+        String pageCurrent = request.getParameter("pageCurrent");
 
         List<User> userList  = new ArrayList<User>();
 
-        userList = systemService.findAllUser(new User());
+//        User user = new User();
+
+//        user.setPageInfo(pageInfo);
+
+        pageInfo = systemService.findAllUser(pageInfo,user);
 
 
         model.addAttribute("userList",userList);
 
-//        pageInfo.setList(userList);
-
         Gson gson = new Gson();
 
-        return gson.toJson(userList);
+        return gson.toJson(pageInfo);
     }
 }

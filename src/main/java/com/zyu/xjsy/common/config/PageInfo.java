@@ -2,6 +2,8 @@ package com.zyu.xjsy.common.config;
 
 import com.google.common.collect.Lists;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -17,6 +19,7 @@ public class PageInfo<T> {
 
     private int pageNum;
 
+
     private String orderField;
 
     private String orderDirection;
@@ -24,14 +27,15 @@ public class PageInfo<T> {
     private List<T> list  = Lists.newArrayList();
 
     public PageInfo() {
-        this.pageCurrent = 1;
-        this.pageSize = 10;
+//        this.pageCurrent = 1;
+//        this.pageSize = 20;
     }
 
-    public PageInfo(int total, String orderField) {
-        this.total = total;
-        this.orderField = orderField;
-    }
+
+   public PageInfo(HttpServletRequest request , HttpServletResponse response){
+
+
+   }
 
     public PageInfo(int total, int pageSize, int pageCurrent, int pageNum, String orderField, String orderDirection, List<T> list) {
         this.total = total;

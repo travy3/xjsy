@@ -1,5 +1,6 @@
 package com.zyu.xjsy.modules.sys.service;
 
+import com.zyu.xjsy.common.config.PageInfo;
 import com.zyu.xjsy.common.service.BaseService;
 import com.zyu.xjsy.modules.sys.dao.MenuDao;
 import com.zyu.xjsy.modules.sys.dao.UserDao;
@@ -30,9 +31,15 @@ public class SystemService extends BaseService {
     }
 
 
-    public List<User> findAllUser(User user) {
+    public PageInfo<User> findAllUser(PageInfo pageInfo,User user) {
 
-        return userDao.findList(user);
+        // 设置分页参数
+        user.setPageInfo(pageInfo);
+
+        // 执行分页查询
+        pageInfo.setList(userDao.findList(user));
+
+        return pageInfo;
 
     }
 }

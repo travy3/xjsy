@@ -2,6 +2,7 @@ package com.zyu.xjsy.modules.sys.entity;
 
 import com.google.common.collect.Lists;
 import com.zyu.xjsy.common.config.Global;
+import com.zyu.xjsy.common.config.PageInfo;
 import com.zyu.xjsy.common.persistence.DataEntity;
 
 import java.util.List;
@@ -34,6 +35,7 @@ public class User extends DataEntity<User> {
     public User(){
         super();
         this.loginFlag = Global.YES;
+        this.pageInfo = new PageInfo();
     }
 
     public User(String id){
