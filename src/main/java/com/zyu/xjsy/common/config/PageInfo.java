@@ -1,6 +1,7 @@
 package com.zyu.xjsy.common.config;
 
 import com.google.common.collect.Lists;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,9 +14,9 @@ public class PageInfo<T> {
 
     private int total;
 
-    private int pageSize;
+    private int pageSize=1;
 
-    private int pageCurrent;
+    private int pageCurrent=1;
 
     private int pageNum;
 
@@ -34,6 +35,15 @@ public class PageInfo<T> {
 
    public PageInfo(HttpServletRequest request , HttpServletResponse response){
 
+       String no = request.getParameter("pageCurrent");
+       if(StringUtils.isNumeric(no)){
+           this.setPageCurrent(Integer.parseInt(no));
+       }
+
+       String size = request.getParameter("pageSize");
+       if (StringUtils.isNumeric(size)){
+           this.setPageSize(Integer.parseInt(size));
+       }
 
    }
 

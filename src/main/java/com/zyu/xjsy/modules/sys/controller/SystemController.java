@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,17 +49,13 @@ public class SystemController extends BaseController {
 
     @RequestMapping(value = "/user/list")
     @ResponseBody
-    public String getUserList(Model model, User user, PageInfo pageInfo, HttpServletRequest request){
+    public String getUserList(Model model, User user, HttpServletRequest request, HttpServletResponse response){
 
         String pageCurrent = request.getParameter("pageCurrent");
 
         List<User> userList  = new ArrayList<User>();
 
-//        User user = new User();
-
-//        user.setPageInfo(pageInfo);
-
-        pageInfo = systemService.findAllUser(pageInfo,user);
+        PageInfo<User> pageInfo = systemService.findAllUser(new PageInfo<User>(request,response),user);
 
 
         model.addAttribute("userList",userList);
