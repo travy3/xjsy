@@ -1,6 +1,5 @@
 package com.zyu.xjsy.common.persistence;
 
-import com.zyu.xjsy.common.config.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;

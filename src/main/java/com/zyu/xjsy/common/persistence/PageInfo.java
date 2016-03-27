@@ -1,4 +1,4 @@
-package com.zyu.xjsy.common.config;
+package com.zyu.xjsy.common.persistence;
 
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
@@ -14,7 +14,7 @@ public class PageInfo<T> {
 
     private int total;
 
-    private int pageSize=1;
+    private int pageSize=20;
 
     private int pageCurrent=1;
 

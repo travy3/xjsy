@@ -1,6 +1,6 @@
 package com.zyu.xjsy.common.persistence.interceptor;
 
-import com.zyu.xjsy.common.config.PageInfo;
+import com.zyu.xjsy.common.persistence.PageInfo;
 import com.zyu.xjsy.common.persistence.dialect.Dialect;
 import org.apache.commons.jxpath.JXPathContext;
 import org.apache.commons.jxpath.JXPathException;

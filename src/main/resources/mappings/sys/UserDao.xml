@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zyu.xjsy.modules.sys.dao.UserDao">
-    <resultMap id="userListResult" type="User">
+    <resultMap id="userResult" type="User">
         <id property="id" column="id"></id>
         <result property="name" column="name"></result>
         <result property="loginName" column="loginName"></result>
@@ -12,6 +12,7 @@
         <result property="createDate" column="createDate"></result>
         <result property="business.id" column="business.id"></result>
         <result property="business.name" column="business.name"></result>
+        <result property="deadLine" column="deadLine"></result>
         <collection property="roleList" ofType="Role">
             <id property="id" column="role.id"></id>
             <result property="name" column="role.name"></result>
@@ -31,6 +32,7 @@
         u.update_by AS 'updateBy.id',
         u.update_date AS 'updateDate',
         u.business AS 'business.id',
+        u.deadline AS 'deadLine',
         b.name AS 'business.name',
         r.id AS 'role.id',
         r.name AS 'role.name'
@@ -42,12 +44,28 @@
         JOIN sys_role r on r.id = ur.role_id
     </sql>
 
-    <select id="findList" resultMap="userListResult">
+    <select id="findList" resultMap="userResult">
         SELECT
         <include refid="userColumns"/>
         FROM sys_user u
         <include refid="userJoin" />
         WHERE u.delflag = #{DEL_FLAG_NORMAL}
+    </select>
+
+    <select id="get" resultMap="userResult">
+        SELECT
+        <include refid="userColumns"></include>
+        FROM sys_user u
+        <include refid="userJoin" />
+        WHERE u.delflag = #{DEL_FLAG_NORMAL} AND u.id = #{id}
+    </select>
+
+    <select id="getByLoginName" resultType="userResult">
+        SELECT
+        <include refid="userColumns"></include>
+        FROM sys_user u
+        <include refid="userJoin" />
+        WHERE u.delflag = #{DEL_FLAG_NORMAL} AND u.login_name=#{loginName}
     </select>
 
 

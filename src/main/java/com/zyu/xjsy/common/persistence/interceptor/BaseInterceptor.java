@@ -1,7 +1,7 @@
 package com.zyu.xjsy.common.persistence.interceptor;
 
 import com.zyu.xjsy.common.config.Global;
-import com.zyu.xjsy.common.config.PageInfo;
+import com.zyu.xjsy.common.persistence.PageInfo;
 import com.zyu.xjsy.common.persistence.dialect.Dialect;
 import com.zyu.xjsy.common.persistence.dialect.MySQLDialect;
 import com.zyu.xjsy.common.util.Reflections;

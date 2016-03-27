@@ -23,7 +23,7 @@
         SELECT
         <include refid="menuColumns"></include>
         FROM sys_menu a
-        WHERE a.delFlag =#{DEL_FLAG_NORMAL}
+        WHERE a.delflag =#{DEL_FLAG_NORMAL}
     </select>
 
 

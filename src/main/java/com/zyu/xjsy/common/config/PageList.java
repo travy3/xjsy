@@ -1,6 +1,7 @@
 package com.zyu.xjsy.common.config;
 
 import com.google.common.collect.Lists;
+import com.zyu.xjsy.common.persistence.PageInfo;
 
 import java.util.List;
 
