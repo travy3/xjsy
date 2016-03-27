@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : chenjie
-Source Server Version : 50616
+Source Server         : mysql
+Source Server Version : 50619
 Source Host           : localhost:3306
 Source Database       : xjsynew
 
 Target Server Type    : MYSQL
-Target Server Version : 50616
+Target Server Version : 50619
 File Encoding         : 65001
 
-Date: 2016-03-23 19:23:04
+Date: 2016-03-27 23:07:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -48,13 +48,14 @@ CREATE TABLE `sys_business` (
   `master` varchar(64) DEFAULT NULL,
   `phone` varchar(64) DEFAULT NULL,
   `email` varchar(64) DEFAULT NULL,
+  `delflag` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_business
 -- ----------------------------
-INSERT INTO `sys_business` VALUES ('1', '石家庄总店', '2', '青园街220', '1', '15032831553', '11@qqc.com');
+INSERT INTO `sys_business` VALUES ('1', '石家庄总店', '2', '青园街220', '1', '15032831553', '11@qqc.com', '0');
 
 -- ----------------------------
 -- Table structure for sys_dictionary
@@ -85,7 +86,7 @@ CREATE TABLE `sys_menu` (
   `pid` varchar(64) NOT NULL,
   `href` varchar(2000) DEFAULT NULL,
   `isShow` char(1) NOT NULL,
-  `delFlag` char(1) NOT NULL,
+  `delflag` char(1) NOT NULL,
   `remarks` varchar(200) DEFAULT NULL,
   `permission` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -158,13 +159,16 @@ CREATE TABLE `sys_user` (
   `update_by` varchar(64) DEFAULT NULL,
   `update_date` datetime DEFAULT NULL,
   `loginflag` char(1) DEFAULT NULL,
+  `deadline` date DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'admin', '123123', '管理员', '15032831553', '11@qq.com', null, '0', '1', '1', '2016-03-17 20:15:26', '1', '2016-03-17 20:15:35', '1');
+INSERT INTO `sys_user` VALUES ('1', 'admin', '123123', '管理员', '15032831553', '11@qq.com', null, '0', '1', '1', '2016-03-17 20:15:26', '1', '2016-03-17 20:15:35', '0', '2016-03-29');
+INSERT INTO `sys_user` VALUES ('2', 'zhangyu', '123123', '加盟a', '15032850523', '22@qq.com', null, '0', '1', '1', '2016-03-01 13:32:08', '1', '2016-03-24 13:32:13', '0', '2017-03-27');
+INSERT INTO `sys_user` VALUES ('3', 'zhangying', '123123', '加盟B', '15032831546', '33@qq.com', null, '0', '1', '1', '2016-03-24 12:48:01', '1', '2016-03-24 12:48:03', '0', '2018-03-27');
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -180,4 +184,5 @@ CREATE TABLE `sys_user_role` (
 -- Records of sys_user_role
 -- ----------------------------
 INSERT INTO `sys_user_role` VALUES ('1', '1');
-INSERT INTO `sys_user_role` VALUES ('1', '2');
+INSERT INTO `sys_user_role` VALUES ('2', '2');
+INSERT INTO `sys_user_role` VALUES ('3', '2');
