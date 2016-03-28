@@ -62,17 +62,18 @@ public class UserController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/edit/{id}")
+    @RequestMapping(value = "/manager/{id}")
     public String userForm(@PathVariable String id, Model model){
-        User user = new User(id);
-        user = systemService.getUser(user);
+        if (!StringUtils.isBlank(id)){
+            User user = new User(id);
+            user = systemService.getUser(user);
+            model.addAttribute("user",user);
+        }
         List<Business> businessList = Lists.newArrayList();
         businessList = systemService.findAllBusiness(new Business());
 
         List<Role> roleList = Lists.newArrayList();
         roleList = systemService.findAllRole(new Role());
-
-        model.addAttribute("user",user);
 
         model.addAttribute("businessList",businessList);
 
