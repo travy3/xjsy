@@ -2,8 +2,9 @@ package com.zyu.xjsy.modules.sys.controller;
 
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
-import com.zyu.xjsy.common.persistence.PageInfo;
+import com.google.gson.GsonBuilder;
 import com.zyu.xjsy.common.controller.BaseController;
+import com.zyu.xjsy.common.persistence.PageInfo;
 import com.zyu.xjsy.modules.sys.entity.Business;
 import com.zyu.xjsy.modules.sys.entity.Role;
 import com.zyu.xjsy.modules.sys.entity.User;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +26,7 @@ import java.util.List;
 /**
  * Created by travy on 2016/3/27.
  */
-@RequestMapping(value = "/sys")
+@RequestMapping(value = "/sys/user")
 @Controller
 public class UserController extends BaseController {
 
@@ -32,12 +34,12 @@ public class UserController extends BaseController {
     private SystemService systemService;
 
 
-    @RequestMapping(value = "/user")
+    @RequestMapping(value = "")
     public String userIndex(){
         return "/modules/sys/sysUser";
     }
 
-    @RequestMapping(value = "/user/list")
+    @RequestMapping(value = "/list")
     @ResponseBody
     public String getUserList(Model model, User user, HttpServletRequest request, HttpServletResponse response){
 
@@ -48,8 +50,9 @@ public class UserController extends BaseController {
 
         model.addAttribute("userList",userList);
 
-        Gson gson = new Gson();
-
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd HH:mm:ss")
+                .create();
         return gson.toJson(pageInfo);
     }
 
@@ -59,7 +62,7 @@ public class UserController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/user/edit/{id}")
+    @RequestMapping(value = "/edit/{id}")
     public String userForm(@PathVariable String id, Model model){
         User user = new User(id);
         user = systemService.getUser(user);
@@ -77,7 +80,15 @@ public class UserController extends BaseController {
         return "/modules/sys/editUser";
     }
 
-    @RequestMapping(value = "/user/save")
+    /**
+     * 保存用户信息
+     * @param user
+     * @param request
+     * @param response
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/save" ,method = RequestMethod.POST)
     public String save(User user, HttpServletRequest request, HttpServletResponse response, Model model){
 
         // 如果新密码为空，则不更换密码
@@ -92,12 +103,22 @@ public class UserController extends BaseController {
             return userForm(user.getId(), model);
         }
 
+        //无法验证有效性
+        List<Role> roles = Lists.newArrayList();
+//        roles.add(new Role(request.getParameter("role.id")));
+//        user.setRoleList(roles);
 
+        for (Role role : systemService.findAllRole(new Role())){
+            if (role.getId().equals(request.getParameter("role.id"))){
 
-
-
-
-        return null;
+                roles.add(role);
+            }
+        }
+        user.setRoleList(roles);
+        // 保存用户信息
+        systemService.saveUser(user);
+        addMessage(model, "保存用户'" + user.getLoginName() + "'成功");
+        return "redirect:/sys/user/list";
     }
 
     @ResponseBody

@@ -20,6 +20,9 @@ public class Role extends DataEntity<Role> {
         super();
     }
 
+    public Role(String id) {
+        super(id);
+    }
 
     public String getName() {
         return name;

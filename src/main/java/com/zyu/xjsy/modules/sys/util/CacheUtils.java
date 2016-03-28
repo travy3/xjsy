@@ -34,7 +34,7 @@ public class CacheUtils {
 
     private static Cache getCache(String cacheName){
         Cache cache = cacheManager.getCache(cacheName);
-        if(cache != null){
+        if(cache == null){
             cacheManager.addCache(cacheName);
             cache = cacheManager.getCache(cacheName);
             cache.getCacheConfiguration().setEternal(true);
@@ -64,6 +64,17 @@ public class CacheUtils {
     }
 
 
+    /**
+     * 清除当前用户缓存
+     */
+    public static void clearCache(){
+//        removeCache(USER_CACHE,CACHE_ROLE_LIST);
+//        removeCache(CACHE_MENU_LIST);
+//        removeCache(CACHE_AREA_LIST);
+//        removeCache(CACHE_OFFICE_LIST);
+//        removeCache(CACHE_OFFICE_ALL_LIST);
+//        UserUtils.clearCache(getUser());
+    }
 
 
 }

@@ -1,8 +1,10 @@
 package com.zyu.xjsy.common.persistence;
 
+import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
+import java.util.Map;
 
 /**
  * Created by chenjie on 2016/2/18.
@@ -16,6 +18,11 @@ public abstract class BaseEntity<T> implements Serializable{
     protected boolean isNewRecord = false;
 
     protected PageInfo pageInfo;
+
+    /**
+     * 自定义SQL（SQL标识，SQL内容）
+     */
+    protected Map<String, String> sqlMap;
 
     public BaseEntity() {
 
@@ -70,12 +77,18 @@ public abstract class BaseEntity<T> implements Serializable{
         isNewRecord = newRecord;
     }
 
-
     public PageInfo getPageInfo() {
         return pageInfo;
     }
 
     public void setPageInfo(PageInfo pageInfo) {
         this.pageInfo = pageInfo;
+    }
+
+    public Map<String, String> getSqlMap() {
+        if (sqlMap == null){
+            sqlMap = Maps.newHashMap();
+        }
+        return sqlMap;
     }
 }

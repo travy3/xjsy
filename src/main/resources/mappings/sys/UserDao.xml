@@ -60,13 +60,84 @@
         WHERE u.delflag = #{DEL_FLAG_NORMAL} AND u.id = #{id}
     </select>
 
-    <select id="getByLoginName" resultType="userResult">
+    <select id="getByLoginName" resultMap="userResult">
         SELECT
         <include refid="userColumns"></include>
         FROM sys_user u
         <include refid="userJoin" />
         WHERE u.delflag = #{DEL_FLAG_NORMAL} AND u.login_name=#{loginName}
     </select>
+
+    <!-- 删除用户和角色关联表数据 -->
+    <delete id="deleteUserRole">
+        DELETE FROM sys_user_role WHERE user_id = #{id}
+    </delete>
+
+    <insert id="insertUserRole">
+        INSERT INTO  sys_user_role(user_id,role_id)
+        <foreach collection="roleList" item="role" separator=" union all ">
+            SELECT #{id}, #{role.id} FROM dual
+        </foreach>
+    </insert>
+
+
+    <insert id="insert">
+        INSERT  INTO sys_user(
+        id,
+        login_name,
+        password,
+        real_name,
+        mobile,
+        email,
+        remarks,
+        delflag,
+        business,
+        create_by,
+        create_date,
+        update_by,
+        update_date,
+        loginflag
+        ) VALUES (
+        #{id},
+        #{loginName},
+        #{password},
+        #{name},
+        #{mobile},
+        #{email},
+        #{remarks},
+        #{delflag},
+        #{business.id},
+        #{createBy.id},
+        #{createDate},
+        #{updateBy.id},
+        #{updateDate},
+        #{loginFlag},
+        )
+    </insert>
+
+    <update id="update">
+        UPDATE sys_user SET
+          business = #{business.id},
+          login_name = #{loginName},
+          password = #{password},
+          name = #{name},
+          email = #{email},
+          mobile = #{mobile},
+          update_by = #{updateBy.id},
+          update_date = #{updateDate},
+          remarks = #{remarks},
+          loginflag = #{loginFlag}
+          WHERE id= #{id}
+    </update>
+
+    <!-- 逻辑删除用户 -->
+    <update id="delete">
+        UPDATE sys_user SET
+        delflag = #{DEL_FLAG_DELETE}
+        WHERE id = #{id}
+    </update>
+
+
 
 
 

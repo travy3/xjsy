@@ -19,4 +19,7 @@ public interface UserDao extends CrudDao<User> {
     public User getByLoginName(User user);
 
 
+    void deleteUserRole(User user);
+
+    void insertUserRole(User user);
 }

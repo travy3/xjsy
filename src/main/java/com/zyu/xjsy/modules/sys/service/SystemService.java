@@ -3,6 +3,7 @@ package com.zyu.xjsy.modules.sys.service;
 import com.zyu.xjsy.common.persistence.PageInfo;
 import com.zyu.xjsy.common.security.Digests;
 import com.zyu.xjsy.common.service.BaseService;
+import com.zyu.xjsy.common.service.ServiceException;
 import com.zyu.xjsy.common.util.Encodes;
 import com.zyu.xjsy.modules.sys.dao.BusinessDao;
 import com.zyu.xjsy.modules.sys.dao.MenuDao;
@@ -13,8 +14,10 @@ import com.zyu.xjsy.modules.sys.entity.Menu;
 import com.zyu.xjsy.modules.sys.entity.Role;
 import com.zyu.xjsy.modules.sys.entity.User;
 import com.zyu.xjsy.modules.sys.util.UserUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,6 +25,7 @@ import java.util.List;
  * Created by travy on 2016/3/4.
  */
 @Service
+@Transactional(readOnly = true)
 public class SystemService extends BaseService {
 
     public static final String HASH_ALGORITHM = "SHA-1";
@@ -70,7 +74,28 @@ public class SystemService extends BaseService {
         return UserUtils.getByLoginName(loginName);
     }
 
+    @Transactional(readOnly = false)
+    public void saveUser(User user) {
+        if(StringUtils.isBlank(user.getId())){
+            user.preInsert();
+            userDao.insert(user);
+        }else {
+            // 更新用户数据
+            user.preUpdate();
+            userDao.update(user);
+        }
+        if (StringUtils.isNotBlank(user.getId())){
+            userDao.deleteUserRole(user);
+            if (user.getRoleList()!= null && user.getRoleList().size() > 0){
+                userDao.insertUserRole(user);
+            }else {
+                throw new ServiceException(user.getLoginName() + "没有设置角色！");
+            }
+        }
+    }
+
     public User getUser(User user){
+//        return UserUtils.get(user.getId());
         return userDao.get(user);
     }
 
@@ -96,4 +121,6 @@ public class SystemService extends BaseService {
         byte[] hashPassword = Digests.sha1(plainPassword.getBytes(), salt, HASH_INTERATIONS);
         return Encodes.encodeHex(salt)+Encodes.encodeHex(hashPassword);
     }
+
+
 }

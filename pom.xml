@@ -35,7 +35,6 @@
     <!-- tools version setting -->
     <slf4j.version>1.7.7</slf4j.version>
     <commons-lang3.version>3.3.2</commons-lang3.version>
-
     <!-- jdbc driver setting -->
     <mysql.driver.version>5.1.30</mysql.driver.version>
 
@@ -278,6 +277,7 @@
       <artifactId>gson</artifactId>
       <version>2.6.1</version>
     </dependency>
+
 
     <!--common-lang-->
     <dependency>

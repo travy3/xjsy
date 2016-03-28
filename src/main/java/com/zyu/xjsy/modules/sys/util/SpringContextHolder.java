@@ -7,6 +7,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
  * Created by travy on 2016/3/27.
  */
 @Service
+@Lazy(false)
 public class SpringContextHolder implements ApplicationContextAware, DisposableBean{
 
     private static ApplicationContext applicationContext = null;

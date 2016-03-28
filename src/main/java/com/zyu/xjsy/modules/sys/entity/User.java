@@ -149,4 +149,12 @@ public class User extends DataEntity<User> {
     public void setNewPassword(String newPassword) {
         this.newPassword = newPassword;
     }
+
+    public boolean isAdmin(){
+        return isAdmin(this.id);
+    }
+
+    public static boolean isAdmin(String id){
+        return id != null && "1".equals(id);
+    }
 }

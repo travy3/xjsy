@@ -2,6 +2,9 @@ package com.zyu.xjsy.common.persistence;
 
 import com.zyu.xjsy.common.util.IdGen;
 import com.zyu.xjsy.modules.sys.entity.User;
+import com.zyu.xjsy.modules.sys.util.UserUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.Date;
 
@@ -31,19 +34,33 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
         this.delFlag = DEL_FLAG_NORMAL;
     }
 
+    /**
+     * 插入之前执行方法，需要手动调用
+     */
     @Override
     public void preInsert() {
-
         if (!this.isNewRecord) {
             setId(IdGen.uuid());
         }
-
-
+        User user = UserUtils.getUser();
+        if (StringUtils.isNotBlank(user.getId())){
+            this.updateBy = user;
+            this.createBy = user;
+        }
+        this.updateDate = new Date();
+        this.createDate = this.updateDate;
     }
 
+    /**
+     * 更新之前执行方法，需要手动调用
+     */
     @Override
-    public void preUpdate() {
-
+    public void preUpdate(){
+        User user = UserUtils.getUser();
+        if (StringUtils.isNotBlank(user.getId())){
+            this.updateBy = user;
+        }
+        this.updateDate = new Date();
     }
 
     public String getDelFlag() {
@@ -54,7 +71,7 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
         this.delFlag = delFlag;
     }
 
-
+    @Length(min=0, max=255)
     public String getRemarks() {
         return remarks;
     }
@@ -70,6 +87,7 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
     public void setCreateBy(User createBy) {
         this.createBy = createBy;
     }
+
 
     public Date getCreateDate() {
         return createDate;
