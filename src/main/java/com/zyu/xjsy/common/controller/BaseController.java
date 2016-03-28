@@ -4,6 +4,7 @@ import com.zyu.xjsy.common.beanvalidator.BeanValidators;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
 
 import javax.validation.ConstraintViolationException;
@@ -17,6 +18,25 @@ import java.util.List;
 public abstract class BaseController {
 
     protected Logger logger = LoggerFactory.getLogger(getClass());
+
+    /**
+     * 管理基础路径
+     */
+    @Value("${adminPath}")
+    protected String adminPath;
+
+    /**
+     * 前端基础路径
+     */
+    @Value("${frontPath}")
+    protected String frontPath;
+
+    /**
+     * 前端URL后缀
+     */
+    @Value("${urlSuffix}")
+    protected String urlSuffix;
+
 
     /**
      * 验证Bean实例对象

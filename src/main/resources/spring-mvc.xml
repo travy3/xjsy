@@ -50,6 +50,11 @@
     <!-- 对静态资源文件的访问， 将无法mapping到Controller的path交给default servlet handler处理 -->
     <mvc:default-servlet-handler />
 
+    <!-- 静态资源映射 -->
+    <mvc:resources mapping="/bjui/**" location="/bjui/" cache-period="31536000"/>
+
+    <!-- 定义无Controller的path<->view直接映射 -->
+    <mvc:view-controller path="/" view-name="redirect:${web.view.index}"/>
 
 
     <!-- 拦截器配置 -->
@@ -65,6 +70,19 @@
     <!--</mvc:interceptor>-->
     <!--</mvc:interceptors>-->
 
+    <!-- 支持Shiro对Controller的方法级AOP安全控制 begin-->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor">
+        <property name="proxyTargetClass" value="true" />
+    </bean>
 
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="org.apache.shiro.authz.UnauthorizedException">error/403</prop>
+                <prop key="java.lang.Throwable">error/500</prop>
+            </props>
+        </property>
+    </bean>
+    <!-- 支持Shiro对Controller的方法级AOP安全控制 end -->
 
 </beans>

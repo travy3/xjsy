@@ -64,11 +64,9 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "/manager/{id}")
     public String userForm(@PathVariable String id, Model model){
-        if (!StringUtils.isBlank(id)){
-            User user = new User(id);
-            user = systemService.getUser(user);
-            model.addAttribute("user",user);
-        }
+        User user = new User(id);
+        user = systemService.getUser(user);
+        model.addAttribute("user",user);
         List<Business> businessList = Lists.newArrayList();
         businessList = systemService.findAllBusiness(new Business());
 

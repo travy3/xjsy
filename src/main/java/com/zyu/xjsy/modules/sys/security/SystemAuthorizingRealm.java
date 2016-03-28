@@ -8,6 +8,7 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
@@ -16,6 +17,7 @@ import java.io.Serializable;
  * Created by travy on 2016/3/4.
  */
 @Service
+@DependsOn({ "userDao", "roleDao", "menuDao" })
 public class SystemAuthorizingRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
@@ -44,7 +46,6 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
         private String loginName; // 登录名
         private String name; // 姓名
 
-        // private Map<String, Object> cacheMap;
 
         public Principal(User user) {
             this.id = user.getId();

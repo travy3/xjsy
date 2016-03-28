@@ -27,7 +27,6 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
 
         String host = UserUtils.getRemtoAddr((HttpServletRequest) request);
 
-
         return new  UsernamePasswordToken(name,password,remeberMe,host,captcha);
     }
 

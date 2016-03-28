@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ public class LoginController extends BaseController {
     @Autowired
     private SystemService systemService;
 
-    @RequestMapping(value = "/a")
+    @RequestMapping(value = "${adminPath}")
     public String index(Model model){
 
         List<Menu> menuList = new ArrayList<Menu>();
@@ -32,9 +33,16 @@ public class LoginController extends BaseController {
         return "/modules/sys/sysIndex";
     }
 
-    @RequestMapping(value = "/login")
+
+    /**
+     * 管理登录
+     */
+    @RequestMapping(value = "${adminPath}/login", method = RequestMethod.GET)
     public String login(){
 
         return "/modules/sys/sysLogin";
     }
+
+
+
 }
