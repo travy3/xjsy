@@ -66,4 +66,29 @@ public class Global {
     // 对/错
     public static final String TRUE = "true";
     public static final String FALSE = "false";
+
+
+    /**
+     * 获取URL后缀
+     */
+    public static String getUrlSuffix() {
+        return getConfig("urlSuffix");
+    }
+
+    /**
+     * 获取管理端根路径
+     */
+    public static String getAdminPath() {
+        return getConfig("adminPath");
+    }
+
+    /**
+     * 获取前端根路径
+     */
+    public static String getFrontPath() {
+        return getConfig("frontPath");
+    }
+
+
+
 }

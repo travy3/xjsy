@@ -99,6 +99,18 @@ public class SystemService extends BaseService {
         return userDao.get(user);
     }
 
+    /**
+     * 验证密码
+     * @param plainPassword 明文密码
+     * @param password 密文密码
+     * @return 验证成功返回true
+     */
+    public  boolean validatePassword(String plainPassword, String password) {
+        byte[] salt = Encodes.decodeHex(password.substring(0,16));
+        byte[] hashPassword = Digests.sha1(plainPassword.getBytes(), salt, HASH_INTERATIONS);
+        return password.equals(Encodes.encodeHex(salt)+Encodes.encodeHex(hashPassword));
+    }
+
     /**********************加盟商信息***********************/
 
     public List<Business> findAllBusiness(Business business){

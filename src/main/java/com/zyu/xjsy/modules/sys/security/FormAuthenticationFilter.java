@@ -30,6 +30,7 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
         return new  UsernamePasswordToken(name,password,remeberMe,host,captcha);
     }
 
+
     private String getCaptcha(ServletRequest request) {
         return WebUtils.getCleanParam(request,DEFAULT_CAPTCHA_PARAM);
     }
