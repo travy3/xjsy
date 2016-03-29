@@ -1,5 +1,6 @@
 package com.zyu.xjsy.modules.sys.entity;
 
+import com.zyu.xjsy.common.config.Global;
 import com.zyu.xjsy.common.persistence.DataEntity;
 
 /**
@@ -15,7 +16,7 @@ public class Menu extends DataEntity<Menu>{
 
     public Menu(){
         super();
-        this.isShow="1";
+        this.isShow= Global.SHOW;
     }
 
     public Menu(String id) {

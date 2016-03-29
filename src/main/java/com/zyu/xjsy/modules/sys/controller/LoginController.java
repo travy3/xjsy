@@ -2,7 +2,9 @@ package com.zyu.xjsy.modules.sys.controller;
 
 import com.zyu.xjsy.common.controller.BaseController;
 import com.zyu.xjsy.modules.sys.entity.Menu;
+import com.zyu.xjsy.modules.sys.security.SystemAuthorizingRealm;
 import com.zyu.xjsy.modules.sys.service.SystemService;
+import com.zyu.xjsy.modules.sys.util.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,11 +26,11 @@ public class LoginController extends BaseController {
     @RequestMapping(value = "${adminPath}")
     public String index(Model model){
 
+
         List<Menu> menuList = new ArrayList<Menu>();
         menuList = systemService.findAllMenu();
 
         model.addAttribute("menuList",menuList);
-//        return "/modules/sys/sysMenu";
 
         return "/modules/sys/sysIndex";
     }
@@ -40,8 +42,18 @@ public class LoginController extends BaseController {
     @RequestMapping(value = "${adminPath}/login", method = RequestMethod.GET)
     public String login(){
 
-        return "/modules/sys/sysLogin";
+        SystemAuthorizingRealm.Principal principal = UserUtils.getPrincipal();
+
+        if (principal != null){
+            return "redirect:"+adminPath;
+        }
+
+        return "/modules/sys/sysLogin2";
     }
+
+//todo
+//    public
+
 
 
 

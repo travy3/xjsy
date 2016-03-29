@@ -62,7 +62,7 @@ public class UserController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/manager/{id}")
+    @RequestMapping(value = "/edit/{id}")
     public String userForm(@PathVariable String id, Model model){
         User user = new User(id);
         user = systemService.getUser(user);

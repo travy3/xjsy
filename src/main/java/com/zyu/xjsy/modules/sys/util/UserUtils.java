@@ -172,8 +172,40 @@ public class UserUtils {
         return null;
     }
 
+    /**
+     * 获取当前用户授权菜单
+     * @return
+     */
     public static List<Menu> getMenuList() {
-//todo
-        return null;
+        List<Menu> menuList = (List<Menu>) getCache(CACHE_MENU_LIST);
+        if(menuList == null){
+            User user = getUser();
+            if (user.isAdmin()){
+                menuList = menuDao.findAllList(new Menu());
+            }else {
+                menuList = menuDao.findByUser(user);
+            }
+            putCache(CACHE_MENU_LIST,menuList);
+        }
+        return menuList;
     }
+
+
+    //user cache session
+
+    public static Object getCache(String key){
+        Object obj = getSession().getAttribute(key);
+        return obj==null?null:obj;
+    }
+
+    public static void putCache(String key, Object value){
+        getSession().setAttribute(key,value);
+    }
+
+    public static void removeCache(String key){
+        getSession().removeAttribute(key);
+    }
+
+
+
 }

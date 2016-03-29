@@ -20,6 +20,19 @@ public class Global {
 
     private static PropertiesLoader propertiesLoader = new PropertiesLoader("xjsy.properties");
 
+
+    // 显示/隐藏
+    public static final String SHOW = "1";
+    public static final String HIDE = "0";
+
+    // 是/否
+    public static final String YES = "1";
+    public static final String NO = "0";
+
+    // 对/错
+    public static final String TRUE = "true";
+    public static final String FALSE = "false";
+
 //    public static synchronized Global getInstance(){
 //        if (global==null)
 //            global = new Global();
@@ -55,17 +68,20 @@ public class Global {
         return value;
     }
 
-    // 显示/隐藏
-    public static final String SHOW = "1";
-    public static final String HIDE = "0";
+    /**
+     * 页面获取常量
+     * @see ${fns:getConst('YES')}
+     */
+    public static Object getConst(String field) {
+        try {
+            return Global.class.getField(field).get(null);
+        } catch (Exception e) {
+            // 异常代表无配置，这里什么也不做
+        }
+        return null;
+    }
 
-    // 是/否
-    public static final String YES = "1";
-    public static final String NO = "0";
 
-    // 对/错
-    public static final String TRUE = "true";
-    public static final String FALSE = "false";
 
 
     /**

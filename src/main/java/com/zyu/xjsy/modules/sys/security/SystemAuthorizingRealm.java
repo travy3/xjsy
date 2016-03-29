@@ -3,6 +3,7 @@ package com.zyu.xjsy.modules.sys.security;
 import com.zyu.xjsy.common.config.Global;
 import com.zyu.xjsy.common.util.ValidateCodeServlet;
 import com.zyu.xjsy.modules.sys.entity.Menu;
+import com.zyu.xjsy.modules.sys.entity.Role;
 import com.zyu.xjsy.modules.sys.entity.User;
 import com.zyu.xjsy.modules.sys.service.SystemService;
 import com.zyu.xjsy.modules.sys.util.SpringContextHolder;
@@ -57,7 +58,6 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
             }
 
         }
-
         User user = getSystemService().getUserByLoginName(
                 principal.getLoginName());
 
@@ -73,11 +73,18 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
                     }
                 }
             }
+            System.out
+                    .println("权限 ： " + info.getStringPermissions().toString());
+            // 添加用户权限
+            info.addStringPermission("user");
+            // 添加用户角色信息
+            for (Role role : user.getRoleList()) {
+                info.addRole(role.getEnname());
+            }
+            return info;
+        }else {
+            return null;
         }
-
-
-
-        return null;
     }
 
     @Override
