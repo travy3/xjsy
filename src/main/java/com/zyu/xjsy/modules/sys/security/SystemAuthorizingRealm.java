@@ -2,6 +2,7 @@ package com.zyu.xjsy.modules.sys.security;
 
 import com.zyu.xjsy.common.config.Global;
 import com.zyu.xjsy.common.util.ValidateCodeServlet;
+import com.zyu.xjsy.modules.sys.entity.Menu;
 import com.zyu.xjsy.modules.sys.entity.User;
 import com.zyu.xjsy.modules.sys.service.SystemService;
 import com.zyu.xjsy.modules.sys.util.SpringContextHolder;
@@ -9,6 +10,7 @@ import com.zyu.xjsy.modules.sys.util.UserUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
@@ -16,6 +18,8 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by travy on 2016/3/4.
@@ -34,6 +38,42 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 
         Principal principal = (Principal) getAvailablePrincipal(principals);
+
+        //
+        if (!Global.getConfig("user.multiAccountLogin").equals("true")){
+            Collection<Session> sessions = getSystemService().getSessionDao()
+                    .getActiveSessions(true, principal, UserUtils.getSession());
+
+            if(sessions.size()> 0 ){
+                if(UserUtils.getSubject().isAuthenticated()){
+                    for (Session session : sessions) {
+                        getSystemService().getSessionDao().delete(session);
+                    }
+                }
+                else {
+                    UserUtils.getSubject().logout();
+                    throw new AuthenticationException("msg:账号已在其它地方登录，请重新登录。");
+                }
+            }
+
+        }
+
+        User user = getSystemService().getUserByLoginName(
+                principal.getLoginName());
+
+        if (user!= null){
+            SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+            List<Menu> list = UserUtils.getMenuList();
+            for (Menu menu : list) {
+                if (StringUtils.isNotBlank(menu.getPermission())) {
+                    // 添加基于Permission的权限信息
+                    for (String permission : StringUtils.split(
+                            menu.getPermission(), ",")) {
+                        info.addStringPermission(permission);
+                    }
+                }
+            }
+        }
 
 
 

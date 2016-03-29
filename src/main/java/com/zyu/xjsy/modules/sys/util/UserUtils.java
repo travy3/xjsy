@@ -5,6 +5,7 @@ import com.zyu.xjsy.modules.sys.dao.BusinessDao;
 import com.zyu.xjsy.modules.sys.dao.MenuDao;
 import com.zyu.xjsy.modules.sys.dao.RoleDao;
 import com.zyu.xjsy.modules.sys.dao.UserDao;
+import com.zyu.xjsy.modules.sys.entity.Menu;
 import com.zyu.xjsy.modules.sys.entity.Role;
 import com.zyu.xjsy.modules.sys.entity.User;
 import com.zyu.xjsy.modules.sys.security.SystemAuthorizingRealm;
@@ -147,6 +148,13 @@ public class UserUtils {
     }
 
     /**
+     * 获取授权主要对象
+     */
+    public static Subject getSubject(){
+        return SecurityUtils.getSubject();
+    }
+
+    /**
      * 获取当前登录者对象
      */
     public static SystemAuthorizingRealm.Principal getPrincipal(){
@@ -164,4 +172,8 @@ public class UserUtils {
         return null;
     }
 
+    public static List<Menu> getMenuList() {
+//todo
+        return null;
+    }
 }

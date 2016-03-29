@@ -16,6 +16,7 @@ public abstract class BaseService {
 
     public static String dataScopeFilter(User user) {
 
+
         return "";
 
     }

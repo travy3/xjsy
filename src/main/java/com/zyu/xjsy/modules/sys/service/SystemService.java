@@ -2,6 +2,7 @@ package com.zyu.xjsy.modules.sys.service;
 
 import com.zyu.xjsy.common.persistence.PageInfo;
 import com.zyu.xjsy.common.security.Digests;
+import com.zyu.xjsy.common.security.shiro.session.SessionDao;
 import com.zyu.xjsy.common.service.BaseService;
 import com.zyu.xjsy.common.service.ServiceException;
 import com.zyu.xjsy.common.util.Encodes;
@@ -21,6 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+
+
 /**
  * Created by travy on 2016/3/4.
  */
@@ -31,6 +34,9 @@ public class SystemService extends BaseService {
     public static final String HASH_ALGORITHM = "SHA-1";
     public static final int HASH_INTERATIONS = 1024;
     public static final int SALT_SIZE = 8;
+
+    @Autowired
+    private SessionDao sessionDao;
 
     @Autowired
     private MenuDao menuDao;
@@ -133,6 +139,11 @@ public class SystemService extends BaseService {
         byte[] hashPassword = Digests.sha1(plainPassword.getBytes(), salt, HASH_INTERATIONS);
         return Encodes.encodeHex(salt)+Encodes.encodeHex(hashPassword);
     }
+
+    public SessionDao getSessionDao(){
+        return sessionDao;
+    }
+
 
 
 }
