@@ -1,10 +1,11 @@
 package com.zyu.xjsy.modules.sys.util;
 
 import com.zyu.xjsy.common.service.BaseService;
-import com.zyu.xjsy.modules.sys.dao.BusinessDao;
+import com.zyu.xjsy.modules.info.dao.BusinessDao;
 import com.zyu.xjsy.modules.sys.dao.MenuDao;
 import com.zyu.xjsy.modules.sys.dao.RoleDao;
 import com.zyu.xjsy.modules.sys.dao.UserDao;
+import com.zyu.xjsy.modules.info.entity.Business;
 import com.zyu.xjsy.modules.sys.entity.Menu;
 import com.zyu.xjsy.modules.sys.entity.Role;
 import com.zyu.xjsy.modules.sys.entity.User;
@@ -53,21 +54,7 @@ public class UserUtils {
         return remoteAddr != null ? remoteAddr : request.getRemoteAddr();
     }
 
-    public static List<Role> getRoleList(){
-        List<Role> roleList = (List<Role>) CacheUtils.get(CACHE_ROLE_LIST);
-        if (roleList == null){
-            User user = getUser();
-            if (user.isAdmin()){
-                roleList = roleDao.findAllList(new Role());
-            }else {
-                //todo 获取当前用户的角色
-                Role role = new Role();
-                role.getSqlMap().put("dsf", BaseService.dataScopeFilter(getUser()));
-                roleList = roleDao.findList(role);
-            }
-        }
-        return roleList;
-    }
+
 
 
     /**
@@ -190,6 +177,34 @@ public class UserUtils {
         return menuList;
     }
 
+    public static List<Role> getRoleList(){
+        List<Role> roleList = (List<Role>) CacheUtils.get(CACHE_ROLE_LIST);
+        if (roleList == null){
+            User user = getUser();
+            if (user.isAdmin()){
+                roleList = roleDao.findAllList(new Role());
+            }else {
+                //todo 获取当前用户的角色
+                Role role = new Role();
+                role.getSqlMap().put("dsf", BaseService.dataScopeFilter(getUser()));
+                roleList = roleDao.findList(role);
+            }
+        }
+        return roleList;
+    }
+
+    /**
+     * 获取当前用户的加盟商信息
+     * @return
+     */
+    public static Business getBusiness(){
+        Business business = (Business) getCache(CACHE_BUSINESS);
+        if (business == null){
+            business = businessDao.getByUser(getUser());
+        }
+        putCache(CACHE_BUSINESS,business);
+        return business;
+    }
 
     //user cache session
 

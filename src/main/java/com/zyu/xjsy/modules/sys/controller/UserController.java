@@ -6,7 +6,8 @@ import com.google.gson.GsonBuilder;
 import com.zyu.xjsy.common.controller.BaseController;
 import com.zyu.xjsy.common.persistence.PageInfo;
 import com.zyu.xjsy.common.web.ExecuteResult;
-import com.zyu.xjsy.modules.sys.entity.Business;
+import com.zyu.xjsy.modules.info.service.BusinessService;
+import com.zyu.xjsy.modules.info.entity.Business;
 import com.zyu.xjsy.modules.sys.entity.Role;
 import com.zyu.xjsy.modules.sys.entity.User;
 import com.zyu.xjsy.modules.sys.service.SystemService;
@@ -35,6 +36,9 @@ public class UserController extends BaseController {
 
     @Autowired
     private SystemService systemService;
+
+    @Autowired
+    private BusinessService businessService;
 
 
     @RequestMapping(value = "")
@@ -71,7 +75,7 @@ public class UserController extends BaseController {
         user = systemService.getUser(user);
         model.addAttribute("user",user);
         List<Business> businessList = Lists.newArrayList();
-        businessList = systemService.findAllBusiness(new Business());
+        businessList = businessService.findAllBusiness(new Business());
 
         List<Role> roleList = Lists.newArrayList();
         roleList = systemService.findAllRole(new Role());
@@ -85,7 +89,7 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/add")
     public String saveForm(Model model){
         List<Business> businessList = Lists.newArrayList();
-        businessList = systemService.findAllBusiness(new Business());
+        businessList = businessService.findAllBusiness(new Business());
 
         List<Role> roleList = Lists.newArrayList();
         roleList = systemService.findAllRole(new Role());
@@ -136,8 +140,9 @@ public class UserController extends BaseController {
     }
 
 
-    @RequestMapping(value = "/del/{id}")
-    public Object del(@PathVariable String id){
+    @RequestMapping(value = "/del" ,method = RequestMethod.POST)
+    @ResponseBody
+    public Object del(String id){
 
         systemService.delUser(new User(id));
 

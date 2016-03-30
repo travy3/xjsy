@@ -1,6 +1,7 @@
-package com.zyu.xjsy.modules.sys.entity;
+package com.zyu.xjsy.modules.info.entity;
 
 import com.zyu.xjsy.common.persistence.DataEntity;
+import com.zyu.xjsy.modules.sys.entity.Area;
 
 /**
  * Created by travy on 2016/3/7.

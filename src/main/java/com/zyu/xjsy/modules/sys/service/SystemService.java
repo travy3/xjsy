@@ -6,11 +6,9 @@ import com.zyu.xjsy.common.security.shiro.session.SessionDao;
 import com.zyu.xjsy.common.service.BaseService;
 import com.zyu.xjsy.common.service.ServiceException;
 import com.zyu.xjsy.common.util.Encodes;
-import com.zyu.xjsy.modules.sys.dao.BusinessDao;
 import com.zyu.xjsy.modules.sys.dao.MenuDao;
 import com.zyu.xjsy.modules.sys.dao.RoleDao;
 import com.zyu.xjsy.modules.sys.dao.UserDao;
-import com.zyu.xjsy.modules.sys.entity.Business;
 import com.zyu.xjsy.modules.sys.entity.Menu;
 import com.zyu.xjsy.modules.sys.entity.Role;
 import com.zyu.xjsy.modules.sys.entity.User;
@@ -45,8 +43,6 @@ public class SystemService extends BaseService {
     @Autowired
     private UserDao userDao;
 
-    @Autowired
-    private BusinessDao businessDao;
 
     @Autowired
     private RoleDao roleDao;
@@ -81,7 +77,7 @@ public class SystemService extends BaseService {
 
     @Transactional(readOnly = false)
     public void delUser(User user){
-        CacheUtils.remove("sysCache","");
+        CacheUtils.remove("sysCache","userList");
         userDao.delete(user);
     }
 
@@ -96,7 +92,6 @@ public class SystemService extends BaseService {
 
     @Transactional(readOnly = false)
     public void saveUser(User user) {
-
         CacheUtils.remove("sysCache","userList");
         if(StringUtils.isBlank(user.getId())){
             user.preInsert();
@@ -135,13 +130,8 @@ public class SystemService extends BaseService {
         return password.equals(Encodes.encodeHex(salt)+Encodes.encodeHex(hashPassword));
     }
 
-    /**********************加盟商信息***********************/
 
-    public List<Business> findAllBusiness(Business business){
-        return businessDao.findAllList(business);
-    }
-
-    /**********************加盟商信息***********************/
+    /**********************角色信息***********************/
 
     public List<Role> findAllRole(Role role){
         return roleDao.findAllList(role);

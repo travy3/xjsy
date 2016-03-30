@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.zyu.xjsy.common.config.Global;
 import com.zyu.xjsy.common.persistence.PageInfo;
 import com.zyu.xjsy.common.persistence.DataEntity;
+import com.zyu.xjsy.modules.info.entity.Business;
 
 import java.util.Date;
 import java.util.List;
