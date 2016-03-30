@@ -5,12 +5,13 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by travy on 2016/3/20.
  */
-public class PageInfo<T> {
+public class PageInfo<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

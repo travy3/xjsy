@@ -13,6 +13,8 @@ public class CacheUtils {
 
     private static final String SYS_CACHE = "sysCache";
 
+    private static final  String SYS_USERLIST_CACHE = "";
+
     private static final String USER_CACHE = "userCache";
 
 
@@ -61,6 +63,14 @@ public class CacheUtils {
      */
     public static void remove(String cacheName,String key){
         getCache(cacheName).remove(key);
+    }
+
+    /**
+     * 从缓存中移除
+     * @param cacheName
+     */
+    public static void remove(String cacheName){
+        getCache(cacheName).removeAll();
     }
 
 

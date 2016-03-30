@@ -1,7 +1,7 @@
 <%@page language="java" contentType="text/html; utf-8" pageEncoding="utf-8" %>
 <%@include file="/WEB-INF/views/include/taglib.jsp"%>
 <div class="bjui-pageContent">
-    <form action="${ctx}/sys/user/save" class="pageForm" data-toggle="validate">
+    <form action="${ctx}/sys/user/save" class="pageForm" data-toggle="validate" data-reload="true" id="userFomr">
         <input type="hidden" name="id" value="${id}">
         <table class="table table-condensed table-hover">
             <tbody>
@@ -70,6 +70,12 @@
 <div class="bjui-pageFooter">
     <ul>
         <li><button type="button" class="btn-close">关闭</button></li>
-        <li><button type="submit" class="btn-default">保存</button></li>
+        <li><button type="button" onclick="submitForm()" class="btn-default">保存</button></li>
     </ul>
 </div>
+<script>
+    function submitForm(){
+        $('#userFomr').bjuiajax('ajaxForm')
+    }
+
+</script>

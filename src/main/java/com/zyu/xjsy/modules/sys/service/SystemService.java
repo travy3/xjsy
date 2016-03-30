@@ -14,6 +14,7 @@ import com.zyu.xjsy.modules.sys.entity.Business;
 import com.zyu.xjsy.modules.sys.entity.Menu;
 import com.zyu.xjsy.modules.sys.entity.Role;
 import com.zyu.xjsy.modules.sys.entity.User;
+import com.zyu.xjsy.modules.sys.util.CacheUtils;
 import com.zyu.xjsy.modules.sys.util.UserUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,11 +65,24 @@ public class SystemService extends BaseService {
         // 设置分页参数
         user.setPageInfo(pageInfo);
 
+        List<User> userList = (List<User>) CacheUtils.get("userList");
+
+        if (userList == null){
+            userList = userDao.findList(user);
+        }
+
         // 执行分页查询
-        pageInfo.setList(userDao.findList(user));
+        pageInfo.setList(userList);
+        CacheUtils.put("sysCache","userList",userList);
 
         return pageInfo;
 
+    }
+
+    @Transactional(readOnly = false)
+    public void delUser(User user){
+        CacheUtils.remove("sysCache","");
+        userDao.delete(user);
     }
 
     /**
@@ -82,10 +96,14 @@ public class SystemService extends BaseService {
 
     @Transactional(readOnly = false)
     public void saveUser(User user) {
+
+        CacheUtils.remove("sysCache","userList");
         if(StringUtils.isBlank(user.getId())){
             user.preInsert();
             userDao.insert(user);
         }else {
+            //删除缓存
+            UserUtils.clearCache(user);
             // 更新用户数据
             user.preUpdate();
             userDao.update(user);

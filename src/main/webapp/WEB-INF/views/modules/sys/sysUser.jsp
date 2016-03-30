@@ -75,7 +75,7 @@
         showTfoot 		: 	false 	,//[可选] 是否显示页脚，适用于显示统计信息，需要字段相关参数支持。
         showToolbar 	: 	true 	,//[可选] 是否显示工具条，需要设置参数toolbarItem或toolbarCustom。
         toolbarItem 	: 	'refresh,|,del' 	,//[可选] 显示工具条按钮，可选参数['all, add, edit, cancel, save, del, import, export, |']，“all” = 显示所有按钮，“|” = 按钮组分隔符。
-        toolbarCustom 	: 	'<a href="${ctx}/sys/user/save" data-toggle="dialog" data-id="" data-width="650" data-height="200" data-mask="true" data-type="POST" data-title="新增账号" class="btn btn-blue">新增账号</a>  ',//[可选] 自定义的html内容或jQuery DOM对象，支持带返回值函数。
+        toolbarCustom 	: 	'<a href="${ctx}/sys/user/add" data-toggle="dialog" data-id="" data-width="830" data-height="230" data-mask="true" data-type="POST" data-title="新增账号" class="btn btn-blue">新增账号</a>  ',//[可选] 自定义的html内容或jQuery DOM对象，支持带返回值函数。
         //toolbarCustom 	: 	null 	,//[可选] 自定义的html内容或jQuery DOM对象，支持带返回值函数。
         columnResize 	: 	true 	,//[可选] 允许调整列宽。
         columnMenu 		: 	true 	,//[可选] 表头字段列上显示菜单按钮。
@@ -91,7 +91,7 @@
         inlineEditMult 	: 	false 	,//[可选] 允许行内编辑模式下同时添加/编辑多行。
         saveAll 		: 	true 	,//[可选] 适用于多行行内编辑时，一次性保存全部数据，发送到服务器端数据格式见参数editUrl。
         addLocation 	: 	'first'	,//[可选] 添加新行数据于当前页的位置，参数['first' | 'last' | 'prev' | 'next']，参数prev和next参考当前选中行位置。
-        delUrl 			: 	'${ctx}/System/user/del' 	,//[可选] 删除数据的url，服务器端接收的数据见参数delPK
+        delUrl 			: 	'${ctx}/sys/user/del' 	,//[可选] 删除数据的url，服务器端接收的数据见参数delPK
         delType 		: 	'POST' 	,//[可选] Ajax删除数据的请求方式。
         delPK 			: 	'id' 	,//[可选] 设置删除主键名，如果设置了主键，则只发送该字段的值(删除多条则主键值以逗号分隔)到服务器端，否则发送JSON数据（参数名"json"，数据类型为JSON Array）。
         delConfirm 		: 	'删除操作无需保存，直接生效，是否继续删除？' 	,//[可选] 删除前的确认提示，参数[true | false | '自定义提示信息']，参数为false时不弹出提示信息。

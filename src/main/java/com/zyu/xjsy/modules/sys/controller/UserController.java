@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.zyu.xjsy.common.controller.BaseController;
 import com.zyu.xjsy.common.persistence.PageInfo;
+import com.zyu.xjsy.common.web.ExecuteResult;
 import com.zyu.xjsy.modules.sys.entity.Business;
 import com.zyu.xjsy.modules.sys.entity.Role;
 import com.zyu.xjsy.modules.sys.entity.User;
@@ -29,6 +30,8 @@ import java.util.List;
 @RequestMapping(value = "/sys/user")
 @Controller
 public class UserController extends BaseController {
+
+    private ExecuteResult executeResult = new ExecuteResult();
 
     @Autowired
     private SystemService systemService;
@@ -63,7 +66,7 @@ public class UserController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/edit/{id}")
-    public String userForm(@PathVariable String id, Model model){
+    public String editForm(@PathVariable String id, Model model){
         User user = new User(id);
         user = systemService.getUser(user);
         model.addAttribute("user",user);
@@ -79,6 +82,22 @@ public class UserController extends BaseController {
         return "/modules/sys/editUser";
     }
 
+    @RequestMapping(value = "/add")
+    public String saveForm(Model model){
+        List<Business> businessList = Lists.newArrayList();
+        businessList = systemService.findAllBusiness(new Business());
+
+        List<Role> roleList = Lists.newArrayList();
+        roleList = systemService.findAllRole(new Role());
+
+        model.addAttribute("businessList",businessList);
+
+        model.addAttribute("roleList",roleList);
+        return "/modules/sys/addUser";
+
+
+    }
+
     /**
      * 保存用户信息
      * @param user
@@ -88,25 +107,22 @@ public class UserController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/save" ,method = RequestMethod.POST)
-    public String save(User user, HttpServletRequest request, HttpServletResponse response, Model model){
+    @ResponseBody
+    public Object save(User user, HttpServletRequest request, HttpServletResponse response, Model model){
 
         // 如果新密码为空，则不更换密码
         if (StringUtils.isNotBlank(user.getNewPassword())) {
             user.setPassword(SystemService.entryptPassword(user.getNewPassword()));
         }
         if(!beanValidator(model,user)){
-            return userForm(user.getId(),model);
+            return executeResult.jsonReturn(300,"数据格式有误",false);
         }
         if (!"true".equals(checkLoginName(user.getLoginName()))){
-            addMessage(model, "保存用户'" + user.getLoginName() + "'失败，登录名已存在");
-            return userForm(user.getId(), model);
+            return executeResult.jsonReturn(300,"保存用户'" + user.getLoginName() + "'失败，登录名已存在",false);
         }
 
         //无法验证有效性
         List<Role> roles = Lists.newArrayList();
-//        roles.add(new Role(request.getParameter("role.id")));
-//        user.setRoleList(roles);
-
         for (Role role : systemService.findAllRole(new Role())){
             if (role.getId().equals(request.getParameter("role.id"))){
 
@@ -116,14 +132,22 @@ public class UserController extends BaseController {
         user.setRoleList(roles);
         // 保存用户信息
         systemService.saveUser(user);
-        addMessage(model, "保存用户'" + user.getLoginName() + "'成功");
-        return "redirect:/sys/user/list";
+        return executeResult.jsonReturn(200,"保存用户'" + user.getLoginName() + "'成功");
+    }
+
+
+    @RequestMapping(value = "/del/{id}")
+    public Object del(@PathVariable String id){
+
+        systemService.delUser(new User(id));
+
+        return executeResult.jsonReturn(200,"删除成功");
     }
 
     @ResponseBody
-    @RequestMapping(value = "/user/checkLoginName")
+    @RequestMapping(value = "/checkLoginName")
     public String checkLoginName(String loginName) {
-        if (loginName != null && systemService.getUserByLoginName(loginName) == null){
+        if (loginName != null && (systemService.getUserByLoginName(loginName)==null || systemService.getUserByLoginName(loginName).getLoginName().equals(loginName))){
             return "true";
         }
         return "false";

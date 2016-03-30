@@ -207,5 +207,23 @@ public class UserUtils {
     }
 
 
+    /**
+     * 清除当前用户缓存
+     */
+    public static void clearCache(){
+        removeCache(CACHE_ROLE_LIST);
+        removeCache(CACHE_MENU_LIST);
+        UserUtils.clearCache(getUser());
+    }
+
+    /**
+     * 清除指定用户缓存
+     * @param user
+     */
+    public static void clearCache(User user){
+        CacheUtils.remove(USER_CACHE, USER_CACHE_ID_ + user.getId());
+        CacheUtils.remove(USER_CACHE, USER_CACHE_LOGIN_NAME_ + user.getLoginName());
+    }
+
 
 }

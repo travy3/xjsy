@@ -107,13 +107,13 @@
         #{mobile},
         #{email},
         #{remarks},
-        #{delflag},
+        #{delFlag},
         #{business.id},
         #{createBy.id},
         #{createDate},
         #{updateBy.id},
         #{updateDate},
-        #{loginFlag},
+        #{loginFlag}
         )
     </insert>
 
@@ -122,7 +122,7 @@
           business = #{business.id},
           login_name = #{loginName},
           password = #{password},
-          name = #{name},
+          real_name = #{name},
           email = #{email},
           mobile = #{mobile},
           update_by = #{updateBy.id},

@@ -35,6 +35,7 @@
     <!-- tools version setting -->
     <slf4j.version>1.7.7</slf4j.version>
     <commons-lang3.version>3.3.2</commons-lang3.version>
+    <jackson.version>2.2.3</jackson.version>
     <!-- jdbc driver setting -->
     <mysql.driver.version>5.1.30</mysql.driver.version>
 
@@ -278,6 +279,27 @@
       <version>2.6.1</version>
     </dependency>
 
+    <!-- jackson json -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-annotations</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.module</groupId>
+      <artifactId>jackson-module-jaxb-annotations</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
 
     <!--common-lang-->
     <dependency>
