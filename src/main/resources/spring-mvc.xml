@@ -47,14 +47,13 @@
         <property name="suffix" value="${web.view.suffix}"/>
     </bean>
 
-    <!-- 对静态资源文件的访问， 将无法mapping到Controller的path交给default servlet handler处理 -->
-    <mvc:default-servlet-handler />
-
     <!-- 静态资源映射 -->
     <mvc:resources mapping="/bjui/**" location="/bjui/" cache-period="31536000"/>
 
+    <!-- 对静态资源文件的访问， 将无法mapping到Controller的path交给default servlet handler处理 -->
+    <mvc:default-servlet-handler />
     <!-- 定义无Controller的path<->view直接映射 -->
-    <mvc:view-controller path="/" view-name="redirect:${web.view.index}"/>
+    <mvc:view-controller path="/" view-name="redirect:${adminPath}"/>
 
 
     <!-- 拦截器配置 -->

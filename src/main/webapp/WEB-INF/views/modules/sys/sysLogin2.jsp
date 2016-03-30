@@ -34,6 +34,9 @@
             )
         })
 
+
+
+
     </script>
     <![endif]-->
 </head>
@@ -47,7 +50,7 @@
     <form id="loginForm" action="${ctx}/a/login" method="post">
         <input id="username" type="text" name="username" class="username" placeholder="账号">
         <input id="password" type="password" name="password" class="password" placeholder="密码">
-        <div id="error" class="error"></div>
+        <div id="error" class="error" style="display: ${empty message ? 'none':'block'}">${message}</div>
         <button id="submit" type="submit" class="submit" success="">登录</button>
     </form>
     <div class="connect">
@@ -55,7 +58,7 @@
 </div>
 <!-- Javascript -->
 <script src="${ctx}/login/js/jquery-1.7.2.min.js"></script>
-<script src="${ctx}/login/js/md5.js"></script>
+<%--<script src="${ctx}/login/js/md5.js"></script>--%>
 <script src="${ctx}/login/js/scripts.js"></script>
 </body>
 

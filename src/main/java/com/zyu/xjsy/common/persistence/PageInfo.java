@@ -12,6 +12,8 @@ import java.util.List;
  */
 public class PageInfo<T> {
 
+    private static final long serialVersionUID = 1L;
+
     private int total;
 
     private int pageSize=20;

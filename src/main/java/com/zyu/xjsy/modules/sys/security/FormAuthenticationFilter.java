@@ -1,7 +1,11 @@
 package com.zyu.xjsy.modules.sys.security;
 
 import com.zyu.xjsy.modules.sys.util.UserUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.web.util.WebUtils;
 
 import javax.servlet.ServletRequest;
@@ -14,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.FormAuthenticationFilter {
 
     private static final String DEFAULT_CAPTCHA_PARAM = "validateCode";
+    public static final String DEFAULT_MESSAGE_PARAM = "message";
 
     @Override
     protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) {
@@ -27,11 +32,40 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
 
         String host = UserUtils.getRemtoAddr((HttpServletRequest) request);
 
-        return new  UsernamePasswordToken(name,password,remeberMe,host,captcha);
+        return new  UsernamePasswordToken(name,password.toCharArray(),remeberMe,host,captcha);
     }
 
 
     private String getCaptcha(ServletRequest request) {
         return WebUtils.getCleanParam(request,DEFAULT_CAPTCHA_PARAM);
+    }
+
+    /**
+     * 登录失败调用事件
+     */
+    @Override
+    protected boolean onLoginFailure(AuthenticationToken token,
+                                     AuthenticationException e, ServletRequest request, ServletResponse response) {
+        String className = e.getClass().getName(), message = "";
+        if (IncorrectCredentialsException.class.getName().equals(className)
+                || UnknownAccountException.class.getName().equals(className)){
+            message = "用户或密码错误, 请重试.";
+        }
+        else if (e.getMessage() != null && StringUtils.startsWith(e.getMessage(), "msg:")){
+            message = StringUtils.replace(e.getMessage(), "msg:", "");
+        }
+        else{
+            message = "系统出现点问题，请稍后再试！";
+            e.printStackTrace(); // 输出到控制台
+        }
+        request.setAttribute(getFailureKeyAttribute(), className);
+        request.setAttribute(DEFAULT_MESSAGE_PARAM, message);
+        return true;
+    }
+    /**
+     * 登录成功之后跳转URL
+     */
+    public String getSuccessUrl() {
+        return super.getSuccessUrl();
     }
 }

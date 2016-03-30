@@ -5,6 +5,7 @@
         <id property="id" column="id"></id>
         <result property="name" column="name"></result>
         <result property="loginName" column="loginName"></result>
+        <result property="password" column="password"></result>
         <result property="email" column="email"></result>
         <result property="mobile" column="mobile"></result>
         <result property="remarks" column="remarks"></result>
@@ -22,6 +23,7 @@
         u.id,
         u.real_name AS 'name',
         u.login_name AS 'loginName',
+        u.password,
         u.email,
         u.mobile,
         u.remarks,

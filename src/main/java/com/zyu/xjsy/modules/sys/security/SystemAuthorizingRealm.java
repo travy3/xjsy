@@ -1,7 +1,6 @@
 package com.zyu.xjsy.modules.sys.security;
 
 import com.zyu.xjsy.common.config.Global;
-import com.zyu.xjsy.common.util.ValidateCodeServlet;
 import com.zyu.xjsy.modules.sys.entity.Menu;
 import com.zyu.xjsy.modules.sys.entity.Role;
 import com.zyu.xjsy.modules.sys.entity.User;
@@ -95,22 +94,22 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 
         //校验登陆验证码
         Session session  = UserUtils.getSession();
-        String code = (String) session
-                .getAttribute(ValidateCodeServlet.VALIDATE_CODE);
-        if (token.getCaptcha() == null
-                || !token.getCaptcha().toUpperCase().equals(code)) {
-            throw new AuthenticationException("msg:验证码错误, 请重试.");
-        }
+//        String code = (String) session
+//                .getAttribute(ValidateCodeServlet.VALIDATE_CODE);
+//        if (token.getCaptcha() == null
+//                || !token.getCaptcha().toUpperCase().equals(code)) {
+//            throw new AuthenticationException("msg:验证码错误, 请重试.");
+//        }
 
         //校验用户名和密码
         if(StringUtils.isNotBlank(token.getUsername()) && StringUtils.isNotBlank(token.getPassword().toString())){
             User user = getSystemService().getUserByLoginName(token.getUsername());
             if(user != null){
-                if(Global.NO.equals(user.getLoginFlag())){
+                if(Global.YES.equals(user.getLoginFlag())){
                     throw new AuthenticationException("msg:该已帐号禁止登录.");
                 }
-                if(getSystemService().validatePassword(token.getPassword().toString(),user.getPassword())){
-                    return new SimpleAuthenticationInfo(new Principal(user),token.getPassword().toString(),getName());
+                if(getSystemService().validatePassword(new String(token.getPassword()),user.getPassword())){
+                    return new SimpleAuthenticationInfo(new Principal(user),new String(token.getPassword()),getName());
                 }else {
                     throw new UnknownAccountException("msg:账号密码错误,请重试.");
                 }

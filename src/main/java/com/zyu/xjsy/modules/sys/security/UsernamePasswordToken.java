@@ -7,7 +7,7 @@ public class UsernamePasswordToken extends org.apache.shiro.authc.UsernamePasswo
 
     private String captcha;
 
-    public UsernamePasswordToken(String username, String password,
+    public UsernamePasswordToken(String username, char[] password,
                                  boolean rememberMe, String host, String captcha){
 
         super(username,password,rememberMe,host);
