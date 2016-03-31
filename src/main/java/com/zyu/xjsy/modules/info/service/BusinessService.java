@@ -62,7 +62,6 @@ public class BusinessService extends BaseService {
 
     public void saveBusiness(Business business) {
         if (StringUtils.isBlank(business.getId())){
-//            business.preInsert();
             businessDao.insert(business);
         }else {
             businessDao.update(business);

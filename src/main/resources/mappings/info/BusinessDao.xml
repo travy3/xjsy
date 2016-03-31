@@ -25,5 +25,20 @@
     </select>
 
 
+    <insert id="insert">
+        INSERT INTO sys_business(
+          id,
+          name,
+          area,
+          address,
+          master,
+          phone,
+          email,
+          delflag
+        ) VALUES (
+          #{id}
+        )
+    </insert>
+
 
 </mapper>
