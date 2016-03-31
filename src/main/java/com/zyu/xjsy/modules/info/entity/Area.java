@@ -1,4 +1,4 @@
-package com.zyu.xjsy.modules.sys.entity;
+package com.zyu.xjsy.modules.info.entity;
 
 import com.zyu.xjsy.common.persistence.DataEntity;
 
@@ -7,6 +7,8 @@ import com.zyu.xjsy.common.persistence.DataEntity;
  */
 public class Area extends DataEntity<Area> {
 
+    private static final long serialVersionUID = 1L;
+
     private String pid;
 
     private String name;
@@ -14,6 +16,10 @@ public class Area extends DataEntity<Area> {
     private String sort;
 
     private String type;
+
+    public Area(){
+        super();
+    }
 
     public Area(String id){
         super(id);

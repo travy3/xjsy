@@ -87,7 +87,7 @@ public class UserController extends BaseController {
     }
 
     @RequestMapping(value = "/add")
-    public String saveForm(Model model){
+    public String addForm(Model model){
         List<Business> businessList = Lists.newArrayList();
         businessList = businessService.findAllBusiness(new Business());
 

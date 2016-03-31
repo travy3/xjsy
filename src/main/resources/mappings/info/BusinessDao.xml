@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyu.xjsy.modules.info.dao.BusinessDao">
+
+
+
+    <sql id="businessColumns">
+        a.id,
+        a.name,
+        a.area AS 'area.id',
+        a.address,
+        a.master,
+        a.phone,
+        a.email,
+        a.delflag,
+        ar.name AS 'area.name'
+    </sql>
+
+    <select id="findAllList" resultType="Business">
+        SELECT
+         <include refid="businessColumns"></include>
+        FROM sys_business a
+        JOIN sys_area ar on a.area = ar.id
+        where a.delflag=#{DEL_FLAG_NORMAL}
+    </select>
+
+
+
+</mapper>

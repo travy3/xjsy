@@ -4,6 +4,8 @@ import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.zyu.xjsy.common.controller.BaseController;
 import com.zyu.xjsy.common.persistence.PageInfo;
+import com.zyu.xjsy.common.web.ExecuteResult;
+import com.zyu.xjsy.modules.info.entity.Area;
 import com.zyu.xjsy.modules.info.service.BusinessService;
 import com.zyu.xjsy.modules.info.entity.Business;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ import java.util.List;
 @RequestMapping(value = "/info/business")
 @Controller
 public class BusinessController extends BaseController {
+
+    private ExecuteResult executeResult = new ExecuteResult();
 
     @Autowired
     private BusinessService businessService;
@@ -42,5 +46,31 @@ public class BusinessController extends BaseController {
     public String index(){
 
         return "/modules/info/business";
+    }
+
+    @RequestMapping(value = "/add")
+    public String addForm(Model model){
+
+        List<Area> areaList = Lists.newArrayList();
+
+        areaList = businessService.findAllAreas(new Area());
+
+        model.addAttribute("areaList",areaList);
+
+        return "/modules/info/addBusiness";
+    }
+
+    @RequestMapping(value = "/save")
+    @ResponseBody
+    public Object save(Business business){
+
+
+        businessService.saveBusiness(business);
+
+
+        return executeResult.jsonReturn(200,"保存成功");
+
+
+
     }
 }
