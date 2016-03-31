@@ -11,6 +11,7 @@ import com.zyu.xjsy.modules.info.entity.Business;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -60,17 +61,42 @@ public class BusinessController extends BaseController {
         return "/modules/info/addBusiness";
     }
 
+    @RequestMapping(value = "/edit/{id}")
+    public String editForm(Model model,@PathVariable String id){
+
+        Business business = new Business(id);
+
+        business = businessService.getBusiness(business);
+
+        model.addAttribute("business",business);
+
+        List<Area> areaList = Lists.newArrayList();
+
+        areaList = businessService.findAllAreas(new Area());
+
+        model.addAttribute("areaList",areaList);
+
+        return "/modules/info/addBusiness";
+
+    }
+
     @RequestMapping(value = "/save")
     @ResponseBody
-    public Object save(Business business){
+    public Object save(Business business,Model model){
+
+        //todo 根据绑定name查找id进而真实绑定
 
 
+
+
+        if(!beanValidator(model,business)){
+            return executeResult.jsonReturn(300,"数据格式有误",false);
+        }
         businessService.saveBusiness(business);
-
 
         return executeResult.jsonReturn(200,"保存成功");
 
-
-
     }
+
+
 }

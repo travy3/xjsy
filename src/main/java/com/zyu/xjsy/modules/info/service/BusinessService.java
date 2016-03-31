@@ -9,6 +9,7 @@ import com.zyu.xjsy.modules.info.entity.Business;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -60,12 +61,25 @@ public class BusinessService extends BaseService {
         return areaList;
     }
 
+    @Transactional(readOnly = false)
     public void saveBusiness(Business business) {
         if (StringUtils.isBlank(business.getId())){
+            business.preInsert();
             businessDao.insert(business);
         }else {
+            business.preUpdate();
             businessDao.update(business);
         }
 
     }
+
+    public Business getBusiness(Business business) {
+        return businessDao.get(business);
+    }
+
+
+    /**********************区域***********************/
+
+
+
 }

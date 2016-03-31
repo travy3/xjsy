@@ -2,8 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zyu.xjsy.modules.info.dao.BusinessDao">
 
-
-
     <sql id="businessColumns">
         a.id,
         a.name,
@@ -36,9 +34,38 @@
           email,
           delflag
         ) VALUES (
-          #{id}
+          #{id},
+          #{name},
+          #{area.id},
+          #{address},
+          #{master},
+          #{phone},
+          #{email},
+          #{delFlag}
         )
     </insert>
+
+    <update id="update">
+        UPDATE sys_business SET
+        name = #{name},
+        area = #{area.id},
+        address = #{address},
+        master = #{master},
+        phone = #{phone},
+        email = #{email},
+        delflag = #{delFlag}
+        WHERE id = #{id}
+    </update>
+
+    <select id="get" resultType="Business">
+        SELECT
+        <include refid="businessColumns"></include>
+        FROM sys_business a
+        JOIN sys_area ar on a.area = ar.id
+        where a.delflag=#{DEL_FLAG_NORMAL}
+        AND  a.id = #{id}
+    </select>
+
 
 
 </mapper>
