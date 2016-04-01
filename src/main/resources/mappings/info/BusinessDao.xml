@@ -66,6 +66,10 @@
         AND  a.id = #{id}
     </select>
 
-
+    <update id="delete" >
+        UPDATE sys_business SET
+        delflag=#{DEL_FLAG_DELETE}
+        WHERE id = #{id}
+    </update>
 
 </mapper>

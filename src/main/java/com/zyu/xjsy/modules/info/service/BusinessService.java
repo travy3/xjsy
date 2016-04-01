@@ -56,10 +56,7 @@ public class BusinessService extends BaseService {
     }
 
 
-    public List<Area> findAllAreas(Area area){
-        List<Area> areaList = areaDao.findAllList(area);
-        return areaList;
-    }
+
 
     @Transactional(readOnly = false)
     public void saveBusiness(Business business) {
@@ -77,9 +74,23 @@ public class BusinessService extends BaseService {
         return businessDao.get(business);
     }
 
+    @Transactional(readOnly = false)
+    public void delBusiness(Business business){
+        businessDao.delete(business);
+    }
+
 
     /**********************区域***********************/
 
+
+    public List<Area> findAllAreas(Area area){
+        List<Area> areaList = areaDao.findAllList(area);
+        return areaList;
+    }
+
+    public Area getAreaByName(Area area){
+        return areaDao.getByName(area);
+    }
 
 
 }

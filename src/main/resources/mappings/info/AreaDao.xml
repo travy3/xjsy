@@ -6,4 +6,10 @@
         SELECT * FROM sys_area WHERE id !='0'
     </select>
 
+    <select id="getByName" resultType="Area">
+
+        SELECT * FROM sys_area WHERE name = #{name}
+
+    </select>
+
 </mapper>

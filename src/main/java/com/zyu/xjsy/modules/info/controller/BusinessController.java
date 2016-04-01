@@ -6,13 +6,14 @@ import com.zyu.xjsy.common.controller.BaseController;
 import com.zyu.xjsy.common.persistence.PageInfo;
 import com.zyu.xjsy.common.web.ExecuteResult;
 import com.zyu.xjsy.modules.info.entity.Area;
-import com.zyu.xjsy.modules.info.service.BusinessService;
 import com.zyu.xjsy.modules.info.entity.Business;
+import com.zyu.xjsy.modules.info.service.BusinessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -84,10 +85,10 @@ public class BusinessController extends BaseController {
     @ResponseBody
     public Object save(Business business,Model model){
 
-        //todo 根据绑定name查找id进而真实绑定
+        // 根据绑定name查找id进而真实绑定
+        Area area = businessService.getAreaByName(business.getArea());
 
-
-
+        business.setArea(area);
 
         if(!beanValidator(model,business)){
             return executeResult.jsonReturn(300,"数据格式有误",false);
@@ -97,6 +98,20 @@ public class BusinessController extends BaseController {
         return executeResult.jsonReturn(200,"保存成功");
 
     }
+
+
+    @RequestMapping(value = "/del",method = RequestMethod.POST)
+    @ResponseBody
+    public Object del(String id){
+        Business business = new Business(id);
+
+        businessService.delBusiness(business);
+
+        return executeResult.jsonReturn(200,"删除成功");
+    }
+
+
+
 
 
 }

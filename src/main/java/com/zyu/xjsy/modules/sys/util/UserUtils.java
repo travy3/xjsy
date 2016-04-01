@@ -165,12 +165,13 @@ public class UserUtils {
      */
     public static List<Menu> getMenuList() {
         List<Menu> menuList = (List<Menu>) getCache(CACHE_MENU_LIST);
-        if(menuList == null){
+        //TODO
+        if(menuList != null){
             User user = getUser();
             if (user.isAdmin()){
                 menuList = menuDao.findAllList(new Menu());
             }else {
-                menuList = menuDao.findByUser(user);
+                menuList = menuDao.findByUser(user==null?new User():user);
             }
             putCache(CACHE_MENU_LIST,menuList);
         }

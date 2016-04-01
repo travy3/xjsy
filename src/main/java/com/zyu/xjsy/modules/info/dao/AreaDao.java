@@ -10,4 +10,5 @@ import com.zyu.xjsy.modules.info.entity.Area;
 @MyBatisDao
 public interface AreaDao extends CrudDao<Area> {
 
+    Area getByName(Area area);
 }

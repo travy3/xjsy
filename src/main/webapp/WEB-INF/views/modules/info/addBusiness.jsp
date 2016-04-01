@@ -30,6 +30,7 @@
 </script>
 <div class="bjui-pageContent">
     <form action="${ctx}/info/business/save" class="pageForm" data-toggle="validate">
+        <input name="id" value="${business.id}" type="hidden"/>
         <table class="table table-condensed table-hover">
             <tbody>
             <tr>
