@@ -42,13 +42,13 @@
     <select id="get" resultType="Menu">
         SELECT
         <include refid="menuColumns"></include>
-        FROM sys_menu
-        WHERE delflag = #{DEL_FLAG_NORMAL}
+        FROM sys_menu a
+        WHERE a.delflag = #{DEL_FLAG_NORMAL}
         <if test="id != null">
-            AND id = #{id}
+            AND a.id = #{id}
         </if>
         <if test="name != null ">
-            AND name = #{name}
+            AND a.name = #{name}
         </if>
     </select>
 

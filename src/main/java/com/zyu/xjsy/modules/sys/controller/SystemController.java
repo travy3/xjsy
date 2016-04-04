@@ -111,6 +111,13 @@ public class SystemController extends BaseController {
         return executeResult.jsonReturn(200,"保存成功");
     }
 
+    @RequestMapping(value = "/role/del")
+    @ResponseBody
+    public Object delRole(String id){
+        systemService.delRole(new Role(id));
+        return executeResult.jsonReturn(200,"删除成功");
+    }
+
 
 
 

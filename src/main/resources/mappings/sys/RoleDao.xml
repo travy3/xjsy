@@ -73,9 +73,9 @@
     </delete>
 
     <insert id="insertMenuRole">
-        INSERT INTO sys_menu_role(menu_id,role_id)
+        INSERT INTO sys_menu_role(role_id,menu_id)
         <foreach collection="menuList" item="menu" separator=" union all ">
-            SELECT #{menu.id} #{id} FROM dual
+            SELECT #{id}, #{menu.id}  FROM dual
         </foreach>
     </insert>
 
@@ -95,7 +95,7 @@
         #{enName},
         #{name},
         #{remarks},
-        #{delflag},
+        #{delFlag},
         #{createBy.id},
         #{createDate},
         #{updateBy.id},

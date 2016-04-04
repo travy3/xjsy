@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : chenjie
-Source Server Version : 50616
+Source Server         : mysql
+Source Server Version : 50619
 Source Host           : localhost:3306
 Source Database       : xjsynew
 
 Target Server Type    : MYSQL
-Target Server Version : 50616
+Target Server Version : 50619
 File Encoding         : 65001
 
-Date: 2016-04-01 19:58:17
+Date: 2016-04-04 23:18:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -56,6 +56,7 @@ CREATE TABLE `sys_business` (
 -- Records of sys_business
 -- ----------------------------
 INSERT INTO `sys_business` VALUES ('1', '石家庄总店', '2', '青园街220', '1', '15032831553', '11@qqc.com', '0');
+INSERT INTO `sys_business` VALUES ('198237dd247241c5bd50c51281aa3211', '加盟商B', '2', 'asd', 'def', '15032831554', 'qwe@qq.com', '1');
 INSERT INTO `sys_business` VALUES ('75c1ca28b5bf488b9841077de4d31591', '石家庄总店2', '3', '青园街220', 'asd', '15032831553', '11@qqc.com', '1');
 INSERT INTO `sys_business` VALUES ('9f44ea18e2864ea59a89dd748e2b7de3', '石家庄青园店', '2', '青园街220', '张颖', '15032831553', '11@qqc.com', '0');
 INSERT INTO `sys_business` VALUES ('c9528829f76b46f0941fc0e0d58ab1b7', '石家庄总店3', '2', '青园街220', '张颖', '15032831553', '11@qqc.com', '1');
@@ -114,15 +115,14 @@ DROP TABLE IF EXISTS `sys_menu_role`;
 CREATE TABLE `sys_menu_role` (
   `menu_id` varchar(64) NOT NULL,
   `role_id` varchar(64) NOT NULL,
-  PRIMARY KEY (`role_id`),
-  KEY `sys_menu_role_sys_menu_id_fk` (`menu_id`),
-  CONSTRAINT `sys_menu_role_sys_menu_id_fk` FOREIGN KEY (`menu_id`) REFERENCES `jeesitenew`.`sys_menu` (`id`),
-  CONSTRAINT `sys_menu_role_sys_role_id_fk` FOREIGN KEY (`role_id`) REFERENCES `jeesitenew`.`sys_role` (`id`)
+  KEY `sys_menu_role_sys_menu_id_fk` (`menu_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_menu_role
 -- ----------------------------
+INSERT INTO `sys_menu_role` VALUES ('6', 'dd79e14c2c7b4261ba18f03c7c4ab8a2');
+INSERT INTO `sys_menu_role` VALUES ('7', 'dd79e14c2c7b4261ba18f03c7c4ab8a2');
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -146,6 +146,7 @@ CREATE TABLE `sys_role` (
 -- ----------------------------
 INSERT INTO `sys_role` VALUES ('1', 'admin', '管理员', '系统', '0', '1', '2016-03-23 15:13:58', '1', '2016-03-23 15:14:01');
 INSERT INTO `sys_role` VALUES ('2', 'jiameng', '加盟商', '加盟商', '0', '1', '2016-03-23 15:14:24', '1', '2016-03-23 15:14:26');
+INSERT INTO `sys_role` VALUES ('dd79e14c2c7b4261ba18f03c7c4ab8a2', 'jiamengB', '加盟商B', '二级', '1', null, '2016-04-04 23:10:56', null, '2016-04-04 23:10:56');
 
 -- ----------------------------
 -- Table structure for sys_user

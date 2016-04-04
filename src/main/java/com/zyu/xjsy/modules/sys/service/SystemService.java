@@ -154,6 +154,11 @@ public class SystemService extends BaseService {
         }
     }
 
+    @Transactional(readOnly = false)
+    public void delRole(Role role) {
+        roleDao.delete(role);
+    }
+
     /**********************其他***********************/
     /**
      * 生成安全的密码，生成随机的16位salt并经过1024次 sha-1 hash
