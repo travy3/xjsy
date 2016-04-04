@@ -166,7 +166,7 @@ public class UserUtils {
     public static List<Menu> getMenuList() {
         List<Menu> menuList = (List<Menu>) getCache(CACHE_MENU_LIST);
         //TODO
-        if(menuList != null){
+        if(menuList == null){
             User user = getUser();
             if (user.isAdmin()){
                 menuList = menuDao.findAllList(new Menu());

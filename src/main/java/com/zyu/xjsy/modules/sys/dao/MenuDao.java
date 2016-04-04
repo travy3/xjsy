@@ -15,4 +15,6 @@ public interface MenuDao extends CrudDao<Menu> {
 
 
     List<Menu> findByUser(User user);
+
+    Menu findByName(String name);
 }

@@ -14,7 +14,7 @@ public class Role extends DataEntity<Role> {
 
     private String name;
 
-    private String enname;
+    private String enName;
 
     private List<Menu> menuList = Lists.newArrayList(); // 拥有菜单列表
 
@@ -42,11 +42,11 @@ public class Role extends DataEntity<Role> {
         this.menuList = menuList;
     }
 
-    public String getEnname() {
-        return enname;
+    public String getEnName() {
+        return enName;
     }
 
-    public void setEnname(String enname) {
-        this.enname = enname;
+    public void setEnName(String enName) {
+        this.enName = enName;
     }
 }

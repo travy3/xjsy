@@ -11,4 +11,7 @@ import com.zyu.xjsy.modules.sys.entity.Role;
 public interface RoleDao extends CrudDao<Role> {
 
 
+    void deleteMenuRole(Role role);
+
+    void insertMenuRole(Role role);
 }

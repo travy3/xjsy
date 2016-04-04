@@ -16,18 +16,18 @@
                 label: '描述',
                 type: 'String',
                 align:'center'
-            },
-            {
-                name: 'id',
-                label: '操作',
-                align: 'center',
-                width: 150,
-                render: function(value) {
-                    return '<a href="${ctx}/sys/role/edit/'+value+'" data-toggle="dialog" data-width="830" data-height="230"data-mask="true" data-type="POST" data-title="账号修改" class="btn btn-blue">修改</a>'
-                },
-                edit:false,
-                add:false
             }
+            <%--{--%>
+                <%--name: 'id',--%>
+                <%--label: '操作',--%>
+                <%--align: 'center',--%>
+                <%--width: 150,--%>
+                <%--render: function(value) {--%>
+                    <%--return '<a href="${ctx}/sys/role/edit/'+value+'" data-toggle="dialog" data-width="830" data-height="230"data-mask="true" data-type="POST" data-title="账号修改" class="btn btn-blue">修改</a>'--%>
+                <%--},--%>
+                <%--edit:false,--%>
+                <%--add:false--%>
+            <%--}--%>
         ],
         dataUrl: '${ctx}/sys/role/list',
         loadType 		: 	'POST' 	,//[可选] Ajax请求方式。
@@ -46,7 +46,7 @@
         showTfoot 		: 	false 	,//[可选] 是否显示页脚，适用于显示统计信息，需要字段相关参数支持。
         showToolbar 	: 	true 	,//[可选] 是否显示工具条，需要设置参数toolbarItem或toolbarCustom。
         toolbarItem 	: 	'refresh,|,del' 	,//[可选] 显示工具条按钮，可选参数['all, add, edit, cancel, save, del, import, export, |']，“all” = 显示所有按钮，“|” = 按钮组分隔符。
-        toolbarCustom 	: 	'<a href="${ctx}/sys/role/add" data-toggle="dialog" data-id="" data-width="830" data-height="230" data-mask="true" data-type="POST" data-title="新增账号" class="btn btn-blue">新增账号</a>  ',//[可选] 自定义的html内容或jQuery DOM对象，支持带返回值函数。
+        toolbarCustom 	: 	'<a href="${ctx}/sys/role/manage" data-toggle="dialog" data-id="" data-width="830" data-height="230" data-mask="true" data-type="POST" data-title="新增账号" class="btn btn-blue">新增账号</a>  ',//[可选] 自定义的html内容或jQuery DOM对象，支持带返回值函数。
         //toolbarCustom 	: 	null 	,//[可选] 自定义的html内容或jQuery DOM对象，支持带返回值函数。
         columnResize 	: 	true 	,//[可选] 允许调整列宽。
         columnMenu 		: 	true 	,//[可选] 表头字段列上显示菜单按钮。

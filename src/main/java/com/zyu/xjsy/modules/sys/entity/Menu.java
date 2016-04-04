@@ -19,9 +19,15 @@ public class Menu extends DataEntity<Menu>{
         this.isShow= Global.SHOW;
     }
 
-    public Menu(String id) {
-        this.id = id;
+    public Menu(String name){
+        super();
+        this.name = name;
+        this.isShow= Global.SHOW;
     }
+
+//    public Menu(String id) {
+//        this.id = id;
+//    }
 
     public String getId() {
         return id;

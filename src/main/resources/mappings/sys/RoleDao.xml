@@ -2,8 +2,36 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zyu.xjsy.modules.sys.dao.RoleDao">
 
+    <resultMap id="roleResult" type="Role">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+        <result property="enName" column="enname"></result>
+        <result property="remarks" column="remarks"></result>
+        <result property="delFlag" column="delflag"></result>
+        <collection property="menuList" ofType="Menu">
+            <id property="id" column="menuList.id"></id>
+            <result property="name" column="menuList.name"></result>
+            <result property="permission" column="menuList.permission"></result>
+        </collection>
+    </resultMap>
+
+    <sql id="roleColumns">
+       r.id,
+       r.name,
+       r.enname,
+       r.remarks,
+       r.delflag,
+       r.create_by AS 'createBy.id',
+       r.create_date AS 'createDate',
+       r.update_by AS 'updateBy.id',
+       r.update_date AS 'updateDate'
+    </sql>
+
+
     <select id="findAllList" resultType="Role">
-        SELECT * FROM sys_role r WHERE r.delflag = #{DEL_FLAG_NORMAL}
+        SELECT
+          <include refid="roleColumns"></include>
+        FROM sys_role r WHERE r.delflag = #{DEL_FLAG_NORMAL}
     </select>
 
     <!--<select id="findList" resultMap="roleResult">-->
@@ -26,5 +54,71 @@
         <!--${sqlMap.dsf}-->
         <!--ORDER BY o.code, a.name-->
     <!--</select>-->
+
+    <select id="get" resultMap="roleResult">
+        SELECT
+        <include refid="roleColumns"></include>,
+        m.id AS 'menuList.id',
+        m.name AS 'menuList.name',
+        m.permission AS 'menuList.permission'
+        FROM sys_role r
+        LEFT JOIN  sys_menu_role mr on mr.role_id=r.id
+        JOIN  sys_menu m on m.id = mr.menu_id
+        WHERE r.delflag = #{DEL_FLAG_NORMAL} AND m.delflag = #{DEL_FLAG_NORMAL}
+    </select>
+
+
+    <delete id="deleteMenuRole">
+        DELETE FROM sys_menu_role WHERE role_id = #{id}
+    </delete>
+
+    <insert id="insertMenuRole">
+        INSERT INTO sys_menu_role(menu_id,role_id)
+        <foreach collection="menuList" item="menu" separator=" union all ">
+            SELECT #{menu.id} #{id} FROM dual
+        </foreach>
+    </insert>
+
+    <insert id="insert">
+        INSERT  INTO  sys_role(
+        id,
+        enname,
+        name,
+        remarks,
+        delflag,
+        create_by,
+        create_date,
+        update_by,
+        update_date
+        ) VALUES (
+        #{id},
+        #{enName},
+        #{name},
+        #{remarks},
+        #{delflag},
+        #{createBy.id},
+        #{createDate},
+        #{updateBy.id},
+        #{updateDate}
+        )
+    </insert>
+
+    <update id="update">
+        UPDATE  sys_role SET
+          ename = #{enName},
+          name = #{name},
+          remarks = #{remarks},
+          update_by = #{updateBy.id},
+          update_date = #{updateDate}
+          WHERE id = #{id}
+
+    </update>
+
+    <update id="delete">
+        UPDATE sys_role SET
+        delflag = ${DEL_FLAG_DELETE}
+        WHERE id = #{id}
+    </update>
+
 
 </mapper>

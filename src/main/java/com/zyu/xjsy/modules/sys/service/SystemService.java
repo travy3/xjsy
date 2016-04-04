@@ -55,6 +55,12 @@ public class SystemService extends BaseService {
 
     }
 
+    public Menu getMenuByName(Menu menu) {
+
+        return menuDao.get(menu);
+
+    }
+
     /*********************用户************************/
     public PageInfo<User> findAllUser(PageInfo pageInfo,User user) {
 
@@ -118,18 +124,6 @@ public class SystemService extends BaseService {
         return userDao.get(user);
     }
 
-    /**
-     * 验证密码
-     * @param plainPassword 明文密码
-     * @param password 密文密码
-     * @return 验证成功返回true
-     */
-    public  boolean validatePassword(String plainPassword, String password) {
-        byte[] salt = Encodes.decodeHex(password.substring(0,16));
-        byte[] hashPassword = Digests.sha1(plainPassword.getBytes(), salt, HASH_INTERATIONS);
-        return password.equals(Encodes.encodeHex(salt)+Encodes.encodeHex(hashPassword));
-    }
-
 
     /**********************角色信息***********************/
 
@@ -137,6 +131,28 @@ public class SystemService extends BaseService {
         return roleDao.findAllList(role);
     }
 
+    public Role getRole(Role role) {
+        return roleDao.get(role);
+    }
+
+    @Transactional(readOnly = false)
+    public void saveRole(Role role) {
+        if (StringUtils.isBlank(role.getId())){
+            role.preInsert();
+            roleDao.insert(role);
+        }else {
+            role.preUpdate();
+            roleDao.update(role);
+        }
+        if (StringUtils.isNotBlank(role.getId())){
+            roleDao.deleteMenuRole(role);
+            if (role.getMenuList()!= null && role.getMenuList().size() >0){
+                roleDao.insertMenuRole(role);
+            }else {
+                throw new ServiceException(role.getName()+"没有设置菜单");
+            }
+        }
+    }
 
     /**********************其他***********************/
     /**
@@ -150,6 +166,18 @@ public class SystemService extends BaseService {
 
     public SessionDao getSessionDao(){
         return sessionDao;
+    }
+
+    /**
+     * 验证密码
+     * @param plainPassword 明文密码
+     * @param password 密文密码
+     * @return 验证成功返回true
+     */
+    public  boolean validatePassword(String plainPassword, String password) {
+        byte[] salt = Encodes.decodeHex(password.substring(0,16));
+        byte[] hashPassword = Digests.sha1(plainPassword.getBytes(), salt, HASH_INTERATIONS);
+        return password.equals(Encodes.encodeHex(salt)+Encodes.encodeHex(hashPassword));
     }
 
 
