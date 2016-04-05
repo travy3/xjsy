@@ -6,6 +6,7 @@ import com.zyu.xjsy.modules.info.dao.PlanDao;
 import com.zyu.xjsy.modules.info.dao.PlanInfoDao;
 import com.zyu.xjsy.modules.info.entity.Plan;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
  * Created by chenjie on 2016/4/5.
  */
 @Transactional(readOnly = true)
+@Service
 public class PlanService extends BaseService {
 
     @Autowired

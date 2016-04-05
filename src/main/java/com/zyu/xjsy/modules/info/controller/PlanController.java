@@ -6,8 +6,10 @@ import com.zyu.xjsy.common.persistence.PageInfo;
 import com.zyu.xjsy.modules.info.entity.Plan;
 import com.zyu.xjsy.modules.info.service.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * Created by chenjie on 2016/4/5.
  */
 @RequestMapping(value = "/info")
+@Controller
 public class PlanController extends BaseController {
 
 
@@ -24,16 +27,11 @@ public class PlanController extends BaseController {
 
     @RequestMapping(value = "/plan")
     public String planIndex(Model model){
-
-//        List<Plan> planList = Lists.newArrayList();
-//
-//        planList = planService.
-
-        return "/modules/info/infoPlan";
-
+        return "/modules/info/plan";
     }
 
     @RequestMapping(value = "/plan/list")
+    @ResponseBody
     public String getPlanList(Model model, HttpServletRequest request, HttpServletResponse response, Plan plan){
 
 //        List<Plan> planList = Lists.newArrayList();
@@ -46,6 +44,10 @@ public class PlanController extends BaseController {
 
         return gson.toJson(pageInfo);
     }
+
+
+
+
 
 
 
