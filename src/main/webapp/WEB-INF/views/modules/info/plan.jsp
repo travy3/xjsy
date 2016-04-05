@@ -5,7 +5,7 @@
         columns: [
             {
                 name: 'name',
-                label: '角色名',
+                label: '方案',
                 type : 'String',
                 align: 'center',
                 width: 80
@@ -46,7 +46,7 @@
         showTfoot 		: 	false 	,//[可选] 是否显示页脚，适用于显示统计信息，需要字段相关参数支持。
         showToolbar 	: 	true 	,//[可选] 是否显示工具条，需要设置参数toolbarItem或toolbarCustom。
         toolbarItem 	: 	'refresh,|,del' 	,//[可选] 显示工具条按钮，可选参数['all, add, edit, cancel, save, del, import, export, |']，“all” = 显示所有按钮，“|” = 按钮组分隔符。
-        toolbarCustom 	: 	'<a href="${ctx}/info/plan/manage" data-toggle="dialog" data-id="" data-width="830" data-height="230" data-mask="true" data-type="POST" data-title="新增账号" class="btn btn-blue">新增角色</a>  ',//[可选] 自定义的html内容或jQuery DOM对象，支持带返回值函数。
+        toolbarCustom 	: 	'<a href="${ctx}/info/plan/manage" data-toggle="dialog" data-id="" data-width="830" data-height="230" data-mask="true" data-type="POST" data-title="新增" class="btn btn-blue">新增</a>  ',//[可选] 自定义的html内容或jQuery DOM对象，支持带返回值函数。
         //toolbarCustom 	: 	null 	,//[可选] 自定义的html内容或jQuery DOM对象，支持带返回值函数。
         columnResize 	: 	true 	,//[可选] 允许调整列宽。
         columnMenu 		: 	true 	,//[可选] 表头字段列上显示菜单按钮。

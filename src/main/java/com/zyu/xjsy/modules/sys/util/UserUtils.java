@@ -2,10 +2,10 @@ package com.zyu.xjsy.modules.sys.util;
 
 import com.zyu.xjsy.common.service.BaseService;
 import com.zyu.xjsy.modules.info.dao.BusinessDao;
+import com.zyu.xjsy.modules.info.entity.Business;
 import com.zyu.xjsy.modules.sys.dao.MenuDao;
 import com.zyu.xjsy.modules.sys.dao.RoleDao;
 import com.zyu.xjsy.modules.sys.dao.UserDao;
-import com.zyu.xjsy.modules.info.entity.Business;
 import com.zyu.xjsy.modules.sys.entity.Menu;
 import com.zyu.xjsy.modules.sys.entity.Role;
 import com.zyu.xjsy.modules.sys.entity.User;
