@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zyu.xjsy.modules.info.dao.PlanDao">
+
+    <resultMap id="planResult" type="Plan">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+        <result property="remarks" column="remarks"></result>
+        <result property="delFlag" column="delflag"></result>
+        <collection property="planInfoList" ofType="PlanInfo">
+            <id property="id" column="planInfo.id"></id>
+            <result property="code" column="planInfo.code"></result>
+            <result property="times" column="planInfo.times"></result>
+            <result property="paper" column="planInfo.paper"></result>
+            <result property="num" column="planInfo.num"></result>
+        </collection>
+    </resultMap>
+
+    <sql id="planColumns">
+        p.id,
+        p.name,
+        p.remarks,
+        p.delflag,
+        pi.id AS 'planInfo.id',
+        pi.code AS 'planInfo.code',
+        pi.times AS 'planInfo.times',
+        pi.paper AS 'planInfo.paper',
+        pi.num AS 'planInfo.num'
+    </sql>
+
+    <select id="findList" resultType="Plan">
+        SELECT * FROM info_plan WHERE delflag = #{DEL_FLAG_NORMAL}
+    </select>
+
+    <select id="get" resultMap="planResult">
+        SELECT
+        <include refid="planColumns"></include>
+        FROM info_plan p
+        LEFT JOIN  info_planInfo pi ON p.id = pi.planid
+        WHERE p.delflag = #{DEL_FLAG_NORMAL}
+    </select>
+
+</mapper>
+
+
