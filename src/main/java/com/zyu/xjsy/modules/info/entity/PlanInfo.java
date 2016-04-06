@@ -12,7 +12,8 @@ public class PlanInfo extends DataEntity<PlanInfo> {
     private String code;
     private String times;
     private String paper;
-    private String num;
+    private Integer num;
+    private Plan plan;
 
     public PlanInfo() {
         super();
@@ -42,11 +43,19 @@ public class PlanInfo extends DataEntity<PlanInfo> {
         this.paper = paper;
     }
 
-    public String getNum() {
+    public Integer getNum() {
         return num;
     }
 
-    public void setNum(String num) {
+    public void setNum(Integer num) {
         this.num = num;
+    }
+
+    public Plan getPlan() {
+        return plan;
+    }
+
+    public void setPlan(Plan plan) {
+        this.plan = plan;
     }
 }

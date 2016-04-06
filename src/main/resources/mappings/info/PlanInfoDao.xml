@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zyu.xjsy.modules.info.dao.PlanInfoDao">
+
+    <select id="findList" resultType="PlanInfo">
+
+        SELECT * FROM info_planinfo where planid = #{id}
+        ORDER BY num ASC
+
+    </select>
+
+    <insert id="insert">
+        INSERT INTO info_planinfo(
+          id,
+          num,
+          code,
+          times,
+          paper,
+          planid
+        ) VALUES (
+          #{id},
+          ${num},
+          #{code},
+          #{times},
+          #{paper},
+          #{plan.id}
+        )
+    </insert>
+
+
+</mapper>
+
+

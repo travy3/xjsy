@@ -18,6 +18,10 @@ public class Plan extends DataEntity<Plan> {
         super();
     }
 
+    public Plan(String id){
+        super(id);
+    }
+
 
     public String getName() {
         return name;

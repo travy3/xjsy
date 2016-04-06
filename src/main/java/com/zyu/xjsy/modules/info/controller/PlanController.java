@@ -4,7 +4,9 @@ import com.google.gson.Gson;
 import com.zyu.xjsy.common.controller.BaseController;
 import com.zyu.xjsy.common.persistence.PageInfo;
 import com.zyu.xjsy.modules.info.entity.Plan;
+import com.zyu.xjsy.modules.info.entity.PlanInfo;
 import com.zyu.xjsy.modules.info.service.PlanService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,7 +34,7 @@ public class PlanController extends BaseController {
 
     @RequestMapping(value = "/plan/list")
     @ResponseBody
-    public String getPlanList(Model model, HttpServletRequest request, HttpServletResponse response, Plan plan){
+    public String PlanList(Model model, HttpServletRequest request, HttpServletResponse response, Plan plan){
 
 //        List<Plan> planList = Lists.newArrayList();
 
@@ -44,6 +46,43 @@ public class PlanController extends BaseController {
 
         return gson.toJson(pageInfo);
     }
+
+    @RequestMapping(value = "/plan/manage")
+    public String planForm(String id,Model model){
+
+        if (StringUtils.isNotBlank(id)){
+            //todo 编辑时获取当前方案
+            Plan plan = new Plan(id);
+            plan = planService.getPlan(plan);
+
+            model.addAttribute("plan",plan);
+        }
+        return "/modules/info/planManager";
+    }
+
+
+
+    @RequestMapping(value = "/planInfo/list")
+    @ResponseBody
+    public String PlanInfoList(String planId,HttpServletRequest request,HttpServletResponse response,Model model){
+
+        PageInfo<PlanInfo> pageInfo = new PageInfo<PlanInfo>();
+
+        if (StringUtils.isNotBlank(planId)){
+            Plan plan = new Plan(planId);
+            PlanInfo planInfo = new PlanInfo();
+            planInfo.setPlan(plan);
+            pageInfo =  planService.getPlanInfo(new PageInfo<PlanInfo>(request,response) ,planInfo);
+
+        }
+
+        Gson gson = new Gson();
+
+        return gson.toJson(pageInfo);
+    }
+
+
+
 
 
 
