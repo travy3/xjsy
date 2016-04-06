@@ -5,7 +5,7 @@
 
     <select id="findList" resultType="PlanInfo">
 
-        SELECT * FROM info_planinfo where planid = #{id}
+        SELECT * FROM info_planinfo where planid = #{plan.id}
         ORDER BY num ASC
 
     </select>
