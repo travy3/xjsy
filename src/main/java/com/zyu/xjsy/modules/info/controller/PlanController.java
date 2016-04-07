@@ -3,6 +3,7 @@ package com.zyu.xjsy.modules.info.controller;
 import com.google.gson.Gson;
 import com.zyu.xjsy.common.controller.BaseController;
 import com.zyu.xjsy.common.persistence.PageInfo;
+import com.zyu.xjsy.common.web.ExecuteResult;
 import com.zyu.xjsy.modules.info.entity.Plan;
 import com.zyu.xjsy.modules.info.entity.PlanInfo;
 import com.zyu.xjsy.modules.info.service.PlanService;
@@ -23,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class PlanController extends BaseController {
 
+    private ExecuteResult executeResult = new ExecuteResult();
+
 
     @Autowired
     private PlanService planService;
@@ -36,11 +39,7 @@ public class PlanController extends BaseController {
     @ResponseBody
     public String PlanList(Model model, HttpServletRequest request, HttpServletResponse response, Plan plan){
 
-//        List<Plan> planList = Lists.newArrayList();
-
         PageInfo<Plan> pageInfo  =  planService.findAllPlan(new PageInfo(request,response),plan);
-
-//        model.addAttribute("planList",planList);
 
         Gson gson = new Gson();
 
@@ -59,7 +58,6 @@ public class PlanController extends BaseController {
         }
         return "/modules/info/planManager";
     }
-
 
 
     @RequestMapping(value = "/planInfo/list")
@@ -81,21 +79,15 @@ public class PlanController extends BaseController {
         return gson.toJson(pageInfo);
     }
 
+    @RequestMapping(value = "/planInfo/save")
+    public Object planInfoSave(PlanInfo planInfo,Model model,String planId){
 
+        if (StringUtils.isNotBlank(planId)){
+            Plan plan = new Plan(planId);
+            planInfo.setPlan(plan);
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+       return  executeResult.jsonReturn(200,"保存成功");
+    }
 
 }

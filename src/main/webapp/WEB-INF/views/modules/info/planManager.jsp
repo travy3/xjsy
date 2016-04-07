@@ -4,10 +4,17 @@
     $('#planInfoList').datagrid({
         columns: [
             {
+                name: 'id',
+                label: '主键',
+                type : 'String',
+                align: 'center',
+                hide: true
+            },
+            {
                 name: 'num',
                 label: '序号',
                 type : 'String',
-                align: 'center',
+                align: 'center'
 //                width: 80
 
             },
@@ -15,7 +22,7 @@
                 name: 'code',
                 label: '编号',
                 type : 'String',
-                align: 'center',
+                align: 'center'
 //                width: 80
 
             },
@@ -48,24 +55,24 @@
         showEditbtnscol : 	false 	,//[可选] 是否显示编辑按钮列。
         showTfoot 		: 	false 	,//[可选] 是否显示页脚，适用于显示统计信息，需要字段相关参数支持。
         showToolbar 	: 	true 	,//[可选] 是否显示工具条，需要设置参数toolbarItem或toolbarCustom。
-        toolbarItem 	: 	'add,|,refresh,|,del' 	,//[可选] 显示工具条按钮，可选参数['all, add, edit, cancel, save, del, import, export, |']，“all” = 显示所有按钮，“|” = 按钮组分隔符。
-        toolbarCustom 	: 	'<a href="${ctx}/info/plan/manage" data-toggle="dialog" data-id="" data-width="830" data-height="230" data-mask="true" data-type="POST" data-title="新增" class="btn btn-blue">新增</a>  ',//[可选] 自定义的html内容或jQuery DOM对象，支持带返回值函数。
+        toolbarItem 	: 	'add,|,edit,|,del,|,refresh' 	,//[可选] 显示工具条按钮，可选参数['all, add, edit, cancel, save, del, import, export, |']，“all” = 显示所有按钮，“|” = 按钮组分隔符。
+        <%--toolbarCustom 	: 	'<a href="${ctx}/info/plan/manage" data-toggle="dialog" data-id="" data-width="830" data-height="230" data-mask="true" data-type="POST" data-title="新增" class="btn btn-blue">新增</a>  ',//[可选] 自定义的html内容或jQuery DOM对象，支持带返回值函数。--%>
         //toolbarCustom 	: 	null 	,//[可选] 自定义的html内容或jQuery DOM对象，支持带返回值函数。
         columnResize 	: 	true 	,//[可选] 允许调整列宽。
         columnMenu 		: 	true 	,//[可选] 表头字段列上显示菜单按钮。
         columnShowhide 	: 	false 	,//[可选] 表头字段列菜单上出现 “显示/隐藏 列” 选项。
         columnFilter 	: 	true 	,//[可选] 表头字段列菜单上出现 “过滤” 选项。
         columnLock 		: 	true 	,//[可选] 表头字段列菜单上出现 “锁定列、解除锁定” 选项。
-        paging 			: 	{pageSize:25, selectPageSize:'30,60,100', pageCurrent:1, showPagenum:5, total:0} 	,//[可选] 是否显示分页组件，可设置分页参数。分页参数模板：{pageSize:30, selectPageSize:'30,60,90', pageCurrent:1, showPagenum:5}
+        paging 			: 	{pageSize:30, selectPageSize:'30,60,100', pageCurrent:1, showPagenum:5, total:0} 	,//[可选] 是否显示分页组件，可设置分页参数。分页参数模板：{pageSize:30, selectPageSize:'30,60,90', pageCurrent:1, showPagenum:5}
         pagingAlign 	: 	'left',//[可选] 分页组件对齐方式，参数['left' | 'center' | 'right']
-        //editUrl 		: 	'${rootpath}/System/user_edit' 	,//[可选] 保存编辑、添加数据的url，Ajax请求方式为POST，服务器端接收的参数名称为"json"，数据类型是JSON Array。
+        editUrl 		: 	'${ctx}/info/planInfo/edit' 	,//[可选] 保存编辑、添加数据的url，Ajax请求方式为POST，服务器端接收的参数名称为"json"，数据类型是JSON Array。
         //editCallback 	: 	null 	,//[可选] 保存成功后的回调，返回的json内容可以是B-JUI默认的回调json或保存后的json数据，datagrid默认回调：如果返回保存后的json数据，将会更新对应的数据行。
         editMode 		: 	'inline',//[可选] 编辑、添加数据的方式，参数[false | 'inline' | 'dialog']。false = 不能编辑，inline = 行内编辑，dialog = 弹窗编辑。
         //editDialogOp 	: 	null 	,//[可选] 弹窗编辑方式时，设置弹出窗口的参数，如{width:500, height:300, mask:false}
-        inlineEditMult 	: 	false 	,//[可选] 允许行内编辑模式下同时添加/编辑多行。
+        inlineEditMult 	: 	true 	,//[可选] 允许行内编辑模式下同时添加/编辑多行。
         saveAll 		: 	true 	,//[可选] 适用于多行行内编辑时，一次性保存全部数据，发送到服务器端数据格式见参数editUrl。
-        addLocation 	: 	'first'	,//[可选] 添加新行数据于当前页的位置，参数['first' | 'last' | 'prev' | 'next']，参数prev和next参考当前选中行位置。
-        delUrl 			: 	'${ctx}/info/plan/del' 	,//[可选] 删除数据的url，服务器端接收的数据见参数delPK
+        addLocation 	: 	'last'	,//[可选] 添加新行数据于当前页的位置，参数['first' | 'last' | 'prev' | 'next']，参数prev和next参考当前选中行位置。
+        delUrl 			: 	'${ctx}/info/planInfo/del' 	,//[可选] 删除数据的url，服务器端接收的数据见参数delPK
         delType 		: 	'POST' 	,//[可选] Ajax删除数据的请求方式。
         delPK 			: 	'id' 	,//[可选] 设置删除主键名，如果设置了主键，则只发送该字段的值(删除多条则主键值以逗号分隔)到服务器端，否则发送JSON数据（参数名"json"，数据类型为JSON Array）。
         delConfirm 		: 	'删除操作无需保存，直接生效，是否继续删除？' 	,//[可选] 删除前的确认提示，参数[true | false | '自定义提示信息']，参数为false时不弹出提示信息。
@@ -75,20 +82,21 @@
         hScrollbar 		: 	false 	,//[可选] 允许出现横向滚动条。
         fullGrid 		: 	true 	,//[可选] 使表格铺满网格容器(如果值为true，则需要设置有列宽，并且总宽度小于datagrid容器宽度时有效)。
         //width 			: 	null 	,//[可选] datagrid容器宽度，默认为父容器的宽，相当于'100%'。
-        height 			: 	'100%' 	//,//[可选] datagrid容器高度。
+        height 			: 	'800' 	//,//[可选] datagrid容器高度。
         //importOption 	: 	null 	,//[可选] 工具栏的导入按钮参数，dialog或navtab方式打开导入页面，参数模板{type:"dialog", options:{url:'', width:400, height:200}}
         //exportOption 	: 	null 	,//[可选] 工具栏的导出按钮参数，执行ajax url或以dialog or navtab方式打开导出页面，参数模板{type:"ajax", options:{url:""}}
         //beforeEdit 		: 	null 	,//[可选] 带返回值方法，编辑数据前调用，返回true继续编辑，返回false取消编辑。
         //beforeDelete 	: 	null 	,//[可选] 带返回值方法，删除数据前调用，返回true继续删除，返回false取消删除。
         //afterSave 		: 	null 	,//[可选] 保存成功后执行方法，参数$trs为保存行(jQuery 对象)，datas为保存行对应数据(JSON Array)。
         //afterDelete 	: 	null 	 //[可选] 删除成功后执行方法。
+
     })
 
 
 </script>
 <div class="bjui-pageContent">
-    <form action="${ctx}/info/plan/save" class="pageForm" data-toggle="validate">
-        <input name="id" value="${plan.id}" type="hidden"/>
+    <form action="${ctx}/info/planInfo/save" class="pageForm" data-toggle="validate">
+        <input name="planId" value="${plan.id}" type="hidden"/>
         <table class="table table-condensed table-hover">
             <tbody>
             <tr>
