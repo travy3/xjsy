@@ -8,7 +8,7 @@
                 label: '主键',
                 type : 'String',
                 align: 'center',
-                hide: true
+                hide : true
             },
             {
                 name: 'num',
@@ -46,7 +46,7 @@
         local 			: 	'remote' ,//[可选] 处理数据方式，可选参数['local' | 'remote']，(影响（分页、排序、筛选）)。
         fieldSortable 	: 	true 	,//[可选] 点击页头字段快速排序。普通表格转为datagrid的，需设置dataUrl参数，local = 'remote'
         filterThead 	: 	false 	,//[可选] 允许表格头部快速筛选。普通表格转为datagrid的，需设置dataUrl参数，local = 'remote'
-        sortAll 		: 	true 	,//[可选] 排序范围，true = 所有数据排序， false = 当前页数据排序。普通表格转为datagrid的，默认为true
+        sortAll 		: 	false 	,//[可选] 排序范围，true = 所有数据排序， false = 当前页数据排序。普通表格转为datagrid的，默认为true
         filterAll 		: 	true 	,//[可选] 筛选范围，true = 从所有数据中筛选，false = 从当前页数据中筛选。普通表格转为datagrid的，默认为true
         filterMult 		: 	true 	,//[可选] 支持多字段筛选。
         linenumberAll 	: 	true 	,//[可选] 行号范围，true = 为所有数据编号，false = 为当前页数据编号。
@@ -57,9 +57,8 @@
         showToolbar 	: 	true 	,//[可选] 是否显示工具条，需要设置参数toolbarItem或toolbarCustom。
         toolbarItem 	: 	'add,|,edit,|,del,|,refresh' 	,//[可选] 显示工具条按钮，可选参数['all, add, edit, cancel, save, del, import, export, |']，“all” = 显示所有按钮，“|” = 按钮组分隔符。
         <%--toolbarCustom 	: 	'<a href="${ctx}/info/plan/manage" data-toggle="dialog" data-id="" data-width="830" data-height="230" data-mask="true" data-type="POST" data-title="新增" class="btn btn-blue">新增</a>  ',//[可选] 自定义的html内容或jQuery DOM对象，支持带返回值函数。--%>
-        //toolbarCustom 	: 	null 	,//[可选] 自定义的html内容或jQuery DOM对象，支持带返回值函数。
         columnResize 	: 	true 	,//[可选] 允许调整列宽。
-        columnMenu 		: 	true 	,//[可选] 表头字段列上显示菜单按钮。
+        columnMenu 		: 	false 	,//[可选] 表头字段列上显示菜单按钮。
         columnShowhide 	: 	false 	,//[可选] 表头字段列菜单上出现 “显示/隐藏 列” 选项。
         columnFilter 	: 	true 	,//[可选] 表头字段列菜单上出现 “过滤” 选项。
         columnLock 		: 	true 	,//[可选] 表头字段列菜单上出现 “锁定列、解除锁定” 选项。

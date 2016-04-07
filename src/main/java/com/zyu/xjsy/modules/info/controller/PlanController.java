@@ -80,7 +80,7 @@ public class PlanController extends BaseController {
     }
 
     @RequestMapping(value = "/planInfo/save")
-    public Object planInfoSave(PlanInfo planInfo,Model model,String planId){
+    public Object planInfoSave(PlanInfo planInfo,Model model,String planId,String[] num,String[] code,String[] times,String[] paper){
 
         if (StringUtils.isNotBlank(planId)){
             Plan plan = new Plan(planId);
