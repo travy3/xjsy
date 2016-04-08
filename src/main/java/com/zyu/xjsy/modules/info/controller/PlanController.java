@@ -76,7 +76,6 @@ public class PlanController extends BaseController {
             planInfo.setPlan(plan);
             pageInfo =  planService.getPlanInfo(new PageInfo<PlanInfo>(request,response) ,planInfo);
 
-            model.addAttribute("pageInfo",pageInfo);
         }
 
         Gson gson = new Gson();
@@ -86,7 +85,7 @@ public class PlanController extends BaseController {
 
     @RequestMapping(value = "/planInfo/save")
     @ResponseBody
-    public Object planInfoSave(PlanInfo planInfo,Model model,String planId){
+    public Object planInfoSave(PlanInfo planInfo,Model model,String planId,String[] num,String[] code,String[] times,String[] paper){
 
         if (StringUtils.isNotBlank(planId)){
             Plan plan = new Plan(planId);
