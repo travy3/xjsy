@@ -28,6 +28,21 @@
         )
     </insert>
 
+    <update id="update">
+        UPDATE info_planinfo SET
+        code = #{code},
+        times = #{times},
+        paper = #{paper},
+        num = #{num}
+        WHERE
+        id = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM info_planinfo
+        WHERE id = #{id}
+    </delete>
+
 
 </mapper>
 

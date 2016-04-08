@@ -79,7 +79,7 @@
         addLocation 	: 	'last'	,//[可选] 添加新行数据于当前页的位置，参数['first' | 'last' | 'prev' | 'next']，参数prev和next参考当前选中行位置。
         delUrl 			: 	'${ctx}/info/planInfo/del' 	,//[可选] 删除数据的url，服务器端接收的数据见参数delPK
         delType 		: 	'POST' 	,//[可选] Ajax删除数据的请求方式。
-        delPK 			: 	'id' 	,//[可选] 设置删除主键名，如果设置了主键，则只发送该字段的值(删除多条则主键值以逗号分隔)到服务器端，否则发送JSON数据（参数名"json"，数据类型为JSON Array）。
+        delPK 			: 	'planInfoId' 	,//[可选] 设置删除主键名，如果设置了主键，则只发送该字段的值(删除多条则主键值以逗号分隔)到服务器端，否则发送JSON数据（参数名"json"，数据类型为JSON Array）。
         delConfirm 		: 	'删除操作无需保存，直接生效，是否继续删除？' 	,//[可选] 删除前的确认提示，参数[true | false | '自定义提示信息']，参数为false时不弹出提示信息。
         //delCallback 	: 	null 	,//[可选] 删除成功后的回调函数，返回的json内容为B-JUI默认的回调json。
         contextMenuH 	: 	true 	,//[可选] 在表头上右键点击时出现 ”显示/隐藏列“ 的快捷菜单。

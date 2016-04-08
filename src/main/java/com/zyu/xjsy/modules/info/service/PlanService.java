@@ -58,9 +58,11 @@ public class PlanService extends BaseService {
 
 
 
+    @Transactional(readOnly = false)
     public void savePlanInfo(PlanInfo planInfo) {
         if (StringUtils.isNotBlank(planInfo.getId())){
 
+            planInfoDao.update(planInfo);
         }
     }
 
