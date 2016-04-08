@@ -4,13 +4,6 @@
     $('#planInfoList').datagrid({
         columns: [
             {
-                name: 'id',
-                label: '主键',
-                type : 'String',
-                align: 'center',
-                hide: true
-            },
-            {
                 name: 'num',
                 label: '序号',
                 type : 'String',
@@ -38,11 +31,23 @@
                 type: 'String',
                 align:'center'
             }
+            <%--,--%>
+            <%--{--%>
+                <%--name: 'id',--%>
+                <%--label: '操作',--%>
+                <%--align: 'center',--%>
+                <%--width: 150,--%>
+                <%--render: function(value) {--%>
+                    <%--return '<a href="${ctx}/info/planInfo/edit/'+value+'" data-toggle="inline"  data-type="POST"  class="btn btn-blue">修改</a>'--%>
+                <%--},--%>
+                <%--edit:false,--%>
+                <%--add:false--%>
+            <%--}--%>
         ],
         dataUrl: '${ctx}/info/planInfo/list?planId=${plan.id}',
         loadType 		: 	'POST' 	,//[可选] Ajax请求方式。
         dataType 		: 	'json' 	,//[可选] 数据类型，可选参数['json' | 'array' | 'xml']。
-        //hiddenFields 	: 	null 	,//[可选] 仅用于dataType='array'时隐藏字段，可以将不能加载到页面上的值设置到给定的字段，array数据除去表头的列后依次赋值。
+//        hiddenFields 	: 	[{name:'id'}] 	,//[可选] 仅用于dataType='array'时隐藏字段，可以将不能加载到页面上的值设置到给定的字段，array数据除去表头的列后依次赋值。
         local 			: 	'remote' ,//[可选] 处理数据方式，可选参数['local' | 'remote']，(影响（分页、排序、筛选）)。
         fieldSortable 	: 	true 	,//[可选] 点击页头字段快速排序。普通表格转为datagrid的，需设置dataUrl参数，local = 'remote'
         filterThead 	: 	false 	,//[可选] 允许表格头部快速筛选。普通表格转为datagrid的，需设置dataUrl参数，local = 'remote'
@@ -52,10 +57,10 @@
         linenumberAll 	: 	true 	,//[可选] 行号范围，true = 为所有数据编号，false = 为当前页数据编号。
         showLinenumber 	: 	true 	,//[可选] 是否显示行号，参数[true | false | 'lock']，lock参数 = 锁定行号列（适用于多列字段，出现横向滚动条的情况）。
         showCheckboxcol : 	false 	,//[可选] 是否显示行复选框，参数同上。
-        showEditbtnscol : 	false 	,//[可选] 是否显示编辑按钮列。
+        showEditbtnscol : 	true 	,//[可选] 是否显示编辑按钮列。
         showTfoot 		: 	false 	,//[可选] 是否显示页脚，适用于显示统计信息，需要字段相关参数支持。
         showToolbar 	: 	true 	,//[可选] 是否显示工具条，需要设置参数toolbarItem或toolbarCustom。
-        toolbarItem 	: 	'add,|,edit,|,del,|,refresh' 	,//[可选] 显示工具条按钮，可选参数['all, add, edit, cancel, save, del, import, export, |']，“all” = 显示所有按钮，“|” = 按钮组分隔符。
+        toolbarItem 	: 	'add,|,del,|,refresh' 	,//[可选] 显示工具条按钮，可选参数['all, add, edit, cancel, save, del, import, export, |']，“all” = 显示所有按钮，“|” = 按钮组分隔符。
         <%--toolbarCustom 	: 	'<a href="${ctx}/info/plan/manage" data-toggle="dialog" data-id="" data-width="830" data-height="230" data-mask="true" data-type="POST" data-title="新增" class="btn btn-blue">新增</a>  ',//[可选] 自定义的html内容或jQuery DOM对象，支持带返回值函数。--%>
         //toolbarCustom 	: 	null 	,//[可选] 自定义的html内容或jQuery DOM对象，支持带返回值函数。
         columnResize 	: 	true 	,//[可选] 允许调整列宽。
@@ -81,6 +86,7 @@
         contextMenuB 	: 	false 	,//[可选] 在数据行右键点击时出现快捷菜单，菜单选项有(刷新、添加、编辑、取消、删除)。
         hScrollbar 		: 	false 	,//[可选] 允许出现横向滚动条。
         fullGrid 		: 	true 	,//[可选] 使表格铺满网格容器(如果值为true，则需要设置有列宽，并且总宽度小于datagrid容器宽度时有效)。
+//        jsonPrefix      :   "planInfo",
         //width 			: 	null 	,//[可选] datagrid容器宽度，默认为父容器的宽，相当于'100%'。
         height 			: 	'800' 	//,//[可选] datagrid容器高度。
         //importOption 	: 	null 	,//[可选] 工具栏的导入按钮参数，dialog或navtab方式打开导入页面，参数模板{type:"dialog", options:{url:'', width:400, height:200}}

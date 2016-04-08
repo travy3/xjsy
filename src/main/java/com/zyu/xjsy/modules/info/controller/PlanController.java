@@ -1,12 +1,16 @@
 package com.zyu.xjsy.modules.info.controller;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.zyu.xjsy.common.controller.BaseController;
 import com.zyu.xjsy.common.persistence.PageInfo;
 import com.zyu.xjsy.common.web.ExecuteResult;
 import com.zyu.xjsy.modules.info.entity.Plan;
 import com.zyu.xjsy.modules.info.entity.PlanInfo;
 import com.zyu.xjsy.modules.info.service.PlanService;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -72,6 +76,7 @@ public class PlanController extends BaseController {
             planInfo.setPlan(plan);
             pageInfo =  planService.getPlanInfo(new PageInfo<PlanInfo>(request,response) ,planInfo);
 
+            model.addAttribute("pageInfo",pageInfo);
         }
 
         Gson gson = new Gson();
@@ -80,6 +85,7 @@ public class PlanController extends BaseController {
     }
 
     @RequestMapping(value = "/planInfo/save")
+    @ResponseBody
     public Object planInfoSave(PlanInfo planInfo,Model model,String planId){
 
         if (StringUtils.isNotBlank(planId)){
@@ -88,6 +94,39 @@ public class PlanController extends BaseController {
         }
 
        return  executeResult.jsonReturn(200,"保存成功");
+    }
+
+    @RequestMapping(value = "/planInfo/edit")
+    @ResponseBody
+    public Object planInfoEdit(String json){
+
+        String jsonTmp = StringEscapeUtils.unescapeHtml4(json).replace("[","").replace("]","");
+        logger.debug(jsonTmp);
+
+
+
+        GsonBuilder gsonBuilder = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
+            @Override
+            public boolean shouldSkipField(FieldAttributes fieldAttributes) {
+                return  fieldAttributes.getName().contains("gridNumber")|fieldAttributes.getName().contains("gridIndex");
+            }
+
+            @Override
+            public boolean shouldSkipClass(Class<?> aClass) {
+                return false;
+            }
+        });
+
+        Gson gson = gsonBuilder.create();
+
+//        String jsonTmp = gson.toJson(json);
+
+        PlanInfo planInfo = gson.fromJson(jsonTmp,PlanInfo.class);
+
+        planService.savePlanInfo(planInfo);
+
+
+        return  executeResult.jsonReturn(200,"保存成功");
     }
 
 }

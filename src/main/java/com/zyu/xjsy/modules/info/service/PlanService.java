@@ -6,6 +6,7 @@ import com.zyu.xjsy.modules.info.dao.PlanDao;
 import com.zyu.xjsy.modules.info.dao.PlanInfoDao;
 import com.zyu.xjsy.modules.info.entity.Plan;
 import com.zyu.xjsy.modules.info.entity.PlanInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,6 +38,13 @@ public class PlanService extends BaseService {
         return pageInfo;
     }
 
+    public Plan getPlan(Plan plan) {
+
+        return planDao.get(plan);
+    }
+
+    /******************************PlanInfo************************************************/
+
     public PageInfo<PlanInfo> getPlanInfo(PageInfo pageInfo,PlanInfo planInfo) {
 
         planInfo.setPageInfo(pageInfo);
@@ -48,9 +56,12 @@ public class PlanService extends BaseService {
         return pageInfo;
     }
 
-    public Plan getPlan(Plan plan) {
 
-        return planDao.get(plan);
+
+    public void savePlanInfo(PlanInfo planInfo) {
+        if (StringUtils.isNotBlank(planInfo.getId())){
+
+        }
     }
 
 //    public String getPlanInfo(String id){
