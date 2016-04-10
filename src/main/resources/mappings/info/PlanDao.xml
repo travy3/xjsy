@@ -41,6 +41,12 @@
         WHERE p.delflag = #{DEL_FLAG_NORMAL}
     </select>
 
+    <insert id="insert">
+        INSERT INTO info_plan(
+          
+        )
+    </insert>
+
 </mapper>
 
 
