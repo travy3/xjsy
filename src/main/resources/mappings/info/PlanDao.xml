@@ -41,6 +41,34 @@
         WHERE p.delflag = #{DEL_FLAG_NORMAL}
     </select>
 
+    <insert id="insert">
+        INSERT  INTO info_plan(
+          id,
+          name,
+          remarks,
+          delflag
+        ) VALUES (
+          #{id},
+          #{name},
+          #{remarks},
+          #{delFlag}
+        )
+    </insert>
+
+    <update id="update">
+        UPDATE info_plan SET
+        name = #{name},
+        remarks = #{remarks}
+        WHERE
+        id = #{id}
+    </update>
+
+    <update id="delete">
+        UPDATE info_plan SET
+        delflag = #{DEL_FLAG_DELETE}
+        WHERE id = #{id}
+    </update>
+
 </mapper>
 
 

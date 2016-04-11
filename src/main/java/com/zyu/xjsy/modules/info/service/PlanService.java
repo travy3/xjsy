@@ -43,6 +43,19 @@ public class PlanService extends BaseService {
         return planDao.get(plan);
     }
 
+    @Transactional(readOnly = false)
+    public void savePlan(Plan plan) {
+        if (StringUtils.isNotBlank(plan.getId())){
+            plan.preInsert();
+            planDao.insert(plan);
+        }else {
+            plan.preUpdate();
+            planDao.update(plan);
+        }
+
+        planInfoDao.insertBatch(plan.getPlanInfoList(),plan);
+    }
+
     /******************************PlanInfo************************************************/
 
     public PageInfo<PlanInfo> getPlanInfo(PageInfo pageInfo,PlanInfo planInfo) {
@@ -63,8 +76,12 @@ public class PlanService extends BaseService {
         if (StringUtils.isNotBlank(planInfo.getId())){
 
             planInfoDao.update(planInfo);
+        }else {
+            planInfoDao.insert(planInfo);
         }
     }
+
+
 
 //    public String getPlanInfo(String id){
 //

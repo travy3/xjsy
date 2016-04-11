@@ -1,5 +1,6 @@
 package com.zyu.xjsy.modules.info.controller;
 
+import com.google.common.collect.Lists;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * Created by chenjie on 2016/4/5.
@@ -83,21 +85,39 @@ public class PlanController extends BaseController {
         return gson.toJson(pageInfo);
     }
 
-    @RequestMapping(value = "/planInfo/save")
+    @RequestMapping(value = "/plan/save")
     @ResponseBody
-    public Object planInfoSave(PlanInfo planInfo,Model model,String planId,String[] num,String[] code,String[] times,String[] paper){
+    public Object planSave(Plan plan,Model model,String planId,String[] num,String[] code,String[] times,String[] paper){
 
-        if (StringUtils.isNotBlank(planId)){
-            Plan plan = new Plan(planId);
-            planInfo.setPlan(plan);
+//        if (StringUtils.isNotBlank(planId)){
+//            Plan plan = new Plan(planId);
+//            planInfo.setPlan(plan);
+//        }
+        List<PlanInfo> planInfos = Lists.newArrayList();
+
+        if (num != null && num.length > 0 ){
+            for (int i = 0 ; i<num.length ; i++){
+                PlanInfo planInfo = new PlanInfo();
+                planInfo.setNum(Integer.valueOf(num[i]));
+                planInfo.setCode(code[i]);
+                planInfo.setTimes(times[i]);
+                planInfo.setPaper(paper[i]);
+                planInfos.add(planInfo);
+            }
         }
+
+        plan.setPlanInfoList(planInfos);
+
+        planService.savePlan(plan);
+
+
 
        return  executeResult.jsonReturn(200,"保存成功");
     }
 
-    @RequestMapping(value = "/planInfo/edit")
+    @RequestMapping(value = "/planInfo/manager")
     @ResponseBody
-    public Object planInfoEdit(String json){
+    public Object planInfoEdit(String json,String planId){
 
         String jsonTmp = StringEscapeUtils.unescapeHtml4(json).replace("[","").replace("]","");
         logger.debug(jsonTmp);
@@ -121,6 +141,10 @@ public class PlanController extends BaseController {
 //        String jsonTmp = gson.toJson(json);
 
         PlanInfo planInfo = gson.fromJson(jsonTmp,PlanInfo.class);
+
+        Plan plan  = new Plan(planId);
+
+        planInfo.setPlan(plan);
 
         planService.savePlanInfo(planInfo);
 

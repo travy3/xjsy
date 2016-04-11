@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2016-04-06 17:13:45
+Date: 2016-04-11 18:20:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -37,20 +37,21 @@ INSERT INTO `info_plan` VALUES ('1', '方案1', '数字1', '0');
 -- ----------------------------
 DROP TABLE IF EXISTS `info_planinfo`;
 CREATE TABLE `info_planinfo` (
-  `id` varchar(64) NOT NULL,
+  `id` int(64) NOT NULL AUTO_INCREMENT,
   `planid` varchar(64) NOT NULL,
   `code` varchar(10) NOT NULL,
   `times` varchar(10) DEFAULT NULL,
   `paper` varchar(10) DEFAULT NULL,
   `num` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of info_planinfo
 -- ----------------------------
 INSERT INTO `info_planinfo` VALUES ('1', '1', 's1', '1', '8', '1');
-INSERT INTO `info_planinfo` VALUES ('2', '1', 's3', '1', '9', '2');
+INSERT INTO `info_planinfo` VALUES ('2', '1', 's2', '1', '9', '2');
+INSERT INTO `info_planinfo` VALUES ('3', '1', 's2', '1', '6', '3');
 
 -- ----------------------------
 -- Table structure for sys_area

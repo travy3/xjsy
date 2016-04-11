@@ -12,14 +12,12 @@
 
     <insert id="insert">
         INSERT INTO info_planinfo(
-          id,
           num,
           code,
           times,
           paper,
           planid
         ) VALUES (
-          #{id},
           ${num},
           #{code},
           #{times},
@@ -42,6 +40,25 @@
         DELETE FROM info_planinfo
         WHERE id = #{id}
     </delete>
+
+    <insert id="insertBatch">
+        INSERT  INTO info_planinfo(
+          num,
+          code,
+          times,
+          paper,
+          planid
+        ) VALUES
+        <foreach collection="planInfoList" item="planInfo">
+            (
+            ${num},
+            #{code},
+            #{times},
+            #{paper},
+            #{plan.id}
+            )
+        </foreach>
+    </insert>
 
 
 </mapper>

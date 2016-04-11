@@ -70,7 +70,7 @@
         columnLock 		: 	true 	,//[可选] 表头字段列菜单上出现 “锁定列、解除锁定” 选项。
         paging 			: 	{pageSize:30, selectPageSize:'30,60,100', pageCurrent:1, showPagenum:5, total:0} 	,//[可选] 是否显示分页组件，可设置分页参数。分页参数模板：{pageSize:30, selectPageSize:'30,60,90', pageCurrent:1, showPagenum:5}
         pagingAlign 	: 	'left',//[可选] 分页组件对齐方式，参数['left' | 'center' | 'right']
-        editUrl 		: 	'${ctx}/info/planInfo/edit' 	,//[可选] 保存编辑、添加数据的url，Ajax请求方式为POST，服务器端接收的参数名称为"json"，数据类型是JSON Array。
+        editUrl 		: 	'${ctx}/info/planInfo/manager?planId=${plan.id}' 	,//[可选] 保存编辑、添加数据的url，Ajax请求方式为POST，服务器端接收的参数名称为"json"，数据类型是JSON Array。
         //editCallback 	: 	null 	,//[可选] 保存成功后的回调，返回的json内容可以是B-JUI默认的回调json或保存后的json数据，datagrid默认回调：如果返回保存后的json数据，将会更新对应的数据行。
         editMode 		: 	'inline',//[可选] 编辑、添加数据的方式，参数[false | 'inline' | 'dialog']。false = 不能编辑，inline = 行内编辑，dialog = 弹窗编辑。
         //editDialogOp 	: 	null 	,//[可选] 弹窗编辑方式时，设置弹出窗口的参数，如{width:500, height:300, mask:false}
@@ -101,8 +101,8 @@
 
 </script>
 <div class="bjui-pageContent">
-    <form action="${ctx}/info/planInfo/save" class="pageForm" data-toggle="validate">
-        <input name="planId" value="${plan.id}" type="hidden"/>
+    <form action="${ctx}/info/plan/save" class="pageForm" data-toggle="validate">
+        <input name="id" value="${plan.id}" type="hidden"/>
         <table class="table table-condensed table-hover">
             <tbody>
             <tr>
@@ -112,7 +112,7 @@
                 </td>
                 <td>
                     <label for="j_dialog_remarks" class="control-label x90">备注：</label>
-                    <input type="text" name="name" id="j_dialog_remarks" value="${plan.remarks}" data-rule="required" size="20">
+                    <input type="text" name="remarks" id="j_dialog_remarks" value="${plan.remarks}" data-rule="required" size="20">
                 </td>
             </tr>
             </tbody>
