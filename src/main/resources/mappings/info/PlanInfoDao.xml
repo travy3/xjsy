@@ -5,7 +5,7 @@
 
     <select id="findList" resultType="PlanInfo">
 
-        SELECT * FROM info_planinfo where planid = #{plan.id}
+        SELECT * FROM info_planinfo where planid = #{id}
         ORDER BY num ASC
 
     </select>
@@ -41,21 +41,40 @@
         WHERE id = #{id}
     </delete>
 
+    <!--<insert id="insertBatch">-->
+        <!--INSERT  INTO info_planinfo(-->
+          <!--num,-->
+          <!--code,-->
+          <!--times,-->
+          <!--paper,-->
+          <!--planid-->
+        <!--) VALUES-->
+        <!--<foreach collection="planInfoList" item="planInfo">-->
+            <!--(-->
+            <!--${planInfo.num},-->
+            <!--#{planInfo.code},-->
+            <!--#{planInfo.times},-->
+            <!--#{planInfo.paper},-->
+            <!--#{plan.id}-->
+            <!--)-->
+        <!--</foreach>-->
+    <!--</insert>-->
+
     <insert id="insertBatch">
         INSERT  INTO info_planinfo(
-          num,
-          code,
-          times,
-          paper,
-          planid
+        num,
+        code,
+        times,
+        paper,
+        planid
         ) VALUES
-        <foreach collection="planInfoList" item="planInfo">
+        <foreach collection="planInfoList" item="planInfo" separator=" , " >
             (
-            ${num},
-            #{code},
-            #{times},
-            #{paper},
-            #{plan.id}
+            ${planInfo.num},
+            #{planInfo.code},
+            #{planInfo.times},
+            #{planInfo.paper},
+            #{id}
             )
         </foreach>
     </insert>

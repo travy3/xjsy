@@ -45,7 +45,7 @@ public class PlanService extends BaseService {
 
     @Transactional(readOnly = false)
     public void savePlan(Plan plan) {
-        if (StringUtils.isNotBlank(plan.getId())){
+        if (StringUtils.isBlank(plan.getId())){
             plan.preInsert();
             planDao.insert(plan);
         }else {
@@ -53,7 +53,9 @@ public class PlanService extends BaseService {
             planDao.update(plan);
         }
 
-        planInfoDao.insertBatch(plan.getPlanInfoList(),plan);
+//        planInfoDao.insertBatch(plan.getPlanInfoList(),plan);
+
+        planInfoDao.insertBatch(plan);
     }
 
     /******************************PlanInfo************************************************/

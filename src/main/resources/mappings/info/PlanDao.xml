@@ -39,6 +39,7 @@
         FROM info_plan p
         LEFT JOIN  info_planInfo pi ON p.id = pi.planid
         WHERE p.delflag = #{DEL_FLAG_NORMAL}
+        AND p.id = #{id}
     </select>
 
     <insert id="insert">
