@@ -10,10 +10,80 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2016-04-11 18:20:18
+Date: 2016-04-13 17:19:25
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for cus_customer
+-- ----------------------------
+DROP TABLE IF EXISTS `cus_customer`;
+CREATE TABLE `cus_customer` (
+  `id` varchar(64) NOT NULL,
+  `name` varchar(32) DEFAULT NULL,
+  `sex` varchar(2) DEFAULT NULL,
+  `age` varchar(16) DEFAULT NULL,
+  `telephone` varchar(255) DEFAULT NULL,
+  `glasses_time` varchar(32) DEFAULT NULL COMMENT '带镜史',
+  `naked_eye_sight_l` varchar(16) DEFAULT NULL COMMENT '左裸眼视力',
+  `naked_eye_sight_r` varchar(16) DEFAULT NULL COMMENT '右裸眼视力',
+  `recover_eye_sight_l` varchar(16) DEFAULT NULL,
+  `recover_eye_sight_r` varchar(16) DEFAULT NULL,
+  `eyeglass_sight_l` varchar(16) DEFAULT NULL,
+  `eyeglass_sight_r` varchar(16) DEFAULT NULL,
+  `company_id` varchar(64) DEFAULT NULL,
+  `office_id` varchar(64) NOT NULL,
+  `school` varchar(64) DEFAULT NULL,
+  `defin_l` varchar(16) DEFAULT NULL COMMENT '清晰度',
+  `defin_r` varchar(16) DEFAULT NULL,
+  `hasdisease` varchar(255) DEFAULT NULL,
+  `eye_control` varchar(255) DEFAULT NULL COMMENT '调节力',
+  `eye_strengh` varchar(255) DEFAULT NULL COMMENT '眼肌所承受强度',
+  `status` varchar(64) DEFAULT '' COMMENT '治疗状态 1活跃 0流失',
+  `cid` varchar(32) DEFAULT NULL COMMENT '客户编号',
+  `plan` varchar(16) DEFAULT NULL COMMENT '方案',
+  `duration` varchar(16) DEFAULT NULL COMMENT '0带确诊1治疗期2保健期',
+  `create_by` varchar(64) NOT NULL COMMENT '创建者',
+  `create_date` datetime NOT NULL COMMENT '创建时间',
+  `update_by` varchar(64) NOT NULL COMMENT '更新者',
+  `update_date` datetime NOT NULL COMMENT '更新时间',
+  `remarks` varchar(255) DEFAULT NULL COMMENT '备注消息',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT '删除标记',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cus_customer
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for cus_hpmanager
+-- ----------------------------
+DROP TABLE IF EXISTS `cus_hpmanager`;
+CREATE TABLE `cus_hpmanager` (
+  `ID` varchar(64) DEFAULT NULL,
+  `CUSTOMER_NAME` varchar(32) DEFAULT NULL,
+  `CUSTOMER_CID` varchar(32) DEFAULT NULL,
+  `CUSTOMER_ID` varchar(64) DEFAULT NULL,
+  `NUM` varchar(6) DEFAULT NULL COMMENT '次数',
+  `DATE` datetime DEFAULT NULL,
+  `BEFORE_ADJUST_L_START` varchar(32) DEFAULT NULL COMMENT '训练前 调节开始',
+  `BEFORE_ADJUST_R_START` varchar(32) DEFAULT NULL,
+  `BEFORE_ADJUST_L_END` varchar(32) DEFAULT NULL COMMENT '训练前调节终',
+  `BEFORE_ADJUST_R_END` varchar(32) DEFAULT NULL,
+  `TRAIN_ONE` varchar(32) DEFAULT NULL,
+  `TRAIN_TWO` varchar(32) DEFAULT NULL,
+  `AFTER_ADJUST_L` varchar(32) DEFAULT NULL,
+  `AFTER_ADJUST_R` varchar(32) DEFAULT NULL,
+  `MEMO` varchar(255) DEFAULT NULL COMMENT '备注',
+  `PLAN` varchar(32) DEFAULT NULL COMMENT '所属方案',
+  KEY `FK_INFOCUSTOMER_ID` (`CUSTOMER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cus_hpmanager
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for info_plan
@@ -31,6 +101,8 @@ CREATE TABLE `info_plan` (
 -- Records of info_plan
 -- ----------------------------
 INSERT INTO `info_plan` VALUES ('1', '方案1', '数字1', '0');
+INSERT INTO `info_plan` VALUES ('500eb43a595943bfb0daaa73479ed157', '方案3', '阿道夫', '0');
+INSERT INTO `info_plan` VALUES ('746a9752fbf641e7b27190f4dbca4fcb', '方案2', '阿斯蒂芬', '0');
 
 -- ----------------------------
 -- Table structure for info_planinfo
@@ -44,14 +116,23 @@ CREATE TABLE `info_planinfo` (
   `paper` varchar(10) DEFAULT NULL,
   `num` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of info_planinfo
 -- ----------------------------
 INSERT INTO `info_planinfo` VALUES ('1', '1', 's1', '1', '8', '1');
 INSERT INTO `info_planinfo` VALUES ('2', '1', 's2', '1', '9', '2');
-INSERT INTO `info_planinfo` VALUES ('3', '1', 's2', '1', '6', '3');
+INSERT INTO `info_planinfo` VALUES ('3', '1', 's3', '1', '6', '3');
+INSERT INTO `info_planinfo` VALUES ('4', '1', 's2', '1', '2', '4');
+INSERT INTO `info_planinfo` VALUES ('5', '1', 's2', '2', '3', '5');
+INSERT INTO `info_planinfo` VALUES ('6', '746a9752fbf641e7b27190f4dbca4fcb', 's2', '3', '2', '1');
+INSERT INTO `info_planinfo` VALUES ('7', '746a9752fbf641e7b27190f4dbca4fcb', 's5', '2', '2', '2');
+INSERT INTO `info_planinfo` VALUES ('8', '746a9752fbf641e7b27190f4dbca4fcb', 's2', '1', '2', '3');
+INSERT INTO `info_planinfo` VALUES ('9', '746a9752fbf641e7b27190f4dbca4fcb', 's1', '3', '2', '4');
+INSERT INTO `info_planinfo` VALUES ('10', '500eb43a595943bfb0daaa73479ed157', 's1', '2', '3', '1');
+INSERT INTO `info_planinfo` VALUES ('11', '500eb43a595943bfb0daaa73479ed157', 's34', '2', '2', '2');
+INSERT INTO `info_planinfo` VALUES ('12', '500eb43a595943bfb0daaa73479ed157', 's1', '2', '34', '3');
 
 -- ----------------------------
 -- Table structure for sys_area
@@ -139,6 +220,10 @@ CREATE TABLE `sys_menu` (
 -- Records of sys_menu
 -- ----------------------------
 INSERT INTO `sys_menu` VALUES ('1', '根目录', '0', '#', 'N', '0', null, null);
+INSERT INTO `sys_menu` VALUES ('10', '客户管理', '9', '#', 'Y', '0', null, null);
+INSERT INTO `sys_menu` VALUES ('11', '治疗期', '10', null, 'Y', '0', null, null);
+INSERT INTO `sys_menu` VALUES ('12', '保健期', '10', null, 'Y', '0', null, null);
+INSERT INTO `sys_menu` VALUES ('13', '试用期', '10', null, 'Y', '0', null, null);
 INSERT INTO `sys_menu` VALUES ('2', '系统管理', '1', '#', 'Y', '0', null, null);
 INSERT INTO `sys_menu` VALUES ('3', '用户管理', '2', '/sys/user', 'Y', '0', null, null);
 INSERT INTO `sys_menu` VALUES ('4', '角色管理', '2', '/sys/role', 'Y', '0', null, null);
@@ -146,6 +231,7 @@ INSERT INTO `sys_menu` VALUES ('5', '菜单管理', '2', '/sys/menu/list', 'Y', 
 INSERT INTO `sys_menu` VALUES ('6', '加盟管理', '1', '#', 'Y', '0', null, null);
 INSERT INTO `sys_menu` VALUES ('7', '加盟商信息', '6', '/info/business', 'Y', '0', null, 'info:business:list');
 INSERT INTO `sys_menu` VALUES ('8', '方案管理', '6', '/info/plan', 'Y', '0', null, 'info:plan:list');
+INSERT INTO `sys_menu` VALUES ('9', '日常', '1', '#', 'Y', '0', null, null);
 
 -- ----------------------------
 -- Table structure for sys_menu_role
