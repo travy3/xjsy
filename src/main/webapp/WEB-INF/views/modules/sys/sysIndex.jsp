@@ -47,6 +47,7 @@
                         <li class="active"><a href="javascript:;" data-toggle="slidebar"><i class="fa fa-check-square-o"></i>${menu.name}</a>
                             <div class="items hide" data-noinit="true">
                                 <ul id="bjui-hnav-tree${menu.id}" class="ztree ztree_main" data-toggle="ztree" data-on-click="MainMenuClick" data-expand-all="true" data-faicon="check-square-o">
+
                                     <c:forEach items="${menuList}" var="menuChild">
                                         <c:if test="${menuChild.pid eq menu.id}">
                                             <li data-id="${menuChild.id}"  data-pid="${menuChild.pid}" data-url="${ctx}${menuChild.href}" data-tabid="form-button"

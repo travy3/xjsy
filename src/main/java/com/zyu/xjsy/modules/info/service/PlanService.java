@@ -43,6 +43,13 @@ public class PlanService extends BaseService {
         return planDao.get(plan);
     }
 
+    public List<Plan> getPlan2(Plan plan){
+
+        List<Plan> planList = planDao.getPlanList(plan);
+
+        return planList;
+    }
+
     @Transactional(readOnly = false)
     public void savePlan(Plan plan) {
         if (StringUtils.isBlank(plan.getId())){

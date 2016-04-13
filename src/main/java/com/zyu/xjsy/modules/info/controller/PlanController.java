@@ -58,9 +58,14 @@ public class PlanController extends BaseController {
         if (StringUtils.isNotBlank(id)){
             //todo 编辑时获取当前方案
             Plan plan = new Plan(id);
-            plan = planService.getPlan(plan);
+//            plan = planService.getPlan(plan);
+//
+//            model.addAttribute("plan",plan);
 
-            model.addAttribute("plan",plan);
+//
+            List<Plan> list = planService.getPlan2(plan);
+//
+            model.addAttribute("plan",list.get(0));
         }
         return "/modules/info/planManager";
     }
@@ -89,10 +94,7 @@ public class PlanController extends BaseController {
     @ResponseBody
     public Object planSave(Plan plan,Model model,String planId,String[] num,String[] code,String[] times,String[] paper){
 
-//        if (StringUtils.isNotBlank(planId)){
-//            Plan plan = new Plan(planId);
-//            planInfo.setPlan(plan);
-//        }
+
         List<PlanInfo> planInfos = Lists.newArrayList();
 
         if (num != null && num.length > 0 ){
@@ -110,8 +112,6 @@ public class PlanController extends BaseController {
 
         planService.savePlan(plan);
 
-
-
        return  executeResult.jsonReturn(200,"保存成功");
     }
 
@@ -121,8 +121,6 @@ public class PlanController extends BaseController {
 
         String jsonTmp = StringEscapeUtils.unescapeHtml4(json).replace("[","").replace("]","");
         logger.debug(jsonTmp);
-
-
 
         GsonBuilder gsonBuilder = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
             @Override
@@ -138,8 +136,6 @@ public class PlanController extends BaseController {
 
         Gson gson = gsonBuilder.create();
 
-//        String jsonTmp = gson.toJson(json);
-
         PlanInfo planInfo = gson.fromJson(jsonTmp,PlanInfo.class);
 
         Plan plan  = new Plan(planId);
@@ -152,10 +148,5 @@ public class PlanController extends BaseController {
         return  executeResult.jsonReturn(200,"保存成功");
     }
 
-//    public Object planInfoDelete(String planInfoId){
-//
-//
-//
-//    }
 
 }

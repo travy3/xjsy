@@ -86,4 +86,8 @@ public class Menu extends DataEntity<Menu>{
     public void setPermission(String permission) {
         this.permission = permission;
     }
+
+//    public boolean hasChild(){
+//
+//    }
 }
