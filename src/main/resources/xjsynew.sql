@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2016-04-13 17:19:25
+Date: 2016-04-15 17:02:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,8 +32,7 @@ CREATE TABLE `cus_customer` (
   `recover_eye_sight_r` varchar(16) DEFAULT NULL,
   `eyeglass_sight_l` varchar(16) DEFAULT NULL,
   `eyeglass_sight_r` varchar(16) DEFAULT NULL,
-  `company_id` varchar(64) DEFAULT NULL,
-  `office_id` varchar(64) NOT NULL,
+  `business` varchar(64) DEFAULT NULL,
   `school` varchar(64) DEFAULT NULL,
   `defin_l` varchar(16) DEFAULT NULL COMMENT '清晰度',
   `defin_r` varchar(16) DEFAULT NULL,
@@ -220,7 +219,7 @@ CREATE TABLE `sys_menu` (
 -- Records of sys_menu
 -- ----------------------------
 INSERT INTO `sys_menu` VALUES ('1', '根目录', '0', '#', 'N', '0', null, null);
-INSERT INTO `sys_menu` VALUES ('10', '客户管理', '9', '#', 'Y', '0', null, null);
+INSERT INTO `sys_menu` VALUES ('10', '客户管理', '1', '#', 'Y', '0', null, null);
 INSERT INTO `sys_menu` VALUES ('11', '治疗期', '10', null, 'Y', '0', null, null);
 INSERT INTO `sys_menu` VALUES ('12', '保健期', '10', null, 'Y', '0', null, null);
 INSERT INTO `sys_menu` VALUES ('13', '试用期', '10', null, 'Y', '0', null, null);
