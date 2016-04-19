@@ -3,9 +3,14 @@
 
 <mapper namespace="com.zyu.xjsy.modules.cus.dao.CustomerDao">
 
+    <resultMap id="customerResult" type="Customer">
+        <!--<id column=""-->
+    </resultMap>
 
 
-    <select id="findAllList">
+    <select id="findList" resultType="Customer">
+
+        SELECT * FROM cus_customer
 
     </select>
 </mapper>

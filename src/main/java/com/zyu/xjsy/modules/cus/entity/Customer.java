@@ -1,5 +1,6 @@
 package com.zyu.xjsy.modules.cus.entity;
 
+import com.zyu.xjsy.common.config.Global;
 import com.zyu.xjsy.common.persistence.DataEntity;
 import com.zyu.xjsy.modules.info.entity.Business;
 import com.zyu.xjsy.modules.info.entity.Plan;
@@ -39,13 +40,19 @@ public class Customer extends DataEntity<Customer> {
 
     public Customer() {
         super();
+        this.status = Global.NO;
+        this.duration = Global.DURATION_SY;
     }
     public Customer(String id) {
         super(id);
+        this.status = Global.NO;
+        this.duration = Global.DURATION_SY;
     }
     public Customer(String id ,String telephone){
         super(id);
         this.telephone = telephone;
+        this.status = Global.NO;
+        this.duration = Global.DURATION_SY;
     }
 
     public String getId() {
