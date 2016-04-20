@@ -6,6 +6,8 @@ import com.zyu.xjsy.common.config.Global;
 import com.zyu.xjsy.common.persistence.PageInfo;
 import com.zyu.xjsy.modules.cus.entity.Customer;
 import com.zyu.xjsy.modules.cus.service.CustomerService;
+import com.zyu.xjsy.modules.sys.entity.User;
+import com.zyu.xjsy.modules.sys.util.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,11 +49,12 @@ public class CustomerController {
 
     @RequestMapping(value = "/{duration}/list")
     @ResponseBody
-    public String list(@PathVariable String duration, PageInfo pageInfo, HttpServletRequest request, HttpServletResponse response){
+    public String list(@PathVariable String duration, HttpServletRequest request, HttpServletResponse response){
 
+        User user = UserUtils.getUser();
         Customer customer = new Customer();
         customer.setDuration(duration);
-        pageInfo = customerService.findAllCustomer(pageInfo,customer);
+        PageInfo<Customer> pageInfo = customerService.findAllCustomer(new PageInfo<Customer>(request,response),customer,user);
 
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd HH:mm:ss")

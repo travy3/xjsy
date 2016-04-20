@@ -4,6 +4,7 @@ import com.zyu.xjsy.common.config.Global;
 import com.zyu.xjsy.common.persistence.DataEntity;
 import com.zyu.xjsy.modules.info.entity.Business;
 import com.zyu.xjsy.modules.info.entity.Plan;
+import com.zyu.xjsy.modules.sys.entity.User;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
@@ -37,6 +38,8 @@ public class Customer extends DataEntity<Customer> {
     private String cid;
     private Plan plan;//当前方案
     private String duration;// 试用期，治疗期，保健期
+
+    private User user;
 
     public Customer() {
         super();
@@ -240,4 +243,14 @@ public class Customer extends DataEntity<Customer> {
     public String toString(){
         return "custmoer";
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+
 }
