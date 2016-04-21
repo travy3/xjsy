@@ -4,10 +4,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.zyu.xjsy.common.config.Global;
 import com.zyu.xjsy.common.persistence.PageInfo;
+import com.zyu.xjsy.common.web.ExecuteResult;
 import com.zyu.xjsy.modules.cus.entity.Customer;
 import com.zyu.xjsy.modules.cus.service.CustomerService;
 import com.zyu.xjsy.modules.sys.entity.User;
 import com.zyu.xjsy.modules.sys.util.UserUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +26,8 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping(value = "/cus")
 public class CustomerController {
 
+
+    private ExecuteResult executeResult = new ExecuteResult();
 
 
     @Autowired
@@ -61,6 +65,28 @@ public class CustomerController {
                 .create();
         return gson.toJson(pageInfo);
 
+    }
+
+    @RequestMapping(value = "/{duration}/manager")
+    public String form(String id){
+
+        if (StringUtils.isNotBlank(id)){
+            //edit
+
+        }
+
+
+        return null;
+
+    }
+
+    @RequestMapping(value = "/{duration}/add")
+    @ResponseBody
+    public Object addCustomer(Customer customer){
+
+
+
+        return null;
     }
 
 }
