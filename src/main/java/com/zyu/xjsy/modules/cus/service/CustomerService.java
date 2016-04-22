@@ -35,4 +35,9 @@ public class CustomerService extends BaseService {
         return pageInfo;
 
     }
+
+    public Customer getCustomer(Customer customer) {
+        return customerDao.get(customer);
+    }
+
 }

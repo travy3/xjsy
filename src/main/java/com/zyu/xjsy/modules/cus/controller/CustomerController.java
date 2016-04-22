@@ -12,6 +12,7 @@ import com.zyu.xjsy.modules.sys.util.UserUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -68,12 +69,18 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/{duration}/manager")
-    public String form(String id){
+    public String form(String id, Model model){
 
         if (StringUtils.isNotBlank(id)){
             //edit
+            Customer customer = new Customer(id);
+            customer = customerService.getCustomer(customer);
 
+            model.addAttribute("customer",customer);
         }
+
+
+
 
 
         return null;
