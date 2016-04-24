@@ -38,6 +38,9 @@ public class SystemController extends BaseController {
         List<Menu> menuList = new ArrayList<Menu>();
         menuList = systemService.findAllMenu();
 
+        for (Menu menu : menuList){
+            System.out.println("menu.Child:"+menu.hasChild(menuList,"1"));
+        }
         model.addAttribute("menuList",menuList);
         return "/modules/sys/sysMenu";
     }
@@ -57,12 +60,9 @@ public class SystemController extends BaseController {
 
         roleList = systemService.findAllRole(new Role());
 
-//        model.addAttribute("roleList",roleList);
-
         Gson gson = new Gson();
-        return gson.toJson(roleList);
 
-//        return "/modules/sys/sysRole";
+        return gson.toJson(roleList);
     }
 
 
@@ -89,7 +89,6 @@ public class SystemController extends BaseController {
     @ResponseBody
     public Object saveRole(Role role, HttpServletRequest request, HttpServletResponse response , Model model){
 
-
         if(!beanValidator(model,role)){
             return executeResult.jsonReturn(300,"数据格式有误",false);
         }
@@ -114,13 +113,11 @@ public class SystemController extends BaseController {
     @RequestMapping(value = "/role/del")
     @ResponseBody
     public Object delRole(String id){
+
         systemService.delRole(new Role(id));
+
         return executeResult.jsonReturn(200,"删除成功");
+
     }
-
-
-
-
-
 
 }

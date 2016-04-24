@@ -14,7 +14,16 @@ public abstract class BaseService {
     Logger logger = LoggerFactory.getLogger(getClass());
 
 
+
     public static String dataScopeFilter(User user) {
+
+        StringBuilder sqlString = new StringBuilder();
+
+
+        if (!user.isAdmin()){
+            sqlString.append("b.id = '"+user.getBusiness().getId()+"'");
+        }
+
 
 
         return "";
