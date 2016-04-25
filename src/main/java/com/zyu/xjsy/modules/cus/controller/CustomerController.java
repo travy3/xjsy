@@ -39,14 +39,14 @@ public class CustomerController {
     public String cusIndex(@PathVariable String duration){
 
         if (Global.DURATION_SY.equals(duration)){
-            return "/modules/cus/cusIndex1";
+            return "/modules/cus/cusIndex0";
 
         }else if (Global.DURATION_ZL.equals(duration)){
 
-            return "/modules/cus/cusIndex2";
+            return "/modules/cus/cusIndex1";
         }else if (Global.DURATION_BJ.equals(duration)){
 
-            return "/modules/cus/cusIndex3";
+            return "/modules/cus/cusIndex2";
         }else {
             return "";
         }

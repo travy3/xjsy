@@ -5,38 +5,37 @@
         columns: [
             {
                 name: 'name',
-                label: '加盟商',
+                label: '姓名',
                 type : 'String',
                 align: 'center',
-                width: 80,
+                width: 80
 
             },
             {
-                name:'area',
-                label: '区域',
-                type: 'String',
-                align:'center',
-                render: function(value){
-                    return value.name;
-                }
-            },
-            {
-                name:'master',
-                label: '负责人',
+                name:'sex',
+                label: '性别',
                 type: 'String',
                 align:'center'
             },
             {
-                name:'phone',
+                name:'age',
+                label: '年龄',
+                type: 'String',
+                align:'center'
+            },
+            {
+                name:'telephone',
                 label: '联系方式',
                 type: 'String',
                 align:'center'
             },
             {
-                name: 'address',
-                label: '详细地址',
+                name: 'business',
+                label: '加盟商',
                 type: 'String',
-                align:'center'
+                render: function(value){
+                    return value.name;
+                }
             },
             {
                 name: 'id',
@@ -44,7 +43,7 @@
                 align: 'center',
                 width: 150,
                 render: function(value) {
-                    return '<a href="${ctx}/info/business/edit/'+value+'" data-toggle="dialog" data-width="830" data-height="230"data-mask="true" data-type="POST" data-title="账号修改" class="btn btn-blue">修改</a>'
+                    return '<a href="${ctx}/cus/0/edit/'+value+'" data-toggle="dialog" data-width="830" data-height="230"data-mask="true" data-type="POST" data-title="客户信息" class="btn btn-blue">修改</a>'
                 },
                 edit:false,
                 add:false
@@ -67,7 +66,7 @@
         showTfoot 		: 	false 	,//[可选] 是否显示页脚，适用于显示统计信息，需要字段相关参数支持。
         showToolbar 	: 	true 	,//[可选] 是否显示工具条，需要设置参数toolbarItem或toolbarCustom。
         toolbarItem 	: 	'refresh,|,del' 	,//[可选] 显示工具条按钮，可选参数['all, add, edit, cancel, save, del, import, export, |']，“all” = 显示所有按钮，“|” = 按钮组分隔符。
-        toolbarCustom 	: 	'<a href="${ctx}/info/business/add" data-toggle="dialog" data-id="" data-width="830" data-height="230" data-mask="true" data-type="POST" data-title="新增账号" class="btn btn-blue">新增账号</a>  ',//[可选] 自定义的html内容或jQuery DOM对象，支持带返回值函数。
+        toolbarCustom 	: 	'<a href="${ctx}/info/business/add" data-toggle="dialog" data-id="" data-width="830" data-height="230" data-mask="true" data-type="POST" data-title="新增" class="btn btn-blue">新增</a>  ',//[可选] 自定义的html内容或jQuery DOM对象，支持带返回值函数。
         //toolbarCustom 	: 	null 	,//[可选] 自定义的html内容或jQuery DOM对象，支持带返回值函数。
         columnResize 	: 	true 	,//[可选] 允许调整列宽。
         columnMenu 		: 	true 	,//[可选] 表头字段列上显示菜单按钮。
@@ -83,7 +82,7 @@
         inlineEditMult 	: 	false 	,//[可选] 允许行内编辑模式下同时添加/编辑多行。
         saveAll 		: 	true 	,//[可选] 适用于多行行内编辑时，一次性保存全部数据，发送到服务器端数据格式见参数editUrl。
         addLocation 	: 	'first'	,//[可选] 添加新行数据于当前页的位置，参数['first' | 'last' | 'prev' | 'next']，参数prev和next参考当前选中行位置。
-        delUrl 			: 	'${ctx}/info/business/del' 	,//[可选] 删除数据的url，服务器端接收的数据见参数delPK
+        delUrl 			: 	'${ctx}/cus/0/del' 	,//[可选] 删除数据的url，服务器端接收的数据见参数delPK
         delType 		: 	'POST' 	,//[可选] Ajax删除数据的请求方式。
         delPK 			: 	'id' 	,//[可选] 设置删除主键名，如果设置了主键，则只发送该字段的值(删除多条则主键值以逗号分隔)到服务器端，否则发送JSON数据（参数名"json"，数据类型为JSON Array）。
         delConfirm 		: 	'删除操作无需保存，直接生效，是否继续删除？' 	,//[可选] 删除前的确认提示，参数[true | false | '自定义提示信息']，参数为false时不弹出提示信息。
@@ -102,26 +101,26 @@
         //afterDelete 	: 	null 	 //[可选] 删除成功后执行方法。
     })
 </script>
-<%--<div class="bjui-pageHeader">--%>
-<%--<form id="pagerForm" data-toggle="ajaxsearch" action="${ctx}/sys/user/list" method="post">--%>
-<%--&lt;%&ndash;<input type="hidden" name="pageSize" value="${user.pageInfo.pageSize}">&ndash;%&gt;--%>
-<%--&lt;%&ndash;<input type="hidden" name="pageCurrent" value="${user.pageInfo.pageCurrent}">&ndash;%&gt;--%>
-<%--&lt;%&ndash;<input type="hidden" name="orderField" value="${user.pageInfo.orderField}">&ndash;%&gt;--%>
-<%--&lt;%&ndash;<input type="hidden" name="orderDirection" value="${user.pageInfo.orderDirection}">&ndash;%&gt;--%>
-<%--<div class="bjui-searchBar">--%>
-<%--<label>区域:</label>--%>
-<%--<select name="area" data-toggle="selectpicker">--%>
-<%--<option value="">全部</option>--%>
-<%--<option value="1">联络</option>--%>
-<%--<option value="2">住宿</option>--%>
-<%--<option value="3">餐饮</option>--%>
-<%--<option value="4">交通</option>--%>
-<%--</select>&nbsp;--%>
-<%--<button type="submit" class="btn-default" data-icon="search">查询</button>&nbsp;--%>
-<%--<a class="btn btn-orange" href="javascript:;" data-toggle="reloadsearch" data-clear-query="true" data-icon="undo">清空查询</a>--%>
-<%--</div>--%>
-<%--</form>--%>
-<%--</div>--%>
+<div class="bjui-pageHeader">
+    <form id="pagerForm" data-toggle="ajaxsearch" action="${ctx}/sys/user/list" method="post">
+        <%--<input type="hidden" name="pageSize" value="${user.pageInfo.pageSize}">--%>
+        <%--<input type="hidden" name="pageCurrent" value="${user.pageInfo.pageCurrent}">--%>
+        <%--<input type="hidden" name="orderField" value="${user.pageInfo.orderField}">--%>
+        <%--<input type="hidden" name="orderDirection" value="${user.pageInfo.orderDirection}">--%>
+        <div class="bjui-searchBar">
+            <label>区域:</label>
+            <select name="area" data-toggle="selectpicker">
+                <option value="">全部</option>
+                <option value="1">联络</option>
+                <option value="2">住宿</option>
+                <option value="3">餐饮</option>
+                <option value="4">交通</option>
+            </select>&nbsp;
+            <button type="submit" class="btn-default" data-icon="search">查询</button>&nbsp;
+            <a class="btn btn-orange" href="javascript:;" data-toggle="reloadsearch" data-clear-query="true" data-icon="undo">清空查询</a>
+        </div>
+    </form>
+</div>
 <div class="bjui-pageContent tableContent">
     <div style="height:100%; width:100%;">
         <table id="user-datagrid-json" data-width="100%" class="table table-bordered">
