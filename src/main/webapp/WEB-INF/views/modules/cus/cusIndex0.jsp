@@ -30,8 +30,21 @@
                 align:'center'
             },
             {
-                name: 'business',
+                name: 'status',
                 label: '加盟商',
+                type: 'String',
+                render: function(value){
+                    if("1"==value){
+                        return '活跃';
+                    }else{
+                        return '流失';
+                    }
+//                    return value.name;
+                }
+            },
+            {
+                name: 'business',
+                label: '状态',
                 type: 'String',
                 render: function(value){
                     return value.name;
@@ -66,7 +79,7 @@
         showTfoot 		: 	false 	,//[可选] 是否显示页脚，适用于显示统计信息，需要字段相关参数支持。
         showToolbar 	: 	true 	,//[可选] 是否显示工具条，需要设置参数toolbarItem或toolbarCustom。
         toolbarItem 	: 	'refresh,|,del' 	,//[可选] 显示工具条按钮，可选参数['all, add, edit, cancel, save, del, import, export, |']，“all” = 显示所有按钮，“|” = 按钮组分隔符。
-        toolbarCustom 	: 	'<a href="${ctx}/info/business/add" data-toggle="dialog" data-id="" data-width="830" data-height="230" data-mask="true" data-type="POST" data-title="新增" class="btn btn-blue">新增</a>  ',//[可选] 自定义的html内容或jQuery DOM对象，支持带返回值函数。
+        toolbarCustom 	: 	'<a href="${ctx}/cus/0/form" data-toggle="dialog" data-id="" data-width="830" data-height="230" data-max="true" data-type="POST" data-title="新增" class="btn btn-blue">新增</a>  ',//[可选] 自定义的html内容或jQuery DOM对象，支持带返回值函数。
         //toolbarCustom 	: 	null 	,//[可选] 自定义的html内容或jQuery DOM对象，支持带返回值函数。
         columnResize 	: 	true 	,//[可选] 允许调整列宽。
         columnMenu 		: 	true 	,//[可选] 表头字段列上显示菜单按钮。
@@ -108,14 +121,14 @@
         <%--<input type="hidden" name="orderField" value="${user.pageInfo.orderField}">--%>
         <%--<input type="hidden" name="orderDirection" value="${user.pageInfo.orderDirection}">--%>
         <div class="bjui-searchBar">
-            <label>区域:</label>
-            <select name="area" data-toggle="selectpicker">
-                <option value="">全部</option>
-                <option value="1">联络</option>
-                <option value="2">住宿</option>
-                <option value="3">餐饮</option>
-                <option value="4">交通</option>
-            </select>&nbsp;
+            <%--<label>区域:</label>--%>
+            <%--<select name="area" data-toggle="selectpicker">--%>
+                <%--<option value="">全部</option>--%>
+                <%--<option value="1">联络</option>--%>
+                <%--<option value="2">住宿</option>--%>
+                <%--<option value="3">餐饮</option>--%>
+                <%--<option value="4">交通</option>--%>
+            <%--</select>&nbsp;--%>
             <button type="submit" class="btn-default" data-icon="search">查询</button>&nbsp;
             <a class="btn btn-orange" href="javascript:;" data-toggle="reloadsearch" data-clear-query="true" data-icon="undo">清空查询</a>
         </div>

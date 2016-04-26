@@ -50,9 +50,9 @@
 
                                     <c:forEach items="${menuList}" var="menuChild">
                                         <c:if test="${menuChild.pid eq menu.id}">
-                                            <li data-id="${menuChild.id}"  data-pid="${menuChild.pid}" data-url="${ctx}${menuChild.href}" data-toggle="navtab" data-tabid="form-button"
+                                            <li data-id="${menuChild.id}"  data-pid="${menuChild.pid}" data-url="${ctx}${menuChild.href}" data-toggle="navtab"  data-tabid="form-button"
                                                 data-faicon="bell">${menuChild.name}</li>
-                                            <%--<a href="${ctx}/sys/menu/list" data-toggle="navtab" data-id="${menuChild.id}" data-pid="${menuChild.pid}"  data-faicon="bell" data-title="我的业务页面">${menuChild.name}</a>--%>
+                                            <%--<a href="${ctx}${menuChild.href}" data-toggle="navtab" data-id="${menuChild.id}" data-pid="${menuChild.pid}"  data-faicon="bell" data-title="我的业务页面">${menuChild.name}</a>--%>
 
                                         </c:if>
                                     </c:forEach>

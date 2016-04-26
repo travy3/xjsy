@@ -68,8 +68,8 @@ public class CustomerController {
 
     }
 
-    @RequestMapping(value = "/{duration}/manager")
-    public String form(String id, Model model){
+    @RequestMapping(value = "/{duration}/form")
+    public String form(@PathVariable String duration,String id, Model model){
 
         if (StringUtils.isNotBlank(id)){
             //edit
@@ -81,7 +81,7 @@ public class CustomerController {
 
 
 
-        return null;
+        return "/modules/cus/cusForm";
 
     }
 
