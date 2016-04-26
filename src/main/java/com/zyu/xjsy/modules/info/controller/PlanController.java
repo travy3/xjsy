@@ -67,7 +67,7 @@ public class PlanController extends BaseController {
 //
             model.addAttribute("plan",list.get(0));
         }
-        return "/modules/info/planManager";
+        return "/modules/info/planForm";
     }
 
 
@@ -115,7 +115,7 @@ public class PlanController extends BaseController {
        return  executeResult.jsonReturn(200,"保存成功");
     }
 
-    @RequestMapping(value = "/planInfo/manager")
+    @RequestMapping(value = "/planInfo/form")
     @ResponseBody
     public Object planInfoEdit(String json,String planId){
 
