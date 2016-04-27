@@ -12,7 +12,7 @@ import com.zyu.xjsy.modules.sys.dao.UserDao;
 import com.zyu.xjsy.modules.sys.entity.Menu;
 import com.zyu.xjsy.modules.sys.entity.Role;
 import com.zyu.xjsy.modules.sys.entity.User;
-import com.zyu.xjsy.modules.sys.util.CacheUtils;
+import com.zyu.xjsy.common.util.CacheUtils;
 import com.zyu.xjsy.modules.sys.util.UserUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

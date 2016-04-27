@@ -1,6 +1,7 @@
 package com.zyu.xjsy.modules.sys.util;
 
 import com.zyu.xjsy.common.service.BaseService;
+import com.zyu.xjsy.common.util.CacheUtils;
 import com.zyu.xjsy.modules.info.dao.BusinessDao;
 import com.zyu.xjsy.modules.info.entity.Business;
 import com.zyu.xjsy.modules.sys.dao.MenuDao;
@@ -63,7 +64,7 @@ public class UserUtils {
      * @return 取不到返回null
      */
     public static User getByLoginName(String loginName) {
-        User user = (User)CacheUtils.get(USER_CACHE, USER_CACHE_LOGIN_NAME_+loginName);
+        User user = (User) CacheUtils.get(USER_CACHE, USER_CACHE_LOGIN_NAME_+loginName);
         if(user==null){
             user  = userDao.getByLoginName(new User(null,loginName));
             if (user == null){
