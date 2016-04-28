@@ -54,8 +54,10 @@
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realm" ref="systemAuthorizingRealm" />
         <property name="sessionManager" ref="sessionManager" />
-        <!-- 为了减少数据库压力 添加了缓存机制 shiroCacheManager 是 Shiro 对缓存框架 EhCache 的配置 -->
-        <property name="cacheManager" ref="shiroCacheManager" />
+        <!-- 为了减少数据库压力 添加了缓存机制 shiroCacheManager 是 Shiro 对缓存框架 EhCache 的配置
+             1, 注入到sessionManager(会先判断sessionManager是否继承CacheManagerAware)
+         -->
+        <property name="cacheManager" ref="shiroEhCacheManager" />
     </bean>
     <bean id="systemAuthorizingRealm" class="com.zyu.xjsy.modules.sys.security.SystemAuthorizingRealm"></bean>
 
@@ -89,12 +91,12 @@
     <bean id="sessionDAO" class="com.zyu.xjsy.common.security.shiro.session.CacheSessionDAO">
         <property name="sessionIdGenerator" ref="idGen" />
         <property name="activeSessionsCacheName" value="activeSessionsCache" />
-        <property name="cacheManager" ref="shiroCacheManager" />
+        <property name="cacheManager" ref="shiroEhCacheManager" />
     </bean>
 
     <!-- 定义授权缓存管理器 -->
      	<!--<bean id="shiroCacheManager" class="com.thinkgem.jeesite.common.security.shiro.cache.SessionCacheManager" /> -->
-    <bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+    <bean id="shiroEhCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
         <property name="cacheManager" ref="cacheManager"/>
     </bean>
 
