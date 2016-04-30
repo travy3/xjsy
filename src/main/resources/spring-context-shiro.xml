@@ -53,10 +53,15 @@
     <!-- 定义Shiro安全管理配置 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realm" ref="systemAuthorizingRealm" />
+        <!--<property name="s"-->
         <property name="sessionManager" ref="sessionManager" />
-        <!-- 为了减少数据库压力 添加了缓存机制 shiroCacheManager 是 Shiro 对缓存框架 EhCache 的配置 -->
-        <property name="cacheManager" ref="shiroCacheManager" />
+        <!-- 为了减少数据库压力 添加了缓存机制 shiroCacheManager 是 Shiro 对缓存框架 EhCache 的配置
+             1, 注入到sessionManager(会先判断sessionManager是否继承CacheManagerAware)
+         -->
+        <!--<property name="cacheManager" ref="shiroEhCacheManager" />-->
+        <property name="cacheManager" ref="jedisManager" />
     </bean>
+
     <bean id="systemAuthorizingRealm" class="com.zyu.xjsy.modules.sys.security.SystemAuthorizingRealm"></bean>
 
     <!-- 自定义会话管理配置 -->
@@ -78,25 +83,32 @@
     <!-- 指定本系统SESSIONID, 默认为: JSESSIONID 问题: 与SERVLET容器名冲突, 如JETTY, TOMCAT 等默认JSESSIONID,
         当跳出SHIRO SERVLET时如ERROR-PAGE容器会为JSESSIONID重新分配值导致登录会话丢失! -->
     <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
-    <constructor-arg name="name" value="xjsy.session.id"/>
-</bean>
-
-    <!-- 自定义Session存储容器 -->
-    <!-- 	<bean id="sessionDAO" class="com.thinkgem.jeesite.common.security.shiro.session.JedisSessionDAO"> -->
-    <!-- 		<property name="sessionIdGenerator" ref="idGen" /> -->
-    <!-- 		<property name="sessionKeyPrefix" value="${redis.keyPrefix}_session_" /> -->
-    <!-- 	</bean> -->
-    <bean id="sessionDAO" class="com.zyu.xjsy.common.security.shiro.session.CacheSessionDAO">
-        <property name="sessionIdGenerator" ref="idGen" />
-        <property name="activeSessionsCacheName" value="activeSessionsCache" />
-        <property name="cacheManager" ref="shiroCacheManager" />
+        <constructor-arg name="name" value="xjsy.session.id"/>
     </bean>
+
+     自定义Session存储容器
+     	<bean id="sessionDAO" class="com.zyu.xjsy.common.security.shiro.session.JedisSessionDAO">
+     		<property name="sessionIdGenerator" ref="idGen" />
+     		<property name="sessionKeyPrefix" value="${redis.keyPrefix}_jedis_session_" />
+            <property name="cacheManager" ref="jedisManager"></property>
+     	</bean>
+    <!--<bean id="sessionDAO" class="com.zyu.xjsy.common.security.shiro.session.EhCacheSessionDAO">-->
+        <!--<property name="sessionIdGenerator" ref="idGen" />-->
+        <!--<property name="activeSessionsCacheName" value="shiro-activeSessionsCache2" />-->
+        <!--<property name="cacheManager" ref="shiroEhCacheManager" />-->
+    <!--</bean>-->
 
     <!-- 定义授权缓存管理器 -->
      	<!--<bean id="shiroCacheManager" class="com.thinkgem.jeesite.common.security.shiro.cache.SessionCacheManager" /> -->
-    <bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+    <bean id="shiroEhCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
         <property name="cacheManager" ref="cacheManager"/>
     </bean>
+
+    <bean id="jedisCacheManager" class="com.zyu.xjsy.common.util.JedisCacheManager">
+        <property name="jedisPool" ref="jedisPool"></property>
+    </bean>
+
+
 
     <!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>

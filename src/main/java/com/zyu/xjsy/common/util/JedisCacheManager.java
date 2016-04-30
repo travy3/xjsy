@@ -1,7 +1,9 @@
 package com.zyu.xjsy.common.util;
 
 import com.zyu.xjsy.common.config.Global;
-import com.zyu.xjsy.modules.sys.util.SpringContextHolder;
+import org.apache.shiro.cache.Cache;
+import org.apache.shiro.cache.CacheException;
+import org.apache.shiro.cache.CacheManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
@@ -10,11 +12,13 @@ import redis.clients.jedis.JedisPool;
 /**
  * Created by chenjie on 2016/4/27.
  */
-public class JedisUtils {
+public class JedisCacheManager implements CacheManager {
 
-    private static Logger logger = LoggerFactory.getLogger(JedisUtils.class);
+    private static Logger logger = LoggerFactory.getLogger(JedisCacheManager.class);
 
-    private static JedisPool jedisPool = SpringContextHolder.getBean(JedisPool.class);
+
+
+    private JedisPool jedisPool;
 
     public static final String KEY_PREFIX = Global.getConfig("redis.keyPrefix");
 
@@ -33,6 +37,18 @@ public class JedisUtils {
     }
 
 
+    public JedisPool getJedisPool() {
+        return jedisPool;
+    }
 
+    public void setJedisPool(JedisPool jedisPool) {
+        this.jedisPool = jedisPool;
+    }
 
+    @Override
+    public <K, V> Cache<K, V> getCache(String name) throws CacheException {
+
+        //todo
+        return null;
+    }
 }
