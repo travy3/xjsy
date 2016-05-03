@@ -18,15 +18,13 @@
         <result property="" column=""></result>
         <result property="" column=""></result>
         <result property="" column=""></result>
-
-
     </resultMap>
 
     <sql id="customerColumns">
         a.id,
 		a.name,
 		a.sex,
-		a.age,
+		a.birthday,
 		a.telephone,
 		a.glasses_time as "glassesTime",
 		a.naked_eye_sight_l as "nakedEyeSightL",
@@ -44,7 +42,7 @@
 		a.status,
 		a.cid,
 		a.plan as "plan.id",
-		p.name as "plan.name",
+-- 		p.name as "plan.name",
 		a.business as "business.id",
 		b.name as "business.name",
 		a.duration,
@@ -56,11 +54,83 @@
 		a.delflag
     </sql>
 
+	<insert id="insert">
+		INSERT INTO cus_customer(
+			id,
+			name,
+			sex,
+			birthday,
+			telephone,
+			address,
+			glasses_time,
+			naked_eye_sight_l,
+			naked_eye_sight_r,
+			recover_eye_sight_l,
+			recover_eye_sight_r,
+			eyeglass_sight_l,
+			eyeglass_sight_r,
+			business,
+			school,
+			defin_l,
+			defin_r,
+			hasdisease,
+			eye_control,
+			eye_strengh,
+			status,
+			cid,
+			plan,
+			duration,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			delflag
+		) VALUES (
+			#{id},
+			#{name},
+			#{sex},
+			#{birthday},
+			#{telephone},
+			#{address},
+			#{glassesTime},
+			#{nakedEyeSightL},
+			#{nakedEyeSightR},
+			#{recoverEyeSightL},
+			#{recoverEyeSightR},
+			#{eyeglassesSightL},
+			#{eyeglassesSightR},
+			#{business.id},
+			#{school},
+			#{definL},
+			#{definR},
+			#{hasDisease},
+			#{eyeControl},
+			#{eyeStrength},
+			#{status},
+			#{cid},
+			#{plan.id},
+			#{duration},
+			#{createBy.id},
+        	#{createDate},
+        	#{updateBy.id},
+        	#{updateDate},
+        	#{remarks},
+        	#{delFlag}
+		)
+	</insert>
+
+	<update id="update">
+
+	</update>
+
     <select id="findList" resultType="Customer">
         SELECT
           <include refid="customerColumns"></include>
         FROM cus_customer a
-        JOIN info_plan p ON a.plan = p.id
+		<if test="plan != null and plan.id != null and plan.id !=''">
+			JOIN info_plan p ON a.plan = p.id
+		</if>
         JOIN sys_business b ON  a.business = b.id
         WHERE a.delflag = #{DEL_FLAG_NORMAL}
 		AND a.duration = #{duration}
@@ -78,4 +148,6 @@
 		AND a.business = #{user.business.id}
 		AND a.id = #{id}
 	</select>
+
+
 </mapper>

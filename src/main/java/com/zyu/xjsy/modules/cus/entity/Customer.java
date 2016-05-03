@@ -18,8 +18,10 @@ public class Customer extends DataEntity<Customer> {
 
     private String name;
     private String sex;
-    private String age;
+//    private String age;
+    private String birthday;
     private String telephone;
+    private String address;
     private String glassesTime; //带镜史
     private String nakedEyeSightL; //裸眼视力
     private String nakedEyeSightR;
@@ -78,13 +80,13 @@ public class Customer extends DataEntity<Customer> {
         this.sex = sex;
     }
 
-    public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
-    }
+//    public String getAge() {
+//        return age;
+//    }
+//
+//    public void setAge(String age) {
+//        this.age = age;
+//    }
 
     @Length(min=0, max=50, message="手机长度必须介于 1 和 50之间")
     public String getTelephone() {
@@ -253,4 +255,19 @@ public class Customer extends DataEntity<Customer> {
     }
 
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
 }

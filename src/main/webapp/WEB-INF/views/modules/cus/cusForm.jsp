@@ -14,157 +14,157 @@
         console.log(json)
         console.log($form)
     }
-    //护照有效日期  = 签发日期 + 10年
-    $('#j_custom_issuedate').on('afterchange.bjui.datepicker', function(e, data) {
-        var pattern = 'yyyy-MM-dd'
-        var start   = end = data.value
-
-        end.setFullYear(start.getFullYear() + 10)
-        end.setDate(start.getDate() - 1)
-
-        $('#j_custom_indate').val(end.formatDate(pattern))
-    })
+//    //护照有效日期  = 签发日期 + 10年
+//    $('#j_custom_issuedate').on('afterchange.bjui.datepicker', function(e, data) {
+//        var pattern = 'yyyy-MM-dd'
+//        var start   = end = data.value
+//
+//        end.setFullYear(start.getFullYear() + 10)
+//        end.setDate(start.getDate() - 1)
+//
+//        $('#j_custom_indate').val(end.formatDate(pattern))
+//    })
 </script>
 <div class="bjui-pageContent">
-    <form action="ajaxDone2.html" id="j_custom_form" data-toggle="validate" data-alertmsg="false">
-        <input type="hidden" name="custom.id" value="edce142bc2ed4ec6b623aacaf602a4de">
+    <form action="${ctx}/cus/0/add" id="j_custom_form" data-toggle="validate" data-alertmsg="false">
+        <input type="hidden" name="id" value="">
         <table class="table table-condensed table-hover" width="100%">
             <tbody>
             <tr>
+                <%--<td>--%>
+                    <%--<label for="j_custom_issuedate" class="control-label x85">注册日期：</label>--%>
+                    <%--<input type="text" name="custom.issuedate" id="j_custom_issuedate" value="2014-10-01" data-toggle="datepicker" data-rule="required;date" size="15">--%>
+                <%--</td>--%>
                 <td>
-                    <label for="j_custom_sale" class="control-label x85">所属业务：</label>
-                    <select name="custom.sale" id="j_custom_sale" data-toggle="selectpicker" data-rule="required">
-                        <option value="">全部</option>
-                        <option value="1">业务1</option>
-                        <option value="2">业务2</option>
+                    <label for="j_customer_duration" class="control-label x85">所属阶段：</label>
+                    <select name="duration" id="j_customer_duration" data-toggle="selectpicker" data-rule="required">
+                        <option value="0">试用期</option>
+                        <option value="1">治疗期</option>
+                        <option value="2">保健期</option>
                     </select>
                 </td>
                 <td>
-                    <label for="j_custom_color" class="control-label x85">表示颜色：</label>
-                    <input type="text" name="custom.color" id="j_custom_color" value="" data-toggle="colorpicker" data-bgcolor="true" size="15" readonly>
-                    <a href="javascript:;" title="清除颜色" data-toggle="clearcolor" data-target="#j_custom_color">清除颜色</a>
+                    <label for="j_customer_name" class="control-label x85">客户姓名：</label>
+                    <input type="text" name="name" id="j_customer_name" value="${customer.name}" data-rule="required" size="15">
                 </td>
+                <%--<td>--%>
+                    <%--<label for="j_custom_color" class="control-label x85">表示颜色：</label>--%>
+                    <%--<input type="text" name="custom.color" id="j_custom_color" value="" data-toggle="colorpicker" data-bgcolor="true" size="15" readonly>--%>
+                    <%--<a href="javascript:;" title="清除颜色" data-toggle="clearcolor" data-target="#j_custom_color">清除颜色</a>--%>
+                <%--</td>--%>
                 <td colspan="2">
-                    <label class="control-label x85">客人照片：</label>
-                    <div style="display: inline-block; vertical-align: middle;">
-                        <div id="j_custom_pic_up" data-toggle="upload" data-uploader="ajaxUpload.html?sessionid=?"
-                             data-file-size-limit="1024000000"
-                             data-file-type-exts="*.jpg;*.png;*.gif;*.mpg"
-                             data-multi="true"
-                             data-on-upload-success="pic_upload_success"
-                             data-icon="cloud-upload"></div>
-                        <input type="hidden" name="custom.pic" value="" id="j_custom_pic">
-                        <span id="j_custom_span_pic"></span>
-                    </div>
+                    <label for="j_customer_school" class="control-label x85">学校：</label>
+                    <input type="text" name="school" id="j_customer_school" value="${customer.school}" size="30">
                 </td>
             </tr>
             <tr>
-                <td>
-                    <label for="j_custom_name" class="control-label x85">客人姓名：</label>
-                    <input type="text" name="custom.name" id="j_custom_name" value="张三" data-rule="required" size="15">
-                </td>
-                <td>
-                    <label for="j_custom_fname" class="control-label x85">拼音姓：</label>
-                    <input type="text" name="custom.fname" id="j_custom_fname" value="Zhang" data-rule="required;letters" size="15">
-                </td>
-                <td>
-                    <label for="j_custom_lname" class="control-label x85">拼音名：</label>
-                    <input type="text" name="custom.lname" id="j_custom_lname" value="San" data-rule="required;letters" size="15">
-                </td>
                 <td>
                     <label for="" class="control-label x85">性别：</label>
-                    <input type="radio" name="custom.isshow" id="j_custom_sex1" data-toggle="icheck" value="true" data-rule="checked" data-label="男&nbsp;&nbsp;">
-                    <input type="radio" name="custom.isshow" id="j_custom_sex2" data-toggle="icheck" value="false" data-label="女">
+                    <c:choose>
+                        <c:when test="${1 eq customer.sex}">
+                            <input type="radio" name="sex" id="j_customer_sex1" data-toggle="icheck" value="1" data-rule="checked" data-label="男&nbsp;&nbsp;">
+                            <input type="radio" name="sex" id="j_customer_sex2" data-toggle="icheck" value="0" data-label="女">
+                        </c:when>
+                        <c:otherwise>
+                            <input type="radio" name="sex" id="j_customer_sex1" data-toggle="icheck" value="1"  data-label="男&nbsp;&nbsp;">
+                            <input type="radio" name="sex" id="j_customer_sex2" data-toggle="icheck" value="0" data-rule="checked" data-label="女">
+                        </c:otherwise>
+                    </c:choose>
+
+                    <%--<input type="radio" name="sex" id="j_customer_sex1" data-toggle="icheck" value="1" data-rule="checked" data-label="男&nbsp;&nbsp;">--%>
+                    <%--<input type="radio" name="sex" id="j_customer_sex2" data-toggle="icheck" value="0" data-label="女">--%>
+                </td>
+                <td>
+                    <label for="j_customer_birthday" class="control-label x85">出生日期：</label>
+                    <input type="text" name="birthday" id="j_customer_birthday" value="1980-08-08" data-toggle="datepicker" data-rule="required;date" size="15">
+                </td>
+                <td>
+                    <label for="j_customer_eyeglassesSightR" class="control-label x85">戴镜度数R：</label>
+                    <input type="text" name="eyeglassesSightR" id="j_customer_eyeglassesSightR" value="" data-rule="required" size="15">
+                </td>
+                <td>
+                    <label for="j_customer_eyeglassesSightL" class="control-label x85">戴镜度数L：</label>
+                    <input type="text" name="eyeglassesSightL" id="j_customer_eyeglassesSightL" value="" data-rule="required" size="15">
                 </td>
             </tr>
             <tr>
-                <td>
-                    <label for="j_custom_birthday" class="control-label x85">出生日期：</label>
-                    <input type="text" name="custom.birthday" id="j_custom_birthday" value="1980-08-08" data-toggle="datepicker" data-rule="required;date" size="15">
+                <td colspan="2">
+                    <label for="j_customer_telephone" class="control-label x85">手机：</label>
+                    <input type="text" name="telephone" id="j_customer_telephone" value="" data-rule="required;mobile" size="30">
                 </td>
                 <td>
-                    <label for="j_custom_birthplace" class="control-label x85">出生地：</label>
-                    <input type="text" name="custom.birthplace" id="j_custom_birthplace" value="四川" data-rule="required" size="15">
+                    <label for="j_customer_nakedEyeSightR" class="control-label x85">裸眼视力R：</label>
+                    <input type="text" name="nakedEyeSightR" id="j_customer_nakedEyeSightR" value="" data-rule="required" size="15">
                 </td>
                 <td>
-                    <label for="j_custom_add" class="control-label x85">居住地：</label>
-                    <input type="text" name="custom.add" id="j_custom_add" value="成都九眼桥" data-rule="required" size="15">
+                    <label for="j_customer_nakedEyeSightL" class="control-label x85">裸眼视力L：</label>
+                    <input type="text" name="nakedEyeSightL" id="j_customer_nakedEyeSightL" value="" data-rule="required" size="15">
                 </td>
                 <td></td>
             </tr>
             <tr>
                 <td>
-                    <label for="j_custom_passportno" class="control-label x85">护照号：</label>
-                    <input type="text" name="custom.passportno" id="j_custom_passportno" value="" data-rule="required" size="15">
+                    <label for="j_customer_glassesTime" class="control-label x85">带镜史：</label>
+                    <input type="text" name="glassesTime" id="j_customer_glassesTime" value="" data-rule="required" size="15">
                 </td>
                 <td>
-                    <label for="j_custom_issuedate" class="control-label x85">签发日期：</label>
-                    <input type="text" name="custom.issuedate" id="j_custom_issuedate" value="2014-10-01" data-toggle="datepicker" data-rule="required;date" size="15">
+                    <label for="j_customer_address" class="control-label x85">家庭住址：</label>
+                    <input type="text" name="address" id="j_customer_address" value="" size="15">
                 </td>
                 <td>
-                    <label for="j_custom_indate" class="control-label x85">有效日期：</label>
-                    <input type="text" name="custom.indate" id="j_custom_indate" value="2024-09-30" data-toggle="datepicker" data-rule="required;date" size="15">
+                    <label for="j_customer_recoverEyeSightR" class="control-label x85">恢复视力R：</label>
+                    <input type="text" name="recoverEyeSightR" id="j_customer_recoverEyeSightR" value=""  data-rule="required" size="15">
                 </td>
                 <td>
-                    <label for="j_custom_issueat" class="control-label x85">签发地：</label>
-                    <input type="text" name="custom.issueat" id="j_custom_issueat" value="成都" data-rule="required" size="15">
+                    <label for="j_customer_recoverEyeSightL" class="control-label x85">恢复视力L：</label>
+                    <input type="text" name="recoverEyeSightL" id="j_customer_recoverEyeSightL" value="" data-rule="required" size="15">
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label for="j_custom_profession" class="control-label x85">职业：</label>
-                    <input type="text" name="custom.profession" id="j_custom_profession" value="耍家" size="15" data-toggle="lookup" data-url="table-edit-lookup.html" data-group="custom" data-width="600" data-height="300">
+                    <label for="j_customer_definR" class="control-label x85">清晰度R：</label>
+                    <input type="text" name="definR" id="j_customer_definR" value="" data-rule="required" size="15">
                 </td>
                 <td>
-                    <label for="j_custom_mobile" class="control-label x85">手机：</label>
-                    <input type="text" name="custom.mobile" id="j_custom_mobile" value="" data-rule="required;mobile" size="15">
+                    <label for="j_customer_definL" class="control-label x85">清晰度L：</label>
+                    <input type="text" name="definL" id="j_customer_definL" value="" size="15">
                 </td>
+                <td>
+                    <label for="j_customer_eyeControl" class="control-label x85">调节力：</label>
+                    <input type="text" name="eyeControl" id="j_customer_eyeControl" value=""  size="15">
+                </td>
+                <td>
+                    <label for="j_customer_eyeStrength" class="control-label x85">眼肌耐受力：</label>
+                    <input type="text" name="eyeStrength" id="j_customer_eyeStrength" value="" size="15">
+                </td>
+            </tr>
+            <tr>
                 <td colspan="2">
-                    <label for="j_custom_tags" class="control-label x85">关键字：</label>
-                    <input type="text" name="custom.tags" id="j_custom_tags" value="" data-toggle="tags" data-url="ajaxTags.html" data-width="400" size="15" placeholder="输入关键字，回车提交">
+                    <label for="j_customer_hasDisease" class="control-label x85">有无眼疾或其他过敏史：</label>
+                    <textarea name="hasDisease" id="j_customer_hasDisease" data-toggle="autoheight" cols="60" rows="1"></textarea>
                 </td>
+                <%--<td colspan="2">--%>
+                    <%--<label for="j_customer_hasDisease" class="control-label x85">有无眼疾或其他过敏史：</label>--%>
+                    <%--<textarea name="customer.hasDisease" id="j_customer_hasDisease" data-toggle="autoheight" cols="60" rows="1"></textarea>--%>
+                <%--</td>--%>
             </tr>
-            <tr>
-                <td>
-                    <label for="" class="control-label x85">占床：</label>
-                    <input type="checkbox" name="custom.room" id="j_custom_room" data-toggle="icheck" value="true" data-label="是否占床" checked data-rule="checked">
-                </td>
-                <td>
-                    <label for="" class="control-label x85">签证：</label>
-                    <input type="checkbox" name="custom.visa" id="j_custom_visa" data-toggle="icheck" value="true" data-label="需要签证">
-                </td>
-                <td>
-                    <label for="" class="control-label x85">素食：</label>
-                    <input type="checkbox" name="custom.vegetarian" id="j_custom_vegetarian" data-toggle="icheck" value="true" data-label="是否素食">
-                </td>
-                <td>
-                    <label for="j_custom_total" class="control-label x85">同行人数：</label>
-                    <input type="text" name="custom.total" id="j_custom_total" value="1" size="5" data-toggle="spinner" data-min="0" data-max="100" data-step="1" data-rule="integer">
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4">
-                    <label for="j_custom_note" class="control-label x85">备注：</label>
-                    <textarea name="custom.note" id="j_custom_note" data-toggle="autoheight" cols="60" rows="1"></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4">
-                    <label for="j_custom_content" class="control-label x85">内容编辑：</label>
-                    <div style="display: inline-block; vertical-align: middle;">
-                            <textarea name="content" id="j_form_content" class="j-content" style="width: 700px;" data-toggle="kindeditor" data-minheight="200">
-                                <p><strong>HTML编辑器KindEditor：</strong></p>
-                                <p><strong>已优化：</strong></p>
-                                <ul>
-                                    <li>深度清理html标记</li>
-                                    <li>上传附件后，自动获取文件名（需要返回JSON属性"origin_name"）</li>
-                                    <li>修改一键排版为段落前空两个全角空格，主要考虑到某些行需要顶格时直接删除空格即可。</li>
-                                </ul>
-                                <p><br>更多参数请参见：<a href="http://kindeditor.net/" target="_blank">http://kindeditor.net/</a></p>
-                            </textarea>
-                    </div>
-                </td>
-            </tr>
+            <%--<tr>--%>
+                <%--<td colspan="4">--%>
+                    <%--<label for="j_custom_content" class="control-label x85">内容编辑：</label>--%>
+                    <%--<div style="display: inline-block; vertical-align: middle;">--%>
+                            <%--<textarea name="content" id="j_form_content" class="j-content" style="width: 700px;" data-toggle="kindeditor" data-minheight="200">--%>
+                                <%--<p><strong>HTML编辑器KindEditor：</strong></p>--%>
+                                <%--<p><strong>已优化：</strong></p>--%>
+                                <%--<ul>--%>
+                                    <%--<li>深度清理html标记</li>--%>
+                                    <%--<li>上传附件后，自动获取文件名（需要返回JSON属性"origin_name"）</li>--%>
+                                    <%--<li>修改一键排版为段落前空两个全角空格，主要考虑到某些行需要顶格时直接删除空格即可。</li>--%>
+                                <%--</ul>--%>
+                                <%--<p><br>更多参数请参见：<a href="http://kindeditor.net/" target="_blank">http://kindeditor.net/</a></p>--%>
+                            <%--</textarea>--%>
+                    <%--</div>--%>
+                <%--</td>--%>
+            <%--</tr>--%>
             </tbody>
         </table>
     </form>

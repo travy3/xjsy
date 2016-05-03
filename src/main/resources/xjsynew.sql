@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2016-04-25 17:07:35
+Date: 2016-05-03 17:11:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,8 +23,9 @@ CREATE TABLE `cus_customer` (
   `id` varchar(64) NOT NULL,
   `name` varchar(32) DEFAULT NULL,
   `sex` varchar(2) DEFAULT NULL,
-  `age` varchar(16) DEFAULT NULL,
+  `birthday` date DEFAULT NULL,
   `telephone` varchar(255) DEFAULT NULL,
+  `address` varchar(200) DEFAULT NULL,
   `glasses_time` varchar(32) DEFAULT NULL COMMENT '带镜史',
   `naked_eye_sight_l` varchar(16) DEFAULT NULL COMMENT '左裸眼视力',
   `naked_eye_sight_r` varchar(16) DEFAULT NULL COMMENT '右裸眼视力',
@@ -55,6 +56,7 @@ CREATE TABLE `cus_customer` (
 -- ----------------------------
 -- Records of cus_customer
 -- ----------------------------
+INSERT INTO `cus_customer` VALUES ('184d9d479daa4951b057301ea99b8e39', '新增Item1', '1', '1980-08-08', '15032831553', '合作路', '123', '12', '12', '12', '32', '123', '123', '1', '十八', '123', '123', '阿斯顿', '32', '12', '0', null, null, '0', '1', '2016-05-03 15:48:24', '1', '2016-05-03 15:48:24', null, '0');
 
 -- ----------------------------
 -- Table structure for cus_hpmanager
@@ -300,7 +302,7 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('1', 'admin', '1caae8b0fe63380363b79062433faa6e3046cd8cc6cf740dbdfe6ab0', '管理员', '15032831553', '11@qq.com', null, '0', '1', '1', '2016-03-17 20:15:26', '1', '2016-03-30 14:56:11', '0', '2016-03-29');
 INSERT INTO `sys_user` VALUES ('2', 'zhangyu', '22b39462b3fdedc07e911d860434b19be3afa59af3fa9bd98604e6fa', '加盟a', '15032850523', '22@qq.com', null, '0', '1', '1', '2016-03-01 13:32:08', '1', '2016-04-05 08:29:14', '0', '2017-03-27');
-INSERT INTO `sys_user` VALUES ('3', 'zhangying123', null, '加盟C', '15032831536', '133@qq.com', null, '0', '1', '1', '2016-03-24 12:48:01', null, '2016-03-30 16:15:32', '0', '2018-03-27');
+INSERT INTO `sys_user` VALUES ('3', 'zhangying123', null, '加盟C1', '15032831536', '133@qq.com', null, '0', '1', '1', '2016-03-24 12:48:01', '1', '2016-04-26 14:36:57', '0', '2018-03-27');
 INSERT INTO `sys_user` VALUES ('57a61b6d1a0148239b1c5ea55b4346f3', 'benz', 'b7349aafbbcb24a5552dbd0d32c83649b9d5bd3436f843b955635671', '新增Item1', '15032831553', '123@qq.com', null, '0', '1', null, '2016-03-30 16:48:40', null, '2016-03-30 16:48:40', '0', null);
 
 -- ----------------------------
@@ -317,6 +319,6 @@ CREATE TABLE `sys_user_role` (
 -- Records of sys_user_role
 -- ----------------------------
 INSERT INTO `sys_user_role` VALUES ('1', '1');
-INSERT INTO `sys_user_role` VALUES ('3', '1');
 INSERT INTO `sys_user_role` VALUES ('57a61b6d1a0148239b1c5ea55b4346f3', '2');
 INSERT INTO `sys_user_role` VALUES ('2', 'dd79e14c2c7b4261ba18f03c7c4ab8a2');
+INSERT INTO `sys_user_role` VALUES ('3', '1');
