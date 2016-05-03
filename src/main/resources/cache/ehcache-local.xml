@@ -15,7 +15,7 @@
     <cache name="actCache" maxEntriesLocalHeap="100" eternal="true" overflowToDisk="true"/>
 
     <!-- 系统活动会话缓存 -->
-    <cache name="shiro-activeSessionsCache2" maxEntriesLocalHeap="10000" overflowToDisk="true"
+    <cache name="activeSessionsCache" maxEntriesLocalHeap="10000" overflowToDisk="true"
            eternal="true" timeToLiveSeconds="0" timeToIdleSeconds="0"
            diskPersistent="true" diskExpiryThreadIntervalSeconds="600"/>
 

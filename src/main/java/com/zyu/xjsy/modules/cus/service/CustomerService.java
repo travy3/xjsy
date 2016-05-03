@@ -6,8 +6,10 @@ import com.zyu.xjsy.common.service.BaseService;
 import com.zyu.xjsy.modules.cus.dao.CustomerDao;
 import com.zyu.xjsy.modules.cus.entity.Customer;
 import com.zyu.xjsy.modules.sys.entity.User;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -40,4 +42,20 @@ public class CustomerService extends BaseService {
         return customerDao.get(customer);
     }
 
+    @Transactional(readOnly = false)
+    public void saveCustomer(Customer customer) {
+
+        if (StringUtils.isBlank(customer.getId())){
+
+            customer.preInsert();
+            customerDao.insert(customer);
+
+        }else {
+
+            customer.preUpdate();
+            customerDao.update(customer);
+
+        }
+
+    }
 }

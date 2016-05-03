@@ -3,7 +3,6 @@ package com.zyu.xjsy.common.security.shiro.session;
 import com.google.common.collect.Sets;
 import com.zyu.xjsy.common.util.DateUtils;
 import com.zyu.xjsy.common.web.Servlets;
-import net.sf.ehcache.Element;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
@@ -56,9 +55,9 @@ public class EhCacheSessionDAO extends EnterpriseCacheSessionDAO implements Sess
 
 //        return getCachedSession(sessionId);
 
-        Element element = (Element) getCacheManager().getCache(getActiveSessionsCacheName()).get(sessionId);
-        element.getHitCount();
-        logger.debug("命中次数："+element.getHitCount());
+//        Element element = (Element) getCacheManager().getCache(getActiveSessionsCacheName()).get(sessionId);
+//        element.getHitCount();
+//        logger.debug("命中次数："+element.getHitCount());
          return super.doReadSession(sessionId);
 
 //        return super.doReadSession(sessionId);

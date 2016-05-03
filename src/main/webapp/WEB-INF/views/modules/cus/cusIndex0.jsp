@@ -15,13 +15,24 @@
                 name:'sex',
                 label: '性别',
                 type: 'String',
-                align:'center'
+                align:'center',
+                render: function(value){
+                    if("1"==value){
+                        return '男';
+                    }else{
+                        return '女';
+                    }
+                }
             },
             {
-                name:'age',
+                name:'birthday',
                 label: '年龄',
                 type: 'String',
-                align:'center'
+                align:'center',
+                render: function(value){
+
+                    return new Date().getFullYear()-value.substring(0,4);
+                }
             },
             {
                 name:'telephone',
@@ -30,9 +41,19 @@
                 align:'center'
             },
             {
-                name: 'status',
+                name: 'business',
                 label: '加盟商',
                 type: 'String',
+                align:'center',
+                render: function(value){
+                    return value.name;
+                }
+            },
+            {
+                name: 'status',
+                label: '状态',
+                type: 'String',
+                align:'center',
                 render: function(value){
                     if("1"==value){
                         return '活跃';
@@ -40,14 +61,6 @@
                         return '流失';
                     }
 //                    return value.name;
-                }
-            },
-            {
-                name: 'business',
-                label: '状态',
-                type: 'String',
-                render: function(value){
-                    return value.name;
                 }
             },
             {

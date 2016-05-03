@@ -3,6 +3,7 @@ package com.zyu.xjsy.modules.cus.controller;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.zyu.xjsy.common.config.Global;
+import com.zyu.xjsy.common.controller.BaseController;
 import com.zyu.xjsy.common.persistence.PageInfo;
 import com.zyu.xjsy.common.web.ExecuteResult;
 import com.zyu.xjsy.modules.cus.entity.Customer;
@@ -25,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 @RequestMapping(value = "/cus")
-public class CustomerController {
+public class CustomerController extends BaseController {
 
 
     private ExecuteResult executeResult = new ExecuteResult();
@@ -74,10 +75,12 @@ public class CustomerController {
         if (StringUtils.isNotBlank(id)){
             //edit
             Customer customer = new Customer(id);
+
             customer = customerService.getCustomer(customer);
 
             model.addAttribute("customer",customer);
         }
+
 
 
 
@@ -87,11 +90,21 @@ public class CustomerController {
 
     @RequestMapping(value = "/{duration}/add")
     @ResponseBody
-    public Object addCustomer(Customer customer){
+    public Object addCustomer(Customer customer,Model model){
+
+        User user = UserUtils.getUser();
+
+        customer.setBusiness(user.getBusiness());
+        customer.setUser(user);
+        if(!beanValidator(model,customer)){
+            return executeResult.jsonReturn(300,"数据格式有误",false);
+        }
+
+        customerService.saveCustomer(customer);
 
 
 
-        return null;
+        return executeResult.jsonReturn(200,"客户信息保存成功!");
     }
 
 }
