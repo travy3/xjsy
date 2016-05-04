@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
 
 /**
  * Created by chenjie on 2016/4/13.
@@ -76,21 +77,23 @@ public class CustomerController extends BaseController {
             //edit
             Customer customer = new Customer(id);
 
+            customer.setUser(UserUtils.getUser());
             customer = customerService.getCustomer(customer);
 
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
             model.addAttribute("customer",customer);
+
+            model.addAttribute("sdfBirthday",sdf.format(customer.getBirthday()));
         }
-
-
-
 
         return "/modules/cus/cusForm";
 
     }
 
-    @RequestMapping(value = "/{duration}/add")
+    @RequestMapping(value = "/{duration}/manage")
     @ResponseBody
-    public Object addCustomer(Customer customer,Model model){
+    public Object manage(Customer customer,Model model){
 
         User user = UserUtils.getUser();
 
@@ -102,9 +105,17 @@ public class CustomerController extends BaseController {
 
         customerService.saveCustomer(customer);
 
-
-
         return executeResult.jsonReturn(200,"客户信息保存成功!");
     }
+
+
+    @RequestMapping(value = "/questionnaire")
+    public String questionnaire(String id,HttpServletRequest request,HttpServletResponse response,Model model){
+
+        model.addAttribute("customerId",id);
+
+        return "/modules/cus/questionnaire";
+    }
+
 
 }

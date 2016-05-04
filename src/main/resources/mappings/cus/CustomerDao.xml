@@ -26,6 +26,7 @@
 		a.sex,
 		a.birthday,
 		a.telephone,
+		a.address,
 		a.glasses_time as "glassesTime",
 		a.naked_eye_sight_l as "nakedEyeSightL",
 		a.naked_eye_sight_r as "nakedEyeSightR",
@@ -47,10 +48,10 @@
 		b.name as "business.name",
 		a.duration,
 		a.create_by AS "createBy.id",
-		a.create_date,
+		a.create_date AS "createDate",
 		a.update_by AS
 		"updateBy.id",
-		a.update_date,
+		a.update_date AS "updateDate",
 		a.delflag
     </sql>
 
@@ -121,8 +122,32 @@
 	</insert>
 
 	<update id="update">
-
+		UPDATE cus_customer  SET
+		  name = #{name},
+		  sex = #{sex},
+		  birthday = #{birthday},
+		  telephone = #{telephone},
+		  address = #{address},
+		  glasses_time = #{glassesTime},
+		  naked_eye_sight_l = #{nakedEyeSightL},
+		  naked_eye_sight_r = #{nakedEyeSightR},
+		  recover_eye_sight_l = #{recoverEyeSightL},
+		  recover_eye_sight_r = #{recoverEyeSightR},
+		  eyeglass_sight_l = #{eyeglassesSightL},
+		  eyeglass_sight_r = #{eyeglassesSightR},
+		  school = #{school},
+		  defin_l = #{definL},
+		  defin_r = #{definR},
+		  hasdisease = #{hasDisease},
+		  eye_control = #{eyeControl},
+		  eye_strengh = #{eyeStrength},
+          status = #{status},
+          duration = #{duration},
+          update_by= #{updateBy.id},
+          update_date = #{updateDate}
+          WHERE id=#{id}
 	</update>
+
 
     <select id="findList" resultType="Customer">
         SELECT
@@ -135,13 +160,21 @@
         WHERE a.delflag = #{DEL_FLAG_NORMAL}
 		AND a.duration = #{duration}
 		AND a.business = #{user.business.id}
+        <if test="name != null and name !=''">
+            AND a.name = #{name}
+        </if>
+        <if test="telephone != null and telephone !=''">
+            AND a.telephone = #{telephone}
+        </if>
     </select>
 
 	<select id="get" resultType="Customer">
 		SELECT
 			<include refid="customerColumns"></include>
 		FROM cus_customer a
-		JOIN info_plan p ON a.plan = p.id
+		<if test="plan != null and plan.id != null and plan.id !=''">
+			JOIN info_plan p ON a.plan = p.id
+		</if>
 		JOIN sys_business b ON  a.business = b.id
 		WHERE a.delflag = #{DEL_FLAG_NORMAL}
 		AND a.duration = #{duration}

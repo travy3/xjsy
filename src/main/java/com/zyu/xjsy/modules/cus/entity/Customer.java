@@ -8,6 +8,7 @@ import com.zyu.xjsy.modules.sys.entity.User;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 /**
  * Created by chenjie on 2016/4/13.
@@ -19,7 +20,7 @@ public class Customer extends DataEntity<Customer> {
     private String name;
     private String sex;
 //    private String age;
-    private String birthday;
+    private Date birthday;
     private String telephone;
     private String address;
     private String glassesTime; //带镜史
@@ -36,7 +37,7 @@ public class Customer extends DataEntity<Customer> {
     private String hasDisease;//有无眼疾或其他过敏史
     private String eyeControl;//视功能评估：调节力
     private String eyeStrength;//视功能评估：眼肌耐受力
-    private String status;// 活跃 流失
+    private String status;// 活跃1 流失0
     private String cid;
     private Plan plan;//当前方案
     private String duration;// 试用期，治疗期，保健期
@@ -45,12 +46,12 @@ public class Customer extends DataEntity<Customer> {
 
     public Customer() {
         super();
-        this.status = Global.NO;
+        this.status = Global.YES;
         this.duration = Global.DURATION_SY;
     }
     public Customer(String id) {
         super(id);
-        this.status = Global.NO;
+        this.status = Global.YES;
         this.duration = Global.DURATION_SY;
     }
     public Customer(String id ,String telephone){
@@ -263,11 +264,11 @@ public class Customer extends DataEntity<Customer> {
         this.address = address;
     }
 
-    public String getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 }
