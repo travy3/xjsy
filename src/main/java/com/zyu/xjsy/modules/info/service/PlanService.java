@@ -65,6 +65,11 @@ public class PlanService extends BaseService {
         planInfoDao.insertBatch(plan);
     }
 
+    @Transactional(readOnly = false)
+    public void delPlan(Plan plan){
+        planDao.delete(plan);
+    }
+
     /******************************PlanInfo************************************************/
 
     public PageInfo<PlanInfo> getPlanInfo(PageInfo pageInfo,PlanInfo planInfo) {
@@ -90,6 +95,10 @@ public class PlanService extends BaseService {
         }
     }
 
+    @Transactional(readOnly = false)
+    public void delPlanInfo(PlanInfo planInfo) {
+        planInfoDao.delete(planInfo);
+    }
 
 
 //    public String getPlanInfo(String id){

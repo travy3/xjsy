@@ -38,9 +38,11 @@ public class CustomerController extends BaseController {
 
 
     @RequestMapping(value = "/{duration}")
-    public String cusIndex(@PathVariable String duration){
+    public String cusIndex(@PathVariable String duration,Customer customer,Model model){
 
         if (Global.DURATION_SY.equals(duration)){
+            //列表查询条件传入
+            model.addAttribute("customer",customer);
             return "/modules/cus/cusIndex0";
 
         }else if (Global.DURATION_ZL.equals(duration)){
@@ -56,10 +58,10 @@ public class CustomerController extends BaseController {
 
     @RequestMapping(value = "/{duration}/list")
     @ResponseBody
-    public String list(@PathVariable String duration, HttpServletRequest request, HttpServletResponse response){
+    public String list(@PathVariable String duration, HttpServletRequest request, HttpServletResponse response,Customer customer){
 
         User user = UserUtils.getUser();
-        Customer customer = new Customer();
+//        Customer customer = new Customer();
         customer.setDuration(duration);
         PageInfo<Customer> pageInfo = customerService.findAllCustomer(new PageInfo<Customer>(request,response),customer,user);
 
@@ -115,6 +117,20 @@ public class CustomerController extends BaseController {
         model.addAttribute("customerId",id);
 
         return "/modules/cus/questionnaire";
+    }
+
+    @RequestMapping(value = "/cusPlanResult")
+    @ResponseBody
+    public String cusPlanResult(String planResult,String eyeType){
+
+        Gson gson = new Gson();
+
+        if ("R".equals(eyeType)){
+
+        }
+
+        return "";
+
     }
 
 

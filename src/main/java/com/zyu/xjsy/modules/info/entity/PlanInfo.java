@@ -19,6 +19,10 @@ public class PlanInfo extends DataEntity<PlanInfo> {
         super();
     }
 
+    public PlanInfo(String id){
+        super(id);
+    }
+
     public String getCode() {
         return code;
     }

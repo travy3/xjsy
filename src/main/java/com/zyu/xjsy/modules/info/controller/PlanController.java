@@ -52,7 +52,7 @@ public class PlanController extends BaseController {
         return gson.toJson(pageInfo);
     }
 
-    @RequestMapping(value = "/plan/manage")
+    @RequestMapping(value = "/plan/form")
     public String planForm(String id,Model model){
 
         if (StringUtils.isNotBlank(id)){
@@ -115,7 +115,18 @@ public class PlanController extends BaseController {
        return  executeResult.jsonReturn(200,"保存成功");
     }
 
-    @RequestMapping(value = "/planInfo/form")
+    @RequestMapping(value = "/plan/del")
+    @ResponseBody
+    public Object planDel(String id){
+
+        Plan plan = new Plan(id);
+
+        planService.delPlan(plan);
+
+        return executeResult.jsonReturn(200,"删除成功");
+    }
+
+    @RequestMapping(value = "/planInfo/manage")
     @ResponseBody
     public Object planInfoEdit(String json,String planId){
 
@@ -147,6 +158,19 @@ public class PlanController extends BaseController {
 
         return  executeResult.jsonReturn(200,"保存成功");
     }
+
+    @RequestMapping(value = "/planInfo/del")
+    @ResponseBody
+    public Object planInfoDel(String id){
+
+        PlanInfo planInfo = new PlanInfo(id);
+
+        planService.delPlanInfo(planInfo);
+
+        return executeResult.jsonReturn(200,"删除成功");
+
+    }
+
 
 
 }
