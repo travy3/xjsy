@@ -70,7 +70,7 @@
                 width: 150,
                 render: function(value) {
                     return '<a href="${ctx}/cus/0/form?id='+value+'" data-toggle="dialog" data-width="830" data-height="230" data-max="true" data-type="POST" data-title="客户信息" class="btn btn-blue">修改</a> | ' +
-                            '<a href="${ctx}/cus/questionnaire?id='+value+'" data-toggle="dialog" data-width="830" data-height="230" data-mask="true" data-type="POST" data-title="客户信息" class="btn btn-blue">方案计算</a>'
+                            '<a href="${ctx}/cus/questionnaire?id='+value+'" data-toggle="dialog" data-width="820" data-height="700" data-mask="true" data-type="POST" data-title="客户信息" class="btn btn-blue">方案计算</a>'
                 },
                 edit:false,
                 add:false
