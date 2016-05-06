@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2016-05-03 17:11:16
+Date: 2016-05-06 16:51:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -56,7 +56,8 @@ CREATE TABLE `cus_customer` (
 -- ----------------------------
 -- Records of cus_customer
 -- ----------------------------
-INSERT INTO `cus_customer` VALUES ('184d9d479daa4951b057301ea99b8e39', '新增Item1', '1', '1980-08-08', '15032831553', '合作路', '123', '12', '12', '12', '32', '123', '123', '1', '十八', '123', '123', '阿斯顿', '32', '12', '0', null, null, '0', '1', '2016-05-03 15:48:24', '1', '2016-05-03 15:48:24', null, '0');
+INSERT INTO `cus_customer` VALUES ('184d9d479daa4951b057301ea99b8e39', '张宇', '1', '1980-08-08', '15032831553', '合作路', '123', '12', '12', '12', '32', '123', '123', '1', '十八中', '123', '123', '阿斯顿12', '32', '12', '1', null, null, '0', '1', '2016-05-03 15:48:24', '1', '2016-05-04 14:34:43', null, '0');
+INSERT INTO `cus_customer` VALUES ('b789c1c2276a495786b79fcffeb940ad', '新增Item1', '1', '2009-05-04', '15032831554', '范甘迪', '12', '21', '23', '23', '123', '34', '123', '1', '十五中', '123', '32', '文身断发', '12', '12', '1', null, null, '0', '1', '2016-05-04 16:36:26', '1', '2016-05-04 16:36:26', null, '0');
 
 -- ----------------------------
 -- Table structure for cus_hpmanager
@@ -78,7 +79,7 @@ CREATE TABLE `cus_hpmanager` (
   `AFTER_ADJUST_L` varchar(32) DEFAULT NULL,
   `AFTER_ADJUST_R` varchar(32) DEFAULT NULL,
   `MEMO` varchar(255) DEFAULT NULL COMMENT '备注',
-  `PLAN` varchar(32) DEFAULT NULL COMMENT '所属方案',
+  `PLAN` varchar(64) DEFAULT NULL COMMENT '所属方案',
   KEY `FK_INFOCUSTOMER_ID` (`CUSTOMER_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -101,8 +102,11 @@ CREATE TABLE `info_plan` (
 -- ----------------------------
 -- Records of info_plan
 -- ----------------------------
-INSERT INTO `info_plan` VALUES ('1', '方案1', '数字1', '0');
+INSERT INTO `info_plan` VALUES ('1', '方案1', '数字1', '1');
+INSERT INTO `info_plan` VALUES ('4', '4级一期方案', '4级一期方案', '0');
+INSERT INTO `info_plan` VALUES ('5', '5级一期方案', '5级一期方案', '0');
 INSERT INTO `info_plan` VALUES ('500eb43a595943bfb0daaa73479ed157', '方案3', '阿道夫', '0');
+INSERT INTO `info_plan` VALUES ('6', '6级一期方案', '6级一期方案', '0');
 INSERT INTO `info_plan` VALUES ('746a9752fbf641e7b27190f4dbca4fcb', '方案2', '阿斯蒂芬', '0');
 
 -- ----------------------------
@@ -117,7 +121,7 @@ CREATE TABLE `info_planinfo` (
   `paper` varchar(10) DEFAULT NULL,
   `num` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of info_planinfo
@@ -134,6 +138,17 @@ INSERT INTO `info_planinfo` VALUES ('9', '746a9752fbf641e7b27190f4dbca4fcb', 's1
 INSERT INTO `info_planinfo` VALUES ('10', '500eb43a595943bfb0daaa73479ed157', 's1', '2', '3', '1');
 INSERT INTO `info_planinfo` VALUES ('11', '500eb43a595943bfb0daaa73479ed157', 's34', '2', '2', '2');
 INSERT INTO `info_planinfo` VALUES ('12', '500eb43a595943bfb0daaa73479ed157', 's1', '2', '34', '3');
+INSERT INTO `info_planinfo` VALUES ('13', '', '2', '3', '4', '1');
+INSERT INTO `info_planinfo` VALUES ('14', '13b82f9629cb429c80ce63e9ce0113b1', '2', '3', '4', '1');
+INSERT INTO `info_planinfo` VALUES ('15', '4538c1950d60455dbcd698916b12c6d5', '2', '2', '4', '1');
+INSERT INTO `info_planinfo` VALUES ('16', '1faa469833b94180901c847958375b0a', '2', '3', '4', '1');
+INSERT INTO `info_planinfo` VALUES ('17', '13b82f9629cb429c80ce63e9ce0113b1', '3', '4', '5', '2');
+INSERT INTO `info_planinfo` VALUES ('18', '13b82f9629cb429c80ce63e9ce0113b1', '7', '8', '9', '6');
+INSERT INTO `info_planinfo` VALUES ('19', '4538c1950d60455dbcd698916b12c6d5', '3', '4', '5', '2');
+INSERT INTO `info_planinfo` VALUES ('20', '4538c1950d60455dbcd698916b12c6d5', '3', '4', '5', '2');
+INSERT INTO `info_planinfo` VALUES ('21', '4538c1950d60455dbcd698916b12c6d5', '123', '23', '2', '123');
+INSERT INTO `info_planinfo` VALUES ('22', '4538c1950d60455dbcd698916b12c6d5', '3', '3', '12', '2');
+INSERT INTO `info_planinfo` VALUES ('23', '4538c1950d60455dbcd698916b12c6d5', '2', '3', '4', '1');
 
 -- ----------------------------
 -- Table structure for sys_area

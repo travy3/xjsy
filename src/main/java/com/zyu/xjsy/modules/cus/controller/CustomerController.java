@@ -8,6 +8,8 @@ import com.zyu.xjsy.common.persistence.PageInfo;
 import com.zyu.xjsy.common.web.ExecuteResult;
 import com.zyu.xjsy.modules.cus.entity.Customer;
 import com.zyu.xjsy.modules.cus.service.CustomerService;
+import com.zyu.xjsy.modules.info.entity.Plan;
+import com.zyu.xjsy.modules.info.service.PlanService;
 import com.zyu.xjsy.modules.sys.entity.User;
 import com.zyu.xjsy.modules.sys.util.UserUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
 
 /**
  * Created by chenjie on 2016/4/13.
@@ -35,11 +38,16 @@ public class CustomerController extends BaseController {
     @Autowired
     private CustomerService customerService;
 
+    @Autowired
+    private PlanService planService;
+
 
     @RequestMapping(value = "/{duration}")
-    public String cusIndex(@PathVariable String duration){
+    public String cusIndex(@PathVariable String duration,Customer customer,Model model){
 
         if (Global.DURATION_SY.equals(duration)){
+            //列表查询条件传入
+            model.addAttribute("customer",customer);
             return "/modules/cus/cusIndex0";
 
         }else if (Global.DURATION_ZL.equals(duration)){
@@ -55,10 +63,10 @@ public class CustomerController extends BaseController {
 
     @RequestMapping(value = "/{duration}/list")
     @ResponseBody
-    public String list(@PathVariable String duration, HttpServletRequest request, HttpServletResponse response){
+    public String list(@PathVariable String duration, HttpServletRequest request, HttpServletResponse response,Customer customer){
 
         User user = UserUtils.getUser();
-        Customer customer = new Customer();
+//        Customer customer = new Customer();
         customer.setDuration(duration);
         PageInfo<Customer> pageInfo = customerService.findAllCustomer(new PageInfo<Customer>(request,response),customer,user);
 
@@ -76,21 +84,29 @@ public class CustomerController extends BaseController {
             //edit
             Customer customer = new Customer(id);
 
+            customer.setUser(UserUtils.getUser());
             customer = customerService.getCustomer(customer);
 
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
             model.addAttribute("customer",customer);
+
+            model.addAttribute("sdfBirthday",sdf.format(customer.getBirthday()));
         }
-
-
-
 
         return "/modules/cus/cusForm";
 
     }
 
-    @RequestMapping(value = "/{duration}/add")
+    /**
+     * insert/update
+     * @param customer
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/{duration}/manage")
     @ResponseBody
-    public Object addCustomer(Customer customer,Model model){
+    public Object manage(Customer customer,Model model){
 
         User user = UserUtils.getUser();
 
@@ -102,9 +118,57 @@ public class CustomerController extends BaseController {
 
         customerService.saveCustomer(customer);
 
-
-
         return executeResult.jsonReturn(200,"客户信息保存成功!");
     }
+
+
+    @RequestMapping(value = "/questionnaire")
+    public String questionnaire(String id,HttpServletRequest request,HttpServletResponse response,Model model){
+
+        model.addAttribute("customerId",id);
+
+        return "/modules/cus/questionnaire";
+    }
+
+    /**
+     * 方案推算 已定
+     * @param planResult
+     * @param eyeType
+     * @return
+     */
+    @RequestMapping(value = "/cusPlanResult")
+    @ResponseBody
+    public String cusPlanResult(String planResult,String eyeType){
+
+        Gson gson = new Gson();
+        Plan plan = new Plan();
+        int planResultTmp = Integer.parseInt(planResult);
+        if ("R".equals(eyeType)){
+            if (planResultTmp >=25){
+                plan.setId("6");
+            }else if(planResultTmp >= 13 && planResultTmp <25){
+                plan.setId("5");
+            }else {
+                plan.setId("4");
+            }
+        }else {
+            if (planResultTmp >=23){
+                plan.setId("6");
+            }else if(planResultTmp >= 13 && planResultTmp <23){
+                plan.setId("5");
+            }else {
+                plan.setId("4");
+            }
+        }
+        plan = planService.getPlan(plan);
+        return gson.toJson(plan);
+
+    }
+
+    //todo 客户方案确认
+    public Object cusPlanSave(){
+        return null;
+    }
+
 
 }

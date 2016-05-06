@@ -1,7 +1,7 @@
 <%@page language="java" contentType="text/html; utf-8" pageEncoding="utf-8" %>
 <%@include file="/WEB-INF/views/include/taglib.jsp"%>
 <script type="text/javascript">
-    $('#user-datagrid-json').datagrid({
+    $('#customer-datagrid-json').datagrid({
         columns: [
             {
                 name: 'name',
@@ -69,7 +69,8 @@
                 align: 'center',
                 width: 150,
                 render: function(value) {
-                    return '<a href="${ctx}/cus/0/edit/'+value+'" data-toggle="dialog" data-width="830" data-height="230"data-mask="true" data-type="POST" data-title="客户信息" class="btn btn-blue">修改</a>'
+                    return '<a href="${ctx}/cus/0/form?id='+value+'" data-toggle="dialog" data-width="830" data-height="230" data-max="true" data-type="POST" data-title="客户信息" class="btn btn-blue">修改</a> | ' +
+                            '<a href="${ctx}/cus/questionnaire?id='+value+'" data-toggle="dialog" data-width="1030" data-height="700" data-mask="true" data-type="POST" data-title="调查问卷" class="btn btn-blue">方案计算</a>'
                 },
                 edit:false,
                 add:false
@@ -118,6 +119,7 @@
         hScrollbar 		: 	false 	,//[可选] 允许出现横向滚动条。
         fullGrid 		: 	true 	,//[可选] 使表格铺满网格容器(如果值为true，则需要设置有列宽，并且总宽度小于datagrid容器宽度时有效)。
         //width 			: 	null 	,//[可选] datagrid容器宽度，默认为父容器的宽，相当于'100%'。
+        postData        :   {name:'${customer.name}',telephone:'${customer.telephone}'},
         height 			: 	'100%' 	//,//[可选] datagrid容器高度。
         //importOption 	: 	null 	,//[可选] 工具栏的导入按钮参数，dialog或navtab方式打开导入页面，参数模板{type:"dialog", options:{url:'', width:400, height:200}}
         //exportOption 	: 	null 	,//[可选] 工具栏的导出按钮参数，执行ajax url或以dialog or navtab方式打开导出页面，参数模板{type:"ajax", options:{url:""}}
@@ -125,10 +127,16 @@
         //beforeDelete 	: 	null 	,//[可选] 带返回值方法，删除数据前调用，返回true继续删除，返回false取消删除。
         //afterSave 		: 	null 	,//[可选] 保存成功后执行方法，参数$trs为保存行(jQuery 对象)，datas为保存行对应数据(JSON Array)。
         //afterDelete 	: 	null 	 //[可选] 删除成功后执行方法。
+
+    })
+
+    $(document).on('bjui.beforeCloseDialog', function(e) {
+        var $dialog = $(e.target)
+        $('#customer-datagrid-json').datagrid('refresh')
     })
 </script>
 <div class="bjui-pageHeader">
-    <form id="pagerForm" data-toggle="ajaxsearch" action="${ctx}/sys/user/list" method="post">
+    <form id="pagerForm" data-toggle="ajaxsearch"  action="${ctx}/cus/0" method="get">
         <%--<input type="hidden" name="pageSize" value="${user.pageInfo.pageSize}">--%>
         <%--<input type="hidden" name="pageCurrent" value="${user.pageInfo.pageCurrent}">--%>
         <%--<input type="hidden" name="orderField" value="${user.pageInfo.orderField}">--%>
@@ -142,6 +150,8 @@
                 <%--<option value="3">餐饮</option>--%>
                 <%--<option value="4">交通</option>--%>
             <%--</select>&nbsp;--%>
+                <label>姓名:</label> <input name="name" id="cusName" value="${customer.name}" />
+                <label>手机号:</label> <input name="telephone" id="cusTelephone" data-rule="mobile" value="${customer.telephone}"/>
             <button type="submit" class="btn-default" data-icon="search">查询</button>&nbsp;
             <a class="btn btn-orange" href="javascript:;" data-toggle="reloadsearch" data-clear-query="true" data-icon="undo">清空查询</a>
         </div>
@@ -149,7 +159,7 @@
 </div>
 <div class="bjui-pageContent tableContent">
     <div style="height:100%; width:100%;">
-        <table id="user-datagrid-json" data-width="100%" class="table table-bordered">
+        <table id="customer-datagrid-json" data-width="100%" class="table table-bordered">
         </table>
         <br>
     </div>

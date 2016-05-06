@@ -23,7 +23,7 @@
             align: 'center',
             width: 150,
             render: function(value) {
-            return '<a href="${ctx}/info/plan/form?id='+value+'" data-toggle="dialog" data-width="830" data-height="610" data-id="dialog-mask" data-type="POST" data-title="账号修改" class="btn btn-blue">修改</a>'
+            return '<a href="${ctx}/info/plan/form?id='+value+'" data-toggle="dialog" data-width="830" data-height="610" data-id="dialog-mask" data-type="POST" data-title="方案修改" class="btn btn-blue">修改</a>'
             },
             edit:false,
             add:false

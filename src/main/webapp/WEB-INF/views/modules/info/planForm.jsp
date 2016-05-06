@@ -7,7 +7,8 @@
                 name: 'num',
                 label: '序号',
                 type : 'String',
-                align: 'center'
+                align: 'center',
+                rule: 'required'
 //                width: 80
 
             },
@@ -15,21 +16,23 @@
                 name: 'code',
                 label: '编号',
                 type : 'String',
-                align: 'center'
+                align: 'center',
 //                width: 80
-
+                rule: 'required'
             },
             {
                 name:'times',
                 label: '次数',
                 type: 'String',
-                align:'center'
+                align:'center',
+                rule: 'required'
             },
             {
                 name:'paper',
                 label: '图纸',
                 type: 'String',
-                align:'center'
+                align:'center',
+                rule: 'required'
             }
             <%--,--%>
             <%--{--%>
@@ -60,7 +63,7 @@
         showEditbtnscol : 	true 	,//[可选] 是否显示编辑按钮列。
         showTfoot 		: 	false 	,//[可选] 是否显示页脚，适用于显示统计信息，需要字段相关参数支持。
         showToolbar 	: 	true 	,//[可选] 是否显示工具条，需要设置参数toolbarItem或toolbarCustom。
-        toolbarItem 	: 	'add,|,del,|,refresh' 	,//[可选] 显示工具条按钮，可选参数['all, add, edit, cancel, save, del, import, export, |']，“all” = 显示所有按钮，“|” = 按钮组分隔符。
+        toolbarItem 	: 	'add,|,refresh' 	,//[可选] 显示工具条按钮，可选参数['all, add, edit, cancel, save, del, import, export, |']，“all” = 显示所有按钮，“|” = 按钮组分隔符。
         <%--toolbarCustom 	: 	'<a href="${ctx}/info/plan/manage" data-toggle="dialog" data-id="" data-width="830" data-height="230" data-mask="true" data-type="POST" data-title="新增" class="btn btn-blue">新增</a>  ',//[可选] 自定义的html内容或jQuery DOM对象，支持带返回值函数。--%>
         //toolbarCustom 	: 	null 	,//[可选] 自定义的html内容或jQuery DOM对象，支持带返回值函数。
         columnResize 	: 	true 	,//[可选] 允许调整列宽。
@@ -70,7 +73,7 @@
         columnLock 		: 	true 	,//[可选] 表头字段列菜单上出现 “锁定列、解除锁定” 选项。
         paging 			: 	{pageSize:30, selectPageSize:'30,60,100', pageCurrent:1, showPagenum:5, total:0} 	,//[可选] 是否显示分页组件，可设置分页参数。分页参数模板：{pageSize:30, selectPageSize:'30,60,90', pageCurrent:1, showPagenum:5}
         pagingAlign 	: 	'left',//[可选] 分页组件对齐方式，参数['left' | 'center' | 'right']
-        editUrl 		: 	'${ctx}/info/planInfo/manager?planId=${plan.id}' 	,//[可选] 保存编辑、添加数据的url，Ajax请求方式为POST，服务器端接收的参数名称为"json"，数据类型是JSON Array。
+        editUrl 		: 	'${ctx}/info/planInfo/manage?planId=${plan.id}' 	,//[可选] 保存编辑、添加数据的url，Ajax请求方式为POST，服务器端接收的参数名称为"json"，数据类型是JSON Array。
         //editCallback 	: 	null 	,//[可选] 保存成功后的回调，返回的json内容可以是B-JUI默认的回调json或保存后的json数据，datagrid默认回调：如果返回保存后的json数据，将会更新对应的数据行。
         editMode 		: 	'inline',//[可选] 编辑、添加数据的方式，参数[false | 'inline' | 'dialog']。false = 不能编辑，inline = 行内编辑，dialog = 弹窗编辑。
         //editDialogOp 	: 	null 	,//[可选] 弹窗编辑方式时，设置弹出窗口的参数，如{width:500, height:300, mask:false}
