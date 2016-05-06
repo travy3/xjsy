@@ -178,7 +178,7 @@
                     <label for="q1" class="control-label x200">方案 ：</label>
                 </td>
                 <td>
-                    <input type="text" name="planResult" id="planResult" value="" onfocus="getPlanResult()" />
+                    <input type="text" name="planResult" id="planResult" value="" onfocus="getPlanResult()" readonly="readonly"/>
                 </td>
             </tr>
             </tbody>
@@ -218,11 +218,11 @@
 
         var planResult = 0;
         if (naireResult !=null && firstResult != null && seccondResult != null){
-            planResult = naireResult+firstResult+seccondResult;
+            planResult = parseInt(naireResult)+parseInt(firstResult)+parseInt(seccondResult);
         }
 
         $.getJSON("${ctx}/cus/cusPlanResult?planResult="+planResult+"&eyeType="+eyeType,function(data){
-            $("#planResult").val(data);
+            $("#planResult").val(data.name);
         });
 
     }

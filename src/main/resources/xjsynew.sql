@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2016-05-05 17:11:10
+Date: 2016-05-06 16:51:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -79,7 +79,7 @@ CREATE TABLE `cus_hpmanager` (
   `AFTER_ADJUST_L` varchar(32) DEFAULT NULL,
   `AFTER_ADJUST_R` varchar(32) DEFAULT NULL,
   `MEMO` varchar(255) DEFAULT NULL COMMENT '备注',
-  `PLAN` varchar(32) DEFAULT NULL COMMENT '所属方案',
+  `PLAN` varchar(64) DEFAULT NULL COMMENT '所属方案',
   KEY `FK_INFOCUSTOMER_ID` (`CUSTOMER_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -103,10 +103,10 @@ CREATE TABLE `info_plan` (
 -- Records of info_plan
 -- ----------------------------
 INSERT INTO `info_plan` VALUES ('1', '方案1', '数字1', '1');
-INSERT INTO `info_plan` VALUES ('13b82f9629cb429c80ce63e9ce0113b1', '6级一期方案', '6级一期方案', '0');
-INSERT INTO `info_plan` VALUES ('1faa469833b94180901c847958375b0a', '4级一期方案', '4级一期方案', '0');
-INSERT INTO `info_plan` VALUES ('4538c1950d60455dbcd698916b12c6d5', '5级一期方案', '5级一期方案', '0');
+INSERT INTO `info_plan` VALUES ('4', '4级一期方案', '4级一期方案', '0');
+INSERT INTO `info_plan` VALUES ('5', '5级一期方案', '5级一期方案', '0');
 INSERT INTO `info_plan` VALUES ('500eb43a595943bfb0daaa73479ed157', '方案3', '阿道夫', '0');
+INSERT INTO `info_plan` VALUES ('6', '6级一期方案', '6级一期方案', '0');
 INSERT INTO `info_plan` VALUES ('746a9752fbf641e7b27190f4dbca4fcb', '方案2', '阿斯蒂芬', '0');
 
 -- ----------------------------

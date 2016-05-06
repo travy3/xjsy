@@ -8,6 +8,8 @@ import com.zyu.xjsy.common.persistence.PageInfo;
 import com.zyu.xjsy.common.web.ExecuteResult;
 import com.zyu.xjsy.modules.cus.entity.Customer;
 import com.zyu.xjsy.modules.cus.service.CustomerService;
+import com.zyu.xjsy.modules.info.entity.Plan;
+import com.zyu.xjsy.modules.info.service.PlanService;
 import com.zyu.xjsy.modules.sys.entity.User;
 import com.zyu.xjsy.modules.sys.util.UserUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -35,6 +37,9 @@ public class CustomerController extends BaseController {
 
     @Autowired
     private CustomerService customerService;
+
+    @Autowired
+    private PlanService planService;
 
 
     @RequestMapping(value = "/{duration}")
@@ -93,6 +98,12 @@ public class CustomerController extends BaseController {
 
     }
 
+    /**
+     * insert/update
+     * @param customer
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/{duration}/manage")
     @ResponseBody
     public Object manage(Customer customer,Model model){
@@ -119,18 +130,44 @@ public class CustomerController extends BaseController {
         return "/modules/cus/questionnaire";
     }
 
+    /**
+     * 方案推算 已定
+     * @param planResult
+     * @param eyeType
+     * @return
+     */
     @RequestMapping(value = "/cusPlanResult")
     @ResponseBody
     public String cusPlanResult(String planResult,String eyeType){
 
         Gson gson = new Gson();
-
+        Plan plan = new Plan();
+        int planResultTmp = Integer.parseInt(planResult);
         if ("R".equals(eyeType)){
-
+            if (planResultTmp >=25){
+                plan.setId("6");
+            }else if(planResultTmp >= 13 && planResultTmp <25){
+                plan.setId("5");
+            }else {
+                plan.setId("4");
+            }
+        }else {
+            if (planResultTmp >=23){
+                plan.setId("6");
+            }else if(planResultTmp >= 13 && planResultTmp <23){
+                plan.setId("5");
+            }else {
+                plan.setId("4");
+            }
         }
+        plan = planService.getPlan(plan);
+        return gson.toJson(plan);
 
-        return "";
+    }
 
+    //todo 客户方案确认
+    public Object cusPlanSave(){
+        return null;
     }
 
 
