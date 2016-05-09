@@ -182,5 +182,9 @@
 		AND a.id = #{id}
 	</select>
 
+	<select id="getById" resultType="Customer">
+		SELECT * FROM cus_customer WHERE id = #{id}
+	</select>
+
 
 </mapper>

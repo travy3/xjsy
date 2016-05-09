@@ -9,6 +9,7 @@ import com.zyu.xjsy.common.web.ExecuteResult;
 import com.zyu.xjsy.modules.cus.entity.Customer;
 import com.zyu.xjsy.modules.cus.service.CustomerService;
 import com.zyu.xjsy.modules.info.entity.Plan;
+import com.zyu.xjsy.modules.info.entity.PlanInfo;
 import com.zyu.xjsy.modules.info.service.PlanService;
 import com.zyu.xjsy.modules.sys.entity.User;
 import com.zyu.xjsy.modules.sys.util.UserUtils;
@@ -131,7 +132,7 @@ public class CustomerController extends BaseController {
     }
 
     /**
-     * 方案推算 已定
+     * 方案推算 已定 no good
      * @param planResult
      * @param eyeType
      * @return
@@ -166,8 +167,35 @@ public class CustomerController extends BaseController {
     }
 
     //todo 客户方案确认
-    public Object cusPlanSave(){
-        return null;
+    @RequestMapping(value = "/saveCusPlanInfo")
+    @ResponseBody
+    public Object cusPlanSave(String planId,String customerId){
+
+
+
+        if (StringUtils.isNotBlank(planId) && StringUtils.isNotBlank(customerId)){
+
+
+            Plan plan = new Plan(planId);
+
+            plan = planService.getPlan(plan);
+
+            Customer customer =null;
+
+            customer = customerService.getCustomerById(customerId);
+
+            PlanInfo planInfo = new PlanInfo();
+
+            planInfo.setPlan(plan);
+
+
+            customerService.creatCusHpManage(customer,plan,planInfo);
+
+
+            return executeResult.jsonReturn(200,"客户方案创建成功");
+        }
+        return executeResult.jsonReturn(300,"客户方案创建失败");
+
     }
 
 
