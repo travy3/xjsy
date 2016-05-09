@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2016-05-06 16:51:34
+Date: 2016-05-09 17:23:28
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -57,30 +57,31 @@ CREATE TABLE `cus_customer` (
 -- Records of cus_customer
 -- ----------------------------
 INSERT INTO `cus_customer` VALUES ('184d9d479daa4951b057301ea99b8e39', '张宇', '1', '1980-08-08', '15032831553', '合作路', '123', '12', '12', '12', '32', '123', '123', '1', '十八中', '123', '123', '阿斯顿12', '32', '12', '1', null, null, '0', '1', '2016-05-03 15:48:24', '1', '2016-05-04 14:34:43', null, '0');
-INSERT INTO `cus_customer` VALUES ('b789c1c2276a495786b79fcffeb940ad', '新增Item1', '1', '2009-05-04', '15032831554', '范甘迪', '12', '21', '23', '23', '123', '34', '123', '1', '十五中', '123', '32', '文身断发', '12', '12', '1', null, null, '0', '1', '2016-05-04 16:36:26', '1', '2016-05-04 16:36:26', null, '0');
+INSERT INTO `cus_customer` VALUES ('b789c1c2276a495786b79fcffeb940ad', '新增Item1', '1', '2009-05-04', '15032831554', '范甘迪', '12', '21', '23', '23', '123', null, null, '1', '十五中', '123', '32', '文身断发', '12', null, '1', null, null, '0', '1', '2016-05-04 16:36:26', '1', '2016-05-09 14:29:17', null, '0');
 
 -- ----------------------------
 -- Table structure for cus_hpmanager
 -- ----------------------------
 DROP TABLE IF EXISTS `cus_hpmanager`;
 CREATE TABLE `cus_hpmanager` (
-  `ID` varchar(64) DEFAULT NULL,
-  `CUSTOMER_NAME` varchar(32) DEFAULT NULL,
-  `CUSTOMER_CID` varchar(32) DEFAULT NULL,
-  `CUSTOMER_ID` varchar(64) DEFAULT NULL,
-  `NUM` varchar(6) DEFAULT NULL COMMENT '次数',
-  `DATE` datetime DEFAULT NULL,
-  `BEFORE_ADJUST_L_START` varchar(32) DEFAULT NULL COMMENT '训练前 调节开始',
-  `BEFORE_ADJUST_R_START` varchar(32) DEFAULT NULL,
-  `BEFORE_ADJUST_L_END` varchar(32) DEFAULT NULL COMMENT '训练前调节终',
-  `BEFORE_ADJUST_R_END` varchar(32) DEFAULT NULL,
-  `TRAIN_ONE` varchar(32) DEFAULT NULL,
-  `TRAIN_TWO` varchar(32) DEFAULT NULL,
-  `AFTER_ADJUST_L` varchar(32) DEFAULT NULL,
-  `AFTER_ADJUST_R` varchar(32) DEFAULT NULL,
-  `MEMO` varchar(255) DEFAULT NULL COMMENT '备注',
-  `PLAN` varchar(64) DEFAULT NULL COMMENT '所属方案',
-  KEY `FK_INFOCUSTOMER_ID` (`CUSTOMER_ID`)
+  `id` varchar(64) DEFAULT NULL,
+  `customer` varchar(64) DEFAULT NULL,
+  `no` int(6) DEFAULT NULL COMMENT '次数',
+  `date` datetime DEFAULT NULL,
+  `beforeAdjustLStart` varchar(32) DEFAULT NULL COMMENT '训练前 调节开始',
+  `beforeAdjustRStart` varchar(32) DEFAULT NULL,
+  `beforeAdjustLEnd` varchar(32) DEFAULT NULL COMMENT '训练前调节终',
+  `beforeAdjustREnd` varchar(32) DEFAULT NULL,
+  `trainOne` varchar(32) DEFAULT NULL,
+  `trainTwo` varchar(32) DEFAULT NULL,
+  `afterAdjustL` varchar(32) DEFAULT NULL,
+  `afterAdjustR` varchar(32) DEFAULT NULL,
+  `memo` varchar(255) DEFAULT NULL COMMENT '备注',
+  `plan` varchar(64) DEFAULT NULL COMMENT '所属方案',
+  `code` varchar(10) DEFAULT NULL,
+  `times` varchar(10) DEFAULT NULL,
+  `paper` varchar(10) DEFAULT NULL,
+  KEY `FK_INFOCUSTOMER_ID` (`customer`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -121,7 +122,7 @@ CREATE TABLE `info_planinfo` (
   `paper` varchar(10) DEFAULT NULL,
   `num` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of info_planinfo
@@ -137,7 +138,7 @@ INSERT INTO `info_planinfo` VALUES ('8', '746a9752fbf641e7b27190f4dbca4fcb', 's2
 INSERT INTO `info_planinfo` VALUES ('9', '746a9752fbf641e7b27190f4dbca4fcb', 's1', '3', '2', '4');
 INSERT INTO `info_planinfo` VALUES ('10', '500eb43a595943bfb0daaa73479ed157', 's1', '2', '3', '1');
 INSERT INTO `info_planinfo` VALUES ('11', '500eb43a595943bfb0daaa73479ed157', 's34', '2', '2', '2');
-INSERT INTO `info_planinfo` VALUES ('12', '500eb43a595943bfb0daaa73479ed157', 's1', '2', '34', '3');
+INSERT INTO `info_planinfo` VALUES ('12', '500eb43a595943bfb0daaa73479ed157', 's1', '3', '34', '3');
 INSERT INTO `info_planinfo` VALUES ('13', '', '2', '3', '4', '1');
 INSERT INTO `info_planinfo` VALUES ('14', '13b82f9629cb429c80ce63e9ce0113b1', '2', '3', '4', '1');
 INSERT INTO `info_planinfo` VALUES ('15', '4538c1950d60455dbcd698916b12c6d5', '2', '2', '4', '1');
@@ -149,6 +150,12 @@ INSERT INTO `info_planinfo` VALUES ('20', '4538c1950d60455dbcd698916b12c6d5', '3
 INSERT INTO `info_planinfo` VALUES ('21', '4538c1950d60455dbcd698916b12c6d5', '123', '23', '2', '123');
 INSERT INTO `info_planinfo` VALUES ('22', '4538c1950d60455dbcd698916b12c6d5', '3', '3', '12', '2');
 INSERT INTO `info_planinfo` VALUES ('23', '4538c1950d60455dbcd698916b12c6d5', '2', '3', '4', '1');
+INSERT INTO `info_planinfo` VALUES ('24', '5', 's2', '1', '7号图纸', '1');
+INSERT INTO `info_planinfo` VALUES ('25', '5', 's1', '1', '8号图纸', '2');
+INSERT INTO `info_planinfo` VALUES ('26', '5', 's1', '1', '9号图纸', '3');
+INSERT INTO `info_planinfo` VALUES ('27', '6', 's1', '1', '1号图纸', '1');
+INSERT INTO `info_planinfo` VALUES ('28', '6', 's2', '1', '2号图纸', '2');
+INSERT INTO `info_planinfo` VALUES ('29', '6', 's3', '1', '3号图纸', '3');
 
 -- ----------------------------
 -- Table structure for sys_area

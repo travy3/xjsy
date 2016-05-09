@@ -15,4 +15,6 @@ public interface CustomerDao extends CrudDao<Customer> {
 
 
     List<Customer> findList(Customer customer, User user);
+
+    Customer getById(String id);
 }

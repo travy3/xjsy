@@ -12,6 +12,7 @@ public class Plan extends DataEntity<Plan> {
 
     private String name;
 
+
     private List<PlanInfo> planInfoList = Lists.newArrayList();
 
     public Plan(){

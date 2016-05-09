@@ -1,10 +1,16 @@
 package com.zyu.xjsy.modules.cus.service;
 
 import com.google.common.collect.Lists;
+import com.zyu.xjsy.common.config.Global;
 import com.zyu.xjsy.common.persistence.PageInfo;
 import com.zyu.xjsy.common.service.BaseService;
 import com.zyu.xjsy.modules.cus.dao.CustomerDao;
+import com.zyu.xjsy.modules.cus.dao.HpManagerDao;
 import com.zyu.xjsy.modules.cus.entity.Customer;
+import com.zyu.xjsy.modules.cus.entity.HpManager;
+import com.zyu.xjsy.modules.info.dao.PlanInfoDao;
+import com.zyu.xjsy.modules.info.entity.Plan;
+import com.zyu.xjsy.modules.info.entity.PlanInfo;
 import com.zyu.xjsy.modules.sys.entity.User;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +28,13 @@ public class CustomerService extends BaseService {
 
     @Autowired
     private CustomerDao customerDao;
+
+    @Autowired
+    private HpManagerDao hpManagerDao;
+
+
+    @Autowired
+    private PlanInfoDao planInfoDao;
 
     public PageInfo<Customer> findAllCustomer(PageInfo pageInfo, Customer customer, User user) {
 
@@ -42,6 +55,10 @@ public class CustomerService extends BaseService {
         return customerDao.get(customer);
     }
 
+    public Customer getCustomerById(String id){
+        return customerDao.getById(id);
+    }
+
     @Transactional(readOnly = false)
     public void saveCustomer(Customer customer) {
 
@@ -56,6 +73,60 @@ public class CustomerService extends BaseService {
             customerDao.update(customer);
 
         }
+
+    }
+
+    /**
+     *  根据方案生成客户的治疗记录
+     * @param customer
+     * @param plan
+     * @param planInfo
+     */
+    @Transactional(readOnly = false)
+    public void creatCusHpManage(Customer customer , Plan plan , PlanInfo planInfo) {
+
+
+        //查询对应planinfo
+
+        List<PlanInfo> planInfoList = Lists.newArrayList();
+
+        planInfoList = planInfoDao.findList(planInfo);
+
+        //遍历插入hpmanager
+
+        Integer maxNo =null;
+        maxNo = hpManagerDao.getMaxNo(customer);
+
+        if (planInfoList != null && planInfoList.size() > 0){
+            for (PlanInfo info : planInfoList){
+
+                HpManager hpManager = new HpManager();
+
+                hpManager.preInsert();
+
+                hpManager.setPlan(plan);
+
+                hpManager.setCode(info.getCode());
+
+                hpManager.setPaper(info.getPaper());
+
+                hpManager.setTimes(info.getTimes());
+
+                //设置次数 累加
+
+                hpManager.setNo((maxNo==null?0:maxNo)+info.getNum());
+
+                hpManagerDao.insert(hpManager);
+            }
+        }
+
+        //客户状态更新
+
+        customer.setDuration(Global.DURATION_ZL);
+
+        customer.preUpdate();
+
+        customerDao.update(customer);
 
     }
 }

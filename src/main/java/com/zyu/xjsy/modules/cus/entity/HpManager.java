@@ -27,6 +27,13 @@ public class HpManager extends DataEntity<HpManager> {
     private String memo;
     private Plan plan;
     private PlanInfo planInfo;
+    private String code;
+    private String times;
+    private String paper;
+
+    public HpManager(){
+        super();
+    }
 
     public HpManager(String id){
         super(id);
@@ -143,5 +150,29 @@ public class HpManager extends DataEntity<HpManager> {
 
     public void setPlanInfo(PlanInfo planInfo) {
         this.planInfo = planInfo;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getTimes() {
+        return times;
+    }
+
+    public void setTimes(String times) {
+        this.times = times;
+    }
+
+    public String getPaper() {
+        return paper;
+    }
+
+    public void setPaper(String paper) {
+        this.paper = paper;
     }
 }

@@ -2,8 +2,9 @@
 <%@include file="/WEB-INF/views/include/taglib.jsp"%>
 
 <div class="bjui-pageContent">
-    <form action="${ctx}/cus/save" class="pageForm" data-toggle="validate">
-        <input name="id" value="${plan.id}" type="hidden"/>
+    <form action="${ctx}/cus/saveCusPlanInfo" class="pageForm" data-toggle="validate">
+        <input name="planId" id="planId" type="hidden"/>
+        <input name="customerId" value="${customerId}" type="hidden" />
         <table class="table table-bordered">
             <tbody>
             <tr>
@@ -178,7 +179,7 @@
                     <label for="q1" class="control-label x200">方案 ：</label>
                 </td>
                 <td>
-                    <input type="text" name="planResult" id="planResult" value="" onfocus="getPlanResult()" readonly="readonly"/>
+                    <input type="text" name="planName" id="planName" value="" onfocus="getPlanResult()" readonly="readonly"/>
                 </td>
             </tr>
             </tbody>
@@ -222,7 +223,8 @@
         }
 
         $.getJSON("${ctx}/cus/cusPlanResult?planResult="+planResult+"&eyeType="+eyeType,function(data){
-            $("#planResult").val(data.name);
+            $("#planName").val(data.name);
+            $("#planId").val(data.id);
         });
 
     }
