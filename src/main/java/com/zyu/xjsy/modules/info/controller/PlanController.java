@@ -94,7 +94,6 @@ public class PlanController extends BaseController {
     @ResponseBody
     public Object planSave(Plan plan,Model model,String planId,String[] num,String[] code,String[] times,String[] paper){
 
-
         List<PlanInfo> planInfos = Lists.newArrayList();
 
         if (num != null && num.length > 0 ){

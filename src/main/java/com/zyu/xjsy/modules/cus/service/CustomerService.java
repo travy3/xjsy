@@ -94,8 +94,9 @@ public class CustomerService extends BaseService {
 
         //遍历插入hpmanager
 
-        Integer maxNo =null;
-        maxNo = hpManagerDao.getMaxNo(customer);
+       HpManager hpManagerTmp = hpManagerDao.getMaxNo(customer);
+
+        int maxNo = 0;
 
         if (planInfoList != null && planInfoList.size() > 0){
             for (PlanInfo info : planInfoList){
@@ -113,8 +114,11 @@ public class CustomerService extends BaseService {
                 hpManager.setTimes(info.getTimes());
 
                 //设置次数 累加
+                if (hpManagerTmp != null){
+                    maxNo = hpManagerTmp.getNo();
+                }
 
-                hpManager.setNo((maxNo==null?0:maxNo)+info.getNum());
+                hpManager.setNo(maxNo+info.getNum());
 
                 hpManagerDao.insert(hpManager);
             }

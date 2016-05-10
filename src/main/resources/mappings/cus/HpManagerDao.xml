@@ -113,8 +113,8 @@
         WHERE c.id = #{customer.id}
     </select>
 
-    <select id="getMaxNo" resultType="Integer">
-        SELECT max(no) FROM cus_hpmanager WHERE customer = #{id}
+    <select id="getMaxNo" resultType="HpManager">
+        SELECT * FROM cus_hpmanager WHERE customer = #{id} ORDER BY no DESC limit 0, 1
     </select>
 
 
