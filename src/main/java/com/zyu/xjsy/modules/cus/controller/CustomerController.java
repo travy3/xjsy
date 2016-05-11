@@ -89,6 +89,9 @@ public class CustomerController extends BaseController {
             Customer customer = new Customer(id);
 
             customer.setUser(UserUtils.getUser());
+
+            customer.setDuration(duration);
+
             customer = customerService.getCustomer(customer);
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -198,18 +201,22 @@ public class CustomerController extends BaseController {
     @RequestMapping(value = "/hpManger")
     public String cusHpManager(Model model,String id) {
 
-//        Customer customer = new Customer(id);
-//
-//        customer.setUser(UserUtils.getUser());
-//        customer = customerService.getCustomer(customer);
-//
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//
-//        model.addAttribute("customer",customer);
-//
-//        model.addAttribute("sdfBirthday",sdf.format(customer.getBirthday()));
-//
-//    }
-        return null;
+        Customer customer = new Customer(id);
+
+        customer.setDuration(Global.DURATION_ZL);
+
+        customer.setUser(UserUtils.getUser());
+
+        customer = customerService.getCustomer(customer);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        model.addAttribute("customer",customer);
+
+        model.addAttribute("sdfBirthday",sdf.format(customer.getBirthday()));
+
+        return "/modules/cus/hpManager";
+
     }
+
 }
