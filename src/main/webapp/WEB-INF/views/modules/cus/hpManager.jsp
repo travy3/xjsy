@@ -21,12 +21,66 @@
                 rule: 'required'
             },
             {
-
-                name:'times',
-                label: '次数',
-                type: 'String',
-                align:'center',
-                rule: 'required'
+                label: '训练前',
+                columns: [{
+                    label: '调节始',
+                    columns: [{
+                        name: 'beforeAdjustRStart',
+                        label: 'R',
+                        width: 100
+                    },{
+                        name: 'beforeAdjustLStart',
+                        label: 'L',
+                        width: 100
+                    }]
+            },{
+                    label: '调节终',
+                    columns: [{
+                        name: 'beforeAdjustREnd',
+                        label: 'R',
+                        width: 100
+                    },{
+                        name: 'beforeAdjustLEnd',
+                        label: 'L',
+                        width: 100
+                    }]
+                }]
+            },
+            {
+                label: '训练',
+                columns: [{
+                    label: '一',
+                    name: 'trainOne',
+                    width: 100
+                    },{
+                    label: '二',
+                    name: 'trainTwo',
+                    width: 100
+                    }]
+            },
+            {
+                label: '训练后',
+                columns: [{
+                    label: 'R',
+                    name: 'afterAdjustR',
+                    width: 100
+                },{
+                    label: 'L',
+                    name: 'afterAdjustL',
+                    width: 100
+                }]
+            },
+            {
+                label: '方案',
+                columns: [{
+                    label: 'R',
+                    name: 'afterAdjustR',
+                    width: 100
+                },{
+                    label: 'L',
+                    name: 'afterAdjustL',
+                    width: 100
+                }]
             },
             {
                 name:'paper',
