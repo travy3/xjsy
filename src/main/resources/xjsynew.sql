@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2016-05-11 17:14:51
+Date: 2016-05-13 17:18:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -81,15 +81,17 @@ CREATE TABLE `cus_hpmanager` (
   `code` varchar(10) DEFAULT NULL,
   `times` varchar(10) DEFAULT NULL,
   `paper` varchar(10) DEFAULT NULL,
+  `optometryL` varchar(32) DEFAULT NULL COMMENT '验光',
+  `optometryR` varchar(32) DEFAULT NULL COMMENT '验光',
   KEY `FK_INFOCUSTOMER_ID` (`customer`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cus_hpmanager
 -- ----------------------------
-INSERT INTO `cus_hpmanager` VALUES ('da93af4782aa4a71b30cb10620d4e292', null, '1', null, null, null, null, null, null, null, null, null, null, '5', 's2', '1', '7号图纸');
-INSERT INTO `cus_hpmanager` VALUES ('b094970561564ae8a29a9048a5611984', null, '2', null, null, null, null, null, null, null, null, null, null, '5', 's1', '1', '8号图纸');
-INSERT INTO `cus_hpmanager` VALUES ('b55133ef2d064db2a5f1298f1568a6b3', null, '3', null, null, null, null, null, null, null, null, null, null, '5', 's1', '1', '9号图纸');
+INSERT INTO `cus_hpmanager` VALUES ('da93af4782aa4a71b30cb10620d4e292', null, '1', null, null, null, null, null, null, null, null, null, null, '5', 's2', '1', '7号图纸', null, null);
+INSERT INTO `cus_hpmanager` VALUES ('b094970561564ae8a29a9048a5611984', null, '2', null, null, null, null, null, null, null, null, null, null, '5', 's1', '1', '8号图纸', null, null);
+INSERT INTO `cus_hpmanager` VALUES ('b55133ef2d064db2a5f1298f1568a6b3', null, '3', null, null, null, null, null, null, null, null, null, null, '5', 's1', '1', '9号图纸', null, null);
 
 -- ----------------------------
 -- Table structure for info_plan

@@ -24,6 +24,8 @@ public class HpManager extends DataEntity<HpManager> {
     private String trainTwo;
     private String afterAdjustL;
     private String afterAdjustR;
+    private String optometryL;  //验光L
+    private String optometryR;//验光R
     private String memo;
     private Plan plan;
     private PlanInfo planInfo;
@@ -174,5 +176,21 @@ public class HpManager extends DataEntity<HpManager> {
 
     public void setPaper(String paper) {
         this.paper = paper;
+    }
+
+    public String getOptometryL() {
+        return optometryL;
+    }
+
+    public void setOptometryL(String optometryL) {
+        this.optometryL = optometryL;
+    }
+
+    public String getOptometryR() {
+        return optometryR;
+    }
+
+    public void setOptometryR(String optometryR) {
+        this.optometryR = optometryR;
     }
 }
