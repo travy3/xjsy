@@ -61,8 +61,9 @@ public class PlanService extends BaseService {
         }
 
 //        planInfoDao.insertBatch(plan.getPlanInfoList(),plan);
-
-        planInfoDao.insertBatch(plan);
+        if(plan.getPlanInfoList() != null && plan.getPlanInfoList().size() >  0){
+            planInfoDao.insertBatch(plan);
+        }
     }
 
     @Transactional(readOnly = false)

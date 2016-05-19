@@ -167,9 +167,10 @@ public class CustomerController extends BaseController {
                 plan.setId("4");
             }
         }
-        plan = planService.getPlan(plan);
-        return gson.toJson(plan);
 
+        plan = planService.getPlan(plan);
+
+        return gson.toJson(plan);
     }
 
     @RequestMapping(value = "/saveCusPlanInfo")

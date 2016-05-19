@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2016-05-13 17:18:56
+Date: 2016-05-19 17:21:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -100,6 +100,8 @@ DROP TABLE IF EXISTS `info_plan`;
 CREATE TABLE `info_plan` (
   `id` varchar(64) NOT NULL,
   `name` varchar(200) DEFAULT NULL,
+  `levelNo` int(10) DEFAULT NULL,
+  `orderNo` int(10) DEFAULT NULL,
   `remarks` varchar(200) DEFAULT NULL,
   `delflag` char(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -108,12 +110,12 @@ CREATE TABLE `info_plan` (
 -- ----------------------------
 -- Records of info_plan
 -- ----------------------------
-INSERT INTO `info_plan` VALUES ('1', '方案1', '数字1', '1');
-INSERT INTO `info_plan` VALUES ('4', '4级一期方案', '4级一期方案', '0');
-INSERT INTO `info_plan` VALUES ('5', '5级一期方案', '5级一期方案', '0');
-INSERT INTO `info_plan` VALUES ('500eb43a595943bfb0daaa73479ed157', '方案3', '阿道夫', '0');
-INSERT INTO `info_plan` VALUES ('6', '6级一期方案', '6级一期方案', '0');
-INSERT INTO `info_plan` VALUES ('746a9752fbf641e7b27190f4dbca4fcb', '方案2', '阿斯蒂芬', '0');
+INSERT INTO `info_plan` VALUES ('1', '方案1', null, null, '数字1', '1');
+INSERT INTO `info_plan` VALUES ('4', '4级一期方案', '2', '1', '4级一期方案', '0');
+INSERT INTO `info_plan` VALUES ('5', '5级一期方案', '5', '1', '5级一期方案', '0');
+INSERT INTO `info_plan` VALUES ('500eb43a595943bfb0daaa73479ed157', '方案3', null, null, '阿道夫', '1');
+INSERT INTO `info_plan` VALUES ('6', '6级一期方案', '6', '1', '6级一期方案', '0');
+INSERT INTO `info_plan` VALUES ('746a9752fbf641e7b27190f4dbca4fcb', '方案2', null, null, '阿斯蒂芬', '1');
 
 -- ----------------------------
 -- Table structure for info_planinfo
@@ -127,7 +129,7 @@ CREATE TABLE `info_planinfo` (
   `paper` varchar(10) DEFAULT NULL,
   `num` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of info_planinfo
@@ -161,6 +163,7 @@ INSERT INTO `info_planinfo` VALUES ('26', '5', 's1', '1', '9号图纸', '3');
 INSERT INTO `info_planinfo` VALUES ('27', '6', 's1', '1', '1号图纸', '1');
 INSERT INTO `info_planinfo` VALUES ('28', '6', 's2', '1', '2号图纸', '2');
 INSERT INTO `info_planinfo` VALUES ('29', '6', 's3', '1', '3号图纸', '3');
+INSERT INTO `info_planinfo` VALUES ('30', '4', 's2', '2', '5号图纸', '1');
 
 -- ----------------------------
 -- Table structure for sys_area

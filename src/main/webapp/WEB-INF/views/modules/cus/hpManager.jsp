@@ -27,10 +27,12 @@
                     columns: [{
                         name: 'beforeAdjustRStart',
                         label: 'R',
+                        align: 'center',
                         width: 100
                     },{
                         name: 'beforeAdjustLStart',
                         label: 'L',
+                        align: 'center',
                         width: 100
                     }]
             },{
@@ -38,10 +40,12 @@
                     columns: [{
                         name: 'beforeAdjustREnd',
                         label: 'R',
+                        align: 'center',
                         width: 100
                     },{
                         name: 'beforeAdjustLEnd',
                         label: 'L',
+                        align: 'center',
                         width: 100
                     }]
                 }]
@@ -51,10 +55,12 @@
                 columns: [{
                     label: '一',
                     name: 'trainOne',
+                    align: 'center',
                     width: 100
                     },{
                     label: '二',
                     name: 'trainTwo',
+                    align: 'center',
                     width: 100
                     }]
             },
@@ -63,31 +69,33 @@
                 columns: [{
                     label: 'R',
                     name: 'afterAdjustR',
+                    align: 'center',
                     width: 100
                 },{
                     label: 'L',
                     name: 'afterAdjustL',
+                    align: 'center',
                     width: 100
                 }]
             },
             {
                 label: '方案',
                 columns: [{
-                    label: 'R',
-                    name: 'afterAdjustR',
+                    label: 'S',
+                    name: 'code',
+                    align: 'center',
                     width: 100
                 },{
-                    label: 'L',
-                    name: 'afterAdjustL',
+                    label: '遍',
+                    name: 'times',
+                    align: 'center',
+                    width: 100
+                },{
+                    label: '号',
+                    name: 'paper',
+                    align: 'center',
                     width: 100
                 }]
-            },
-            {
-                name:'paper',
-                label: '图纸',
-                type: 'String',
-                align:'center',
-                rule: 'required'
             }
             <%--,--%>
             <%--{--%>
@@ -115,10 +123,10 @@
         linenumberAll 	: 	true 	,//[可选] 行号范围，true = 为所有数据编号，false = 为当前页数据编号。
         showLinenumber 	: 	true 	,//[可选] 是否显示行号，参数[true | false | 'lock']，lock参数 = 锁定行号列（适用于多列字段，出现横向滚动条的情况）。
         showCheckboxcol : 	false 	,//[可选] 是否显示行复选框，参数同上。
-        showEditbtnscol : 	true 	,//[可选] 是否显示编辑按钮列。
+        showEditbtnscol : 	false 	,//[可选] 是否显示编辑按钮列。
         showTfoot 		: 	false 	,//[可选] 是否显示页脚，适用于显示统计信息，需要字段相关参数支持。
         showToolbar 	: 	true 	,//[可选] 是否显示工具条，需要设置参数toolbarItem或toolbarCustom。
-        toolbarItem 	: 	'add,|,refresh' 	,//[可选] 显示工具条按钮，可选参数['all, add, edit, cancel, save, del, import, export, |']，“all” = 显示所有按钮，“|” = 按钮组分隔符。
+        toolbarItem 	: 	'add,|,del,|,refresh' 	,//[可选] 显示工具条按钮，可选参数['all, add, edit, cancel, save, del, import, export, |']，“all” = 显示所有按钮，“|” = 按钮组分隔符。
         <%--toolbarCustom 	: 	'<a href="${ctx}/info/plan/manage" data-toggle="dialog" data-id="" data-width="830" data-height="230" data-mask="true" data-type="POST" data-title="新增" class="btn btn-blue">新增</a>  ',//[可选] 自定义的html内容或jQuery DOM对象，支持带返回值函数。--%>
         //toolbarCustom 	: 	null 	,//[可选] 自定义的html内容或jQuery DOM对象，支持带返回值函数。
         columnResize 	: 	true 	,//[可选] 允许调整列宽。
