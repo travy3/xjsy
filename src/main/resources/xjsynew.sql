@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2016-05-09 17:23:28
+Date: 2016-05-19 17:21:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -57,7 +57,7 @@ CREATE TABLE `cus_customer` (
 -- Records of cus_customer
 -- ----------------------------
 INSERT INTO `cus_customer` VALUES ('184d9d479daa4951b057301ea99b8e39', '张宇', '1', '1980-08-08', '15032831553', '合作路', '123', '12', '12', '12', '32', '123', '123', '1', '十八中', '123', '123', '阿斯顿12', '32', '12', '1', null, null, '0', '1', '2016-05-03 15:48:24', '1', '2016-05-04 14:34:43', null, '0');
-INSERT INTO `cus_customer` VALUES ('b789c1c2276a495786b79fcffeb940ad', '新增Item1', '1', '2009-05-04', '15032831554', '范甘迪', '12', '21', '23', '23', '123', null, null, '1', '十五中', '123', '32', '文身断发', '12', null, '1', null, null, '0', '1', '2016-05-04 16:36:26', '1', '2016-05-09 14:29:17', null, '0');
+INSERT INTO `cus_customer` VALUES ('b789c1c2276a495786b79fcffeb940ad', '新增Item1', '1', '2009-05-04', '15032831554', '范甘迪', '12', '21', '23', '23', '123', '1', '2', '1', '十五中', '123', '32', '文身断发', '12', '3', '1', null, null, '1', '1', '2016-05-04 16:36:26', '1', '2016-05-10 10:12:10', null, '0');
 
 -- ----------------------------
 -- Table structure for cus_hpmanager
@@ -81,12 +81,17 @@ CREATE TABLE `cus_hpmanager` (
   `code` varchar(10) DEFAULT NULL,
   `times` varchar(10) DEFAULT NULL,
   `paper` varchar(10) DEFAULT NULL,
+  `optometryL` varchar(32) DEFAULT NULL COMMENT '验光',
+  `optometryR` varchar(32) DEFAULT NULL COMMENT '验光',
   KEY `FK_INFOCUSTOMER_ID` (`customer`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cus_hpmanager
 -- ----------------------------
+INSERT INTO `cus_hpmanager` VALUES ('da93af4782aa4a71b30cb10620d4e292', null, '1', null, null, null, null, null, null, null, null, null, null, '5', 's2', '1', '7号图纸', null, null);
+INSERT INTO `cus_hpmanager` VALUES ('b094970561564ae8a29a9048a5611984', null, '2', null, null, null, null, null, null, null, null, null, null, '5', 's1', '1', '8号图纸', null, null);
+INSERT INTO `cus_hpmanager` VALUES ('b55133ef2d064db2a5f1298f1568a6b3', null, '3', null, null, null, null, null, null, null, null, null, null, '5', 's1', '1', '9号图纸', null, null);
 
 -- ----------------------------
 -- Table structure for info_plan
@@ -95,6 +100,8 @@ DROP TABLE IF EXISTS `info_plan`;
 CREATE TABLE `info_plan` (
   `id` varchar(64) NOT NULL,
   `name` varchar(200) DEFAULT NULL,
+  `levelNo` int(10) DEFAULT NULL,
+  `orderNo` int(10) DEFAULT NULL,
   `remarks` varchar(200) DEFAULT NULL,
   `delflag` char(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -103,12 +110,12 @@ CREATE TABLE `info_plan` (
 -- ----------------------------
 -- Records of info_plan
 -- ----------------------------
-INSERT INTO `info_plan` VALUES ('1', '方案1', '数字1', '1');
-INSERT INTO `info_plan` VALUES ('4', '4级一期方案', '4级一期方案', '0');
-INSERT INTO `info_plan` VALUES ('5', '5级一期方案', '5级一期方案', '0');
-INSERT INTO `info_plan` VALUES ('500eb43a595943bfb0daaa73479ed157', '方案3', '阿道夫', '0');
-INSERT INTO `info_plan` VALUES ('6', '6级一期方案', '6级一期方案', '0');
-INSERT INTO `info_plan` VALUES ('746a9752fbf641e7b27190f4dbca4fcb', '方案2', '阿斯蒂芬', '0');
+INSERT INTO `info_plan` VALUES ('1', '方案1', null, null, '数字1', '1');
+INSERT INTO `info_plan` VALUES ('4', '4级一期方案', '2', '1', '4级一期方案', '0');
+INSERT INTO `info_plan` VALUES ('5', '5级一期方案', '5', '1', '5级一期方案', '0');
+INSERT INTO `info_plan` VALUES ('500eb43a595943bfb0daaa73479ed157', '方案3', null, null, '阿道夫', '1');
+INSERT INTO `info_plan` VALUES ('6', '6级一期方案', '6', '1', '6级一期方案', '0');
+INSERT INTO `info_plan` VALUES ('746a9752fbf641e7b27190f4dbca4fcb', '方案2', null, null, '阿斯蒂芬', '1');
 
 -- ----------------------------
 -- Table structure for info_planinfo
@@ -122,7 +129,7 @@ CREATE TABLE `info_planinfo` (
   `paper` varchar(10) DEFAULT NULL,
   `num` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of info_planinfo
@@ -156,6 +163,7 @@ INSERT INTO `info_planinfo` VALUES ('26', '5', 's1', '1', '9号图纸', '3');
 INSERT INTO `info_planinfo` VALUES ('27', '6', 's1', '1', '1号图纸', '1');
 INSERT INTO `info_planinfo` VALUES ('28', '6', 's2', '1', '2号图纸', '2');
 INSERT INTO `info_planinfo` VALUES ('29', '6', 's3', '1', '3号图纸', '3');
+INSERT INTO `info_planinfo` VALUES ('30', '4', 's2', '2', '5号图纸', '1');
 
 -- ----------------------------
 -- Table structure for sys_area
@@ -271,6 +279,10 @@ CREATE TABLE `sys_menu_role` (
 -- ----------------------------
 INSERT INTO `sys_menu_role` VALUES ('6', 'dd79e14c2c7b4261ba18f03c7c4ab8a2');
 INSERT INTO `sys_menu_role` VALUES ('7', 'dd79e14c2c7b4261ba18f03c7c4ab8a2');
+INSERT INTO `sys_menu_role` VALUES ('10', 'a4e9a2cf56fc4cbbafa74f312fec23e4');
+INSERT INTO `sys_menu_role` VALUES ('11', 'a4e9a2cf56fc4cbbafa74f312fec23e4');
+INSERT INTO `sys_menu_role` VALUES ('12', 'a4e9a2cf56fc4cbbafa74f312fec23e4');
+INSERT INTO `sys_menu_role` VALUES ('13', 'a4e9a2cf56fc4cbbafa74f312fec23e4');
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -294,6 +306,7 @@ CREATE TABLE `sys_role` (
 -- ----------------------------
 INSERT INTO `sys_role` VALUES ('1', 'admin', '管理员', '系统', '0', '1', '2016-03-23 15:13:58', '1', '2016-03-23 15:14:01');
 INSERT INTO `sys_role` VALUES ('2', 'jiameng', '加盟商', '加盟商', '0', '1', '2016-03-23 15:14:24', '1', '2016-03-23 15:14:26');
+INSERT INTO `sys_role` VALUES ('a4e9a2cf56fc4cbbafa74f312fec23e4', 'jiamengC', '加盟C', '123', '0', '1', '2016-05-10 15:49:58', '1', '2016-05-10 15:49:58');
 INSERT INTO `sys_role` VALUES ('dd79e14c2c7b4261ba18f03c7c4ab8a2', 'jiamengB', '加盟商B', '二级', '0', null, '2016-04-04 23:10:56', null, '2016-04-04 23:10:56');
 
 -- ----------------------------
@@ -323,7 +336,7 @@ CREATE TABLE `sys_user` (
 -- Records of sys_user
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('1', 'admin', '1caae8b0fe63380363b79062433faa6e3046cd8cc6cf740dbdfe6ab0', '管理员', '15032831553', '11@qq.com', null, '0', '1', '1', '2016-03-17 20:15:26', '1', '2016-03-30 14:56:11', '0', '2016-03-29');
-INSERT INTO `sys_user` VALUES ('2', 'zhangyu', '22b39462b3fdedc07e911d860434b19be3afa59af3fa9bd98604e6fa', '加盟a', '15032850523', '22@qq.com', null, '0', '1', '1', '2016-03-01 13:32:08', '1', '2016-04-05 08:29:14', '0', '2017-03-27');
+INSERT INTO `sys_user` VALUES ('2', 'zhangyu', '587043a9e96edde05070d54559065210f377b4345abda4d00ea8dcef', '加盟a', '15032850523', '22@qq.com', null, '0', '1', '1', '2016-03-01 13:32:08', '1', '2016-05-10 15:51:50', '0', '2017-03-27');
 INSERT INTO `sys_user` VALUES ('3', 'zhangying123', null, '加盟C1', '15032831536', '133@qq.com', null, '0', '1', '1', '2016-03-24 12:48:01', '1', '2016-04-26 14:36:57', '0', '2018-03-27');
 INSERT INTO `sys_user` VALUES ('57a61b6d1a0148239b1c5ea55b4346f3', 'benz', 'b7349aafbbcb24a5552dbd0d32c83649b9d5bd3436f843b955635671', '新增Item1', '15032831553', '123@qq.com', null, '0', '1', null, '2016-03-30 16:48:40', null, '2016-03-30 16:48:40', '0', null);
 
@@ -342,5 +355,5 @@ CREATE TABLE `sys_user_role` (
 -- ----------------------------
 INSERT INTO `sys_user_role` VALUES ('1', '1');
 INSERT INTO `sys_user_role` VALUES ('57a61b6d1a0148239b1c5ea55b4346f3', '2');
-INSERT INTO `sys_user_role` VALUES ('2', 'dd79e14c2c7b4261ba18f03c7c4ab8a2');
 INSERT INTO `sys_user_role` VALUES ('3', '1');
+INSERT INTO `sys_user_role` VALUES ('2', 'a4e9a2cf56fc4cbbafa74f312fec23e4');

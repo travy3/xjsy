@@ -15,13 +15,24 @@
                 name:'sex',
                 label: '性别',
                 type: 'String',
-                align:'center'
+                align:'center',
+                render: function(value){
+                    if("1"==value){
+                        return '男';
+                    }else{
+                        return '女';
+                    }
+                }
             },
             {
-                name:'age',
+                name:'birthday',
                 label: '年龄',
                 type: 'String',
-                align:'center'
+                align:'center',
+                render: function(value){
+
+                    return new Date().getFullYear()-value.substring(0,4);
+                }
             },
             {
                 name:'telephone',
@@ -43,7 +54,8 @@
                 align: 'center',
                 width: 150,
                 render: function(value) {
-                    return '<a href="${ctx}/cus/1/edit/'+value+'" data-toggle="dialog" data-width="830" data-height="230"data-mask="true" data-type="POST" data-title="客户信息" class="btn btn-blue">修改</a>'
+                    return '<a href="${ctx}/cus/1/form?id='+value+'" data-toggle="dialog" data-width="830" data-height="230" data-max="true" data-type="POST" data-title="客户信息" class="btn btn-blue">修改</a> | ' +
+                            '<a href="${ctx}/cus/hpManger?id='+value+'" data-toggle="dialog" data-width="1030" data-height="700" data-max="true" data-type="POST" data-title="治疗记录" class="btn btn-blue">治疗纪录</a>'
                 },
                 edit:false,
                 add:false
@@ -102,20 +114,14 @@
     })
 </script>
 <div class="bjui-pageHeader">
-<form id="pagerForm" data-toggle="ajaxsearch" action="${ctx}/sys/user/list" method="post">
+<form id="pagerForm" data-toggle="ajaxsearch" action="${ctx}/cus/1" method="post">
 <%--<input type="hidden" name="pageSize" value="${user.pageInfo.pageSize}">--%>
 <%--<input type="hidden" name="pageCurrent" value="${user.pageInfo.pageCurrent}">--%>
 <%--<input type="hidden" name="orderField" value="${user.pageInfo.orderField}">--%>
 <%--<input type="hidden" name="orderDirection" value="${user.pageInfo.orderDirection}">--%>
 <div class="bjui-searchBar">
-<label>区域:</label>
-<select name="area" data-toggle="selectpicker">
-<option value="">全部</option>
-<option value="1">联络</option>
-<option value="2">住宿</option>
-<option value="3">餐饮</option>
-<option value="4">交通</option>
-</select>&nbsp;
+    <label>姓名:</label> <input name="name" id="cusName" value="${customer.name}" />
+    <label>手机号:</label> <input name="telephone" id="cusTelephone" data-rule="mobile" value="${customer.telephone}"/>
 <button type="submit" class="btn-default" data-icon="search">查询</button>&nbsp;
 <a class="btn btn-orange" href="javascript:;" data-toggle="reloadsearch" data-clear-query="true" data-icon="undo">清空查询</a>
 </div>

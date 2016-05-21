@@ -8,6 +8,8 @@
         <result property="name" column="name"></result>
         <result property="remarks" column="remarks"></result>
         <result property="delFlag" column="delflag"></result>
+        <result property="levelNo" column="levelNo"></result>
+        <result property="orderNo" column="orderNo"></result>
         <collection property="planInfoList" ofType="PlanInfo">
             <id property="id" column="planInfo.id"></id>
             <result property="code" column="planInfo.code"></result>
@@ -22,6 +24,8 @@
         p.name,
         p.remarks,
         p.delflag,
+        p.levelNo,
+        p.orderNo,
         pi.id AS 'planInfo.id',
         pi.code AS 'planInfo.code',
         pi.times AS 'planInfo.times',
@@ -55,11 +59,15 @@
         INSERT  INTO info_plan(
           id,
           name,
+          orderNo,
+          levelNo,
           remarks,
           delflag
         ) VALUES (
           #{id},
           #{name},
+          #{orderNo},
+          #{levelNo},
           #{remarks},
           #{delFlag}
         )
@@ -68,6 +76,8 @@
     <update id="update">
         UPDATE info_plan SET
         name = #{name},
+        orderNo = ${orderNo},
+        levelNo = ${levelNo},
         remarks = #{remarks}
         WHERE
         id = #{id}

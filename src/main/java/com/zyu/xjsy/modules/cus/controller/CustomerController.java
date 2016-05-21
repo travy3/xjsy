@@ -52,11 +52,14 @@ public class CustomerController extends BaseController {
             return "/modules/cus/cusIndex0";
 
         }else if (Global.DURATION_ZL.equals(duration)){
-
+            //列表查询条件传入
+            model.addAttribute("customer",customer);
             return "/modules/cus/cusIndex1";
+
         }else if (Global.DURATION_BJ.equals(duration)){
 
             return "/modules/cus/cusIndex2";
+
         }else {
             return "";
         }
@@ -86,6 +89,9 @@ public class CustomerController extends BaseController {
             Customer customer = new Customer(id);
 
             customer.setUser(UserUtils.getUser());
+
+            customer.setDuration(duration);
+
             customer = customerService.getCustomer(customer);
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -161,20 +167,17 @@ public class CustomerController extends BaseController {
                 plan.setId("4");
             }
         }
-        plan = planService.getPlan(plan);
-        return gson.toJson(plan);
 
+        plan = planService.getPlan(plan);
+
+        return gson.toJson(plan);
     }
 
-    //todo 客户方案确认
     @RequestMapping(value = "/saveCusPlanInfo")
     @ResponseBody
     public Object cusPlanSave(String planId,String customerId){
 
-
-
         if (StringUtils.isNotBlank(planId) && StringUtils.isNotBlank(customerId)){
-
 
             Plan plan = new Plan(planId);
 
@@ -188,15 +191,33 @@ public class CustomerController extends BaseController {
 
             planInfo.setPlan(plan);
 
-
             customerService.creatCusHpManage(customer,plan,planInfo);
 
 
             return executeResult.jsonReturn(200,"客户方案创建成功");
         }
         return executeResult.jsonReturn(300,"客户方案创建失败");
-
     }
 
+    @RequestMapping(value = "/hpManger")
+    public String cusHpManager(Model model,String id) {
+
+        Customer customer = new Customer(id);
+
+        customer.setDuration(Global.DURATION_ZL);
+
+        customer.setUser(UserUtils.getUser());
+
+        customer = customerService.getCustomer(customer);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        model.addAttribute("customer",customer);
+
+        model.addAttribute("sdfBirthday",sdf.format(customer.getBirthday()));
+
+        return "/modules/cus/hpManager";
+
+    }
 
 }

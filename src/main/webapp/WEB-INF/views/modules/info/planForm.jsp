@@ -118,6 +118,16 @@
                     <input type="text" name="remarks" id="j_dialog_remarks" value="${plan.remarks}" data-rule="required" size="20">
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <label for="j_dialog_levelNo" class="control-label x90">级别：</label>
+                    <input type="text" name="levelNo" id="j_dialog_levelNo" value="${plan.levelNo}" data-rule="required;number" size="20">
+                </td>
+                <td>
+                    <label for="j_dialog_orderNo" class="control-label x90">期数：</label>
+                    <input type="text" name="orderNo" id="j_dialog_orderNo" value="${plan.orderNo}" data-rule="required;number" size="20">
+                </td>
+            </tr>
             </tbody>
         </table>
         <table id="planInfoList" data-width="100%" class="table table-bordered">

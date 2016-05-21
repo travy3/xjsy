@@ -12,6 +12,10 @@ public class Plan extends DataEntity<Plan> {
 
     private String name;
 
+    private Integer levelNo;
+
+    private Integer orderNo;
+
 
     private List<PlanInfo> planInfoList = Lists.newArrayList();
 
@@ -40,4 +44,19 @@ public class Plan extends DataEntity<Plan> {
         this.planInfoList = planInfoList;
     }
 
+    public Integer getLevelNo() {
+        return levelNo;
+    }
+
+    public void setLevelNo(Integer levelNo) {
+        this.levelNo = levelNo;
+    }
+
+    public Integer getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(Integer orderNo) {
+        this.orderNo = orderNo;
+    }
 }

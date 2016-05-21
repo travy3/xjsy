@@ -178,7 +178,9 @@
 		JOIN sys_business b ON  a.business = b.id
 		WHERE a.delflag = #{DEL_FLAG_NORMAL}
 		AND a.duration = #{duration}
-		AND a.business = #{user.business.id}
+		<if test="user.admin != true ">
+			AND a.business = #{user.business.id}
+		</if>
 		AND a.id = #{id}
 	</select>
 

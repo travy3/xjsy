@@ -12,5 +12,5 @@ import com.zyu.xjsy.modules.cus.entity.HpManager;
 public interface HpManagerDao extends CrudDao<HpManager>{
 
 
-    int getMaxNo(Customer customer);
+    HpManager getMaxNo(Customer customer);
 }

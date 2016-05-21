@@ -38,6 +38,8 @@ public class User extends DataEntity<User> {
 
     private List<Role> roleList = Lists.newArrayList();
 
+    private boolean admin;
+
     public User(){
         super();
         this.loginFlag = Global.YES;
@@ -158,4 +160,9 @@ public class User extends DataEntity<User> {
     public static boolean isAdmin(String id){
         return id != null && "1".equals(id);
     }
+
+    public void setAdmin() {
+        admin = isAdmin();
+    }
+
 }
