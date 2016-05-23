@@ -110,7 +110,7 @@
             <%--add:false--%>
             <%--}--%>
         ],
-        dataUrl: '${ctx}/cus/hpManager/list?cid=${customer.id}',
+        dataUrl: '${ctx}/hpManager/list?cid=${customer.id}',
         loadType 		: 	'POST' 	,//[可选] Ajax请求方式。
         dataType 		: 	'json' 	,//[可选] 数据类型，可选参数['json' | 'array' | 'xml']。
 //        hiddenFields 	: 	[{name:'id'}] 	,//[可选] 仅用于dataType='array'时隐藏字段，可以将不能加载到页面上的值设置到给定的字段，array数据除去表头的列后依次赋值。

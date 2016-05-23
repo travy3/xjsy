@@ -2,6 +2,7 @@ package com.zyu.xjsy.common.controller;
 
 import com.zyu.xjsy.common.beanvalidator.BeanValidators;
 import com.zyu.xjsy.common.util.DateUtils;
+import com.zyu.xjsy.common.web.ExecuteResult;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,8 @@ import java.util.List;
 public abstract class BaseController {
 
     protected Logger logger = LoggerFactory.getLogger(getClass());
+
+    protected ExecuteResult executeResult = new ExecuteResult();
 
     /**
      * 管理基础路径

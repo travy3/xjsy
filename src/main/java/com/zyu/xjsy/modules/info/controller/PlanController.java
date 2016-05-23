@@ -7,7 +7,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.zyu.xjsy.common.controller.BaseController;
 import com.zyu.xjsy.common.persistence.PageInfo;
-import com.zyu.xjsy.common.web.ExecuteResult;
 import com.zyu.xjsy.modules.info.entity.Plan;
 import com.zyu.xjsy.modules.info.entity.PlanInfo;
 import com.zyu.xjsy.modules.info.service.PlanService;
@@ -30,7 +29,7 @@ import java.util.List;
 @Controller
 public class PlanController extends BaseController {
 
-    private ExecuteResult executeResult = new ExecuteResult();
+//    private ExecuteResult executeResult = new ExecuteResult();
 
 
     @Autowired

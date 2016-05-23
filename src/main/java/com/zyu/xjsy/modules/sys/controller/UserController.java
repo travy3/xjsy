@@ -5,9 +5,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.zyu.xjsy.common.controller.BaseController;
 import com.zyu.xjsy.common.persistence.PageInfo;
-import com.zyu.xjsy.common.web.ExecuteResult;
-import com.zyu.xjsy.modules.info.service.BusinessService;
 import com.zyu.xjsy.modules.info.entity.Business;
+import com.zyu.xjsy.modules.info.service.BusinessService;
 import com.zyu.xjsy.modules.sys.entity.Role;
 import com.zyu.xjsy.modules.sys.entity.User;
 import com.zyu.xjsy.modules.sys.service.SystemService;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,7 +30,7 @@ import java.util.List;
 @Controller
 public class UserController extends BaseController {
 
-    private ExecuteResult executeResult = new ExecuteResult();
+//    private ExecuteResult executeResult = new ExecuteResult();
 
     @Autowired
     private SystemService systemService;
@@ -50,7 +48,7 @@ public class UserController extends BaseController {
     @ResponseBody
     public String getUserList(Model model, User user, HttpServletRequest request, HttpServletResponse response){
 
-        List<User> userList  = new ArrayList<User>();
+        List<User> userList  = Lists.newArrayList();
 
         PageInfo<User> pageInfo = systemService.findAllUser(new PageInfo<User>(request,response),user);
 
