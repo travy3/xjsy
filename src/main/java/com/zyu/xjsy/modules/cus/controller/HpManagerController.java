@@ -8,6 +8,7 @@ import com.zyu.xjsy.common.util.JsonUtils;
 import com.zyu.xjsy.modules.cus.entity.Customer;
 import com.zyu.xjsy.modules.cus.entity.HpManager;
 import com.zyu.xjsy.modules.cus.service.HpManagerService;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,14 +21,13 @@ import java.util.List;
 /**
  * Created by chenjie on 2016/5/6.
  */
-@Controller(value = "/hpManager")
+@RequestMapping(value = "/hpManager")
+@Controller
 public class HpManagerController extends BaseController {
 
 
     @Autowired
     private HpManagerService hpManagerService;
-
-
 
 
 
@@ -51,5 +51,25 @@ public class HpManagerController extends BaseController {
         return gson.toJson(pageInfo);
 
     }
+
+    @RequestMapping(value = "/manage")
+    @ResponseBody
+    public Object manageEdit(String json,String hpManagerId){
+
+        String jsonTmp = StringEscapeUtils.unescapeHtml4(json).replace("[","").replace("]","");
+
+        logger.debug(jsonTmp);
+
+        Gson gson = JsonUtils.getGsonBuilder().create();
+
+        HpManager hpManager = gson.fromJson(jsonTmp,HpManager.class);
+
+        hpManagerService.saveHpManager(hpManager);
+
+
+        return executeResult.jsonReturn(200,"保存成功");
+
+    }
+
 
 }

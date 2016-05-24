@@ -13,12 +13,15 @@
 
             },
             {
-                name: '日期',
-                label: '编号',
+                name: 'date',
+                label: '日期',
                 type : 'date',
                 align: 'center',
 //                width: 80
-                rule: 'required'
+                rule: 'required;date',
+                render: function(value){
+                    return value.substr(0,10);
+                }
             },
             {
                 label: '训练前',
@@ -123,10 +126,10 @@
         linenumberAll 	: 	true 	,//[可选] 行号范围，true = 为所有数据编号，false = 为当前页数据编号。
         showLinenumber 	: 	true 	,//[可选] 是否显示行号，参数[true | false | 'lock']，lock参数 = 锁定行号列（适用于多列字段，出现横向滚动条的情况）。
         showCheckboxcol : 	false 	,//[可选] 是否显示行复选框，参数同上。
-        showEditbtnscol : 	false 	,//[可选] 是否显示编辑按钮列。
+        showEditbtnscol : 	true 	,//[可选] 是否显示编辑按钮列。
         showTfoot 		: 	false 	,//[可选] 是否显示页脚，适用于显示统计信息，需要字段相关参数支持。
         showToolbar 	: 	true 	,//[可选] 是否显示工具条，需要设置参数toolbarItem或toolbarCustom。
-        toolbarItem 	: 	'add,|,del,|,refresh' 	,//[可选] 显示工具条按钮，可选参数['all, add, edit, cancel, save, del, import, export, |']，“all” = 显示所有按钮，“|” = 按钮组分隔符。
+//        toolbarItem 	: 	'refresh' 	,//[可选] 显示工具条按钮，可选参数['all, add, edit, cancel, save, del, import, export, |']，“all” = 显示所有按钮，“|” = 按钮组分隔符。
         <%--toolbarCustom 	: 	'<a href="${ctx}/info/plan/manage" data-toggle="dialog" data-id="" data-width="830" data-height="230" data-mask="true" data-type="POST" data-title="新增" class="btn btn-blue">新增</a>  ',//[可选] 自定义的html内容或jQuery DOM对象，支持带返回值函数。--%>
         //toolbarCustom 	: 	null 	,//[可选] 自定义的html内容或jQuery DOM对象，支持带返回值函数。
         columnResize 	: 	true 	,//[可选] 允许调整列宽。
@@ -136,16 +139,16 @@
         columnLock 		: 	true 	,//[可选] 表头字段列菜单上出现 “锁定列、解除锁定” 选项。
         paging 			: 	{pageSize:30, selectPageSize:'30,60,100', pageCurrent:1, showPagenum:5, total:0} 	,//[可选] 是否显示分页组件，可设置分页参数。分页参数模板：{pageSize:30, selectPageSize:'30,60,90', pageCurrent:1, showPagenum:5}
         pagingAlign 	: 	'left',//[可选] 分页组件对齐方式，参数['left' | 'center' | 'right']
-        editUrl 		: 	'${ctx}/cus/hpManager/manage?planId=${plan.id}' 	,//[可选] 保存编辑、添加数据的url，Ajax请求方式为POST，服务器端接收的参数名称为"json"，数据类型是JSON Array。
+        editUrl 		: 	'${ctx}/hpManager/manage?planId=${plan.id}'	,//[可选] 保存编辑、添加数据的url，Ajax请求方式为POST，服务器端接收的参数名称为"json"，数据类型是JSON Array。
         //editCallback 	: 	null 	,//[可选] 保存成功后的回调，返回的json内容可以是B-JUI默认的回调json或保存后的json数据，datagrid默认回调：如果返回保存后的json数据，将会更新对应的数据行。
         editMode 		: 	'inline',//[可选] 编辑、添加数据的方式，参数[false | 'inline' | 'dialog']。false = 不能编辑，inline = 行内编辑，dialog = 弹窗编辑。
         //editDialogOp 	: 	null 	,//[可选] 弹窗编辑方式时，设置弹出窗口的参数，如{width:500, height:300, mask:false}
-        inlineEditMult 	: 	true 	,//[可选] 允许行内编辑模式下同时添加/编辑多行。
-        saveAll 		: 	true 	,//[可选] 适用于多行行内编辑时，一次性保存全部数据，发送到服务器端数据格式见参数editUrl。
+        inlineEditMult 	: 	false 	,//[可选] 允许行内编辑模式下同时添加/编辑多行。
+        saveAll 		: 	false 	,//[可选] 适用于多行行内编辑时，一次性保存全部数据，发送到服务器端数据格式见参数editUrl。
         addLocation 	: 	'last'	,//[可选] 添加新行数据于当前页的位置，参数['first' | 'last' | 'prev' | 'next']，参数prev和next参考当前选中行位置。
-        delUrl 			: 	'${ctx}/info/planInfo/del' 	,//[可选] 删除数据的url，服务器端接收的数据见参数delPK
+        delUrl 			: 	'${ctx}/hpManager/del' 	,//[可选] 删除数据的url，服务器端接收的数据见参数delPK
         delType 		: 	'POST' 	,//[可选] Ajax删除数据的请求方式。
-        delPK 			: 	'planInfoId' 	,//[可选] 设置删除主键名，如果设置了主键，则只发送该字段的值(删除多条则主键值以逗号分隔)到服务器端，否则发送JSON数据（参数名"json"，数据类型为JSON Array）。
+        delPK 			: 	'id' 	,//[可选] 设置删除主键名，如果设置了主键，则只发送该字段的值(删除多条则主键值以逗号分隔)到服务器端，否则发送JSON数据（参数名"json"，数据类型为JSON Array）。
         delConfirm 		: 	'删除操作无需保存，直接生效，是否继续删除？' 	,//[可选] 删除前的确认提示，参数[true | false | '自定义提示信息']，参数为false时不弹出提示信息。
         //delCallback 	: 	null 	,//[可选] 删除成功后的回调函数，返回的json内容为B-JUI默认的回调json。
         contextMenuH 	: 	true 	,//[可选] 在表头上右键点击时出现 ”显示/隐藏列“ 的快捷菜单。
@@ -174,11 +177,12 @@
             <tr>
                 <td>
                     <label for="j_customer_duration" class="control-label x85">所属阶段：</label>
-                    <select name="duration" id="j_customer_duration" data-toggle="selectpicker" data-rule="required" readonly>
+                    <select name="duration" id="j_customer_duration" data-toggle="selectpicker" readonly>
                         <option value="0">试用期</option>
                         <option value="1">治疗期</option>
                         <option value="2">保健期</option>
                     </select>
+                    <%--<input name="duration" id="j_customer_duration" data-rule="required" value="${customer}" readonly>--%>
                 </td>
                 <td>
                     <label for="j_customer_name" class="control-label x85">客户姓名：</label>
@@ -275,14 +279,14 @@
             </tr>
             </tbody>
         </table>
-        <table id="hpManagerList" data-width="100%" class="table table-bordered">
+        <table id="hpManagerList" data-width="100%" class="table table-bordered" data-toggle="tabledit">
 
         </table>
     </form>
 </div>
-<div class="bjui-pageFooter">
-    <ul>
-        <li><button type="button" class="btn-close" data-icon="close">取消</button></li>
-        <li><button type="submit" class="btn-default" data-icon="save">保存</button></li>
-    </ul>
-</div>
+<%--<div class="bjui-pageFooter">--%>
+    <%--<ul>--%>
+        <%--<li><button type="button" class="btn-close" data-icon="close">取消</button></li>--%>
+        <%--<li><button type="submit" class="btn-default" data-icon="save">保存</button></li>--%>
+    <%--</ul>--%>
+<%--</div>--%>

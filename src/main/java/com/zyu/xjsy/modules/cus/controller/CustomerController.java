@@ -192,7 +192,6 @@ public class CustomerController extends BaseController {
 
             customerService.creatCusHpManage(customer,plan,planInfo);
 
-
             return executeResult.jsonReturn(200,"客户方案创建成功");
         }
         return executeResult.jsonReturn(300,"客户方案创建失败");

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2016-05-19 17:21:26
+Date: 2016-05-24 17:06:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -57,14 +57,14 @@ CREATE TABLE `cus_customer` (
 -- Records of cus_customer
 -- ----------------------------
 INSERT INTO `cus_customer` VALUES ('184d9d479daa4951b057301ea99b8e39', '张宇', '1', '1980-08-08', '15032831553', '合作路', '123', '12', '12', '12', '32', '123', '123', '1', '十八中', '123', '123', '阿斯顿12', '32', '12', '1', null, null, '0', '1', '2016-05-03 15:48:24', '1', '2016-05-04 14:34:43', null, '0');
-INSERT INTO `cus_customer` VALUES ('b789c1c2276a495786b79fcffeb940ad', '新增Item1', '1', '2009-05-04', '15032831554', '范甘迪', '12', '21', '23', '23', '123', '1', '2', '1', '十五中', '123', '32', '文身断发', '12', '3', '1', null, null, '1', '1', '2016-05-04 16:36:26', '1', '2016-05-10 10:12:10', null, '0');
+INSERT INTO `cus_customer` VALUES ('b789c1c2276a495786b79fcffeb940ad', '新增Item1', '1', '2009-05-04', '15032831554', '范甘迪', '12', '21', '23', '23', '123', '1', '2', '1', '十五中', '123', '32', '文身断发', '12', '3', '1', null, null, '1', '1', '2016-05-04 16:36:26', '1', '2016-05-24 16:53:12', null, '0');
 
 -- ----------------------------
 -- Table structure for cus_hpmanager
 -- ----------------------------
 DROP TABLE IF EXISTS `cus_hpmanager`;
 CREATE TABLE `cus_hpmanager` (
-  `id` varchar(64) DEFAULT NULL,
+  `id` varchar(64) NOT NULL,
   `customer` varchar(64) DEFAULT NULL,
   `no` int(6) DEFAULT NULL COMMENT '次数',
   `date` datetime DEFAULT NULL,
@@ -83,15 +83,16 @@ CREATE TABLE `cus_hpmanager` (
   `paper` varchar(10) DEFAULT NULL,
   `optometryL` varchar(32) DEFAULT NULL COMMENT '验光',
   `optometryR` varchar(32) DEFAULT NULL COMMENT '验光',
+  PRIMARY KEY (`id`),
   KEY `FK_INFOCUSTOMER_ID` (`customer`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cus_hpmanager
 -- ----------------------------
-INSERT INTO `cus_hpmanager` VALUES ('da93af4782aa4a71b30cb10620d4e292', null, '1', null, null, null, null, null, null, null, null, null, null, '5', 's2', '1', '7号图纸', null, null);
-INSERT INTO `cus_hpmanager` VALUES ('b094970561564ae8a29a9048a5611984', null, '2', null, null, null, null, null, null, null, null, null, null, '5', 's1', '1', '8号图纸', null, null);
-INSERT INTO `cus_hpmanager` VALUES ('b55133ef2d064db2a5f1298f1568a6b3', null, '3', null, null, null, null, null, null, null, null, null, null, '5', 's1', '1', '9号图纸', null, null);
+INSERT INTO `cus_hpmanager` VALUES ('b094970561564ae8a29a9048a5611984', 'b789c1c2276a495786b79fcffeb940ad', '2', '2016-05-26 00:00:00', '12', '23', '43', '32', '12', '32', '21', '43', null, '5', 's1', '1', '8号图纸', null, null);
+INSERT INTO `cus_hpmanager` VALUES ('b55133ef2d064db2a5f1298f1568a6b3', 'b789c1c2276a495786b79fcffeb940ad', '3', '2016-05-25 00:00:00', '23', '12', '23', '1', '23', '23', '3', '1', null, '5', 's1', '1', '9号图纸', null, null);
+INSERT INTO `cus_hpmanager` VALUES ('da93af4782aa4a71b30cb10620d4e292', 'b789c1c2276a495786b79fcffeb940ad', '1', '2016-05-24 00:00:00', '32', '12', '32', '12', '12', '32', '32', '12', null, '5', 's2', '1', '7号图纸', null, null);
 
 -- ----------------------------
 -- Table structure for info_plan
