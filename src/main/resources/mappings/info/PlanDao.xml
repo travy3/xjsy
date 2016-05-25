@@ -89,6 +89,16 @@
         WHERE id = #{id}
     </update>
 
+    <select id="getByType" resultMap="planResult">
+        SELECT
+        <include refid="planColumns"></include>
+        FROM info_plan p
+        LEFT JOIN  info_planInfo pi ON p.id = pi.planid
+        WHERE p.delflag = #{DEL_FLAG_NORMAL}
+        AND p.levelNo = ${levelNo}
+        AND p.orderNo = ${orderNo}
+    </select>
+
 </mapper>
 
 

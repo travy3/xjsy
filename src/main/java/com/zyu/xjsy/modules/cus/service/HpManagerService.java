@@ -43,9 +43,7 @@ public class HpManagerService extends BaseService {
         }else {
             hpManager.preUpdate();
             hpManagerDao.update(hpManager);
-            if (hpManager.getNo()==30){
-//                hp
-            }
+
         }
     }
 }

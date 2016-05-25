@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2016-05-24 17:06:51
+Date: 2016-05-25 18:37:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -130,7 +130,7 @@ CREATE TABLE `info_planinfo` (
   `paper` varchar(10) DEFAULT NULL,
   `num` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of info_planinfo
@@ -165,6 +165,7 @@ INSERT INTO `info_planinfo` VALUES ('27', '6', 's1', '1', '1号图纸', '1');
 INSERT INTO `info_planinfo` VALUES ('28', '6', 's2', '1', '2号图纸', '2');
 INSERT INTO `info_planinfo` VALUES ('29', '6', 's3', '1', '3号图纸', '3');
 INSERT INTO `info_planinfo` VALUES ('30', '4', 's2', '2', '5号图纸', '1');
+INSERT INTO `info_planinfo` VALUES ('31', '4', 's1', '2', '2', '2');
 
 -- ----------------------------
 -- Table structure for sys_area
@@ -284,6 +285,10 @@ INSERT INTO `sys_menu_role` VALUES ('10', 'a4e9a2cf56fc4cbbafa74f312fec23e4');
 INSERT INTO `sys_menu_role` VALUES ('11', 'a4e9a2cf56fc4cbbafa74f312fec23e4');
 INSERT INTO `sys_menu_role` VALUES ('12', 'a4e9a2cf56fc4cbbafa74f312fec23e4');
 INSERT INTO `sys_menu_role` VALUES ('13', 'a4e9a2cf56fc4cbbafa74f312fec23e4');
+INSERT INTO `sys_menu_role` VALUES ('10', '584eaadeb5d947bfb76a523b029e13cb');
+INSERT INTO `sys_menu_role` VALUES ('11', '584eaadeb5d947bfb76a523b029e13cb');
+INSERT INTO `sys_menu_role` VALUES ('12', '584eaadeb5d947bfb76a523b029e13cb');
+INSERT INTO `sys_menu_role` VALUES ('13', '584eaadeb5d947bfb76a523b029e13cb');
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -307,8 +312,9 @@ CREATE TABLE `sys_role` (
 -- ----------------------------
 INSERT INTO `sys_role` VALUES ('1', 'admin', '管理员', '系统', '0', '1', '2016-03-23 15:13:58', '1', '2016-03-23 15:14:01');
 INSERT INTO `sys_role` VALUES ('2', 'jiameng', '加盟商', '加盟商', '0', '1', '2016-03-23 15:14:24', '1', '2016-03-23 15:14:26');
-INSERT INTO `sys_role` VALUES ('a4e9a2cf56fc4cbbafa74f312fec23e4', 'jiamengC', '加盟C', '123', '0', '1', '2016-05-10 15:49:58', '1', '2016-05-10 15:49:58');
-INSERT INTO `sys_role` VALUES ('dd79e14c2c7b4261ba18f03c7c4ab8a2', 'jiamengB', '加盟商B', '二级', '0', null, '2016-04-04 23:10:56', null, '2016-04-04 23:10:56');
+INSERT INTO `sys_role` VALUES ('584eaadeb5d947bfb76a523b029e13cb', 'new_jiameng', '新加盟商', '123', '0', '1', '2016-05-25 14:55:54', '1', '2016-05-25 14:55:54');
+INSERT INTO `sys_role` VALUES ('a4e9a2cf56fc4cbbafa74f312fec23e4', 'jiamengC', '加盟C', '123', '1', '1', '2016-05-10 15:49:58', '1', '2016-05-10 15:49:58');
+INSERT INTO `sys_role` VALUES ('dd79e14c2c7b4261ba18f03c7c4ab8a2', 'jiamengB', '加盟商B', '二级', '1', null, '2016-04-04 23:10:56', null, '2016-04-04 23:10:56');
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -337,9 +343,10 @@ CREATE TABLE `sys_user` (
 -- Records of sys_user
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('1', 'admin', '1caae8b0fe63380363b79062433faa6e3046cd8cc6cf740dbdfe6ab0', '管理员', '15032831553', '11@qq.com', null, '0', '1', '1', '2016-03-17 20:15:26', '1', '2016-03-30 14:56:11', '0', '2016-03-29');
-INSERT INTO `sys_user` VALUES ('2', 'zhangyu', '587043a9e96edde05070d54559065210f377b4345abda4d00ea8dcef', '加盟a', '15032850523', '22@qq.com', null, '0', '1', '1', '2016-03-01 13:32:08', '1', '2016-05-10 15:51:50', '0', '2017-03-27');
-INSERT INTO `sys_user` VALUES ('3', 'zhangying123', null, '加盟C1', '15032831536', '133@qq.com', null, '0', '1', '1', '2016-03-24 12:48:01', '1', '2016-04-26 14:36:57', '0', '2018-03-27');
+INSERT INTO `sys_user` VALUES ('2', 'zhangyu', 'c5d61427200aca060709b90aed27a14b36f1877e622c5c0592865e91', '加盟abc', '15032850523', '22@qq.com', null, '0', '1', '1', '2016-03-01 13:32:08', '1', '2016-05-25 16:47:31', '0', '2017-03-27');
+INSERT INTO `sys_user` VALUES ('3', 'zhangying123', '1caae8b0fe63380363b79062433faa6e3046cd8cc6cf740dbdfe6ab0', '加盟C1', '15032831536', '133@qq.com', null, '1', '1', '1', '2016-03-24 12:48:01', '1', '2016-04-26 14:36:57', '0', '2018-03-27');
 INSERT INTO `sys_user` VALUES ('57a61b6d1a0148239b1c5ea55b4346f3', 'benz', 'b7349aafbbcb24a5552dbd0d32c83649b9d5bd3436f843b955635671', '新增Item1', '15032831553', '123@qq.com', null, '0', '1', null, '2016-03-30 16:48:40', null, '2016-03-30 16:48:40', '0', null);
+INSERT INTO `sys_user` VALUES ('7c5f5acfeeab4f1fbcc2afc671ded1d9', 'qingyuan', '3aac2affbe6c082dc479bf7dbd7e2e4b076a2892db5f18ac028eb6a9', '青园账号', '15032831552', 'asd@qq.com', null, '0', '9f44ea18e2864ea59a89dd748e2b7de3', '1', '2016-05-25 14:46:17', '1', '2016-05-25 16:51:01', '0', null);
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -357,4 +364,5 @@ CREATE TABLE `sys_user_role` (
 INSERT INTO `sys_user_role` VALUES ('1', '1');
 INSERT INTO `sys_user_role` VALUES ('57a61b6d1a0148239b1c5ea55b4346f3', '2');
 INSERT INTO `sys_user_role` VALUES ('3', '1');
-INSERT INTO `sys_user_role` VALUES ('2', 'a4e9a2cf56fc4cbbafa74f312fec23e4');
+INSERT INTO `sys_user_role` VALUES ('2', '584eaadeb5d947bfb76a523b029e13cb');
+INSERT INTO `sys_user_role` VALUES ('7c5f5acfeeab4f1fbcc2afc671ded1d9', '584eaadeb5d947bfb76a523b029e13cb');

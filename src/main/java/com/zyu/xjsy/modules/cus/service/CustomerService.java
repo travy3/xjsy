@@ -113,6 +113,8 @@ public class CustomerService extends BaseService {
 
                 hpManager.setTimes(info.getTimes());
 
+                hpManager.setCustomer(customer);
+
                 //设置次数 累加
                 if (hpManagerTmp != null){
                     maxNo = hpManagerTmp.getNo();

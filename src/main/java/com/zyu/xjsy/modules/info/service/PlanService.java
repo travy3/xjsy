@@ -101,6 +101,10 @@ public class PlanService extends BaseService {
         planInfoDao.delete(planInfo);
     }
 
+    public Plan getPlanByType(Plan nextPlan) {
+        return planDao.getByType(nextPlan);
+    }
+
 
 //    public String getPlanInfo(String id){
 //

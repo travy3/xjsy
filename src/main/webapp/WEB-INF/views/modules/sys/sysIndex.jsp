@@ -21,13 +21,13 @@
             <li><a href="#">消息 <span class="badge">4</span></a></li>
             <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">我的账户 <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="changepwd.html" data-toggle="dialog" data-id="changepwd_page" data-mask="true" data-width="400" data-height="260">&nbsp;<span class="glyphicon glyphicon-lock"></span> 修改密码&nbsp;</a></li>
+                    <li><a href="changePwd.html" data-toggle="dialog" data-id="changepwd_page" data-mask="true" data-width="400" data-height="260">&nbsp;<span class="glyphicon glyphicon-lock"></span> 修改密码&nbsp;</a></li>
                     <li><a href="#">&nbsp;<span class="glyphicon glyphicon-user"></span> 我的资料</a></li>
                     <li class="divider"></li>
                     <li><a href="${ctx}/logout" class="red">&nbsp;<span class="glyphicon glyphicon-off"></span> 注销登陆</a></li>
                 </ul>
             </li>
-            <li><a href="index.html" title="切换为列表导航(窄版)" style="background-color:#ff7b61;">列表导航栏(窄版)</a></li>
+            <%--<li><a href="index.html" title="切换为列表导航(窄版)" style="background-color:#ff7b61;">列表导航栏(窄版)</a></li>--%>
             <li class="dropdown"><a href="#" class="dropdown-toggle theme blue" data-toggle="dropdown" title="切换皮肤"><i class="fa fa-tree"></i></a>
                 <ul class="dropdown-menu" role="menu" id="bjui-themes">
                     <li><a href="javascript:;" class="theme_default" data-toggle="theme" data-theme="default">&nbsp;<i class="fa fa-tree"></i> 黑白分明&nbsp;&nbsp;</a></li>
@@ -61,16 +61,16 @@
                         </li>
                     </c:if>
                 </c:forEach>
-                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog"></i> 系统设置 <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">角色权限</a></li>
-                        <li><a href="#">用户列表</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">关于我们</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">友情链接</a></li>
-                    </ul>
-                </li>
+                <%--<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog"></i> 系统设置 <span class="caret"></span></a>--%>
+                    <%--<ul class="dropdown-menu" role="menu">--%>
+                        <%--<li><a href="#">角色权限</a></li>--%>
+                        <%--<li><a href="#">用户列表</a></li>--%>
+                        <%--<li class="divider"></li>--%>
+                        <%--<li><a href="#">关于我们</a></li>--%>
+                        <%--<li class="divider"></li>--%>
+                        <%--<li><a href="#">友情链接</a></li>--%>
+                    <%--</ul>--%>
+                <%--</li>--%>
             </ul>
         </div>
     </div>
@@ -89,7 +89,7 @@
                 <div class="tabsMore"><i class="fa fa-angle-double-down"></i></div>
             </div>
             <ul class="tabsMoreList">
-                <li><a href="javascript:;">#maintab#</a></li>
+                <li><a href="javascript:;">#123maintab#</a></li>
             </ul>
             <div class="navtab-panel tabsPageContent">
                 <div class="navtabPage unitBox">

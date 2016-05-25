@@ -2,7 +2,8 @@
 <%@include file="/WEB-INF/views/include/taglib.jsp"%>
 <div class="bjui-pageContent">
     <form action="${ctx}/sys/user/save" class="pageForm" data-toggle="validate" data-reload="true" id="userFomr">
-        <input type="hidden" name="id" value="${id}">
+        <input type="hidden" name="id" value="${user.id}">
+        <input type="hidden" name="password" value="${user.password}">
         <table class="table table-condensed table-hover">
             <tbody>
             <tr>
@@ -31,7 +32,7 @@
                     <label for="j_dialog_business" class="control-label x90">所属加盟商：</label>
                     <select name="business.id" id="j_dialog_business" data-toggle="selectpicker">
                         <c:forEach items="${businessList}" var="business">
-                            <option value="${business.id}">${business.name}</option>
+                            <option value="${business.id}" <c:if test="${user.business.id eq business.id}">selected="selected"</c:if> >${business.name}</option>
                         </c:forEach>
                     </select>
                 </td>
@@ -39,7 +40,14 @@
                     <label for="j_dialog_role" class="control-label x85">角色：</label>
                     <select name="role.id" id="j_dialog_role" data-toggle="selectpicker">
                         <c:forEach items="${roleList}" var="role">
-                            <option value="${role.id}">${role.name}</option>
+                            <c:choose>
+                                <c:when test="${user.roleList[0].id eq role.id}">
+                                    <option value="${role.id}" selected="selected">${role.name}</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option value="${role.id}">${role.name}</option>
+                                </c:otherwise>
+                            </c:choose>
                         </c:forEach>
                     </select>
                 </td>
