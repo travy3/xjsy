@@ -18,11 +18,11 @@
     <nav id="bjui-navbar-collapse">
         <ul class="bjui-navbar-right">
             <li class="datetime"><div><span id="bjui-date"></span> <span id="bjui-clock"></span></div></li>
-            <li><a href="#">消息 <span class="badge">4</span></a></li>
+            <%--<li><a href="#">消息 <span class="badge">4</span></a></li>--%>
             <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">我的账户 <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="changePwd.html" data-toggle="dialog" data-id="changepwd_page" data-mask="true" data-width="400" data-height="260">&nbsp;<span class="glyphicon glyphicon-lock"></span> 修改密码&nbsp;</a></li>
-                    <li><a href="#">&nbsp;<span class="glyphicon glyphicon-user"></span> 我的资料</a></li>
+                    <li><a href="${ctx}/changePwd" data-toggle="dialog" data-id="changepwd_page" data-mask="true" data-width="550" data-height="260">&nbsp;<span class="glyphicon glyphicon-lock"></span> 修改密码&nbsp;</a></li>
+                    <li><a href="${ctx}/sys/user/info">&nbsp;<span class="glyphicon glyphicon-user"></span> 我的资料</a></li>
                     <li class="divider"></li>
                     <li><a href="${ctx}/logout" class="red">&nbsp;<span class="glyphicon glyphicon-off"></span> 注销登陆</a></li>
                 </ul>
@@ -46,7 +46,7 @@
                     <c:if test="${menu.pid eq 1}">
                         <li class="active"><a href="javascript:;" data-toggle="slidebar"><i class="fa fa-check-square-o"></i>${menu.name}</a>
                             <div class="items hide" data-noinit="true">
-                                <ul id="bjui-hnav-tree${menu.id}" class="ztree ztree_main" data-toggle="ztree" data-on-click="MainMenuClick" data-expand-all="true" data-faicon="check-square-o">
+                                <ul id="bjui-hnav-tree-${menu.id}" class="ztree ztree_main" data-toggle="ztree" data-on-click="MainMenuClick" data-expand-all="true" data-faicon="check-square-o">
 
                                     <c:forEach items="${menuList}" var="menuChild">
                                         <c:if test="${menuChild.pid eq menu.id}">
@@ -76,7 +76,18 @@
     </div>
 </header>
 <div id="bjui-container" class="clearfix">
-    <%@include file="/WEB-INF/views/common/leftMenu.jsp"%>
+    <%--<%@include file="/WEB-INF/views/common/leftMenu.jsp"%>--%>
+    <div id="bjui-leftside">
+        <div id="bjui-sidebar-s">
+            <div class="collapse"></div>
+        </div>
+        <div id="bjui-sidebar">
+            <div class="toggleCollapse"><h2><i class="fa fa-bars"></i> 导航栏 <i class="fa fa-bars"></i></h2><a href="javascript:;" class="lock"><i class="fa fa-lock"></i></a></div>
+            <div class="panel-group panel-main" data-toggle="accordion" id="bjui-accordionmenu" data-heightbox="#bjui-sidebar" data-offsety="26">
+
+            </div>
+        </div>
+    </div>
         <div id="bjui-navtab" class="tabsPage">
             <div class="tabsPageHeader">
                 <div class="tabsPageHeaderContent">
@@ -93,6 +104,10 @@
             </ul>
             <div class="navtab-panel tabsPageContent">
                 <div class="navtabPage unitBox">
+                    <div class="bjui-pageContent" style="background:#FFF;">
+                        Loading...
+                    </div>
+                    <%--<div style="width:600px;"></div><!-- 保证tabhead正常显示 -->--%>
                 </div>
             </div>
         </div>

@@ -157,4 +157,11 @@ public class UserController extends BaseController {
     }
 
 
+    @RequestMapping(value = "/info")
+    public String myInfo(){
+
+        return "/modules/sys/userInfo";
+    }
+
+
 }

@@ -1,7 +1,10 @@
 package com.zyu.xjsy.modules.cus.controller;
 
 import com.google.common.collect.Lists;
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.zyu.xjsy.common.controller.BaseController;
 import com.zyu.xjsy.common.persistence.PageInfo;
 import com.zyu.xjsy.common.util.JsonUtils;
@@ -13,6 +16,7 @@ import com.zyu.xjsy.modules.info.entity.Plan;
 import com.zyu.xjsy.modules.info.entity.PlanInfo;
 import com.zyu.xjsy.modules.info.service.PlanService;
 import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -65,13 +69,25 @@ public class HpManagerController extends BaseController {
 
     @RequestMapping(value = "/manage")
     @ResponseBody
-    public Object manageEdit(String json,String cid){
+    public Object manageEdit(String json,String planId){
 
         String jsonTmp = StringEscapeUtils.unescapeHtml4(json).replace("[","").replace("]","");
 
         logger.debug(jsonTmp);
 
-        Gson gson = JsonUtils.getGsonBuilder().create();
+        GsonBuilder gsonBuilder = JsonUtils.getGsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
+            @Override
+            public boolean shouldSkipField(FieldAttributes fieldAttributes) {
+                return  fieldAttributes.getName().contains("planInfoList");
+            }
+
+            @Override
+            public boolean shouldSkipClass(Class<?> aClass) {
+                return false;
+            }
+        });
+
+        Gson gson = gsonBuilder.create();
 
         HpManager hpManager = gson.fromJson(jsonTmp,HpManager.class);
 
@@ -80,13 +96,22 @@ public class HpManagerController extends BaseController {
         if (hpManager.getNo()==30){
 //                次数到达30，说明一个方案已经完毕，自动开始下一期方案
 
-            Plan plan = hpManager.getPlan();
+//            Plan plan = hpManager.getPlan();
+
+
+            if (StringUtils.isBlank(planId)){
+                return executeResult.jsonReturn(300,"获取方案缺失");
+            }
+
+            Plan plan = new Plan(planId);
+
+            plan = planService.getPlan(plan);
 
             Plan nextPlan = new Plan();
 
             nextPlan.setLevelNo(plan.getLevelNo());
 
-            nextPlan.setOrderNo(nextPlan.getOrderNo()+1);
+            nextPlan.setOrderNo(plan.getOrderNo()+1);
 
             nextPlan = planService.getPlanByType(nextPlan);
 
@@ -98,7 +123,7 @@ public class HpManagerController extends BaseController {
 
             planInfo.setPlan(nextPlan);
 
-            Customer customer = new Customer(cid);
+            Customer customer = hpManager.getCustomer();
 
             //添加带有方案的治疗纪录
             customerService.creatCusHpManage(customer,nextPlan,planInfo);

@@ -34,9 +34,9 @@
                 <td>
                     <label for="j_customer_duration" class="control-label x85">所属阶段：</label>
                     <select name="duration" id="j_customer_duration" data-toggle="selectpicker" data-rule="required">
-                        <option value="0">试用期</option>
-                        <option value="1">治疗期</option>
-                        <option value="2">保健期</option>
+                        <option value="0" <c:if test="${customer.duration eq 0}">selected="selected"</c:if>>试用期</option>
+                        <option value="1" <c:if test="${customer.duration eq 1}">selected="selected"</c:if>>治疗期</option>
+                        <option value="2" <c:if test="${customer.duration eq 2}">selected="selected"</c:if>>保健期</option>
                     </select>
                 </td>
                 <td>

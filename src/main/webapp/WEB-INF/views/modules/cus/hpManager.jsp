@@ -100,6 +100,12 @@
                     width: 100
                 }]
             }
+//            ,
+//            {
+//                name: 'plan.id',
+//                type : 'String',
+//                hide: true
+//            }
             <%--,--%>
             <%--{--%>
             <%--name: 'id',--%>
@@ -139,7 +145,7 @@
         columnLock 		: 	true 	,//[可选] 表头字段列菜单上出现 “锁定列、解除锁定” 选项。
         paging 			: 	{pageSize:30, selectPageSize:'30,60,100', pageCurrent:1, showPagenum:5, total:0} 	,//[可选] 是否显示分页组件，可设置分页参数。分页参数模板：{pageSize:30, selectPageSize:'30,60,90', pageCurrent:1, showPagenum:5}
         pagingAlign 	: 	'left',//[可选] 分页组件对齐方式，参数['left' | 'center' | 'right']
-        editUrl 		: 	'${ctx}/hpManager/manage?cid=${customer.id}'	,//[可选] 保存编辑、添加数据的url，Ajax请求方式为POST，服务器端接收的参数名称为"json"，数据类型是JSON Array。
+        editUrl 		: 	'${ctx}/hpManager/manage?planId=${customer.plan.id}'	,//[可选] 保存编辑、添加数据的url，Ajax请求方式为POST，服务器端接收的参数名称为"json"，数据类型是JSON Array。
         //editCallback 	: 	null 	,//[可选] 保存成功后的回调，返回的json内容可以是B-JUI默认的回调json或保存后的json数据，datagrid默认回调：如果返回保存后的json数据，将会更新对应的数据行。
         editMode 		: 	'inline',//[可选] 编辑、添加数据的方式，参数[false | 'inline' | 'dialog']。false = 不能编辑，inline = 行内编辑，dialog = 弹窗编辑。
         //editDialogOp 	: 	null 	,//[可选] 弹窗编辑方式时，设置弹出窗口的参数，如{width:500, height:300, mask:false}
@@ -157,7 +163,7 @@
         fullGrid 		: 	true 	,//[可选] 使表格铺满网格容器(如果值为true，则需要设置有列宽，并且总宽度小于datagrid容器宽度时有效)。
 //        jsonPrefix      :   "planInfo",
         //width 			: 	null 	,//[可选] datagrid容器宽度，默认为父容器的宽，相当于'100%'。
-        height 			: 	'800' 	//,//[可选] datagrid容器高度。
+        height 			: 	'650' 	//,//[可选] datagrid容器高度。
         //importOption 	: 	null 	,//[可选] 工具栏的导入按钮参数，dialog或navtab方式打开导入页面，参数模板{type:"dialog", options:{url:'', width:400, height:200}}
         //exportOption 	: 	null 	,//[可选] 工具栏的导出按钮参数，执行ajax url或以dialog or navtab方式打开导出页面，参数模板{type:"ajax", options:{url:""}}
         //beforeEdit 		: 	null 	,//[可选] 带返回值方法，编辑数据前调用，返回true继续编辑，返回false取消编辑。
@@ -166,8 +172,6 @@
         //afterDelete 	: 	null 	 //[可选] 删除成功后执行方法。
 
     })
-
-
 </script>
 <div class="bjui-pageContent">
     <form action="${ctx}/cus/0/manage" id="j_custom_form" data-toggle="validate" data-alertmsg="false">
@@ -179,7 +183,7 @@
                     <label for="j_customer_duration" class="control-label x85">所属阶段：</label>
                     <select name="duration" id="j_customer_duration" data-toggle="selectpicker" readonly>
                         <option value="0">试用期</option>
-                        <option value="1">治疗期</option>
+                        <option value="1" selected="selected">治疗期</option>
                         <option value="2">保健期</option>
                     </select>
                     <%--<input name="duration" id="j_customer_duration" data-rule="required" value="${customer}" readonly>--%>

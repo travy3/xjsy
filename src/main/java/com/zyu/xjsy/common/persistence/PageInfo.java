@@ -17,7 +17,7 @@ public class PageInfo<T> implements Serializable {
 
     private int total;
 
-    private int pageSize=30;
+    private int pageSize=10;
 
     private int pageCurrent=1;
 

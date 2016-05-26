@@ -71,7 +71,7 @@
         columnShowhide 	: 	false 	,//[可选] 表头字段列菜单上出现 “显示/隐藏 列” 选项。
         columnFilter 	: 	true 	,//[可选] 表头字段列菜单上出现 “过滤” 选项。
         columnLock 		: 	true 	,//[可选] 表头字段列菜单上出现 “锁定列、解除锁定” 选项。
-        paging 			: 	{pageSize:30, selectPageSize:'30,60,100', pageCurrent:1, showPagenum:5, total:0} 	,//[可选] 是否显示分页组件，可设置分页参数。分页参数模板：{pageSize:30, selectPageSize:'30,60,90', pageCurrent:1, showPagenum:5}
+        paging 			: 	{pageSize:10, selectPageSize:'30,60,100', pageCurrent:1, showPagenum:5, total:0} 	,//[可选] 是否显示分页组件，可设置分页参数。分页参数模板：{pageSize:30, selectPageSize:'30,60,90', pageCurrent:1, showPagenum:5}
         pagingAlign 	: 	'left',//[可选] 分页组件对齐方式，参数['left' | 'center' | 'right']
         editUrl 		: 	'${ctx}/info/planInfo/manage?planId=${plan.id}' 	,//[可选] 保存编辑、添加数据的url，Ajax请求方式为POST，服务器端接收的参数名称为"json"，数据类型是JSON Array。
         //editCallback 	: 	null 	,//[可选] 保存成功后的回调，返回的json内容可以是B-JUI默认的回调json或保存后的json数据，datagrid默认回调：如果返回保存后的json数据，将会更新对应的数据行。
@@ -82,7 +82,7 @@
         addLocation 	: 	'last'	,//[可选] 添加新行数据于当前页的位置，参数['first' | 'last' | 'prev' | 'next']，参数prev和next参考当前选中行位置。
         delUrl 			: 	'${ctx}/info/planInfo/del' 	,//[可选] 删除数据的url，服务器端接收的数据见参数delPK
         delType 		: 	'POST' 	,//[可选] Ajax删除数据的请求方式。
-        delPK 			: 	'planInfoId' 	,//[可选] 设置删除主键名，如果设置了主键，则只发送该字段的值(删除多条则主键值以逗号分隔)到服务器端，否则发送JSON数据（参数名"json"，数据类型为JSON Array）。
+        delPK 			: 	'id' 	,//[可选] 设置删除主键名，如果设置了主键，则只发送该字段的值(删除多条则主键值以逗号分隔)到服务器端，否则发送JSON数据（参数名"json"，数据类型为JSON Array）。
         delConfirm 		: 	'删除操作无需保存，直接生效，是否继续删除？' 	,//[可选] 删除前的确认提示，参数[true | false | '自定义提示信息']，参数为false时不弹出提示信息。
         //delCallback 	: 	null 	,//[可选] 删除成功后的回调函数，返回的json内容为B-JUI默认的回调json。
         contextMenuH 	: 	true 	,//[可选] 在表头上右键点击时出现 ”显示/隐藏列“ 的快捷菜单。
@@ -91,7 +91,7 @@
         fullGrid 		: 	true 	,//[可选] 使表格铺满网格容器(如果值为true，则需要设置有列宽，并且总宽度小于datagrid容器宽度时有效)。
 //        jsonPrefix      :   "planInfo",
         //width 			: 	null 	,//[可选] datagrid容器宽度，默认为父容器的宽，相当于'100%'。
-        height 			: 	'800' 	//,//[可选] datagrid容器高度。
+        height 			: 	'460' 	//,//[可选] datagrid容器高度。
         //importOption 	: 	null 	,//[可选] 工具栏的导入按钮参数，dialog或navtab方式打开导入页面，参数模板{type:"dialog", options:{url:'', width:400, height:200}}
         //exportOption 	: 	null 	,//[可选] 工具栏的导出按钮参数，执行ajax url或以dialog or navtab方式打开导出页面，参数模板{type:"ajax", options:{url:""}}
         //beforeEdit 		: 	null 	,//[可选] 带返回值方法，编辑数据前调用，返回true继续编辑，返回false取消编辑。
@@ -131,7 +131,6 @@
             </tbody>
         </table>
         <table id="planInfoList" data-width="100%" class="table table-bordered">
-
         </table>
     </form>
 </div>
