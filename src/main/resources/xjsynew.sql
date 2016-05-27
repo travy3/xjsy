@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2016-05-26 16:59:18
+Date: 2016-05-27 14:56:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -445,7 +445,7 @@ INSERT INTO `sys_menu` VALUES ('5', '菜单管理', '2', '/sys/menu/list', 'Y', 
 INSERT INTO `sys_menu` VALUES ('6', '加盟管理', '1', '#', 'Y', '0', null, null);
 INSERT INTO `sys_menu` VALUES ('7', '加盟商信息', '6', '/info/business', 'Y', '0', null, 'info:business:list');
 INSERT INTO `sys_menu` VALUES ('8', '方案管理', '6', '/info/plan', 'Y', '0', null, 'info:plan:list');
-INSERT INTO `sys_menu` VALUES ('9', '日常', '1', '#', 'Y', '0', null, null);
+INSERT INTO `sys_menu` VALUES ('9', '统计', '1', '#', 'Y', '0', null, null);
 
 -- ----------------------------
 -- Table structure for sys_menu_role
