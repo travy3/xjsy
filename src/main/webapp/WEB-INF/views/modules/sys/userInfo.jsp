@@ -1,11 +1,46 @@
 <%@page language="java" contentType="text/html; utf-8" pageEncoding="utf-8" %>
 <%@include file="/WEB-INF/views/include/taglib.jsp"%>
 <div class="bjui-pageContent">
-    <form action="${ctx}/sys/user/save" class="pageForm" data-toggle="validate" data-reload="true" id="userFomr">
-        <input type="hidden" name="id" value="${user.id}">
-        <input type="hidden" name="password" value="${user.password}">
-        <table class="table table-condensed table-hover">
-            <tbody>
+    <table class="table table-condensed table-hover">
+        <tbody>
+        <tr>
+            <td>
+                <label for="j_dialog_name" class="control-label x90">加盟商：</label>
+                <input type="text" name="name" id="j_dialog_business_name" value="${business.name}" data-rule="required" size="20">
+            </td>
+            <td>
+                <label for="j_dialog_area" class="control-label x90">区域：</label>
+                <select name="area.id" id="j_dialog_area" data-toggle="selectpicker">
+                    <c:forEach items="${areaList}" var="area">
+                        <option value="${area.id}">${area.name}</option>
+                    </c:forEach>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="j_dialog_address" class="control-label x90">详细地址：</label>
+                <input type="text" name="address" id="j_dialog_address" value="" data-rule="required" size="20">
+            </td>
+            <td>
+                <label for="j_dialog_name" class="control-label x85">电子邮箱：</label>
+                <input type="text" name="email" id="j_dialog_business_mail" value="" data-rule="required;email" size="20">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="j_dialog_master" class="control-label x90">负责人：</label>
+                <input type="text" name="master" id="j_dialog_master" value="" data-rule="required" size="20">
+            </td>
+            <td>
+                <label for="j_dialog_phone" class="control-label x85">联系电话：</label>
+                <input type="text" name="phone" id="j_dialog_phone" value="" data-rule="required;mobile" size="20">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <table class="table table-condensed table-hover">
+        <tbody>
             <tr>
                 <td>
                     <label for="j_dialog_name" class="control-label x90">姓名：</label>
@@ -52,28 +87,8 @@
                     </select>
                 </td>
             </tr>
-            <tr>
-                <td>
-                    <label for="j_dialog_loginFlag" class="control-label x90">是否禁用：</label>
-                    <c:choose>
-                        <c:when test="${user.loginFlag eq 1}">
-                            <input type="radio" name="loginFlag" id="doc-j_dialog_loginFlag" data-toggle="icheck" data-label="是" value="1" checked="checked">
-                            <input type="radio" name="loginFlag" id="doc-j_dialog_loginFlag2" data-toggle="icheck" data-label="否" value="0">
-                        </c:when>
-                        <c:otherwise>
-                            <input type="radio" name="loginFlag" id="doc-j_dialog_loginFlag" data-toggle="icheck" data-label="是" value="1">
-                            <input type="radio" name="loginFlag" id="doc-j_dialog_loginFlag2" data-toggle="icheck" data-label="否" value="0"checked="checked">
-                        </c:otherwise>
-                    </c:choose>
-                </td>
-                <td>
-                    <label for="j_dialog_newPwd" class="control-label x85">重置密码：</label>
-                    <input type="text" name="newPassword" id="j_dialog_newPwd" value="" size="20">
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </form>
+        </tbody>
+    </table>
 </div>
 <div class="bjui-pageFooter">
     <ul>

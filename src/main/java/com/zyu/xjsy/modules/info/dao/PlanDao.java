@@ -12,4 +12,11 @@ import java.util.List;
 @MyBatisDao
 public interface PlanDao extends CrudDao<Plan> {
     List<Plan> getPlanList(Plan plan);
+
+    /**
+     * 按照level and order 查询 对应plan
+     * @param nextPlan
+     * @return
+     */
+    Plan getByType(Plan nextPlan);
 }

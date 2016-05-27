@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder;
 import com.zyu.xjsy.common.config.Global;
 import com.zyu.xjsy.common.controller.BaseController;
 import com.zyu.xjsy.common.persistence.PageInfo;
-import com.zyu.xjsy.common.web.ExecuteResult;
 import com.zyu.xjsy.modules.cus.entity.Customer;
 import com.zyu.xjsy.modules.cus.service.CustomerService;
 import com.zyu.xjsy.modules.info.entity.Plan;
@@ -33,7 +32,7 @@ import java.text.SimpleDateFormat;
 public class CustomerController extends BaseController {
 
 
-    private ExecuteResult executeResult = new ExecuteResult();
+//    private ExecuteResult executeResult = new ExecuteResult();
 
 
     @Autowired
@@ -192,7 +191,6 @@ public class CustomerController extends BaseController {
             planInfo.setPlan(plan);
 
             customerService.creatCusHpManage(customer,plan,planInfo);
-
 
             return executeResult.jsonReturn(200,"客户方案创建成功");
         }

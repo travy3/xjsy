@@ -89,9 +89,10 @@ public class PlanService extends BaseService {
     @Transactional(readOnly = false)
     public void savePlanInfo(PlanInfo planInfo) {
         if (StringUtils.isNotBlank(planInfo.getId())){
-
+//            planInfo.preUpdate();
             planInfoDao.update(planInfo);
         }else {
+//            planInfo.preInsert();
             planInfoDao.insert(planInfo);
         }
     }
@@ -99,6 +100,10 @@ public class PlanService extends BaseService {
     @Transactional(readOnly = false)
     public void delPlanInfo(PlanInfo planInfo) {
         planInfoDao.delete(planInfo);
+    }
+
+    public Plan getPlanByType(Plan nextPlan) {
+        return planDao.getByType(nextPlan);
     }
 
 

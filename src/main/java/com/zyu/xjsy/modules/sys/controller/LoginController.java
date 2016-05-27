@@ -1,7 +1,9 @@
 package com.zyu.xjsy.modules.sys.controller;
 
 import com.zyu.xjsy.common.controller.BaseController;
+import com.zyu.xjsy.modules.cus.entity.Customer;
 import com.zyu.xjsy.modules.sys.entity.Menu;
+import com.zyu.xjsy.modules.sys.entity.User;
 import com.zyu.xjsy.modules.sys.security.FormAuthenticationFilter;
 import com.zyu.xjsy.modules.sys.security.SystemAuthorizingRealm;
 import com.zyu.xjsy.modules.sys.service.SystemService;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,6 +44,7 @@ public class LoginController extends BaseController {
     }
 
 
+
     /**
      * 管理登录
      */
@@ -55,6 +59,7 @@ public class LoginController extends BaseController {
 
         return "/modules/sys/sysLogin2";
     }
+
 
     @RequestMapping(value = "${adminPath}/login",method =RequestMethod.POST)
     public String shiroLoginFailure(HttpServletRequest request, HttpServletResponse response, Model model){
@@ -81,6 +86,45 @@ public class LoginController extends BaseController {
     }
 
 
+
+
+    @RequestMapping(value = "/changePwd")
+    public String changePwdForm(){
+
+        return "/modules/sys/changePwd";
+    }
+
+    @RequestMapping(value = "/saveNewPwd")
+    @ResponseBody
+    public Object saveNewPwd(String password,String newPassword,String againNewPassword){
+
+
+        if (StringUtils.isBlank(password) || StringUtils.isBlank(newPassword)){
+            return executeResult.jsonReturn(300,"密码不能为空");
+        }
+
+        User user = UserUtils.getUser();
+
+        if (systemService.validatePassword(password,user.getPassword())){
+            user.setPassword(SystemService.entryptPassword(newPassword));
+            user.setNewPassword(SystemService.entryptPassword(newPassword));
+        }else {
+            return executeResult.jsonReturn(300,"密码验证失败");
+        }
+
+        systemService.saveUser(user);
+
+        return executeResult.jsonReturn(200,"新密码保存成功");
+
+    }
+
+
+    @RequestMapping(value = "/main")
+    public String mainPage(Customer customer, Model model){
+        //列表查询条件传入
+        model.addAttribute("customer",customer);
+        return "/modules/cus/cusIndex1";
+    }
 
 
 

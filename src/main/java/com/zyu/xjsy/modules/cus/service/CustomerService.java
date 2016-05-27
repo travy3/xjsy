@@ -113,6 +113,8 @@ public class CustomerService extends BaseService {
 
                 hpManager.setTimes(info.getTimes());
 
+                hpManager.setCustomer(customer);
+
                 //设置次数 累加
                 if (hpManagerTmp != null){
                     maxNo = hpManagerTmp.getNo();
@@ -124,13 +126,17 @@ public class CustomerService extends BaseService {
             }
         }
 
-        //客户状态更新
+        if (Global.DURATION_SY.equals(customer.getDuration())){
+            //如果试用客户，状态更新
+            customer.preUpdate();
 
-        customer.setDuration(Global.DURATION_ZL);
+            customer.setDuration(Global.DURATION_ZL);
 
-        customer.preUpdate();
+            customer.setPlan(plan);
 
-        customerDao.update(customer);
+
+            customerDao.update(customer);
+        }
 
     }
 }

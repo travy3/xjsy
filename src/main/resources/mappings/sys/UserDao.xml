@@ -121,7 +121,9 @@
         UPDATE sys_user SET
           business = #{business.id},
           login_name = #{loginName},
-          password = #{password},
+          <if test="newPassword != null and newPassword != ''">
+              password = #{password},
+          </if>
           real_name = #{name},
           email = #{email},
           mobile = #{mobile},

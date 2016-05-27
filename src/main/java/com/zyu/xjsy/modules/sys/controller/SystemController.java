@@ -3,7 +3,6 @@ package com.zyu.xjsy.modules.sys.controller;
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.zyu.xjsy.common.controller.BaseController;
-import com.zyu.xjsy.common.web.ExecuteResult;
 import com.zyu.xjsy.modules.sys.entity.Menu;
 import com.zyu.xjsy.modules.sys.entity.Role;
 import com.zyu.xjsy.modules.sys.service.SystemService;
@@ -26,7 +25,7 @@ import java.util.List;
 @Controller
 public class SystemController extends BaseController {
 
-    private ExecuteResult executeResult = new ExecuteResult();
+//    private ExecuteResult executeResult = new ExecuteResult();
 
     @Autowired
     private SystemService systemService;

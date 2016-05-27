@@ -21,9 +21,9 @@
         <association property="customer" javaType="Customer" >
             <id property="id" column="cid"></id>
         </association>
-        <association property="plan" javaType="Plan">
-            <id property="id" column="pid"></id>
-        </association>
+        <!--<association property="plan" javaType="Plan">-->
+            <!--<id property="id" column="pid"></id>-->
+        <!--</association>-->
     </resultMap>
 
     <sql id="hpManagerColumns">
@@ -43,7 +43,7 @@
         a.times,
         a.paper,
         a.customer AS 'cid',
-        a.plan AS 'pid'
+        a.plan AS 'plan.id'
     </sql>
 
     <insert id="insert">
@@ -111,6 +111,7 @@
         FROM cus_hpmanager a
         JOIN cus_customer c ON a.customer = c.id
         WHERE c.id = #{customer.id}
+        ORDER BY a.no ASC
     </select>
 
     <select id="getMaxNo" resultType="HpManager">

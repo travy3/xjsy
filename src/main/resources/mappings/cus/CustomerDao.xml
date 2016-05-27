@@ -142,6 +142,7 @@
 		  eye_control = #{eyeControl},
 		  eye_strengh = #{eyeStrength},
           status = #{status},
+          plan = #{plan.id},
           duration = #{duration},
           update_by= #{updateBy.id},
           update_date = #{updateDate}
@@ -185,7 +186,11 @@
 	</select>
 
 	<select id="getById" resultType="Customer">
-		SELECT * FROM cus_customer WHERE id = #{id}
+		SELECT
+		<include refid="customerColumns"></include>
+		FROM cus_customer a
+		JOIN sys_business b ON  a.business = b.id
+		WHERE a.id = #{id}
 	</select>
 
 
