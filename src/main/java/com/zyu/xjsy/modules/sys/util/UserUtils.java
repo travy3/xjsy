@@ -1,5 +1,6 @@
 package com.zyu.xjsy.modules.sys.util;
 
+import com.google.common.collect.Lists;
 import com.zyu.xjsy.common.service.BaseService;
 import com.zyu.xjsy.common.util.CacheUtils;
 import com.zyu.xjsy.modules.info.dao.BusinessDao;
@@ -165,17 +166,18 @@ public class UserUtils {
      * @return
      */
     public static List<Menu> getMenuList() {
-        List<Menu> menuList = (List<Menu>) getCache(CACHE_MENU_LIST);
-        //TODO
-        if(menuList == null){
+//        List<Menu> menuList = (List<Menu>) getCache(CACHE_MENU_LIST);
+//        //TODO
+//        if(menuList == null){
+        List<Menu> menuList = Lists.newArrayList();
             User user = getUser();
             if (user.isAdmin()){
                 menuList = menuDao.findAllList(new Menu());
             }else {
                 menuList = menuDao.findByUser(user==null?new User():user);
             }
-            putCache(CACHE_MENU_LIST,menuList);
-        }
+//            putCache(CACHE_MENU_LIST,menuList);
+//        }
         return menuList;
     }
 

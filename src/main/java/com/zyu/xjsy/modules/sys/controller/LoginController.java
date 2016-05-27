@@ -1,6 +1,7 @@
 package com.zyu.xjsy.modules.sys.controller;
 
 import com.zyu.xjsy.common.controller.BaseController;
+import com.zyu.xjsy.modules.cus.entity.Customer;
 import com.zyu.xjsy.modules.sys.entity.Menu;
 import com.zyu.xjsy.modules.sys.entity.User;
 import com.zyu.xjsy.modules.sys.security.FormAuthenticationFilter;
@@ -43,6 +44,7 @@ public class LoginController extends BaseController {
     }
 
 
+
     /**
      * 管理登录
      */
@@ -57,6 +59,7 @@ public class LoginController extends BaseController {
 
         return "/modules/sys/sysLogin2";
     }
+
 
     @RequestMapping(value = "${adminPath}/login",method =RequestMethod.POST)
     public String shiroLoginFailure(HttpServletRequest request, HttpServletResponse response, Model model){
@@ -81,6 +84,7 @@ public class LoginController extends BaseController {
 
         return "/modules/sys/sysLogin2";
     }
+
 
 
 
@@ -112,6 +116,14 @@ public class LoginController extends BaseController {
 
         return executeResult.jsonReturn(200,"新密码保存成功");
 
+    }
+
+
+    @RequestMapping(value = "/main")
+    public String mainPage(Customer customer, Model model){
+        //列表查询条件传入
+        model.addAttribute("customer",customer);
+        return "/modules/cus/cusIndex1";
     }
 
 
