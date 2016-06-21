@@ -40,7 +40,7 @@ public class LoginController extends BaseController {
 
         model.addAttribute("menuList",menuList);
 
-        return "/modules/sys/sysIndex";
+        return "/modules/sys/sysIndex2";
     }
 
 
