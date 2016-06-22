@@ -20,6 +20,8 @@ public class JedisCacheManager implements CacheManager {
 
     private JedisPool jedisPool;
 
+//    private RedisManager redisManager;
+
     public static final String KEY_PREFIX = Global.getConfig("redis.keyPrefix");
 
 
@@ -51,4 +53,12 @@ public class JedisCacheManager implements CacheManager {
         //todo
         return null;
     }
+
+//    public RedisManager getRedisManager() {
+//        return redisManager;
+//    }
+//
+//    public void setRedisManager(RedisManager redisManager) {
+//        this.redisManager = redisManager;
+//    }
 }

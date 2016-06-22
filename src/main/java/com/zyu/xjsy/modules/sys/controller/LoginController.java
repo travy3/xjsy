@@ -6,8 +6,12 @@ import com.github.abel533.echarts.axis.CategoryAxis;
 import com.github.abel533.echarts.axis.ValueAxis;
 import com.github.abel533.echarts.code.Trigger;
 import com.github.abel533.echarts.json.GsonOption;
+import com.github.abel533.echarts.series.Bar;
+import com.github.abel533.echarts.series.Series;
 import com.google.common.collect.Lists;
 import com.zyu.xjsy.common.controller.BaseController;
+import com.zyu.xjsy.modules.cus.entity.Customer;
+import com.zyu.xjsy.modules.cus.service.CustomerService;
 import com.zyu.xjsy.modules.sys.entity.Menu;
 import com.zyu.xjsy.modules.sys.entity.User;
 import com.zyu.xjsy.modules.sys.security.FormAuthenticationFilter;
@@ -27,6 +31,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by travy on 2016/2/17.
@@ -36,6 +41,9 @@ public class LoginController extends BaseController {
 
     @Autowired
     private SystemService systemService;
+
+    @Autowired
+    private CustomerService customerService;
 
     @RequestMapping(value = "${adminPath}")
     public String index(Model model){
@@ -135,6 +143,8 @@ public class LoginController extends BaseController {
     @ResponseBody
     public String statistics_increaseCus(){
 
+        User user = UserUtils.getUser();
+
         GsonOption gsonOption = new GsonOption();
         Toolbox toolbox = new Toolbox();
         toolbox.show(true);
@@ -153,6 +163,21 @@ public class LoginController extends BaseController {
         gsonOption.setyAxis(yAxisList);
 
         //todo echart 每月新增客户数据
+
+        Series series  = new Bar("客户");
+        /**
+         *  查询新增用户
+         */
+
+        Customer customer = new Customer();
+        customer.setUser(user);
+        List<Map> mapList = Lists.newArrayList();
+        mapList = customerService.getIncCusByMonth(customer);
+
+
+
+//        series.setData();
+
 
 
         return null;

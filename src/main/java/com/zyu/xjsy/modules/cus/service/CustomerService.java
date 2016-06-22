@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by chenjie on 2016/4/13.
@@ -139,4 +140,11 @@ public class CustomerService extends BaseService {
         }
 
     }
+
+    public List<Map> getIncCusByMonth(Customer customer){
+
+        return customerDao.countIncCusByMonth(customer);
+    }
+
+
 }

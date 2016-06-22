@@ -196,5 +196,16 @@
 		WHERE a.id = #{id}
 	</select>
 
+	<select id="countIncCusByMonth" resultType="Map">
+
+		SELECT DATE_FORMAT(a.create_date,'%m') months, COUNT(a.id) COUNT FROM cus_customer a
+		JOIN sys_business b ON  a.business = b.id
+		WHERE a.delflag = #{DEL_FLAG_NORMAL}
+		<if test="user.admin != true">
+			AND a.business = #{user.business.id}
+		</if>
+
+	</select>
+
 
 </mapper>
