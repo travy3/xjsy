@@ -60,7 +60,7 @@
                             <ul id="bjui-tree-${menu.id}" class="ztree ztree_main" data-toggle="ztree" data-on-click="MainMenuClick" data-expand-all="true" data-expand-level="2">
                                 <c:forEach items="${menuList}" var="menuChild">
                                 <c:if test="${menuChild.pid eq menu.id}">
-                                <li data-id="${menuChild.id}" data-pid="${menuChild.pid}" data-toggle="navtab" data-url="${ctx}${menuChild.href}" data-tabid="form-button" data-faicon="caret-right">${menuChild.name}</li>
+                                <li data-id="${menuChild.id}" data-pid="${menuChild.pid}" data-toggle="navtab" data-url="${ctx}${menuChild.href}" data-tabid="navId_${menuChild.id}" data-faicon="caret-right">${menuChild.name}</li>
                                     <%--<li data-id="${menuChild.id}"  data-pid="${menuChild.pid}" data-url="${ctx}${menuChild.href}" data-toggle="navtab"  data-tabid="form-button"--%>
                                         <%--data-faicon="bell">${menuChild.name}</li>--%>
                                 </c:if>
