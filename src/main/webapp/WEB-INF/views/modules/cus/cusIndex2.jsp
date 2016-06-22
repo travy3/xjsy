@@ -1,7 +1,7 @@
 <%@page language="java" contentType="text/html; utf-8" pageEncoding="utf-8" %>
 <%@include file="/WEB-INF/views/include/taglib.jsp"%>
 <script type="text/javascript">
-    $('#user-datagrid-json').datagrid({
+    $('#customer-datagrid-${uuid}').datagrid({
         columns: [
             {
                 name: 'name',
@@ -129,7 +129,7 @@
 </div>
 <div class="bjui-pageContent tableContent">
     <div style="height:100%; width:100%;">
-        <table id="user-datagrid-json" data-width="100%" class="table table-bordered">
+        <table id="customer-datagrid-${uuid}" data-width="100%" class="table table-bordered">
         </table>
         <br>
     </div>
