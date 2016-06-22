@@ -1,7 +1,13 @@
 package com.zyu.xjsy.modules.sys.controller;
 
+import com.github.abel533.echarts.Toolbox;
+import com.github.abel533.echarts.axis.Axis;
+import com.github.abel533.echarts.axis.CategoryAxis;
+import com.github.abel533.echarts.axis.ValueAxis;
+import com.github.abel533.echarts.code.Trigger;
+import com.github.abel533.echarts.json.GsonOption;
+import com.google.common.collect.Lists;
 import com.zyu.xjsy.common.controller.BaseController;
-import com.zyu.xjsy.modules.cus.entity.Customer;
 import com.zyu.xjsy.modules.sys.entity.Menu;
 import com.zyu.xjsy.modules.sys.entity.User;
 import com.zyu.xjsy.modules.sys.security.FormAuthenticationFilter;
@@ -34,13 +40,12 @@ public class LoginController extends BaseController {
     @RequestMapping(value = "${adminPath}")
     public String index(Model model){
 
-
         List<Menu> menuList = new ArrayList<Menu>();
         menuList = UserUtils.getMenuList();
 
         model.addAttribute("menuList",menuList);
 
-        return "/modules/sys/sysIndex";
+        return "/modules/sys/sysIndex2";
     }
 
 
@@ -120,10 +125,39 @@ public class LoginController extends BaseController {
 
 
     @RequestMapping(value = "/main")
-    public String mainPage(Customer customer, Model model){
+    public String mainPage(Model model){
         //列表查询条件传入
-        model.addAttribute("customer",customer);
-        return "/modules/cus/cusIndex1";
+//        model.addAttribute("customer",customer);
+        return "/modules/sys/main";
+    }
+
+    @RequestMapping(value = "/statistics/increaseCus")
+    @ResponseBody
+    public String statistics_increaseCus(){
+
+        GsonOption gsonOption = new GsonOption();
+        Toolbox toolbox = new Toolbox();
+        toolbox.show(true);
+        gsonOption.tooltip(Trigger.axis).legend("客户").calculable(true);
+        Axis xAxis = new CategoryAxis();
+        xAxis.data("1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月");
+
+        Axis yAxis = new ValueAxis();
+        yAxis.splitArea().show(true);
+
+        List<Axis> xAxisList = Lists.newArrayList();
+        List<Axis> yAxisList = Lists.newArrayList();
+        xAxisList.add(xAxis);
+        yAxisList.add(yAxis);
+        gsonOption.setxAxis(xAxisList);
+        gsonOption.setyAxis(yAxisList);
+
+        //todo echart 每月新增客户数据
+
+
+        return null;
+
+
     }
 
 

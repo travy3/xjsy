@@ -303,6 +303,12 @@
       <version>${jackson.version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>com.github.abel533</groupId>
+      <artifactId>ECharts</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+
     <!--common-lang-->
     <dependency>
       <groupId>org.apache.commons</groupId>

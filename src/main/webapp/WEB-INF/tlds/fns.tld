@@ -45,6 +45,14 @@
         <example>${fns:getUser()}</example>
     </function>
 
+    <function>
+        <description>随机生成UUID</description>
+        <name>getUUID</name>
+        <function-class>com.zyu.xjsy.common.util.IdGen</function-class>
+        <function-signature>java.lang.String uuid()</function-signature>
+        <example>${fns:getUUID()}</example>
+    </function>
+
 
     
 

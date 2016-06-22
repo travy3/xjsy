@@ -37,9 +37,9 @@ public class SystemController extends BaseController {
         List<Menu> menuList = new ArrayList<Menu>();
         menuList = systemService.findAllMenu();
 
-        for (Menu menu : menuList){
-            System.out.println("menu.Child:"+menu.hasChild(menuList,"1"));
-        }
+//        for (Menu menu : menuList){
+//            System.out.println("menu.Child:"+menu.hasChild(menuList,"1"));
+//        }
         model.addAttribute("menuList",menuList);
         return "/modules/sys/sysMenu";
     }

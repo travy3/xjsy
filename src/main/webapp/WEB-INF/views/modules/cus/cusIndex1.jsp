@@ -1,7 +1,7 @@
 <%@page language="java" contentType="text/html; utf-8" pageEncoding="utf-8" %>
 <%@include file="/WEB-INF/views/include/taglib.jsp"%>
 <script type="text/javascript">
-    $('#user-datagrid-json').datagrid({
+    $('#customer-datagrid-${uuid}').datagrid({
         columns: [
             {
                 name: 'name',
@@ -44,6 +44,7 @@
                 name: 'business',
                 label: '加盟商',
                 type: 'String',
+                align:'center',
                 render: function(value){
                     return value.name;
                 }
@@ -104,6 +105,7 @@
         hScrollbar 		: 	false 	,//[可选] 允许出现横向滚动条。
         fullGrid 		: 	true 	,//[可选] 使表格铺满网格容器(如果值为true，则需要设置有列宽，并且总宽度小于datagrid容器宽度时有效)。
         //width 			: 	null 	,//[可选] datagrid容器宽度，默认为父容器的宽，相当于'100%'。
+        postData        :   {name:'${customer.name}',telephone:'${customer.telephone}'},
         height 			: 	'100%' 	//,//[可选] datagrid容器高度。
         //importOption 	: 	null 	,//[可选] 工具栏的导入按钮参数，dialog或navtab方式打开导入页面，参数模板{type:"dialog", options:{url:'', width:400, height:200}}
         //exportOption 	: 	null 	,//[可选] 工具栏的导出按钮参数，执行ajax url或以dialog or navtab方式打开导出页面，参数模板{type:"ajax", options:{url:""}}
@@ -114,7 +116,7 @@
     })
 </script>
 <div class="bjui-pageHeader">
-<form id="pagerForm" data-toggle="ajaxsearch" action="${ctx}/cus/1" method="post">
+<form id="pagerForm" data-toggle="ajaxsearch" action="${ctx}/cus/1" method="get">
 <%--<input type="hidden" name="pageSize" value="${user.pageInfo.pageSize}">--%>
 <%--<input type="hidden" name="pageCurrent" value="${user.pageInfo.pageCurrent}">--%>
 <%--<input type="hidden" name="orderField" value="${user.pageInfo.orderField}">--%>
@@ -129,7 +131,7 @@
 </div>
 <div class="bjui-pageContent tableContent">
     <div style="height:100%; width:100%;">
-        <table id="user-datagrid-json" data-width="100%" class="table table-bordered">
+        <table id="customer-datagrid-${uuid}" data-width="100%" class="table table-bordered">
         </table>
         <br>
     </div>

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2016-05-27 14:56:53
+Date: 2016-06-22 14:48:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -60,6 +60,7 @@ INSERT INTO `cus_customer` VALUES ('184d9d479daa4951b057301ea99b8e39', '张宇',
 INSERT INTO `cus_customer` VALUES ('4b1cf64dfc6046a586b31cea2b6a2584', '温柔', '1', '1999-05-26', '15032831554', '3', '2', '21', '2', '2', '3', '23', '12', '1', '阿飞', '22', '12', '第三方', '3', '12', '1', null, null, '0', '1', '2016-05-26 15:10:29', '1', '2016-05-26 15:18:25', null, '0');
 INSERT INTO `cus_customer` VALUES ('a12ef2a8720b4825b22eccd02e950c83', '张丽', '1', '2000-05-26', '15032831554', '上海', '12', '212', '32', '32', '21', '2', '1', '1', '家里蹲', '23', '23', '无', '5', '2', '1', null, null, '1', '1', '2016-05-26 14:59:13', '1', '2016-05-26 15:22:03', null, '0');
 INSERT INTO `cus_customer` VALUES ('b789c1c2276a495786b79fcffeb940ad', '新增Item1', '1', '2009-05-04', '15032831554', '范甘迪', '12', '21', '23', '23', '123', '1', '2', '1', '十五中', '123', '32', '文身断发', '12', '3', '1', null, '', '1', '1', '2016-05-04 16:36:26', '1', '2016-05-24 16:53:12', null, '0');
+INSERT INTO `cus_customer` VALUES ('fa9fa72f146f437cb6399d14a50f3b26', 'lirui', '0', '2008-06-21', '15032852145', '地方', '23', '12', '32', '1', '32', '32', '12', '9f44ea18e2864ea59a89dd748e2b7de3', '实验二中', '23', '12', '饿1', '12', '23', '1', null, null, '0', '7c5f5acfeeab4f1fbcc2afc671ded1d9', '2016-06-21 16:38:09', '7c5f5acfeeab4f1fbcc2afc671ded1d9', '2016-06-21 16:38:09', null, '0');
 
 -- ----------------------------
 -- Table structure for cus_hpmanager
@@ -137,7 +138,7 @@ INSERT INTO `cus_hpmanager` VALUES ('4aee677a7c4843c2a78b6c1ed64e5c92', '184d9d4
 INSERT INTO `cus_hpmanager` VALUES ('4c25054045974d91aa2c20e47806ad7d', 'a12ef2a8720b4825b22eccd02e950c83', '11', null, null, null, null, null, null, null, null, null, null, '5', 's1', '2', '6号图纸', null, null);
 INSERT INTO `cus_hpmanager` VALUES ('4fd5e25cb4804ef891bf3dcea167118b', '184d9d479daa4951b057301ea99b8e39', '115', null, null, null, null, null, null, null, null, null, null, '5', 's2', '2', '7号图纸', null, null);
 INSERT INTO `cus_hpmanager` VALUES ('507cf7dc82a342eeadc90acbc148af84', '184d9d479daa4951b057301ea99b8e39', '40', null, null, null, null, null, null, null, null, null, null, '5', 's2', '6', '8号图纸', null, null);
-INSERT INTO `cus_hpmanager` VALUES ('511cc4b85dd74c6f8c82fd2d392677c8', 'a12ef2a8720b4825b22eccd02e950c83', '29', null, null, null, null, null, null, null, null, null, null, '5', 's2', '4', '23号图纸', null, null);
+INSERT INTO `cus_hpmanager` VALUES ('511cc4b85dd74c6f8c82fd2d392677c8', 'a12ef2a8720b4825b22eccd02e950c83', '29', '2016-06-16 00:00:00', '12', '23', '12', '32', '32', '34', '32', '12', null, '5', 's2', '4', '23号图纸', null, null);
 INSERT INTO `cus_hpmanager` VALUES ('515d90aee15f4e268e224404015c6465', '184d9d479daa4951b057301ea99b8e39', '79', null, null, null, null, null, null, null, null, null, null, '5', 's2', '1', '3号图纸', null, null);
 INSERT INTO `cus_hpmanager` VALUES ('51b2d4464f2644738327f401a3d66467', 'a12ef2a8720b4825b22eccd02e950c83', '10', null, null, null, null, null, null, null, null, null, null, '5', 's2', '6', '8号图纸', null, null);
 INSERT INTO `cus_hpmanager` VALUES ('53bcedd631ef4c0d857ec400d9a997aa', 'a12ef2a8720b4825b22eccd02e950c83', '16', null, null, null, null, null, null, null, null, null, null, '5', 's2', '2', '6号图纸', null, null);
@@ -190,7 +191,7 @@ INSERT INTO `cus_hpmanager` VALUES ('9e8fb4265e8f4e0191aa7b2f53d5288b', '184d9d4
 INSERT INTO `cus_hpmanager` VALUES ('9ec1738be8f0441fac83be0c783dcc99', '184d9d479daa4951b057301ea99b8e39', '25', null, null, null, null, null, null, null, null, null, null, '5', 's2', '2', '7号图纸', null, null);
 INSERT INTO `cus_hpmanager` VALUES ('9ee16d437f2448e8a04c0055444efd53', 'a12ef2a8720b4825b22eccd02e950c83', '4', null, null, null, null, null, null, null, null, null, null, '5', 's1', '2', '8号图纸', null, null);
 INSERT INTO `cus_hpmanager` VALUES ('9f1a96dcb4084fafa46004046036dc0e', '184d9d479daa4951b057301ea99b8e39', '106', null, null, null, null, null, null, null, null, null, null, '5', 's2', '2', '6号图纸', null, null);
-INSERT INTO `cus_hpmanager` VALUES ('9fa8a877b5fb44e698087f52203f15df', 'a12ef2a8720b4825b22eccd02e950c83', '1', null, null, null, null, null, null, null, null, null, null, '5', 's2', '1', '7号图纸', null, null);
+INSERT INTO `cus_hpmanager` VALUES ('9fa8a877b5fb44e698087f52203f15df', 'a12ef2a8720b4825b22eccd02e950c83', '1', '2016-06-20 00:00:00', '12', '23', '123', '3', '23', '12', '12', '32', null, '5', 's2', '1', '7号图纸', null, null);
 INSERT INTO `cus_hpmanager` VALUES ('a016a40bd1ac4684a0ff089c3775c8bd', '184d9d479daa4951b057301ea99b8e39', '75', null, null, null, null, null, null, null, null, null, null, '5', 's2', '1', '3号图纸', null, null);
 INSERT INTO `cus_hpmanager` VALUES ('a0b116f829e74c509e5da3a5a53324c7', '184d9d479daa4951b057301ea99b8e39', '89', null, null, null, null, null, null, null, null, null, null, '5', 's2', '4', '23号图纸', null, null);
 INSERT INTO `cus_hpmanager` VALUES ('a298f90c49f0472b8edb084e7dc01e6d', '184d9d479daa4951b057301ea99b8e39', '41', null, null, null, null, null, null, null, null, null, null, '5', 's1', '2', '6号图纸', null, null);
@@ -217,7 +218,7 @@ INSERT INTO `cus_hpmanager` VALUES ('bfa61770ea614bc99b7cbcadfefd7974', '184d9d4
 INSERT INTO `cus_hpmanager` VALUES ('bfbac82c36b948ea889e7627658ffdd8', '184d9d479daa4951b057301ea99b8e39', '35', null, null, null, null, null, null, null, null, null, null, '5', 's1', '1', '8号图纸', null, null);
 INSERT INTO `cus_hpmanager` VALUES ('c00da920b777499eb17e064a0dd9e3b6', 'a12ef2a8720b4825b22eccd02e950c83', '15', null, null, null, null, null, null, null, null, null, null, '5', 's2', '1', '3号图纸', null, null);
 INSERT INTO `cus_hpmanager` VALUES ('c13a8368121044d4ba354bacb410b5c6', '184d9d479daa4951b057301ea99b8e39', '65', null, null, null, null, null, null, null, null, null, null, '5', 's1', '1', '8号图纸', null, null);
-INSERT INTO `cus_hpmanager` VALUES ('c3d9bbbae6444cabbdc1ed4d2f850c7e', 'a12ef2a8720b4825b22eccd02e950c83', '30', null, null, null, null, null, null, null, null, null, null, '5', 's2', '6', '2号图纸', null, null);
+INSERT INTO `cus_hpmanager` VALUES ('c3d9bbbae6444cabbdc1ed4d2f850c7e', 'a12ef2a8720b4825b22eccd02e950c83', '30', '2016-06-21 00:00:00', '12', '23', '234', '53', '12', '321', '3', '2', null, '5', 's2', '6', '2号图纸', null, null);
 INSERT INTO `cus_hpmanager` VALUES ('c4bdb71584b541959da2326d084745e1', '184d9d479daa4951b057301ea99b8e39', '110', null, null, null, null, null, null, null, null, null, null, '5', 's3', '2', '7号图纸', null, null);
 INSERT INTO `cus_hpmanager` VALUES ('c82499b256764c38802a7b615a881bff', '184d9d479daa4951b057301ea99b8e39', '48', null, null, null, null, null, null, null, null, null, null, '5', 's1', '2', '5号图纸', null, null);
 INSERT INTO `cus_hpmanager` VALUES ('cca05d7581844615b90aad16592d3a31', '184d9d479daa4951b057301ea99b8e39', '69', null, null, null, null, null, null, null, null, null, null, '5', 's1', '5', '8号图纸', null, null);
@@ -435,16 +436,16 @@ CREATE TABLE `sys_menu` (
 -- ----------------------------
 INSERT INTO `sys_menu` VALUES ('1', '根目录', '0', '#', 'N', '0', null, null);
 INSERT INTO `sys_menu` VALUES ('10', '客户管理', '1', '#', 'Y', '0', null, null);
-INSERT INTO `sys_menu` VALUES ('11', '治疗期', '10', '/cus/1', 'Y', '0', null, null);
-INSERT INTO `sys_menu` VALUES ('12', '保健期', '10', '/cus/2', 'Y', '0', null, null);
-INSERT INTO `sys_menu` VALUES ('13', '试用期', '10', '/cus/0', 'Y', '0', null, null);
+INSERT INTO `sys_menu` VALUES ('11', '治疗期', '10', '/cus/1', 'Y', '0', 'cus_1', null);
+INSERT INTO `sys_menu` VALUES ('12', '保健期', '10', '/cus/2', 'Y', '0', 'cus_2', null);
+INSERT INTO `sys_menu` VALUES ('13', '试用期', '10', '/cus/0', 'Y', '0', 'cus_3', null);
 INSERT INTO `sys_menu` VALUES ('2', '系统管理', '1', '#', 'Y', '0', null, null);
-INSERT INTO `sys_menu` VALUES ('3', '用户管理', '2', '/sys/user', 'Y', '0', null, null);
-INSERT INTO `sys_menu` VALUES ('4', '角色管理', '2', '/sys/role', 'Y', '0', null, null);
-INSERT INTO `sys_menu` VALUES ('5', '菜单管理', '2', '/sys/menu/list', 'Y', '0', null, 'sys:menu:list');
+INSERT INTO `sys_menu` VALUES ('3', '用户管理', '2', '/sys/user', 'Y', '0', 'user', null);
+INSERT INTO `sys_menu` VALUES ('4', '角色管理', '2', '/sys/role', 'Y', '0', 'role', null);
+INSERT INTO `sys_menu` VALUES ('5', '菜单管理', '2', '/sys/menu/list', 'Y', '0', 'menu_list', 'sys:menu:list');
 INSERT INTO `sys_menu` VALUES ('6', '加盟管理', '1', '#', 'Y', '0', null, null);
-INSERT INTO `sys_menu` VALUES ('7', '加盟商信息', '6', '/info/business', 'Y', '0', null, 'info:business:list');
-INSERT INTO `sys_menu` VALUES ('8', '方案管理', '6', '/info/plan', 'Y', '0', null, 'info:plan:list');
+INSERT INTO `sys_menu` VALUES ('7', '加盟商信息', '6', '/info/business', 'Y', '0', 'business', 'info:business:list');
+INSERT INTO `sys_menu` VALUES ('8', '方案管理', '6', '/info/plan', 'Y', '0', 'plan', 'info:plan:list');
 INSERT INTO `sys_menu` VALUES ('9', '统计', '1', '#', 'Y', '0', null, null);
 
 -- ----------------------------
@@ -492,7 +493,7 @@ CREATE TABLE `sys_role` (
 -- Records of sys_role
 -- ----------------------------
 INSERT INTO `sys_role` VALUES ('1', 'admin', '管理员', '系统', '0', '1', '2016-03-23 15:13:58', '1', '2016-03-23 15:14:01');
-INSERT INTO `sys_role` VALUES ('2', 'jiameng', '加盟商', '加盟商', '0', '1', '2016-03-23 15:14:24', '1', '2016-03-23 15:14:26');
+INSERT INTO `sys_role` VALUES ('2', 'jiameng', '加盟商', '加盟商', '1', '1', '2016-03-23 15:14:24', '1', '2016-03-23 15:14:26');
 INSERT INTO `sys_role` VALUES ('584eaadeb5d947bfb76a523b029e13cb', 'new_jiameng', '新加盟商', '123', '0', '1', '2016-05-25 14:55:54', '1', '2016-05-25 14:55:54');
 INSERT INTO `sys_role` VALUES ('a4e9a2cf56fc4cbbafa74f312fec23e4', 'jiamengC', '加盟C', '123', '1', '1', '2016-05-10 15:49:58', '1', '2016-05-10 15:49:58');
 INSERT INTO `sys_role` VALUES ('dd79e14c2c7b4261ba18f03c7c4ab8a2', 'jiamengB', '加盟商B', '二级', '1', null, '2016-04-04 23:10:56', null, '2016-04-04 23:10:56');

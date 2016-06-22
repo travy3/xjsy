@@ -2,6 +2,7 @@ package com.zyu.xjsy.common.controller;
 
 import com.zyu.xjsy.common.beanvalidator.BeanValidators;
 import com.zyu.xjsy.common.util.DateUtils;
+import com.zyu.xjsy.common.util.IdGen;
 import com.zyu.xjsy.common.web.ExecuteResult;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.validation.ConstraintViolationException;
 import javax.validation.Validator;
@@ -27,6 +29,11 @@ public abstract class BaseController {
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
     protected ExecuteResult executeResult = new ExecuteResult();
+
+    @ModelAttribute("uuid")
+    public String  initUUID(){
+        return IdGen.uuid();
+    }
 
     /**
      * 管理基础路径
