@@ -111,8 +111,10 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
                 if(getSystemService().validatePassword(new String(token.getPassword()),user.getPassword())){
                     return new SimpleAuthenticationInfo(new Principal(user),new String(token.getPassword()),getName());
                 }else {
-                    throw new UnknownAccountException("msg:账号密码错误,请重试.");
+                    throw new IncorrectCredentialsException("msg:密码错误,请重试.");
                 }
+            }else {
+                throw  new UnknownAccountException("msg:账号不存在,请重试.");
             }
         }
         return null;

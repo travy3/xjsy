@@ -58,7 +58,8 @@
 <%--<script src="${bjui}/plugins/highcharts/highcharts.js"></script>--%>
 <%--<script src="${bjui}/plugins/highcharts/highcharts-3d.js"></script>--%>
 <!-- ECharts -->
-<%--<script src="${bjui}/plugins/echarts/echarts.js"></script>--%>
+<script src="${bjui}/plugins/echarts/echarts.js"></script>
+
 <!-- other plugins -->
 <script src="${bjui}/plugins/other/jquery.autosize.js"></script>
 <link href="${bjui}/plugins/uploadify/css/uploadify.css" rel="stylesheet">

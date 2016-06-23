@@ -139,6 +139,7 @@ public class LoginController extends BaseController {
         return "/modules/sys/main";
     }
 
+
     @RequestMapping(value = "/statistics/increaseCus")
     @ResponseBody
     public String statistics_increaseCus(){
@@ -174,14 +175,26 @@ public class LoginController extends BaseController {
         List<Map> mapList = Lists.newArrayList();
         mapList = customerService.getIncCusByMonth(customer);
 
+        List<String> list = Lists.newArrayList();
 
+        for (int i =1; i<=12; i++){
+            list.add("0");
+        }
 
-//        series.setData();
+        for (Map map : mapList){
+            String month = (String) map.get("months");
+            list.set(Integer.parseInt(month), map.get("COUNT").toString());
+        }
 
+        series.setData(list);
 
+        List<Series> serieslist = Lists.newArrayList();
+        serieslist.add(series);
 
-        return null;
+        gsonOption.setSeries(serieslist);
+        logger.info("gsonOption is {}",gsonOption.toString());
 
+        return gsonOption.toString();
 
     }
 

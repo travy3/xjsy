@@ -204,7 +204,7 @@
 		<if test="user.admin != true">
 			AND a.business = #{user.business.id}
 		</if>
-
+		GROUP BY months
 	</select>
 
 
