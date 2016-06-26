@@ -57,12 +57,22 @@
 
     <!-- 定义Shiro安全管理配置 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <!--继承自RealmSecurityManager 单个realm 多个reamls -->
         <property name="realm" ref="systemAuthorizingRealm" />
+        <!--继承自AuthenticatingSecurityManager 配置Authenticator 默认ModularRealmAuthenticator
+            ModularRealmAuthenticator 调用AuthenticationStrategy进行多Realm身份验证（默认AtLeastOneSuccessfulStrategy）
+            传入token realm 进行认证
+        -->
+
+        <!--<property name="authenticator" ref=""></property>-->
+        <!--继承自AuthorizingSecurityManager 配置authorizer 默认ModularRealmAuthorizer-->
+        <property name="authorizer" ref="modularRealmAuthorizer"></property>
         <property name="sessionManager" ref="sessionManager" />
         <!-- 为了减少数据库压力 添加了缓存机制 shiroCacheManager 是 Shiro 对缓存框架 EhCache 的配置 -->
         <property name="cacheManager" ref="shiroCacheManager" />
     </bean>
     <bean id="systemAuthorizingRealm" class="com.zyu.xjsy.modules.sys.security.SystemAuthorizingRealm"></bean>
+    <bean id="modularRealmAuthorizer" class="org.apache.shiro.authz.ModularRealmAuthorizer"></bean>
 
     <!-- 自定义会话管理配置 -->
     <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
