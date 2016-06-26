@@ -3,6 +3,8 @@ package com.zyu.xjsy.modules.sys.entity;
 import com.zyu.xjsy.common.config.Global;
 import com.zyu.xjsy.common.persistence.DataEntity;
 
+import java.util.List;
+
 /**
  * Created by chenjie on 2016/2/18.
  */
@@ -86,4 +88,23 @@ public class Menu extends DataEntity<Menu>{
     public void setPermission(String permission) {
         this.permission = permission;
     }
+
+    public boolean hasChild(List<Menu> menuList , String parentId){
+
+        for (int i  = 0 ; i<menuList.size() ; i++){
+        Menu menu = menuList.get(i);
+        if(menu.getPid()!=null && menu.getPid().equals(parentId)){
+
+            for (int j = 0 ; j<menuList.size() ; j++){
+                Menu menuChild = menuList.get(j);
+                if(menuChild .getPid() != null && menuChild.getPid().equals(menu.getId())){
+                    hasChild(menuList,menu.getId());
+                }
+                break;
+            }
+            return true;
+        }
+    }
+    return false;
+}
 }

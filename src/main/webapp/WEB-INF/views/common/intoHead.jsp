@@ -25,7 +25,7 @@
 <script src="${bjui}/other/respond.min.js"></script>
 <![endif]-->
 <!-- jquery -->
-<script src="${bjui}/js/jquery-1.7.2.min.js"></script>
+<script src="${bjui}/js/jquery-3.0.0.js"></script>
 <script src="${bjui}/js/jquery.cookie.js"></script>
 <!--[if lte IE 9]>
 <script src="${bjui}/other/jquery.iframe-transport.js"></script>
@@ -58,7 +58,8 @@
 <%--<script src="${bjui}/plugins/highcharts/highcharts.js"></script>--%>
 <%--<script src="${bjui}/plugins/highcharts/highcharts-3d.js"></script>--%>
 <!-- ECharts -->
-<%--<script src="${bjui}/plugins/echarts/echarts.js"></script>--%>
+<script src="${bjui}/plugins/echarts/echarts.js"></script>
+
 <!-- other plugins -->
 <script src="${bjui}/plugins/other/jquery.autosize.js"></script>
 <link href="${bjui}/plugins/uploadify/css/uploadify.css" rel="stylesheet">

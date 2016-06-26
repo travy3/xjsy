@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zyu.xjsy.modules.info.dao.PlanInfoDao">
+
+    <select id="findList" resultType="PlanInfo">
+
+        SELECT * FROM info_planinfo where planid = #{plan.id}
+        ORDER BY num ASC
+
+    </select>
+
+    <insert id="insert">
+        INSERT INTO info_planinfo(
+          num,
+          code,
+          times,
+          paper,
+          planid
+        ) VALUES (
+          ${num},
+          #{code},
+          #{times},
+          #{paper},
+          #{plan.id}
+        )
+    </insert>
+
+    <update id="update">
+        UPDATE info_planinfo SET
+        code = #{code},
+        times = #{times},
+        paper = #{paper},
+        num = #{num}
+        WHERE
+        id = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM info_planinfo
+        WHERE id = #{id}
+    </delete>
+
+    <!--<insert id="insertBatch">-->
+        <!--INSERT  INTO info_planinfo(-->
+          <!--num,-->
+          <!--code,-->
+          <!--times,-->
+          <!--paper,-->
+          <!--planid-->
+        <!--) VALUES-->
+        <!--<foreach collection="planInfoList" item="planInfo">-->
+            <!--(-->
+            <!--${planInfo.num},-->
+            <!--#{planInfo.code},-->
+            <!--#{planInfo.times},-->
+            <!--#{planInfo.paper},-->
+            <!--#{plan.id}-->
+            <!--)-->
+        <!--</foreach>-->
+    <!--</insert>-->
+
+    <insert id="insertBatch">
+        INSERT  INTO info_planinfo(
+        num,
+        code,
+        times,
+        paper,
+        planid
+        ) VALUES
+        <foreach collection="planInfoList" item="planInfo" separator=" , " >
+            (
+            ${planInfo.num},
+            #{planInfo.code},
+            #{planInfo.times},
+            #{planInfo.paper},
+            #{id}
+            )
+        </foreach>
+    </insert>
+
+
+</mapper>
+
+

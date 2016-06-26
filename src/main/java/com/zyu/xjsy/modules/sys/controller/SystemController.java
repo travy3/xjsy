@@ -3,7 +3,6 @@ package com.zyu.xjsy.modules.sys.controller;
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.zyu.xjsy.common.controller.BaseController;
-import com.zyu.xjsy.common.web.ExecuteResult;
 import com.zyu.xjsy.modules.sys.entity.Menu;
 import com.zyu.xjsy.modules.sys.entity.Role;
 import com.zyu.xjsy.modules.sys.service.SystemService;
@@ -26,7 +25,7 @@ import java.util.List;
 @Controller
 public class SystemController extends BaseController {
 
-    private ExecuteResult executeResult = new ExecuteResult();
+//    private ExecuteResult executeResult = new ExecuteResult();
 
     @Autowired
     private SystemService systemService;
@@ -38,6 +37,9 @@ public class SystemController extends BaseController {
         List<Menu> menuList = new ArrayList<Menu>();
         menuList = systemService.findAllMenu();
 
+//        for (Menu menu : menuList){
+//            System.out.println("menu.Child:"+menu.hasChild(menuList,"1"));
+//        }
         model.addAttribute("menuList",menuList);
         return "/modules/sys/sysMenu";
     }
@@ -57,12 +59,9 @@ public class SystemController extends BaseController {
 
         roleList = systemService.findAllRole(new Role());
 
-//        model.addAttribute("roleList",roleList);
-
         Gson gson = new Gson();
-        return gson.toJson(roleList);
 
-//        return "/modules/sys/sysRole";
+        return gson.toJson(roleList);
     }
 
 
@@ -89,7 +88,6 @@ public class SystemController extends BaseController {
     @ResponseBody
     public Object saveRole(Role role, HttpServletRequest request, HttpServletResponse response , Model model){
 
-
         if(!beanValidator(model,role)){
             return executeResult.jsonReturn(300,"数据格式有误",false);
         }
@@ -114,13 +112,11 @@ public class SystemController extends BaseController {
     @RequestMapping(value = "/role/del")
     @ResponseBody
     public Object delRole(String id){
+
         systemService.delRole(new Role(id));
+
         return executeResult.jsonReturn(200,"删除成功");
+
     }
-
-
-
-
-
 
 }

@@ -1,11 +1,13 @@
 package com.zyu.xjsy.modules.sys.util;
 
+import com.google.common.collect.Lists;
 import com.zyu.xjsy.common.service.BaseService;
+import com.zyu.xjsy.common.util.CacheUtils;
 import com.zyu.xjsy.modules.info.dao.BusinessDao;
+import com.zyu.xjsy.modules.info.entity.Business;
 import com.zyu.xjsy.modules.sys.dao.MenuDao;
 import com.zyu.xjsy.modules.sys.dao.RoleDao;
 import com.zyu.xjsy.modules.sys.dao.UserDao;
-import com.zyu.xjsy.modules.info.entity.Business;
 import com.zyu.xjsy.modules.sys.entity.Menu;
 import com.zyu.xjsy.modules.sys.entity.Role;
 import com.zyu.xjsy.modules.sys.entity.User;
@@ -63,7 +65,7 @@ public class UserUtils {
      * @return 取不到返回null
      */
     public static User getByLoginName(String loginName) {
-        User user = (User)CacheUtils.get(USER_CACHE, USER_CACHE_LOGIN_NAME_+loginName);
+        User user = (User) CacheUtils.get(USER_CACHE, USER_CACHE_LOGIN_NAME_+loginName);
         if(user==null){
             user  = userDao.getByLoginName(new User(null,loginName));
             if (user == null){
@@ -164,17 +166,18 @@ public class UserUtils {
      * @return
      */
     public static List<Menu> getMenuList() {
-        List<Menu> menuList = (List<Menu>) getCache(CACHE_MENU_LIST);
-        //TODO
-        if(menuList == null){
+//        List<Menu> menuList = (List<Menu>) getCache(CACHE_MENU_LIST);
+//        //TODO
+//        if(menuList == null){
+        List<Menu> menuList = Lists.newArrayList();
             User user = getUser();
             if (user.isAdmin()){
                 menuList = menuDao.findAllList(new Menu());
             }else {
                 menuList = menuDao.findByUser(user==null?new User():user);
             }
-            putCache(CACHE_MENU_LIST,menuList);
-        }
+//            putCache(CACHE_MENU_LIST,menuList);
+//        }
         return menuList;
     }
 

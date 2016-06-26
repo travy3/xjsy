@@ -2,6 +2,7 @@ package com.zyu.xjsy.common.security.shiro.session;
 
 import com.google.common.collect.Sets;
 import com.zyu.xjsy.common.util.DateUtils;
+import com.zyu.xjsy.common.web.Servlets;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
@@ -10,6 +11,7 @@ import org.apache.shiro.subject.support.DefaultSubjectContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Set;
@@ -17,11 +19,11 @@ import java.util.Set;
 /**
  * Created by chenjie on 2016/3/29.
  */
-public class CacheSessionDAO extends EnterpriseCacheSessionDAO implements SessionDao {
+public class EhCacheSessionDAO extends EnterpriseCacheSessionDAO implements SessionDao {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    public CacheSessionDAO() {
+    public EhCacheSessionDAO() {
         super();
     }
 
@@ -29,24 +31,49 @@ public class CacheSessionDAO extends EnterpriseCacheSessionDAO implements Sessio
     @Override
     protected Serializable doCreate(Session session) {
 
+//        getCacheManager().getCache(getActiveSessionsCacheName());
+//
+//        return session.getId();
+//        logger.debug("doCreate : "+session.getId());
+//        return super.doCreate(session);
 
-        return super.doCreate(session);
+        HttpServletRequest request = Servlets.getRequest();
+        if (request != null){
+            String uri = request.getServletPath();
+            // 如果是静态文件，则不创建SESSION
+            if (Servlets.isStaticFile(uri)){
+                return null;
+            }
+        }
+        super.doCreate(session);
+        logger.debug("doCreate {} {}", session, request != null ? request.getRequestURI() : "");
+        return session.getId();
     }
 
     @Override
     protected Session doReadSession(Serializable sessionId) {
-        return super.doReadSession(sessionId);
+
+//        return getCachedSession(sessionId);
+
+//        Element element = (Element) getCacheManager().getCache(getActiveSessionsCacheName()).get(sessionId);
+//        element.getHitCount();
+//        logger.debug("命中次数："+element.getHitCount());
+         return super.doReadSession(sessionId);
+
+//        return super.doReadSession(sessionId);
     }
 
-    @Override
-    protected void doUpdate(Session session) {
-        super.doUpdate(session);
-    }
+//    @Override
+//    protected void doUpdate(Session session) {
+//
+//        super.update(session);
+//
+//    }
 
-    @Override
-    protected void doDelete(Session session) {
-        super.doDelete(session);
-    }
+//    @Override
+//    protected void doDelete(Session session) {
+//        super.delete(session);
+//    }
 
     @Override
     public Collection<Session> getActiveSessions(boolean includeLeave) {

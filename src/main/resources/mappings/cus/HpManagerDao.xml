@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zyu.xjsy.modules.cus.dao.HpManagerDao">
+    <resultMap id="hpManagerResult" type="HpManager">
+        <id property="id" column="id"></id>
+        <result property="no" column="no"></result>
+        <result property="date" column="date"></result>
+        <result property="beforeAdjustLStart" column="beforeAdjustLStart"></result>
+        <result property="beforeAdjustRStart" column="beforeAdjustRStart"></result>
+        <result property="beforeAdjustLEnd" column="beforeAdjustLEnd"></result>
+        <result property="beforeAdjustREnd" column="beforeAdjustREnd"></result>
+        <result property="trainOne" column="trainOne"></result>
+        <result property="trainTwo" column="trainTwo"></result>
+        <result property="afterAdjustL" column="afterAdjustL"></result>
+        <result property="afterAdjustR" column="afterAdjustR"></result>
+        <result property="memo" column="memo"></result>
+        <result property="code" column="code"></result>
+        <result property="times" column="times"></result>
+        <result property="paper" column="paper"></result>
+        <association property="customer" javaType="Customer" >
+            <id property="id" column="cid"></id>
+        </association>
+        <!--<association property="plan" javaType="Plan">-->
+            <!--<id property="id" column="pid"></id>-->
+        <!--</association>-->
+    </resultMap>
+
+    <sql id="hpManagerColumns">
+        a.id,
+        a.no,
+        a.date,
+        a.beforeAdjustLStart,
+        a.beforeAdjustRStart,
+        a.beforeAdjustLEnd,
+        a.beforeAdjustREnd,
+        a.trainOne,
+        a.trainTwo,
+        a.afterAdjustL,
+        a.afterAdjustR,
+        a.memo,
+        a.code,
+        a.times,
+        a.paper,
+        a.customer AS 'cid',
+        a.plan AS 'plan.id'
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO cus_hpmanager(
+          id,
+          no,
+          date,
+          beforeAdjustLStart,
+          beforeAdjustRStart,
+          beforeAdjustLEnd,
+          beforeAdjustREnd,
+          trainOne,
+          trainTwo,
+          afterAdjustL,
+          afterAdjustR,
+          memo,
+          code,
+          times,
+          paper,
+          customer,
+          plan
+        ) VALUES (
+          #{id},
+          #{no},
+          #{date},
+          #{beforeAdjustLStart},
+          #{beforeAdjustRStart},
+          #{beforeAdjustLEnd},
+          #{beforeAdjustREnd},
+          #{trainOne},
+          #{trainTwo},
+          #{afterAdjustL},
+          #{afterAdjustR},
+          #{memo},
+          #{code},
+          #{times},
+          #{paper},
+          #{customer.id},
+          #{plan.id}
+        )
+    </insert>
+
+    <update id="update">
+        UPDATE cus_hpmanager SET
+          date = #{date},
+          beforeAdjustLStart = #{beforeAdjustLStart},
+          beforeAdjustRStart = #{beforeAdjustRStart},
+          beforeAdjustLEnd = #{beforeAdjustLEnd},
+          beforeAdjustREnd = #{beforeAdjustREnd},
+          trainOne = #{trainOne},
+          trainTwo = #{trainTwo},
+          afterAdjustL = #{afterAdjustL},
+          afterAdjustR = #{afterAdjustR},
+          memo =#{memo},
+          code =#{code},
+          times =#{times},
+          paper =#{paper},
+          no = #{no}
+          WHERE id = #{id}
+    </update>
+
+    <select id="findList" resultMap="hpManagerResult">
+        SELECT
+        <include refid="hpManagerColumns"></include>
+        FROM cus_hpmanager a
+        JOIN cus_customer c ON a.customer = c.id
+        WHERE c.id = #{customer.id}
+        ORDER BY a.no ASC
+    </select>
+
+    <select id="getMaxNo" resultType="HpManager">
+        SELECT * FROM cus_hpmanager WHERE customer = #{id} ORDER BY no DESC limit 0, 1
+    </select>
+
+
+</mapper>

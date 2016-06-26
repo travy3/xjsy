@@ -1,5 +1,6 @@
-package com.zyu.xjsy.modules.sys.util;
+package com.zyu.xjsy.common.util;
 
+import com.zyu.xjsy.modules.sys.util.SpringContextHolder;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;

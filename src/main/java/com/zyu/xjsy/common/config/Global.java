@@ -33,6 +33,12 @@ public class Global {
     public static final String TRUE = "true";
     public static final String FALSE = "false";
 
+
+    // 试用期/治疗期/保健期
+    public static final String DURATION_SY = "0";
+    public static final String DURATION_ZL = "1";
+    public static final String DURATION_BJ = "2";
+
 //    public static synchronized Global getInstance(){
 //        if (global==null)
 //            global = new Global();
