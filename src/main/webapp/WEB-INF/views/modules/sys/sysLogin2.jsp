@@ -12,8 +12,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- CSS -->
-    <link rel="stylesheet" href="${ctx}/login/css/reset.css">
-    <link rel="stylesheet" href="${ctx}/login/css/style.css">
+    <link rel="stylesheet" href="${login}/css/reset.css">
+    <link rel="stylesheet" href="${login}/css/style.css">
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
     <script src="${ctx}/BJUI/other/html5shiv.min.js"></script>
@@ -47,7 +47,7 @@
 <div class="page-container">
     <br><br>
     <h1>登录</h1>
-    <form id="loginForm" action="${ctx}/a/login" method="post">
+    <form id="loginForm" action="${ctx}/login" method="post">
         <input id="username" type="text" name="username" class="username" placeholder="账号">
         <input id="password" type="password" name="password" class="password" placeholder="密码">
         <div id="error" class="error" style="display: ${empty message ? 'none':'block'}">${message}</div>
@@ -57,9 +57,9 @@
     </div>
 </div>
 <!-- Javascript -->
-<script src="${ctx}/login/js/jquery-1.7.2.min.js"></script>
-<%--<script src="${ctx}/login/js/md5.js"></script>--%>
-<script src="${ctx}/login/js/scripts.js"></script>
+<script src="${login}/js/jquery-1.7.2.min.js"></script>
+<%--<script src="${login}/js/md5.js"></script>--%>
+<script src="${login}/js/scripts.js"></script>
 </body>
 
 

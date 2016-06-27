@@ -28,7 +28,7 @@ import java.text.SimpleDateFormat;
  * Created by chenjie on 2016/4/13.
  */
 @Controller
-@RequestMapping(value = "/cus")
+@RequestMapping(value = "${adminPath}/cus")
 public class CustomerController extends BaseController {
 
 

@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * Created by travy on 2016/3/30.
  */
-@RequestMapping(value = "/info/business")
+@RequestMapping(value = "${adminPath}/info/business")
 @Controller
 public class BusinessController extends BaseController {
 

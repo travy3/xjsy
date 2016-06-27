@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * Created by travy on 2016/3/27.
  */
-@RequestMapping(value = "/sys/user")
+@RequestMapping(value = "${adminPath}/sys/user")
 @Controller
 public class UserController extends BaseController {
 

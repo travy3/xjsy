@@ -101,13 +101,13 @@ public class LoginController extends BaseController {
 
 
 
-    @RequestMapping(value = "/changePwd")
+    @RequestMapping(value = "${adminPath}/changePwd")
     public String changePwdForm(){
 
         return "/modules/sys/changePwd";
     }
 
-    @RequestMapping(value = "/saveNewPwd")
+    @RequestMapping(value = "${adminPath}/saveNewPwd")
     @ResponseBody
     public Object saveNewPwd(String password,String newPassword,String againNewPassword){
 
@@ -132,15 +132,20 @@ public class LoginController extends BaseController {
     }
 
 
-    @RequestMapping(value = "/main")
+    @RequestMapping(value = "${adminPath}/main")
     public String mainPage(Model model){
         //列表查询条件传入
 //        model.addAttribute("customer",customer);
         return "/modules/sys/main";
     }
 
+    @RequestMapping(value = "${adminPath}/noauth")
+    public String getNoauth(){
+        return "/modules/sys/noauth";
+    }
 
-    @RequestMapping(value = "/statistics/increaseCus")
+
+    @RequestMapping(value = "${adminPath}/statistics/increaseCus")
     @ResponseBody
     public String statistics_increaseCus(){
 

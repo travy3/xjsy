@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * Created by chenjie on 2016/5/6.
  */
-@RequestMapping(value = "/hpManager")
+@RequestMapping(value = "${adminPath}/hpManager")
 @Controller
 public class HpManagerController extends BaseController {
 

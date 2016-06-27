@@ -22,7 +22,10 @@
 
                 ${adminPath}/login = authc
                 ${adminPath}/logout = logout
+                ${adminPath}/noauth = anon
+                <!--${adminPath}/sys/role = roles[admin,qwe]-->
                 ${adminPath}/** = user
+
             </value>
         </constructor-arg>
     </bean>
@@ -32,6 +35,7 @@
         <property name="securityManager" ref="securityManager" />
         <property name="loginUrl" value="${adminPath}/login" />
         <property name="successUrl" value="${adminPath}" />
+        <property name="unauthorizedUrl" value="${adminPath}/noauth"></property>
         <property name="filters">
             <map>
                 <!-- 基于表单验证的过滤器 -->
@@ -66,7 +70,7 @@
 
         <!--<property name="authenticator" ref=""></property>-->
         <!--继承自AuthorizingSecurityManager 配置authorizer 默认ModularRealmAuthorizer-->
-        <property name="authorizer" ref="modularRealmAuthorizer"></property>
+        <!--<property name="authorizer" ref="modularRealmAuthorizer"></property>-->
         <property name="sessionManager" ref="sessionManager" />
         <!-- 为了减少数据库压力 添加了缓存机制 shiroCacheManager 是 Shiro 对缓存框架 EhCache 的配置 -->
         <property name="cacheManager" ref="shiroCacheManager" />

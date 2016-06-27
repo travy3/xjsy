@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * Created by travy on 2016/3/6.
  */
-@RequestMapping(value = "/sys")
+@RequestMapping(value = "${adminPath}/sys")
 @Controller
 public class SystemController extends BaseController {
 
@@ -45,6 +45,7 @@ public class SystemController extends BaseController {
     }
 
 
+//    @RequiresPermissions("sys:role:index")
     @RequestMapping(value = "/role")
     public String roleIndex(){
 

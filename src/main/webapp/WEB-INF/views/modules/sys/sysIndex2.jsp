@@ -23,7 +23,7 @@
                     <li><a href="${ctx}/changePwd" data-toggle="dialog" data-id="changepwd_page" data-mask="true" data-width="550" data-height="260">&nbsp;<span class="glyphicon glyphicon-lock"></span> 修改密码&nbsp;</a></li>
                     <li><a href="">&nbsp;<span class="glyphicon glyphicon-user"></span> 我的资料</a></li>
                     <li class="divider"></li>
-                    <li><a href="${ctx}/a/logout" class="red">&nbsp;<span class="glyphicon glyphicon-off"></span> 注销登陆</a></li>
+                    <li><a href="${ctx}/logout" class="red">&nbsp;<span class="glyphicon glyphicon-off"></span> 注销登陆</a></li>
                 </ul>
             </li>
             <%--<li><a href="index.html" title="切换为列表导航(窄版)" style="background-color:#ff7b61;">列表导航栏(窄版)</a></li>--%>

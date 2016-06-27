@@ -1,4 +1,5 @@
 <%@page language="java" contentType="text/html; utf-8" pageEncoding="utf-8" %>
+<%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <!-- bootstrap - css -->
 <link href="${bjui}/themes/css/bootstrap.min.css" rel="stylesheet">
 <!-- core - css -->

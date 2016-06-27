@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * Created by chenjie on 2016/4/5.
  */
-@RequestMapping(value = "/info")
+@RequestMapping(value = "${adminPath}/info")
 @Controller
 public class PlanController extends BaseController {
 
