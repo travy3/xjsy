@@ -2,9 +2,9 @@ package com.zyu.xjsy.modules.sys.service;
 
 import com.zyu.xjsy.common.persistence.PageInfo;
 import com.zyu.xjsy.common.security.Digests;
-import com.zyu.xjsy.common.security.shiro.session.SessionDao;
 import com.zyu.xjsy.common.service.BaseService;
 import com.zyu.xjsy.common.service.ServiceException;
+import com.zyu.xjsy.common.util.CacheUtils;
 import com.zyu.xjsy.common.util.Encodes;
 import com.zyu.xjsy.modules.sys.dao.MenuDao;
 import com.zyu.xjsy.modules.sys.dao.RoleDao;
@@ -12,7 +12,6 @@ import com.zyu.xjsy.modules.sys.dao.UserDao;
 import com.zyu.xjsy.modules.sys.entity.Menu;
 import com.zyu.xjsy.modules.sys.entity.Role;
 import com.zyu.xjsy.modules.sys.entity.User;
-import com.zyu.xjsy.common.util.CacheUtils;
 import com.zyu.xjsy.modules.sys.util.UserUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +33,6 @@ public class SystemService extends BaseService {
     public static final int HASH_INTERATIONS = 1024;
     public static final int SALT_SIZE = 8;
 
-    @Autowired
-    private SessionDao sessionDao;
 
     @Autowired
     private MenuDao menuDao;
@@ -167,10 +164,6 @@ public class SystemService extends BaseService {
         byte[] salt = Digests.generateSalt(SALT_SIZE);
         byte[] hashPassword = Digests.sha1(plainPassword.getBytes(), salt, HASH_INTERATIONS);
         return Encodes.encodeHex(salt)+Encodes.encodeHex(hashPassword);
-    }
-
-    public SessionDao getSessionDao(){
-        return sessionDao;
     }
 
     /**

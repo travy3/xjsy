@@ -18,7 +18,6 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -40,23 +39,22 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
         Principal principal = (Principal) getAvailablePrincipal(principals);
 
         //
-        if (!Global.getConfig("user.multiAccountLogin").equals("true")){
-            Collection<Session> sessions = getSystemService().getSessionDao()
-                    .getActiveSessions(true, principal, UserUtils.getSession());
-
-            if(sessions.size()> 0 ){
-                if(UserUtils.getSubject().isAuthenticated()){
-                    for (Session session : sessions) {
-                        getSystemService().getSessionDao().delete(session);
-                    }
-                }
-                else {
-                    UserUtils.getSubject().logout();
-                    throw new AuthenticationException("msg:账号已在其它地方登录，请重新登录。");
-                }
-            }
-
-        }
+//        if (!Global.getConfig("user.multiAccountLogin").equals("true")){
+//            Collection<Session> sessions = getSystemService().getSessionDao()
+//                    .getActiveSessions(true, principal, UserUtils.getSession());
+//
+//            if(sessions.size()> 0 ){
+//                if(UserUtils.getSubject().isAuthenticated()){
+//                    for (Session session : sessions) {
+//                        getSystemService().getSessionDao().delete(session);
+//                    }
+//                }
+//                else {
+//                    UserUtils.getSubject().logout();
+//                    throw new AuthenticationException("msg:账号已在其它地方登录，请重新登录。");
+//                }
+//            }
+//        }
         User user = getSystemService().getUserByLoginName(
                 principal.getLoginName());
 
