@@ -101,6 +101,7 @@
         hScrollbar 		: 	false 	,//[可选] 允许出现横向滚动条。
         fullGrid 		: 	true 	,//[可选] 使表格铺满网格容器(如果值为true，则需要设置有列宽，并且总宽度小于datagrid容器宽度时有效)。
         //width 			: 	null 	,//[可选] datagrid容器宽度，默认为父容器的宽，相当于'100%'。
+        postData        :   {loginName:'${user.loginName}',name:'${user.name}'},
         height 			: 	'100%' 	//,//[可选] datagrid容器高度。
         //importOption 	: 	null 	,//[可选] 工具栏的导入按钮参数，dialog或navtab方式打开导入页面，参数模板{type:"dialog", options:{url:'', width:400, height:200}}
         //exportOption 	: 	null 	,//[可选] 工具栏的导出按钮参数，执行ajax url或以dialog or navtab方式打开导出页面，参数模板{type:"ajax", options:{url:""}}
@@ -111,35 +112,24 @@
     })
 </script>
 <div class="bjui-pageHeader">
-    <form id="pagerForm" data-toggle="ajaxsearch" action="${ctx}/sys/user/list" method="post">
+    <form id="pagerForm" data-toggle="ajaxsearch" action="${ctx}/sys/user" method="post">
         <%--<input type="hidden" name="pageSize" value="${user.pageInfo.pageSize}">--%>
         <%--<input type="hidden" name="pageCurrent" value="${user.pageInfo.pageCurrent}">--%>
         <%--<input type="hidden" name="orderField" value="${user.pageInfo.orderField}">--%>
         <%--<input type="hidden" name="orderDirection" value="${user.pageInfo.orderDirection}">--%>
         <div class="bjui-searchBar">
-            <label>加盟商:</label>
-            <select name="business" data-toggle="selectpicker">
-                <option value="">全部</option>
-                <option value="1">联络</option>
-                <option value="2">住宿</option>
-                <option value="3">餐饮</option>
-                <option value="4">交通</option>
-            </select>&nbsp;
-            <label>用户名：</label><input type="text" id="customNo" value="" name="code" class="form-control" size="10">&nbsp;
-            <label>姓名：</label><input type="text" value="" name="name" class="form-control" size="8">&nbsp;
+            <%--<label>加盟商:</label>--%>
+            <%--<select name="business" data-toggle="selectpicker">--%>
+                <%--<option value="">全部</option>--%>
+                <%--<option value="1">联络</option>--%>
+                <%--<option value="2">住宿</option>--%>
+                <%--<option value="3">餐饮</option>--%>
+                <%--<option value="4">交通</option>--%>
+            <%--</select>&nbsp;--%>
+            <label>用户名：</label><input type="text" id="loginName"  name="loginName" class="form-control" size="10">&nbsp;
+            <label>姓名：</label><input type="text" id="name"  name="name" class="form-control" size="8">&nbsp;
             <button type="submit" class="btn-default" data-icon="search">查询</button>&nbsp;
             <a class="btn btn-orange" href="javascript:;" data-toggle="reloadsearch" data-clear-query="true" data-icon="undo">清空查询</a>
-        </div>
-        <div class="bjui-moreSearch">
-            <label>职业：</label><input type="text" value="" name="profession" size="15" />
-            <label>&nbsp;性别:</label>
-            <select name="sex" data-toggle="selectpicker">
-                <option value="">全部</option>
-                <option value="true">男</option>
-                <option value="false">女</option>
-            </select>
-            <label>&nbsp;手机:</label>
-            <input type="text" value="" name="mobile" size="10">
         </div>
     </form>
 </div>

@@ -40,7 +40,10 @@ public class UserController extends BaseController {
 
 
     @RequestMapping(value = "")
-    public String userIndex(){
+    public String userIndex(User user,Model model){
+
+        model.addAttribute("user",user);
+
         return "/modules/sys/sysUser";
     }
 

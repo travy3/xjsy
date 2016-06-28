@@ -64,11 +64,11 @@ public class SystemService extends BaseService {
         // 设置分页参数
         user.setPageInfo(pageInfo);
 
-        List<User> userList = (List<User>) CacheUtils.get("userList");
-
-        if (userList == null){
-            userList = userDao.findList(user);
-        }
+//        List<User> userList = (List<User>) CacheUtils.get("userList");
+//
+//        if (userList == null){
+        List<User> userList = userDao.findList(user);
+//        }
 
         // 执行分页查询
         pageInfo.setList(userList);

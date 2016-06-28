@@ -52,6 +52,12 @@
         FROM sys_user u
         <include refid="userJoin" />
         WHERE u.delflag = #{DEL_FLAG_NORMAL}
+        <if test="loginName != null and loginName != ''">
+            AND u.login_name=#{loginName}
+        </if>
+        <if test="name != null and name != ''">
+            AND u.real_name=#{name}
+        </if>
     </select>
 
     <select id="get" resultMap="userResult">
