@@ -39,7 +39,8 @@
         <property name="filters">
             <map>
                 <!-- 基于表单验证的过滤器 -->
-                <entry key="authc" value-ref="formAuthenticationFilter"/>
+                <entry key="authc" value-ref="formAuthenticationFilter">
+                </entry>
                 <entry key="logout" value-ref="logoutFilter" />
             </map>
         </property>
@@ -87,18 +88,19 @@
 
         <!-- 定时清理失效会话, 清理用户直接关闭浏览器造成的孤立会话   -->
         <property name="sessionValidationInterval" value="${session.sessionTimeoutClean}"/>
-        <!--  		<property name="sessionValidationSchedulerEnabled" value="false"/> -->
         <property name="sessionValidationSchedulerEnabled" value="true"/>
 
         <property name="sessionIdCookie" ref="sessionIdCookie"/>
         <property name="sessionIdCookieEnabled" value="true"/>
+        <!--设置会话监听器-->
+        <!--<property name="sessionListeners"></property>-->
     </bean>
 
     <!-- 指定本系统SESSIONID, 默认为: JSESSIONID 问题: 与SERVLET容器名冲突, 如JETTY, TOMCAT 等默认JSESSIONID,
         当跳出SHIRO SERVLET时如ERROR-PAGE容器会为JSESSIONID重新分配值导致登录会话丢失! -->
     <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
-    <constructor-arg name="name" value="xjsy.session.id"/>
-</bean>
+        <constructor-arg name="name" value="xjsy.session.id"/>
+    </bean>
 
     <!-- 自定义Session存储容器 -->
     <!-- 	<bean id="sessionDAO" class="com.thinkgem.jeesite.common.security.shiro.session.JedisSessionDAO"> -->
@@ -108,13 +110,14 @@
     <bean id="sessionDAO" class="com.zyu.xjsy.common.security.shiro.session.EhCacheSessionDAO">
         <property name="sessionIdGenerator" ref="idGen" />
         <property name="activeSessionsCacheName" value="activeSessionsCache" />
-        <property name="cacheManager" ref="shiroCacheManager" />
+        <property name="cacheManager" ref="EhCacheManager" />
     </bean>
 
     <!-- 定义授权缓存管理器 -->
      	<!--<bean id="shiroCacheManager" class="com.thinkgem.jeesite.common.security.shiro.cache.SessionCacheManager" /> -->
-    <bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+    <bean id="EhCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
         <property name="cacheManager" ref="cacheManager"/>
+        <!--<property name="cacheManagerConfigFile" ref="classpath:${ehcache.configFile}"/>-->
     </bean>
 
     <!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
