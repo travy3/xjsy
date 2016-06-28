@@ -78,9 +78,12 @@
     <!--<error-code>500</error-code>-->
     <!--<location></location>-->
   <!--</error-page>-->
-
   <!--<error-page>-->
     <!--<error-code>404</error-code>-->
     <!--<location></location>-->
   <!--</error-page>-->
+  <error-page>
+    <exception-type>org.apache.shiro.session.InvalidSessionException</exception-type>
+    <location>/WEB-INF/views/common/invalidSession.jsp</location>
+  </error-page>
 </web-app>
