@@ -51,6 +51,7 @@
         <input id="username" type="text" name="username" class="username" placeholder="账号">
         <input id="password" type="password" name="password" class="password" placeholder="密码">
         <div id="error" class="error" style="display: ${empty message ? 'none':'block'}">${message}</div>
+        <input type="checkbox" id="rememberMe" name="rememberMe" >记住我（公共场所慎用）</input>
         <button id="submit" type="submit" class="submit" success="">登录</button>
     </form>
     <div class="connect">

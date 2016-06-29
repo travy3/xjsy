@@ -130,7 +130,6 @@ public class UserController extends BaseController {
         List<Role> roles = Lists.newArrayList();
         for (Role role : systemService.findAllRole(new Role())){
             if (role.getId().equals(request.getParameter("role.id"))){
-
                 roles.add(role);
             }
         }

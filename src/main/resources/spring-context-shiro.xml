@@ -16,14 +16,13 @@
             <value>
                 <!-- anon 匿名访问
                     authc 需要认证
-
+                    user  表示访问该地址的用户是身份验证通过或RememberMe登录的都可以
                     perms[act:model:edit] 用户需要提供值为“act:model:edit”的Permission信息
                  -->
 
                 ${adminPath}/login = authc
                 ${adminPath}/logout = logout
                 ${adminPath}/noauth = anon
-                ${adminPath}/sys/role = roles[admin,qwe]
                 ${adminPath}/** = user
 
             </value>
@@ -74,8 +73,8 @@
         <property name="sessionManager" ref="sessionManager" />
         <!-- 为了减少数据库压力 添加了缓存机制 shiroCacheManager 是 Shiro 对缓存框架 EhCache 的配置 -->
         <property name="cacheManager" ref="EhCacheManager" />
+        <!--<property name="rememberMeManager" value=""-->
     </bean>
-    <bean id="systemAuthorizingRealm" class="com.zyu.xjsy.modules.sys.security.SystemAuthorizingRealm"></bean>
     <bean id="modularRealmAuthorizer" class="org.apache.shiro.authz.ModularRealmAuthorizer"></bean>
 
     <!-- 自定义会话管理配置 -->
