@@ -12,7 +12,6 @@ import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
-import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
@@ -91,7 +90,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 
 
         //校验登陆验证码
-        Session session  = UserUtils.getSession();
+//        Session session  = UserUtils.getSession();
 //        String code = (String) session
 //                .getAttribute(ValidateCodeServlet.VALIDATE_CODE);
 //        if (token.getCaptcha() == null

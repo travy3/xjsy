@@ -15,10 +15,29 @@ public class Menu extends DataEntity<Menu>{
     private String href;
     private String isShow;// 是否在菜单中显示（1：显示；0：不显示）显示是菜单，不显示是权限
     private String permission;
+    private int priority;
+    private boolean available;
+    private Type type = Type.menu;
+
+    public enum Type{
+        menu("菜单"),
+        button("按钮");
+        private final String info;
+
+        private Type(String info){
+            this.info = info;
+        }
+
+        public String getInfo(){
+            return info;
+        }
+
+    }
 
     public Menu(){
         super();
         this.isShow= Global.SHOW;
+        this.available =true;
     }
 
     public Menu(String name){
@@ -27,9 +46,6 @@ public class Menu extends DataEntity<Menu>{
         this.isShow= Global.SHOW;
     }
 
-//    public Menu(String id) {
-//        this.id = id;
-//    }
 
     public String getId() {
         return id;
@@ -80,6 +96,22 @@ public class Menu extends DataEntity<Menu>{
         this.delFlag = delFlag;
     }
 
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
 
     public String getPermission() {
         return permission;
@@ -87,6 +119,14 @@ public class Menu extends DataEntity<Menu>{
 
     public void setPermission(String permission) {
         this.permission = permission;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public boolean hasChild(List<Menu> menuList , String parentId){
