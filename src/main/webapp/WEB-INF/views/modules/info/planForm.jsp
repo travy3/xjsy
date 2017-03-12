@@ -114,8 +114,12 @@
                     <input type="text" name="name" id="j_dialog_name" value="${plan.name}" data-rule="required" size="20">
                 </td>
                 <td>
-                    <label for="j_dialog_remarks" class="control-label x90">备注：</label>
-                    <input type="text" name="remarks" id="j_dialog_remarks" value="${plan.remarks}" data-rule="required" size="20">
+                    <label for="j_dialog_eyeType" class="control-label x90">方案类型：</label>
+                    <select name="eyeType" id="j_dialog_eyeType" data-toggle="selectpicker" data-rule="required">
+                        <option value="1" <c:if test="${plan.eyeType eq 1}">selected="selected"</c:if>>近视/远视/散光</option>
+                        <option value="2" <c:if test="${plan.eyeType eq 2}">selected="selected"</c:if>>弱视</option>
+
+                    </select>
                 </td>
             </tr>
             <tr>
@@ -126,6 +130,12 @@
                 <td>
                     <label for="j_dialog_orderNo" class="control-label x90">期数：</label>
                     <input type="text" name="orderNo" id="j_dialog_orderNo" value="${plan.orderNo}" data-rule="required;number" size="20">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="j_dialog_remarks" class="control-label x90">备注：</label>
+                    <input type="text" name="remarks" id="j_dialog_remarks" value="${plan.remarks}" data-rule="required" size="20">
                 </td>
             </tr>
             </tbody>

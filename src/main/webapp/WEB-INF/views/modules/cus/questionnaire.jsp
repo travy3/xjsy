@@ -170,8 +170,17 @@
                     <label for="q1" class="control-label x200">弱视/近视 ：</label>
                 </td>
                 <td>
-                    <input type="radio" name="eyeType" id="q1_choose1" data-toggle="icheck" value="R" checked="checked" data-label="弱视&nbsp;&nbsp;">
-                    <input type="radio" name="eyeType" id="q1_choose2" data-toggle="icheck" value="J" data-label="近视">
+                    <c:choose>
+                        <c:when test="${customer.eyeType eq 1}">
+                            <input type="radio" name="eyeType" id="q1_choose2" data-toggle="icheck" value="1" checked="checked" data-label="近视/远视/散光" disabled="disabled">
+                            <input type="radio" name="eyeType" id="q1_choose1" data-toggle="icheck" value="2"  data-label="弱视&nbsp;&nbsp;" disabled="disabled">
+                        </c:when>
+                        <c:otherwise>
+                            <input type="radio" name="eyeType" id="q1_choose2" data-toggle="icheck" value="1"  data-label="近视/远视/散光" disabled="disabled">
+                            <input type="radio" name="eyeType" id="q1_choose1" data-toggle="icheck" value="2" checked="checked"  data-label="弱视&nbsp;&nbsp;" disabled="disabled">
+                        </c:otherwise>
+                    </c:choose>
+
                 </td>
             </tr>
             <tr>

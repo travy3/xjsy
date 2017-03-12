@@ -14,16 +14,6 @@
         console.log(json)
         console.log($form)
     }
-//    //护照有效日期  = 签发日期 + 10年
-//    $('#j_custom_issuedate').on('afterchange.bjui.datepicker', function(e, data) {
-//        var pattern = 'yyyy-MM-dd'
-//        var start   = end = data.value
-//
-//        end.setFullYear(start.getFullYear() + 10)
-//        end.setDate(start.getDate() - 1)
-//
-//        $('#j_custom_indate').val(end.formatDate(pattern))
-//    })
 </script>
 <div class="bjui-pageContent">
     <form action="${ctx}/cus/0/manage" id="j_custom_form" data-toggle="validate" data-alertmsg="false">
@@ -57,8 +47,8 @@
                             <input type="radio" name="sex" id="j_customer_sex2" data-toggle="icheck" value="0" data-label="女">
                         </c:when>
                         <c:otherwise>
-                            <input type="radio" name="sex" id="j_customer_sex1" data-toggle="icheck" value="1" checked="checked"  data-label="男&nbsp;&nbsp;">
-                            <input type="radio" name="sex" id="j_customer_sex2" data-toggle="icheck" value="0"  data-label="女">
+                            <input type="radio" name="sex" id="j_customer_sex1" data-toggle="icheck" value="1"   data-label="男&nbsp;&nbsp;">
+                            <input type="radio" name="sex" id="j_customer_sex2" data-toggle="icheck" value="0" checked="checked" data-label="女">
                         </c:otherwise>
                     </c:choose>
                 </td>
@@ -131,6 +121,41 @@
                     <label for="j_customer_hasDisease" class="control-label x85">有无眼疾或其他过敏史：</label>
                     <textarea name="hasDisease" id="j_customer_hasDisease" data-toggle="autoheight" cols="60" rows="1">${customer.hasDisease}</textarea>
                 </td>
+                <td>
+                    <label for="j_customer_eyeglassesR" class="control-label x85">带镜视力R：</label>
+                    <input type="text" name="eyeglassesR" id="j_customer_eyeglassesR" value="${customer.eyeglassesR}" data-rule="required" size="15">
+                </td>
+                <td>
+                    <label for="j_customer_eyeglassesL" class="control-label x85">带镜视力L：</label>
+                    <input type="text" name="eyeglassesL" id="j_customer_eyeglassesL" value="${customer.eyeglassesL}" data-rule="required" size="15">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="j_customer_dadEyeSightR" class="control-label x85">父亲视力R：</label>
+                    <input type="text" name="dadEyeSightR" id="j_customer_dadEyeSightR" value="${customer.dadEyeSightR}" data-rule="required" size="15">
+                </td>
+                <td>
+                    <label for="j_customer_dadEyeSightL" class="control-label x85">父亲视力L：</label>
+                    <input type="text" name="dadEyeSightL" id="j_customer_dadEyeSightL" value="${customer.dadEyeSightL}" size="15">
+                </td>
+                <td>
+                    <label for="j_customer_mumEyeSightR" class="control-label x85">母亲视力R：</label>
+                    <input type="text" name="mumEyeSightR" id="j_customer_mumEyeSightR" value="${customer.mumEyeSightR}"  data-rule="required" size="15">
+                </td>
+                <td>
+                    <label for="j_customer_mumEyeSightL" class="control-label x85">母亲视力L：</label>
+                    <input type="text" name="mumEyeSightL" id="j_customer_mumEyeSightL" value="${customer.mumEyeSightL}" data-rule="required" size="15">
+                </td>
+            </tr>
+            <tr>
+               <td>
+                   <label for="j_customer_eyeType" class="control-label x85">视力类型：</label>
+                   <select name="eyeType" id="j_customer_eyeType" data-toggle="selectpicker" data-rule="required">
+                       <option value="1" <c:if test="${customer.eyeType eq 1}">selected="selected"</c:if>>近视/远视/散光</option>
+                       <option value="2" <c:if test="${customer.eyeType eq 2}">selected="selected"</c:if>>弱视</option>
+                   </select>
+               </td>
             </tr>
             </tbody>
         </table>

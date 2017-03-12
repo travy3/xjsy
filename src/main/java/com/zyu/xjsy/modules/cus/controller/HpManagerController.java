@@ -126,8 +126,12 @@ public class HpManagerController extends BaseController {
             Customer customer = hpManager.getCustomer();
 
             //添加带有方案的治疗纪录
-            customerService.creatCusHpManage(customer,nextPlan,planInfo);
+            try {
+                customerService.creatCusHpManage(customer,nextPlan,planInfo);
 
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             return executeResult.jsonReturn(200,"保存成功,进入下级方案阶段");
         }
 

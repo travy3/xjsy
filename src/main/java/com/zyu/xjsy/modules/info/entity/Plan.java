@@ -16,6 +16,8 @@ public class Plan extends DataEntity<Plan> {
 
     private Integer orderNo;
 
+    private String eyeType;//用于何种类型
+
 
     private List<PlanInfo> planInfoList = Lists.newArrayList();
 
@@ -58,5 +60,13 @@ public class Plan extends DataEntity<Plan> {
 
     public void setOrderNo(Integer orderNo) {
         this.orderNo = orderNo;
+    }
+
+    public String getEyeType() {
+        return eyeType;
+    }
+
+    public void setEyeType(String eyeType) {
+        this.eyeType = eyeType;
     }
 }

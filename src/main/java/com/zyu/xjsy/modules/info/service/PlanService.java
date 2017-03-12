@@ -40,7 +40,11 @@ public class PlanService extends BaseService {
 
     public Plan getPlan(Plan plan) {
 
-        return planDao.get(plan);
+//        return planDao.get(plan);
+
+        List<Plan> planList = (List<Plan>) planDao.get(plan);
+
+        return planList.get(0);
     }
 
     public List<Plan> getPlan2(Plan plan){

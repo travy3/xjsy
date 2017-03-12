@@ -19,4 +19,6 @@ public interface PlanDao extends CrudDao<Plan> {
      * @return
      */
     Plan getByType(Plan nextPlan);
+
+    
 }

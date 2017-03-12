@@ -188,7 +188,7 @@ public class LoginController extends BaseController {
 
         for (Map map : mapList){
             String month = (String) map.get("months");
-            list.set(Integer.parseInt(month), map.get("COUNT").toString());
+            list.set(Integer.parseInt(month)-1, map.get("COUNT").toString());
         }
 
         series.setData(list);

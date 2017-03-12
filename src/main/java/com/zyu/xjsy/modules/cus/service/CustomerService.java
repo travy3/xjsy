@@ -73,7 +73,7 @@ public class CustomerService extends BaseService {
             customer.preUpdate();
             customerDao.update(customer);
 
-        }
+}
 
     }
 

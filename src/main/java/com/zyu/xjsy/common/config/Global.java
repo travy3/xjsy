@@ -39,6 +39,12 @@ public class Global {
     public static final String DURATION_ZL = "1";
     public static final String DURATION_BJ = "2";
 
+    // 近视/弱视
+    public static final String EYETYPE_JS = "1";
+    public static final String EYETYPE_RS = "2";
+
+
+
 //    public static synchronized Global getInstance(){
 //        if (global==null)
 //            global = new Global();

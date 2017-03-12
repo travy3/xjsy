@@ -32,7 +32,6 @@ import java.text.SimpleDateFormat;
 public class CustomerController extends BaseController {
 
 
-//    private ExecuteResult executeResult = new ExecuteResult();
 
 
     @Autowired
@@ -69,7 +68,6 @@ public class CustomerController extends BaseController {
     public String list(@PathVariable String duration, HttpServletRequest request, HttpServletResponse response,Customer customer){
 
         User user = UserUtils.getUser();
-//        Customer customer = new Customer();
         customer.setDuration(duration);
         PageInfo<Customer> pageInfo = customerService.findAllCustomer(new PageInfo<Customer>(request,response),customer,user);
 
@@ -132,7 +130,11 @@ public class CustomerController extends BaseController {
     public String questionnaire(String id,HttpServletRequest request,HttpServletResponse response,Model model){
 
         model.addAttribute("customerId",id);
-
+//        Customer customer = customerService.getCustomer(new Customer(id));
+//        Customer customer = new Customer(id);
+//        customer = customerService.getCustomer(customer);
+        Customer customer = customerService.getCustomerById(id);
+        model.addAttribute("customer",customer);
         return "/modules/cus/questionnaire";
     }
 
@@ -149,26 +151,36 @@ public class CustomerController extends BaseController {
         Gson gson = new Gson();
         Plan plan = new Plan();
         int planResultTmp = Integer.parseInt(planResult);
-        if ("R".equals(eyeType)){
+        if ("2".equals(eyeType)){
             if (planResultTmp >=25){
-                plan.setId("6");
+//                plan.setId("6");
+                plan.setLevelNo(6);
             }else if(planResultTmp >= 13 && planResultTmp <25){
-                plan.setId("5");
+//                plan.setId("5");
+                plan.setLevelNo(5);
             }else {
-                plan.setId("4");
+//                plan.setId("4");
+                plan.setLevelNo(4);
             }
+            plan.setEyeType(Global.EYETYPE_RS);
         }else {
             if (planResultTmp >=23){
-                plan.setId("6");
+//                plan.setId("6");
+                plan.setLevelNo(6);
             }else if(planResultTmp >= 13 && planResultTmp <23){
-                plan.setId("5");
+//                plan.setId("5");
+                plan.setLevelNo(5);
             }else {
-                plan.setId("4");
+//                plan.setId("4");
+                plan.setLevelNo(4);
             }
+            plan.setEyeType(Global.EYETYPE_JS);
         }
 
         plan = planService.getPlan(plan);
-
+        if (plan==null){
+            return gson.toJson("抱歉，没有找到符合条件方案");
+        }
         return gson.toJson(plan);
     }
 

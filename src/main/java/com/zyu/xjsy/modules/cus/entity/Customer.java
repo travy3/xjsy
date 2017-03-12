@@ -42,6 +42,15 @@ public class Customer extends DataEntity<Customer> {
     private Plan plan;//当前方案
     private String duration;// 试用期，治疗期，保健期
 
+    private String eyeglassesR;//带镜视力
+    private String eyeglassesL;
+    private String dadEyeSightR;//父亲视力
+    private String dadEyeSightL;
+    private String mumEyeSightR;//母亲视力
+    private String mumEyeSightL;
+
+    private String eyeType;//近视/远视/散光 1  弱势  2
+
     private User user;
 
     public Customer() {
@@ -270,5 +279,61 @@ public class Customer extends DataEntity<Customer> {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    public String getEyeglassesR() {
+        return eyeglassesR;
+    }
+
+    public void setEyeglassesR(String eyeglassesR) {
+        this.eyeglassesR = eyeglassesR;
+    }
+
+    public String getEyeglassesL() {
+        return eyeglassesL;
+    }
+
+    public void setEyeglassesL(String eyeglassesL) {
+        this.eyeglassesL = eyeglassesL;
+    }
+
+    public String getDadEyeSightR() {
+        return dadEyeSightR;
+    }
+
+    public void setDadEyeSightR(String dadEyeSightR) {
+        this.dadEyeSightR = dadEyeSightR;
+    }
+
+    public String getDadEyeSightL() {
+        return dadEyeSightL;
+    }
+
+    public void setDadEyeSightL(String dadEyeSightL) {
+        this.dadEyeSightL = dadEyeSightL;
+    }
+
+    public String getMumEyeSightR() {
+        return mumEyeSightR;
+    }
+
+    public void setMumEyeSightR(String mumEyeSightR) {
+        this.mumEyeSightR = mumEyeSightR;
+    }
+
+    public String getMumEyeSightL() {
+        return mumEyeSightL;
+    }
+
+    public void setMumEyeSightL(String mumEyeSightL) {
+        this.mumEyeSightL = mumEyeSightL;
+    }
+
+    public String getEyeType() {
+        return eyeType;
+    }
+
+    public void setEyeType(String eyeType) {
+        this.eyeType = eyeType;
     }
 }

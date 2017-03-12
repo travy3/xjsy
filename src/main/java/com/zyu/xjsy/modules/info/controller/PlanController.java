@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.zyu.xjsy.common.controller.BaseController;
 import com.zyu.xjsy.common.persistence.PageInfo;
+import com.zyu.xjsy.common.util.JsonUtils;
 import com.zyu.xjsy.modules.info.entity.Plan;
 import com.zyu.xjsy.modules.info.entity.PlanInfo;
 import com.zyu.xjsy.modules.info.service.PlanService;
@@ -22,15 +23,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-/**
- * Created by chenjie on 2016/4/5.
- */
+
 @RequestMapping(value = "${adminPath}/info")
 @Controller
 public class PlanController extends BaseController {
-
-//    private ExecuteResult executeResult = new ExecuteResult();
-
 
     @Autowired
     private PlanService planService;
@@ -46,9 +42,7 @@ public class PlanController extends BaseController {
 
         PageInfo<Plan> pageInfo  =  planService.findAllPlan(new PageInfo(request,response),plan);
 
-        Gson gson = new Gson();
-
-        return gson.toJson(pageInfo);
+        return JsonUtils.getGson().toJson(pageInfo);
     }
 
     @RequestMapping(value = "/plan/form")
@@ -57,9 +51,6 @@ public class PlanController extends BaseController {
         if (StringUtils.isNotBlank(id)){
             //todo 编辑时获取当前方案
             Plan plan = new Plan(id);
-//            plan = planService.getPlan(plan);
-//
-//            model.addAttribute("plan",plan);
 
 //
             List<Plan> list = planService.getPlan2(plan);
@@ -84,9 +75,7 @@ public class PlanController extends BaseController {
 
         }
 
-        Gson gson = new Gson();
-
-        return gson.toJson(pageInfo);
+        return JsonUtils.getGson().toJson(pageInfo);
     }
 
     @RequestMapping(value = "/plan/save")

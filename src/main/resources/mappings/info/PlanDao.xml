@@ -10,6 +10,7 @@
         <result property="delFlag" column="delflag"></result>
         <result property="levelNo" column="levelNo"></result>
         <result property="orderNo" column="orderNo"></result>
+        <result property="eyeType" column="eyeType"></result>
         <collection property="planInfoList" ofType="PlanInfo">
             <id property="id" column="planInfo.id"></id>
             <result property="code" column="planInfo.code"></result>
@@ -26,6 +27,7 @@
         p.delflag,
         p.levelNo,
         p.orderNo,
+        p.eyeType,
         pi.id AS 'planInfo.id',
         pi.code AS 'planInfo.code',
         pi.times AS 'planInfo.times',
@@ -43,7 +45,15 @@
         FROM info_plan p
         LEFT JOIN  info_planinfo pi ON p.id = pi.planid
         WHERE p.delflag = #{DEL_FLAG_NORMAL}
+        <if test="eyeType != null and eyeType !=''">
+            AND p.eyeType = #{eyeType}
+        </if>
+        <if test="levelNo != null">
+            AND p.levelNo = ${levelNo}
+        </if>
+        <if test="id != null and id !=''">
         AND p.id = #{id}
+        </if>
     </select>
 
     <select id="getPlanList" resultMap="planResult">
@@ -61,6 +71,7 @@
           name,
           orderNo,
           levelNo,
+          eyeType,
           remarks,
           delflag
         ) VALUES (
@@ -68,6 +79,7 @@
           #{name},
           #{orderNo},
           #{levelNo},
+          #{eyeType},
           #{remarks},
           #{delFlag}
         )
@@ -78,6 +90,7 @@
         name = #{name},
         orderNo = ${orderNo},
         levelNo = ${levelNo},
+        eyeType = ${eyeType},
         remarks = #{remarks}
         WHERE
         id = #{id}
