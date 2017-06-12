@@ -5,6 +5,7 @@ import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.zyu.xjsy.common.config.Global;
 import com.zyu.xjsy.common.controller.BaseController;
 import com.zyu.xjsy.common.persistence.PageInfo;
 import com.zyu.xjsy.common.util.JsonUtils;
@@ -45,23 +46,19 @@ public class HpManagerController extends BaseController {
     private PlanService planService;
 
 
-
-
     @ResponseBody
     @RequestMapping(value = "/list")
-    public String hpManagerList(String cid, HttpServletRequest request, HttpServletResponse response){
+    public String hpManagerList(String cid, HttpServletRequest request, HttpServletResponse response) {
 
         List<HpManager> hpManagerList = Lists.newArrayList();
-
 
         HpManager hpManager = new HpManager();
 
         hpManager.setCustomer(new Customer(cid));
 
-        PageInfo<HpManager> pageInfo = hpManagerService.findByCid(new PageInfo<HpManager>(request,response),hpManager);
+        PageInfo<HpManager> pageInfo = hpManagerService.findByCid(new PageInfo<HpManager>(request, response), hpManager);
 
-
-        Gson gson = JsonUtils.getGsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+        Gson gson = JsonUtils.getGsonBuilder().setDateFormat("yyyy-MM-dd").create();
 
         return gson.toJson(pageInfo);
 
@@ -69,16 +66,16 @@ public class HpManagerController extends BaseController {
 
     @RequestMapping(value = "/manage")
     @ResponseBody
-    public Object manageEdit(String json,String planId){
+    public Object manageEdit(String json, String planId) {
 
-        String jsonTmp = StringEscapeUtils.unescapeHtml4(json).replace("[","").replace("]","");
+        String jsonTmp = StringEscapeUtils.unescapeHtml4(json).replace("[", "").replace("]", "");
 
         logger.debug(jsonTmp);
 
         GsonBuilder gsonBuilder = JsonUtils.getGsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
             @Override
             public boolean shouldSkipField(FieldAttributes fieldAttributes) {
-                return  fieldAttributes.getName().contains("planInfoList");
+                return fieldAttributes.getName().contains("planInfoList");
             }
 
             @Override
@@ -89,18 +86,17 @@ public class HpManagerController extends BaseController {
 
         Gson gson = gsonBuilder.create();
 
-        HpManager hpManager = gson.fromJson(jsonTmp,HpManager.class);
+        HpManager hpManager = gson.fromJson(jsonTmp, HpManager.class);
 
         hpManagerService.saveHpManager(hpManager);
 
-        if (hpManager.getNo()==30){
-//                次数到达30，说明一个方案已经完毕，自动开始下一期方案
+//        if (hpManager.getNo() == 30) {
+        if (Global.YES.equals(hpManager.getIsEnd()) && hpManagerService.checkNextIsExist(hpManager)) {
+//                说明一个方案已经完毕，自动开始下一期方案
 
-//            Plan plan = hpManager.getPlan();
 
-
-            if (StringUtils.isBlank(planId)){
-                return executeResult.jsonReturn(300,"获取方案缺失");
+            if (StringUtils.isBlank(planId)) {
+                return executeResult.jsonReturn(300, "获取方案缺失");
             }
 
             Plan plan = new Plan(planId);
@@ -111,31 +107,40 @@ public class HpManagerController extends BaseController {
 
             nextPlan.setLevelNo(plan.getLevelNo());
 
-            nextPlan.setOrderNo(plan.getOrderNo()+1);
+            nextPlan.setOrderNo(plan.getOrderNo() + 1);
+
+            nextPlan.setEyeType(plan.getEyeType());
 
             nextPlan = planService.getPlanByType(nextPlan);
 
-            if (nextPlan == null){
-                return executeResult.jsonReturn(300,"后续方案缺失");
+            if (nextPlan == null) {
+                return executeResult.jsonReturn(300, "后续方案缺失，请及时添加");
             }
 
             PlanInfo planInfo = new PlanInfo();
 
             planInfo.setPlan(nextPlan);
 
-            Customer customer = hpManager.getCustomer();
+            Customer customer = customerService.getCustomerById(hpManager.getCustomer().getId());
+            if (customer==null){
+                return executeResult.jsonReturn(300, "获取用户信息失败");
+            }
 
             //添加带有方案的治疗纪录
             try {
-                customerService.creatCusHpManage(customer,nextPlan,planInfo);
+                customerService.creatCusHpManage(customer, nextPlan, planInfo);
 
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
+                return executeResult.jsonReturn(200, "创建方案失败,请稍后再试");
             }
-            return executeResult.jsonReturn(200,"保存成功,进入下级方案阶段");
+            return executeResult.jsonReturn(200, "保存成功,进入下级方案阶段");
+        } else {
+            logger.info("正常录入");
+            return executeResult.jsonReturn(200, "保存成功");
+
         }
 
-        return executeResult.jsonReturn(200,"保存成功");
 
     }
 

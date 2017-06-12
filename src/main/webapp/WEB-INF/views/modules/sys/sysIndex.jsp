@@ -22,6 +22,7 @@
             <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">我的账户 <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="${ctx}/changePwd" data-toggle="dialog" data-id="changepwd_page" data-mask="true" data-width="550" data-height="260">&nbsp;<span class="glyphicon glyphicon-lock"></span> 修改密码&nbsp;</a></li>
+                    <li><a href="${ctx}/resetPwd" data-toggle="dialog" data-id="changepwd_page" data-mask="true" data-width="550" data-height="260">&nbsp;<span class="glyphicon glyphicon-lock"></span> 重置密码&nbsp;</a></li>
                     <li><a href="">&nbsp;<span class="glyphicon glyphicon-user"></span> 我的资料</a></li>
                     <li class="divider"></li>
                     <li><a href="${ctx}/logout" class="red">&nbsp;<span class="glyphicon glyphicon-off"></span> 注销登陆</a></li>

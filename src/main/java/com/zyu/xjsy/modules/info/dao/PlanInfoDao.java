@@ -17,4 +17,6 @@ public interface PlanInfoDao extends CrudDao<PlanInfo> {
     void insertBatch(@Param("planInfoList") List<PlanInfo> planInfoList, @Param("plan") Plan plan);
 
     void insertBatch(Plan plan);
+
+    List<Plan> getByCondition(String orderNo, String levelNo, String eyeType);
 }

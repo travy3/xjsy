@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ import java.util.List;
  * Created by chenjie on 2016/5/6.
  */
 @Service
-@Transactional(readOnly = true)
+@Transactional(readOnly = true,rollbackFor = Exception.class)
 public class HpManagerService extends BaseService {
 
 
@@ -45,5 +46,15 @@ public class HpManagerService extends BaseService {
             hpManagerDao.update(hpManager);
 
         }
+    }
+
+    public boolean checkNextIsExist(HpManager hpManager) {
+        Assert.notNull(hpManager);
+        hpManager.setNo(hpManager.getNo()+1);
+        HpManager manager = hpManagerDao.getNextNo(hpManager);
+        if (manager!=null){
+            return false;
+        }
+        return true;
     }
 }

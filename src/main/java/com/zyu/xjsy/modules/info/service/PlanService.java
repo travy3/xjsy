@@ -1,5 +1,6 @@
 package com.zyu.xjsy.modules.info.service;
 
+import com.zyu.xjsy.common.config.Global;
 import com.zyu.xjsy.common.persistence.PageInfo;
 import com.zyu.xjsy.common.service.BaseService;
 import com.zyu.xjsy.modules.info.dao.PlanDao;
@@ -10,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.util.List;
 
@@ -38,13 +40,17 @@ public class PlanService extends BaseService {
         return pageInfo;
     }
 
+    public Plan getPlanByCondition(Plan plan) {
+        List<Plan> planList = (List<Plan>) planDao.listByCondition(plan);
+        if (planList.size()>0){
+            return planList.get(0);
+        }
+        return null;
+    }
+
     public Plan getPlan(Plan plan) {
-
-//        return planDao.get(plan);
-
-        List<Plan> planList = (List<Plan>) planDao.get(plan);
-
-        return planList.get(0);
+        Plan planVo =  planDao.get(plan);
+        return planVo;
     }
 
     public List<Plan> getPlan2(Plan plan){
@@ -64,7 +70,6 @@ public class PlanService extends BaseService {
             planDao.update(plan);
         }
 
-//        planInfoDao.insertBatch(plan.getPlanInfoList(),plan);
         if(plan.getPlanInfoList() != null && plan.getPlanInfoList().size() >  0){
             planInfoDao.insertBatch(plan);
         }
@@ -93,10 +98,8 @@ public class PlanService extends BaseService {
     @Transactional(readOnly = false)
     public void savePlanInfo(PlanInfo planInfo) {
         if (StringUtils.isNotBlank(planInfo.getId())){
-//            planInfo.preUpdate();
             planInfoDao.update(planInfo);
         }else {
-//            planInfo.preInsert();
             planInfoDao.insert(planInfo);
         }
     }
@@ -110,9 +113,13 @@ public class PlanService extends BaseService {
         return planDao.getByType(nextPlan);
     }
 
+    public String checkOrderNoisRight(String orderNo, String levelNo, String eyeType) {
+        Assert.noNullElements(new Object[]{orderNo,levelNo,eyeType});
+        List<Plan> planList = planInfoDao.getByCondition(orderNo,levelNo,eyeType);
+        if (planList.size()>0){
+            return Global.TRUE;
+        }
+        return Global.FALSE;
+    }
 
-//    public String getPlanInfo(String id){
-//
-//
-//    }
 }

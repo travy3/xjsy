@@ -43,7 +43,7 @@
         SELECT
         <include refid="planColumns"></include>
         FROM info_plan p
-        LEFT JOIN  info_planinfo pi ON p.id = pi.planid
+        LEFT JOIN info_planinfo pi ON p.id = pi.planid
         WHERE p.delflag = #{DEL_FLAG_NORMAL}
         <if test="eyeType != null and eyeType !=''">
             AND p.eyeType = #{eyeType}
@@ -52,7 +52,7 @@
             AND p.levelNo = ${levelNo}
         </if>
         <if test="id != null and id !=''">
-        AND p.id = #{id}
+            AND p.id = #{id}
         </if>
     </select>
 
@@ -60,7 +60,7 @@
         SELECT
         <include refid="planColumns"></include>
         FROM info_plan p
-        LEFT JOIN  info_planinfo pi ON p.id = pi.planid
+        LEFT JOIN info_planinfo pi ON p.id = pi.planid
         WHERE p.delflag = #{DEL_FLAG_NORMAL}
         AND p.id = #{id}
     </select>
@@ -106,10 +106,28 @@
         SELECT
         <include refid="planColumns"></include>
         FROM info_plan p
-        LEFT JOIN  info_planinfo pi ON p.id = pi.planid
+        LEFT JOIN info_planinfo pi ON p.id = pi.planid
         WHERE p.delflag = #{DEL_FLAG_NORMAL}
         AND p.levelNo = ${levelNo}
         AND p.orderNo = ${orderNo}
+        AND p.eyeType = ${eyeType}
+    </select>
+
+    <select id="getByCondition" resultType="Plan">
+        SELECT
+        <include refid="planColumns"></include>
+        FROM info_plan p
+        WHERE p.delflag = #{DEL_FLAG_NORMAL}
+        AND p.levelNo = #{levelNo}
+        AND p.orderNo = #{orderNo}
+        AND p.eyeType = #{eyeType}
+    </select>
+
+    <select id="listByCondition" resultType="Plan">
+        SELECT * FROM info_plan WHERE delflag = #{DEL_FLAG_NORMAL}
+        AND levelNo = #{levelNo}
+        AND orderNo = #{orderNo}
+        AND eyeType = #{eyeType}
     </select>
 
 </mapper>

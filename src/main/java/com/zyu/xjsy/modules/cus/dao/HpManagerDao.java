@@ -13,4 +13,6 @@ public interface HpManagerDao extends CrudDao<HpManager>{
 
 
     HpManager getMaxNo(Customer customer);
+
+    HpManager getNextNo(HpManager hpManager);
 }

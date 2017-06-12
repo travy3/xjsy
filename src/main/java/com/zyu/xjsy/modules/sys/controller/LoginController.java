@@ -103,8 +103,16 @@ public class LoginController extends BaseController {
 
     @RequestMapping(value = "${adminPath}/changePwd")
     public String changePwdForm(){
-
         return "/modules/sys/changePwd";
+    }
+
+    @RequestMapping(value = "${adminPath}/resetPwd")
+    public Object resetPwd(){
+        User user = UserUtils.getUser();
+        user.setPassword(SystemService.entryptPassword("123456"));
+        user.setNewPassword(SystemService.entryptPassword("123456"));
+        systemService.saveUser(user);
+        return executeResult.jsonReturn(200,"密码重置成功");
     }
 
     @RequestMapping(value = "${adminPath}/saveNewPwd")

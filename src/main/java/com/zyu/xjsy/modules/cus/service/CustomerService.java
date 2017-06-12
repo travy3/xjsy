@@ -24,6 +24,7 @@ import java.util.Map;
  * Created by chenjie on 2016/4/13.
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class CustomerService extends BaseService {
 
 
@@ -56,35 +57,36 @@ public class CustomerService extends BaseService {
         return customerDao.get(customer);
     }
 
-    public Customer getCustomerById(String id){
+    public Customer getCustomerById(String id) {
         return customerDao.getById(id);
     }
 
     @Transactional(readOnly = false)
     public void saveCustomer(Customer customer) {
 
-        if (StringUtils.isBlank(customer.getId())){
+        if (StringUtils.isBlank(customer.getId())) {
 
             customer.preInsert();
             customerDao.insert(customer);
 
-        }else {
+        } else {
 
             customer.preUpdate();
             customerDao.update(customer);
 
-}
+        }
 
     }
 
     /**
-     *  根据方案生成客户的治疗记录
+     * 根据方案生成客户的治疗记录
+     *
      * @param customer
      * @param plan
      * @param planInfo
      */
     @Transactional(readOnly = false)
-    public void creatCusHpManage(Customer customer , Plan plan , PlanInfo planInfo) {
+    public void creatCusHpManage(Customer customer, Plan plan, PlanInfo planInfo) {
 
 
         //查询对应planinfo
@@ -95,12 +97,13 @@ public class CustomerService extends BaseService {
 
         //遍历插入hpmanager
 
-       HpManager hpManagerTmp = hpManagerDao.getMaxNo(customer);
+        HpManager hpManagerTmp = hpManagerDao.getMaxNo(customer);
 
         int maxNo = 0;
 
-        if (planInfoList != null && planInfoList.size() > 0){
-            for (PlanInfo info : planInfoList){
+        if (planInfoList != null && planInfoList.size() > 0) {
+//            for (PlanInfo info : planInfoList){
+            for (int i = 0; i < planInfoList.size(); i++) {
 
                 HpManager hpManager = new HpManager();
 
@@ -108,40 +111,46 @@ public class CustomerService extends BaseService {
 
                 hpManager.setPlan(plan);
 
-                hpManager.setCode(info.getCode());
+//                hpManager.setCode(info.getCode());
+                hpManager.setCode(planInfoList.get(i).getCode());
 
-                hpManager.setPaper(info.getPaper());
+//                hpManager.setPaper(info.getPaper());
+                hpManager.setPaper(planInfoList.get(i).getPaper());
 
-                hpManager.setTimes(info.getTimes());
+//                hpManager.setTimes(info.getTimes());
+                hpManager.setTimes(planInfoList.get(i).getTimes());
 
                 hpManager.setCustomer(customer);
 
                 //设置次数 累加
-                if (hpManagerTmp != null){
+                if (hpManagerTmp != null) {
                     maxNo = hpManagerTmp.getNo();
                 }
 
-                hpManager.setNo(maxNo+info.getNum());
+//                hpManager.setNo(maxNo+info.getNum());
+                hpManager.setNo(maxNo + planInfoList.get(i).getNum());
+
+                if (i == planInfoList.size() - 1) {
+                    hpManager.setIsEnd(Global.YES);
+                } else {
+                    hpManager.setIsEnd(Global.NO);
+                }
 
                 hpManagerDao.insert(hpManager);
             }
         }
 
-        if (Global.DURATION_SY.equals(customer.getDuration())){
+        if (Global.DURATION_SY.equals(customer.getDuration())) {
             //如果试用客户，状态更新
             customer.preUpdate();
-
             customer.setDuration(Global.DURATION_ZL);
-
-            customer.setPlan(plan);
-
-
-            customerDao.update(customer);
         }
+        customer.setPlan(plan);
+        customerDao.update(customer);
 
     }
 
-    public List<Map> getIncCusByMonth(Customer customer){
+    public List<Map> getIncCusByMonth(Customer customer) {
 
         return customerDao.countIncCusByMonth(customer);
     }

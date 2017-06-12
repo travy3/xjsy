@@ -20,5 +20,10 @@ public interface PlanDao extends CrudDao<Plan> {
      */
     Plan getByType(Plan nextPlan);
 
-    
+    /**
+     * 按照level order eyeType
+     * @param plan
+     * @return
+     */
+    List<Plan> listByCondition(Plan plan);
 }

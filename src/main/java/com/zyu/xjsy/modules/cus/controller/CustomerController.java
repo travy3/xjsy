@@ -32,8 +32,6 @@ import java.text.SimpleDateFormat;
 public class CustomerController extends BaseController {
 
 
-
-
     @Autowired
     private CustomerService customerService;
 
@@ -153,33 +151,27 @@ public class CustomerController extends BaseController {
         int planResultTmp = Integer.parseInt(planResult);
         if ("2".equals(eyeType)){
             if (planResultTmp >=25){
-//                plan.setId("6");
                 plan.setLevelNo(6);
             }else if(planResultTmp >= 13 && planResultTmp <25){
-//                plan.setId("5");
                 plan.setLevelNo(5);
             }else {
-//                plan.setId("4");
                 plan.setLevelNo(4);
             }
             plan.setEyeType(Global.EYETYPE_RS);
         }else {
             if (planResultTmp >=23){
-//                plan.setId("6");
                 plan.setLevelNo(6);
             }else if(planResultTmp >= 13 && planResultTmp <23){
-//                plan.setId("5");
                 plan.setLevelNo(5);
             }else {
-//                plan.setId("4");
                 plan.setLevelNo(4);
             }
             plan.setEyeType(Global.EYETYPE_JS);
         }
-
-        plan = planService.getPlan(plan);
+        plan.setOrderNo(1);
+        plan = planService.getPlanByCondition(plan);
         if (plan==null){
-            return gson.toJson("抱歉，没有找到符合条件方案");
+            return gson.toJson("");
         }
         return gson.toJson(plan);
     }

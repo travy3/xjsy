@@ -188,7 +188,7 @@
                     <label for="q1" class="control-label x200">方案 ：</label>
                 </td>
                 <td>
-                    <input type="text" name="planName" id="planName" value="" onfocus="getPlanResult()" readonly="readonly"/>
+                    <input type="text" name="planName" id="planName" value="" onclick="getPlanResult()" readonly="readonly"/>
                 </td>
             </tr>
             </tbody>
@@ -232,8 +232,13 @@
         }
 
         $.getJSON("${ctx}/cus/cusPlanResult?planResult="+planResult+"&eyeType="+eyeType,function(data){
-            $("#planName").val(data.name);
-            $("#planId").val(data.id);
+            debugger;
+            if(data){
+                $("#planName").val(data.name);
+                $("#planId").val(data.id);
+            }else {
+                alert("抱歉，没有找到符合条件方案");
+            }
         });
 
     }

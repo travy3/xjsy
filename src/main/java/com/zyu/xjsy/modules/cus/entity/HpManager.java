@@ -32,6 +32,7 @@ public class HpManager extends DataEntity<HpManager> {
     private String code;
     private String times;
     private String paper;
+    private String isEnd;
 
     public HpManager(){
         super();
@@ -192,5 +193,13 @@ public class HpManager extends DataEntity<HpManager> {
 
     public void setOptometryR(String optometryR) {
         this.optometryR = optometryR;
+    }
+
+    public String getIsEnd() {
+        return isEnd;
+    }
+
+    public void setIsEnd(String isEnd) {
+        this.isEnd = isEnd;
     }
 }
